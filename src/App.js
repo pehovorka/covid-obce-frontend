@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 
 import "./App.css";
+import { Routes } from "./Routes";
 
 const OBEC_QUERY = gql`
   query Obce_nazvy {
@@ -16,7 +17,7 @@ function App() {
   if (!obce.loading && !obce.error) {
     console.log(obce.data.obce);
   }
-  return <>Nic</>;
+  return <Routes />;
 }
 
 export default App;
