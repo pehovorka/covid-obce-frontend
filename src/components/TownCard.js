@@ -35,7 +35,6 @@ const OBEC_DETAIL_QUERY = gql`
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    margin: 15,
   },
   bullet: {
     display: "inline-block",
