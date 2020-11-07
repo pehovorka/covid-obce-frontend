@@ -21,17 +21,12 @@ export function SearchField() {
   const obce = useQuery(OBEC_QUERY, {
     variables: { obec_nazev },
   });
-  if (!obce.loading && !obce.error) {
-    //console.log(obce.data.obce);
-  }
 
   useEffect(() => {
-    let active = true;
-
     if (!obce.loading && !obce.error) {
       setOptions(obce.data.obce);
     }
-  });
+  }, [obce.data, obce.loading, obce.error]);
 
   //Use this to add to local storage
   useEffect(() => {
@@ -49,7 +44,7 @@ export function SearchField() {
   return (
     <Autocomplete
       id="obce-search"
-      style={{ width: 500 }}
+      fullWidth
       noOptionsText={"Žádné výsledky"}
       open={autoCompleteOpen}
       onOpen={() => {
@@ -78,11 +73,7 @@ export function SearchField() {
           variant="outlined"
           InputProps={{
             ...params.InputProps,
-            startAdornment: (
-              <React.Fragment>
-                <SearchIcon style={{ color: "#fff" }} />
-              </React.Fragment>
-            ),
+            startAdornment: <SearchIcon style={{ color: "#fff" }} />,
             endAdornment: (
               <React.Fragment>
                 {obce.loading ? (
