@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   },
 });
 
-export function TownCard({ obec_nazev, obec_kod }) {
+export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
   const [limit, setLimit] = useState(90);
   const [queryLimit, setQueryLimit] = useState(90);
   const obec = useQuery(OBEC_DETAIL_QUERY, {
@@ -109,6 +109,13 @@ export function TownCard({ obec_nazev, obec_kod }) {
                 variant={limit === 0 ? "contained" : "outlined"}
               >
                 Vše
+              </Button>
+              <Button
+                onClick={() => {
+                  handleClose(index);
+                }}
+              >
+                X
               </Button>
             </ButtonGroup>
           </Box>

@@ -31,6 +31,12 @@ export function HomePage() {
     setSelectedTowns(items);
   };
 
+  const handleClose = (index) => {
+    const items = Array.from(selectedTowns);
+    items.splice(index, 1);
+    setSelectedTowns(items);
+  };
+
   return (
     <>
       <PrimarySearchAppBar
@@ -59,6 +65,8 @@ export function HomePage() {
                         <TownCard
                           obec_nazev={selectedTown.obec_nazev}
                           obec_kod={selectedTown.obec_kod}
+                          index={index}
+                          handleClose={handleClose}
                         />
                       </Box>
                     )}
