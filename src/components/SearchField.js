@@ -13,7 +13,7 @@ const OBEC_QUERY = gql`
   }
 `;
 
-export function SearchField() {
+export function SearchField({ setSelectedTowns, addNewTown }) {
   const [autoCompleteOpen, setAutoCompleteOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [value, setValue] = useState("");
@@ -31,6 +31,7 @@ export function SearchField() {
   //Use this to add to local storage
   useEffect(() => {
     console.log(value);
+    if (value === "") return;
   }, [value]);
 
   useEffect(() => {
@@ -55,6 +56,7 @@ export function SearchField() {
       }}
       onChange={(event, newValue) => {
         setValue(newValue);
+        addNewTown(newValue.obec_kod, newValue.obec_nazev);
       }}
       inputValue={obec_nazev}
       onInputChange={(event, newInputValue) => {

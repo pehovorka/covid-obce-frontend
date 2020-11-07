@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function PrimarySearchAppBar() {
+export function PrimarySearchAppBar({ setSelectedTowns, addNewTown }) {
   const classes = useStyles();
 
   return (
@@ -80,7 +80,10 @@ export function PrimarySearchAppBar() {
             Covid-obce
           </Typography>
           <div className={classes.search}>
-            <SearchField />
+            <SearchField
+              setSelectedTowns={setSelectedTowns}
+              addNewTown={addNewTown}
+            />
           </div>
         </Toolbar>
       </AppBar>
