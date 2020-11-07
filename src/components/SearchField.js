@@ -56,7 +56,9 @@ export function SearchField({ setSelectedTowns, addNewTown }) {
       }}
       onChange={(event, newValue) => {
         setValue(newValue);
-        addNewTown(newValue.obec_kod, newValue.obec_nazev);
+        if (newValue !== null) {
+          addNewTown(newValue.obec_kod, newValue.obec_nazev);
+        }
       }}
       inputValue={obec_nazev}
       onInputChange={(event, newInputValue) => {
