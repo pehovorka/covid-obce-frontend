@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { CircularProgress, TextField } from "@material-ui/core/";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import SearchIcon from "@material-ui/icons/Search";
 
 const OBEC_QUERY = gql`
   query Obce_nazvy($obec_nazev: String!) {
@@ -47,8 +48,9 @@ export function SearchField() {
 
   return (
     <Autocomplete
-      id="asynchronous-demo"
+      id="obce-search"
       style={{ width: 500 }}
+      noOptionsText={"Žádné výsledky"}
       open={autoCompleteOpen}
       onOpen={() => {
         setAutoCompleteOpen(true);
@@ -72,10 +74,15 @@ export function SearchField() {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Asynchronous"
+          placeholder="Začněte vyhledávat obec..."
           variant="outlined"
           InputProps={{
             ...params.InputProps,
+            startAdornment: (
+              <React.Fragment>
+                <SearchIcon style={{ color: "#fff" }} />
+              </React.Fragment>
+            ),
             endAdornment: (
               <React.Fragment>
                 {obce.loading ? (
