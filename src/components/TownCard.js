@@ -10,6 +10,13 @@ import {
   Button,
   ButtonGroup,
   CardHeader,
+  Table,
+  TableCell,
+  TableContainer,
+  TableRow,
+  TableBody,
+  TableHead,
+  Paper,
 } from "@material-ui/core/";
 
 import { Chart } from "./Chart";
@@ -57,6 +64,7 @@ export function TownCard({ obec_nazev, obec_kod }) {
       const container = {};
       container.datum = new Date(item.datum).toLocaleDateString("cs-CZ", {});
       container.aktualne_nemocnych = parseInt(item.aktualne_nemocnych);
+      container.nove_pripady = parseInt(item.nove_pripady);
       return container;
     });
     graphData.reverse();
@@ -119,8 +127,57 @@ export function TownCard({ obec_nazev, obec_kod }) {
           </Box>
         ) : (
           <>
-            <Box>
-              Aktuálně nemocných: {obec.data.obec[0].aktualne_nemocnych}
+            <Box mb={2}>
+              <TableContainer component="table">
+                <Table className={classes.table} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center">
+                        Aktuálně nemocných (
+                        {new Date(obec.data.obec[0].datum).toLocaleDateString(
+                          "cs-CZ",
+                          {
+                            day: "numeric",
+                            month: "numeric",
+                          }
+                        )}
+                        )
+                      </TableCell>
+                      <TableCell align="center">
+                        Nové případy (
+                        {new Date(obec.data.obec[1].datum).toLocaleDateString(
+                          "cs-CZ",
+                          {
+                            day: "numeric",
+                            month: "numeric",
+                          }
+                        )}
+                        )
+                      </TableCell>
+                      <TableCell align="center">Změna za 7 dní</TableCell>
+                      <TableCell align="center">Změna za 30 dní</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell component="th" scope="row" align="center">
+                        {obec.data.obec[0].aktualne_nemocnych}
+                      </TableCell>
+                      <TableCell align="center">
+                        {obec.data.obec[1].nove_pripady}
+                      </TableCell>
+                      <TableCell align="center">
+                        {obec.data.obec[0].aktualne_nemocnych -
+                          obec.data.obec[6].aktualne_nemocnych}
+                      </TableCell>
+                      <TableCell align="center">
+                        {obec.data.obec[0].aktualne_nemocnych -
+                          obec.data.obec[29].aktualne_nemocnych}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Box>
             <Chart data={convertToGraphData(obec.data.obec)} />
           </>

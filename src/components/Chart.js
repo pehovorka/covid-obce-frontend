@@ -28,9 +28,16 @@ export function Chart({ data }) {
         <Area
           type="linear"
           dataKey="aktualne_nemocnych"
-          stroke="#8884d8"
-          fill="#8884d8"
+          stroke="2980b9"
+          fill="#2980b9"
           name="Nemocných"
+        />
+        <Area
+          type="linear"
+          dataKey="nove_pripady"
+          stroke="#c0392b"
+          fill="#c0392b"
+          name="Nové případy"
         />
       </AreaChart>
     </ResponsiveContainer>
