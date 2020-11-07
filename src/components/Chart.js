@@ -26,7 +26,7 @@ export function Chart({ data }) {
         <YAxis />
         <Tooltip />
         <Area
-          type="basis"
+          type="linear"
           dataKey="aktualne_nemocnych"
           stroke="#8884d8"
           fill="#8884d8"
