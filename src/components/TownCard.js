@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import {
   CircularProgress,
@@ -7,6 +7,8 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core/";
+
+import { Chart } from "./Chart";
 
 const OBEC_DETAIL_QUERY = gql`
   query Obec($obec_kod: String!) {
@@ -43,14 +45,15 @@ export function TownCard({ obec_nazev, obec_kod }) {
     fetchPolicy: "cache-first",
   });
 
-  const [obecData, setObecData] = useState([]);
-
-  useEffect(() => {
-    if (!obec.loading && !obec.error) {
-      console.log(obec.data.obec);
-      setObecData(obec.data.obec);
-    }
-  }, [obec.data, obec.loading, obec.error]);
+  const convertToGraphData = (stringData) => {
+    const graphData = stringData.map((item) => {
+      const container = {};
+      container.datum = new Date(item.datum).toLocaleDateString("cs-CZ", {});
+      container.aktualne_nemocnych = parseInt(item.aktualne_nemocnych);
+      return container;
+    });
+    return graphData;
+  };
 
   //console.log(obecData[obecData.length - 1].aktualne_nemocnych);
   const classes = useStyles();
@@ -64,13 +67,16 @@ export function TownCard({ obec_nazev, obec_kod }) {
         >
           {obec_nazev}
         </Typography>
-        {obec.loading || obecData === [] ? (
+        {obec.loading ? (
           <CircularProgress color="primary" size={20} />
         ) : (
-          <div>
-            Aktuálně nemocných:{" "}
-            {obec.data.obec[obec.data.obec.length - 1].aktualne_nemocnych}
-          </div>
+          <>
+            <div>
+              Aktuálně nemocných:{" "}
+              {obec.data.obec[obec.data.obec.length - 1].aktualne_nemocnych}
+            </div>
+            <Chart data={convertToGraphData(obec.data.obec)} />
+          </>
         )}
       </CardContent>
     </Card>
