@@ -37,6 +37,7 @@ export function HomePage() {
           <TownCard
             obec_nazev={selectedTown.obec_nazev}
             obec_kod={selectedTown.obec_kod}
+            key={selectedTown.obec_kod}
           />
         ))}
       </Container>
