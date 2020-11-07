@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import {
+  Box,
   CircularProgress,
   Card,
   CardContent,
@@ -8,6 +9,7 @@ import {
   makeStyles,
   Button,
   ButtonGroup,
+  CardHeader,
 } from "@material-ui/core/";
 
 import { Chart } from "./Chart";
@@ -65,56 +67,61 @@ export function TownCard({ obec_nazev, obec_kod }) {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
+      <CardHeader
+        action={
+          <Box m={1}>
+            <ButtonGroup
+              color="primary"
+              aria-label="outlined primary button group"
+            >
+              <Button
+                onClick={() => {
+                  setLimit(7);
+                }}
+                variant={limit === 7 ? "contained" : "outlined"}
+              >
+                7 dní
+              </Button>
+              <Button
+                onClick={() => {
+                  setLimit(30);
+                }}
+                variant={limit === 30 ? "contained" : "outlined"}
+              >
+                30 dní
+              </Button>
+              <Button
+                onClick={() => {
+                  setLimit(90);
+                }}
+                variant={limit === 90 ? "contained" : "outlined"}
+              >
+                90 dní
+              </Button>
+              <Button
+                onClick={() => {
+                  setLimit(0);
+                  setQueryLimit(0);
+                }}
+                variant={limit === 0 ? "contained" : "outlined"}
+              >
+                Vše
+              </Button>
+            </ButtonGroup>
+          </Box>
+        }
+        title={obec_nazev}
+      />
       <CardContent>
-        <Typography
-          className={classes.title}
-          color="textSecondary"
-          gutterBottom
-        >
-          {obec_nazev}
-        </Typography>
-        <ButtonGroup color="primary" aria-label="outlined primary button group">
-          <Button
-            onClick={() => {
-              setLimit(7);
-            }}
-            variant={limit === 7 ? "contained" : "outlined"}
-          >
-            7 dní
-          </Button>
-          <Button
-            onClick={() => {
-              setLimit(30);
-            }}
-            variant={limit === 30 ? "contained" : "outlined"}
-          >
-            30 dní
-          </Button>
-          <Button
-            onClick={() => {
-              setLimit(90);
-            }}
-            variant={limit === 90 ? "contained" : "outlined"}
-          >
-            90 dní
-          </Button>
-          <Button
-            onClick={() => {
-              setLimit(0);
-              setQueryLimit(0);
-            }}
-            variant={limit === 0 ? "contained" : "outlined"}
-          >
-            Vše
-          </Button>
-        </ButtonGroup>
         {obec.loading ? (
-          <CircularProgress color="primary" size={20} />
+          <Box>
+            <CircularProgress text-align="center" color="primary" size={50} />
+          </Box>
         ) : (
           <>
-            <div>
+            <Box>
               Aktuálně nemocných: {obec.data.obec[0].aktualne_nemocnych}
-            </div>
+            </Box>
             <Chart data={convertToGraphData(obec.data.obec)} />
           </>
         )}
