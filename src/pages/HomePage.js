@@ -10,11 +10,6 @@ export function HomePage() {
     JSON.parse(localStorage.getItem("obce")) || []
   );
 
-  console.log(selectedTowns);
-  /*   useEffect(() => {
-    setSelectedTowns(localStorage.getItem("obce"));
-  }, []); */
-
   useEffect(() => {
     localStorage.setItem("obce", JSON.stringify(selectedTowns));
   }, [selectedTowns]);

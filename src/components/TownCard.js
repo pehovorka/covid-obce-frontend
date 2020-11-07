@@ -5,18 +5,15 @@ import {
   CircularProgress,
   Card,
   CardContent,
-  Typography,
   makeStyles,
   Button,
   ButtonGroup,
   CardHeader,
   Table,
   TableCell,
-  TableContainer,
   TableRow,
   TableBody,
   TableHead,
-  Paper,
 } from "@material-ui/core/";
 
 import { Chart } from "./Chart";
@@ -57,7 +54,6 @@ export function TownCard({ obec_nazev, obec_kod }) {
     fetchPolicy: "cache-first",
   });
 
-  console.log(queryLimit);
   const convertToGraphData = (stringData) => {
     const graphData = stringData.map((item) => {
       const container = {};
