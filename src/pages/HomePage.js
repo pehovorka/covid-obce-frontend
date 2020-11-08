@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Container, Box } from "@material-ui/core";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import { PrimarySearchAppBar } from "../components/AppBar";
 import { TownCard } from "../components/TownCard";
+import { Footer } from "../components/Footer";
+import { EmptyContent } from "../components/EmptyContent";
 
 export function HomePage() {
   const [selectedTowns, setSelectedTowns] = useState(
     JSON.parse(localStorage.getItem("obce")) || []
   );
+
+  const inputRef = useRef(null);
 
   useEffect(() => {
     localStorage.setItem("obce", JSON.stringify(selectedTowns));
@@ -43,40 +47,48 @@ export function HomePage() {
         selectedTowns={selectedTowns}
         setSelectedTowns={setSelectedTowns}
         addNewTown={addNewTown}
+        inputRef={inputRef}
       />
       <Container component="main">
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="towns">
-            {(provided) => (
-              <Box {...provided.droppableProps} ref={provided.innerRef}>
-                {selectedTowns.map((selectedTown, index) => (
-                  <Draggable
-                    key={selectedTown.obec_kod}
-                    draggableId={selectedTown.obec_kod}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <Box
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                        p={1}
-                      >
-                        <TownCard
-                          obec_nazev={selectedTown.obec_nazev}
-                          obec_kod={selectedTown.obec_kod}
-                          index={index}
-                          handleClose={handleClose}
-                        />
-                      </Box>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </Box>
-            )}
-          </Droppable>
-        </DragDropContext>
+        {selectedTowns.length === 0 ? (
+          <EmptyContent inputRef={inputRef} />
+        ) : (
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="towns">
+              {(provided) => (
+                <Box {...provided.droppableProps} ref={provided.innerRef}>
+                  {selectedTowns.map((selectedTown, index) => (
+                    <Draggable
+                      key={selectedTown.obec_kod}
+                      draggableId={selectedTown.obec_kod}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <Box
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                          p={1}
+                        >
+                          <TownCard
+                            obec_nazev={selectedTown.obec_nazev}
+                            obec_kod={selectedTown.obec_kod}
+                            index={index}
+                            handleClose={handleClose}
+                          />
+                        </Box>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </Box>
+              )}
+            </Droppable>
+          </DragDropContext>
+        )}
+        <Box p={3} textAlign={"center"}>
+          <Footer />
+        </Box>
       </Container>
     </>
   );

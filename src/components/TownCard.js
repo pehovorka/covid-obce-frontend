@@ -14,7 +14,14 @@ import {
   TableRow,
   TableBody,
   TableHead,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  IconButton,
+  Grid,
 } from "@material-ui/core/";
+import CloseIcon from "@material-ui/icons/Close";
 
 import { Chart } from "./Chart";
 
@@ -66,58 +73,46 @@ export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
     return graphData.slice(-limit);
   };
 
+  const handleChange = (result) => {
+    console.log(result.target.value);
+    setLimit(result.target.value);
+    if (result.target.value === 0) {
+      setQueryLimit(0);
+    }
+  };
+
   //console.log(obecData[obecData.length - 1].aktualne_nemocnych);
   const classes = useStyles();
   return (
     <Card className={classes.root}>
       <CardHeader
         action={
-          <Box m={1}>
-            <ButtonGroup
-              color="primary"
-              aria-label="outlined primary button group"
-            >
-              <Button
-                onClick={() => {
-                  setLimit(7);
-                }}
-                variant={limit === 7 ? "contained" : "outlined"}
-              >
-                7 dní
-              </Button>
-              <Button
-                onClick={() => {
-                  setLimit(30);
-                }}
-                variant={limit === 30 ? "contained" : "outlined"}
-              >
-                30 dní
-              </Button>
-              <Button
-                onClick={() => {
-                  setLimit(90);
-                }}
-                variant={limit === 90 ? "contained" : "outlined"}
-              >
-                90 dní
-              </Button>
-              <Button
-                onClick={() => {
-                  setLimit(0);
-                  setQueryLimit(0);
-                }}
-                variant={limit === 0 ? "contained" : "outlined"}
-              >
-                Vše
-              </Button>
-              <Button
-                onClick={() => {
-                  handleClose(index);
-                }}
-              >
-                X
-              </Button>
-            </ButtonGroup>
+          <Box>
+            <Grid container alignItems="center" spacing={2}>
+              <Grid item>
+                <FormControl className={classes.formControl}>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={limit}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={7}>7 dní</MenuItem>
+                    <MenuItem value={30}>30 dní</MenuItem>
+                    <MenuItem value={90}>90 dní</MenuItem>
+                    <MenuItem value={0}>Vše</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item>
+                <IconButton
+                  aria-label="delete"
+                  onClick={() => handleClose(index)}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
           </Box>
         }
         title={obec_nazev}

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { CircularProgress, TextField } from "@material-ui/core/";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
+import { makeStyles } from "@material-ui/core/styles";
 
 const OBEC_QUERY = gql`
   query Obce_nazvy($obec_nazev: String!) {
@@ -13,7 +14,27 @@ const OBEC_QUERY = gql`
   }
 `;
 
-export function SearchField({ setSelectedTowns, addNewTown }) {
+const suggestedTowns = [
+  { obec_kod: "554782", obec_nazev: "Praha" },
+  { obec_kod: "582786", obec_nazev: "Brno" },
+  { obec_kod: "554821", obec_nazev: "Ostrava" },
+  { obec_kod: "554791", obec_nazev: "Plzeň" },
+  { obec_kod: "563889", obec_nazev: "Liberec" },
+];
+
+const useStyles = makeStyles((theme) => ({
+  inputRoot: {
+    color: "#fff",
+  },
+  popupIndicator: {
+    color: "#fff",
+  },
+  clearIndicator: {
+    color: "#fff",
+  },
+}));
+
+export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
   const [autoCompleteOpen, setAutoCompleteOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [value, setValue] = useState("");
@@ -24,9 +45,12 @@ export function SearchField({ setSelectedTowns, addNewTown }) {
 
   useEffect(() => {
     if (!obce.loading && !obce.error) {
+      /*       obec_nazev === ""
+        ? setOptions(suggestedTowns)
+        : setOptions(obce.data.obce); */
       setOptions(obce.data.obce);
     }
-  }, [obce.data, obce.loading, obce.error]);
+  }, [obce.data, obce.loading, obce.error, obec_nazev]);
 
   //Use this to add to local storage
   useEffect(() => {
@@ -40,13 +64,16 @@ export function SearchField({ setSelectedTowns, addNewTown }) {
     }
   }, [autoCompleteOpen]);
 
-  //console.log("Input value: " + obec_nazev);
+  const classes = useStyles();
 
+  //console.log("Input value: " + obec_nazev);
   return (
     <Autocomplete
       id="obce-search"
-      fullWidth
+      classes={classes}
+      openOnFocus
       noOptionsText={"Žádné výsledky"}
+      loadingText={"Načítám..."}
       open={autoCompleteOpen}
       onOpen={() => {
         setAutoCompleteOpen(true);
@@ -70,21 +97,23 @@ export function SearchField({ setSelectedTowns, addNewTown }) {
       }
       getOptionLabel={(option) => option.obec_nazev}
       loading={obce.loading}
+      autoHighlight={true}
       renderInput={(params) => (
         <TextField
           {...params}
           placeholder="Začněte vyhledávat obec..."
           variant="outlined"
+          inputRef={inputRef}
           InputProps={{
             ...params.InputProps,
             startAdornment: <SearchIcon style={{ color: "#fff" }} />,
             endAdornment: (
-              <React.Fragment>
+              <>
                 {obce.loading ? (
                   <CircularProgress color="inherit" size={20} />
                 ) : null}
                 {params.InputProps.endAdornment}
-              </React.Fragment>
+              </>
             ),
           }}
         />
