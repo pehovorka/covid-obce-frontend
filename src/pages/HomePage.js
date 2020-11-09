@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Container, Box } from "@material-ui/core";
+import { Container, Box, Typography, Grid } from "@material-ui/core";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
 
 import { PrimarySearchAppBar } from "../components/AppBar";
 import { TownCard } from "../components/TownCard";
@@ -35,8 +36,8 @@ export function HomePage() {
         );
       } else {
         setSelectedTowns((selectedTowns) => [
-          ...selectedTowns,
           { obec_kod: obec_kod, obec_nazev: obec_nazev },
+          ...selectedTowns,
         ]);
       }
     }
@@ -70,38 +71,55 @@ export function HomePage() {
         {selectedTowns.length === 0 ? (
           <EmptyContent inputRef={inputRef} />
         ) : (
-          <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="towns">
-              {(provided) => (
-                <Box {...provided.droppableProps} ref={provided.innerRef}>
-                  {selectedTowns.map((selectedTown, index) => (
-                    <Draggable
-                      key={selectedTown.obec_kod}
-                      draggableId={selectedTown.obec_kod}
-                      index={index}
-                    >
-                      {(provided) => (
-                        <Box
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          ref={provided.innerRef}
-                          p={1}
-                        >
-                          <TownCard
-                            obec_nazev={selectedTown.obec_nazev}
-                            obec_kod={selectedTown.obec_kod}
-                            index={index}
-                            handleClose={handleClose}
-                          />
-                        </Box>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </Box>
-              )}
-            </Droppable>
-          </DragDropContext>
+          <>
+            <DragDropContext onDragEnd={handleOnDragEnd}>
+              <Droppable droppableId="towns">
+                {(provided) => (
+                  <Box {...provided.droppableProps} ref={provided.innerRef}>
+                    {selectedTowns.map((selectedTown, index) => (
+                      <Draggable
+                        key={selectedTown.obec_kod}
+                        draggableId={selectedTown.obec_kod}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <Box
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                            p={1}
+                          >
+                            <TownCard
+                              obec_nazev={selectedTown.obec_nazev}
+                              obec_kod={selectedTown.obec_kod}
+                              index={index}
+                              handleClose={handleClose}
+                            />
+                          </Box>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </Box>
+                )}
+              </Droppable>
+            </DragDropContext>
+            <Box textAlign="center" mt={2}>
+              <Grid container alignItems="center" justify="center" spacing={1}>
+                <Grid item>
+                  <WbIncandescentTwoToneIcon
+                    style={{ transform: "scaleY(-1)", color: "#dbc21a" }}
+                  />
+                </Grid>
+                <Grid item>
+                  <Typography variant="body2">
+                    Přidejte až 10 obcí, řadit je můžete přetažením. Seznam obcí
+                    vám zůstane uložený do příští návštěvy.
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Box>
+          </>
         )}
         <Box p={3} textAlign={"center"}>
           <Footer />

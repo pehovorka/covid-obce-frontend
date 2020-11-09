@@ -9,7 +9,7 @@ export function EmptyContent({ inputRef }) {
         <Grid container direction="column" spacing={5}>
           <Grid item>
             <Typography variant="h4" component="h2">
-              Sledujte vývoj šíření nákazy ve vaší obci
+              Sledujte vývoj počtu lidí s onemocněním COVID-19 ve vaší obci.
             </Typography>
           </Grid>
           <Grid item>

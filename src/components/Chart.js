@@ -28,15 +28,15 @@ export function Chart({ data }) {
         <Area
           type="linear"
           dataKey="aktualne_nemocnych"
-          stroke="2980b9"
-          fill="#2980b9"
+          stroke="#0078B8"
+          fill="#0078B8"
           name="Nemocných"
         />
         <Area
           type="linear"
           dataKey="nove_pripady"
-          stroke="#c0392b"
-          fill="#c0392b"
+          stroke="#b84100"
+          fill="#b84100"
           name="Nové případy"
         />
       </AreaChart>

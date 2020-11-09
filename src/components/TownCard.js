@@ -20,6 +20,7 @@ import {
   Select,
   IconButton,
   Grid,
+  LinearProgress,
 } from "@material-ui/core/";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -74,7 +75,7 @@ export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
   };
 
   const handleChange = (result) => {
-    console.log(result.target.value);
+    //console.log(result.target.value);
     setLimit(result.target.value);
     if (result.target.value === 0) {
       setQueryLimit(0);
@@ -88,8 +89,14 @@ export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
       <CardHeader
         action={
           <Box>
-            <Grid container alignItems="center" spacing={2}>
-              <Grid item>
+            <Grid
+              container
+              alignItems="center"
+              justify="flex-end"
+              spacing={1}
+              direction="row"
+            >
+              <Grid item xs={7}>
                 <FormControl className={classes.formControl}>
                   <Select
                     labelId="demo-simple-select-label"
@@ -104,7 +111,7 @@ export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item>
+              <Grid item xs={5}>
                 <IconButton
                   aria-label="delete"
                   onClick={() => handleClose(index)}
@@ -119,13 +126,24 @@ export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
       />
       <CardContent>
         {obec.loading ? (
-          <Box>
-            <CircularProgress text-align="center" color="primary" size={50} />
+          <Box
+            height={426}
+            width="100%"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Box>
+              <CircularProgress size={50} />
+            </Box>
           </Box>
         ) : (
           <>
             <Box mb={2}>
-              <Table className={classes.table} aria-label="simple table">
+              <Table
+                className={classes.table}
+                aria-label="Tabulka s vývojem počtu nakažených"
+              >
                 <TableHead>
                   <TableRow>
                     <TableCell align="center">
