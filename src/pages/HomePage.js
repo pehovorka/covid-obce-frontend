@@ -6,6 +6,7 @@ import { PrimarySearchAppBar } from "../components/AppBar";
 import { TownCard } from "../components/TownCard";
 import { Footer } from "../components/Footer";
 import { EmptyContent } from "../components/EmptyContent";
+import { SnackBar } from "../components/SnackBar";
 
 export function HomePage() {
   const [selectedTowns, setSelectedTowns] = useState(
@@ -13,16 +14,32 @@ export function HomePage() {
   );
 
   const inputRef = useRef(null);
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const [snackBarMessage, setSnackBarMessage] = useState();
 
   useEffect(() => {
     localStorage.setItem("obce", JSON.stringify(selectedTowns));
   }, [selectedTowns]);
 
   const addNewTown = (obec_kod, obec_nazev) => {
-    setSelectedTowns((selectedTowns) => [
-      ...selectedTowns,
-      { obec_kod: obec_kod, obec_nazev: obec_nazev },
-    ]);
+    console.log(selectedTowns);
+
+    if (selectedTowns.some((e) => e.obec_kod === obec_kod)) {
+      setSnackBarOpen(true);
+      setSnackBarMessage("Tato obec již byla přidána!");
+    } else {
+      if (selectedTowns.length === 10) {
+        setSnackBarOpen(true);
+        setSnackBarMessage(
+          "Dosáhli jste maximálního počtu přidaných obcí. Pokud chcete vyhledat další obec, nějakou odeberte."
+        );
+      } else {
+        setSelectedTowns((selectedTowns) => [
+          ...selectedTowns,
+          { obec_kod: obec_kod, obec_nazev: obec_nazev },
+        ]);
+      }
+    }
   };
 
   const handleOnDragEnd = (result) => {
@@ -90,6 +107,12 @@ export function HomePage() {
           <Footer />
         </Box>
       </Container>
+      <SnackBar
+        message={snackBarMessage}
+        severity="error"
+        open={snackBarOpen}
+        setOpen={setSnackBarOpen}
+      />
     </>
   );
 }
