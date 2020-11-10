@@ -74,12 +74,17 @@ export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
     return graphData.slice(-limit);
   };
 
-  const handleChange = (result) => {
+  const handleDateLimitChange = (result) => {
     //console.log(result.target.value);
     setLimit(result.target.value);
     if (result.target.value === 0) {
       setQueryLimit(0);
     }
+  };
+
+  const formatNumberToDisplay = (number) => {
+    let result = (number > 0 ? "+" : "") + number;
+    return result;
   };
 
   //console.log(obecData[obecData.length - 1].aktualne_nemocnych);
@@ -102,7 +107,7 @@ export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={limit}
-                    onChange={handleChange}
+                    onChange={handleDateLimitChange}
                   >
                     <MenuItem value={7}>7 dní</MenuItem>
                     <MenuItem value={30}>30 dní</MenuItem>
@@ -146,7 +151,7 @@ export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
               >
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">
+                    <TableCell align="center" width="33.3%">
                       Aktuálně nemocných (
                       {new Date(obec.data.obec[0].datum).toLocaleDateString(
                         "cs-CZ",
@@ -157,36 +162,30 @@ export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
                       )}
                       )
                     </TableCell>
-                    <TableCell align="center">
-                      Nové případy (
-                      {new Date(obec.data.obec[1].datum).toLocaleDateString(
-                        "cs-CZ",
-                        {
-                          day: "numeric",
-                          month: "numeric",
-                        }
-                      )}
-                      )
+                    <TableCell align="center" width="33.3%">
+                      Změna za 7 dní
                     </TableCell>
-                    <TableCell align="center">Změna za 7 dní</TableCell>
-                    <TableCell align="center">Změna za 30 dní</TableCell>
+                    <TableCell align="center" width="33.3%">
+                      Změna za 30 dní
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell component="th" scope="row" align="center">
+                    <TableCell align="center">
                       {obec.data.obec[0].aktualne_nemocnych}
                     </TableCell>
                     <TableCell align="center">
-                      {obec.data.obec[1].nove_pripady}
+                      {formatNumberToDisplay(
+                        obec.data.obec[0].aktualne_nemocnych -
+                          obec.data.obec[6].aktualne_nemocnych
+                      )}
                     </TableCell>
                     <TableCell align="center">
-                      {obec.data.obec[0].aktualne_nemocnych -
-                        obec.data.obec[6].aktualne_nemocnych}
-                    </TableCell>
-                    <TableCell align="center">
-                      {obec.data.obec[0].aktualne_nemocnych -
-                        obec.data.obec[29].aktualne_nemocnych}
+                      {formatNumberToDisplay(
+                        obec.data.obec[0].aktualne_nemocnych -
+                          obec.data.obec[29].aktualne_nemocnych
+                      )}
                     </TableCell>
                   </TableRow>
                 </TableBody>
