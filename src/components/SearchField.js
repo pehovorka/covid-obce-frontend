@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { CircularProgress, TextField } from "@material-ui/core/";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -14,13 +14,13 @@ const OBEC_QUERY = gql`
   }
 `;
 
-const suggestedTowns = [
+/* const suggestedTowns = [
   { obec_kod: "554782", obec_nazev: "Praha" },
   { obec_kod: "582786", obec_nazev: "Brno" },
   { obec_kod: "554821", obec_nazev: "Ostrava" },
   { obec_kod: "554791", obec_nazev: "Plzeň" },
   { obec_kod: "563889", obec_nazev: "Liberec" },
-];
+]; */
 
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
@@ -109,7 +109,7 @@ export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
             startAdornment: <SearchIcon style={{ color: "#fff" }} />,
             endAdornment: (
               <>
-                {obce.loading ? (
+                {obce.loading || obce.error ? (
                   <CircularProgress color="inherit" size={20} />
                 ) : null}
                 {params.InputProps.endAdornment}

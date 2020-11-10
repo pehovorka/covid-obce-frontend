@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Divider, Grid, Link } from "@material-ui/core";
+import { Grid, Link } from "@material-ui/core";
 
 import { CookieDialog } from "./CookieDialog";
 

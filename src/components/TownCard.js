@@ -6,8 +6,6 @@ import {
   Card,
   CardContent,
   makeStyles,
-  Button,
-  ButtonGroup,
   CardHeader,
   Table,
   TableCell,
@@ -15,12 +13,10 @@ import {
   TableBody,
   TableHead,
   FormControl,
-  InputLabel,
   MenuItem,
   Select,
   IconButton,
   Grid,
-  LinearProgress,
 } from "@material-ui/core/";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -130,7 +126,7 @@ export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
         title={obec_nazev}
       />
       <CardContent>
-        {obec.loading ? (
+        {obec.loading || obec.error ? (
           <Box
             height={426}
             width="100%"
