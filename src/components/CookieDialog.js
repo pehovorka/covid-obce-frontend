@@ -1,13 +1,10 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { Dialog, Link } from "@material-ui/core/";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import { Dialog, Link, IconButton, Typography } from "@material-ui/core/";
 import MuiDialogContent from "@material-ui/core/DialogContent";
-import MuiDialogActions from "@material-ui/core/DialogActions";
-import IconButton from "@material-ui/core/IconButton";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+
 import CloseIcon from "@material-ui/icons/Close";
-import Typography from "@material-ui/core/Typography";
 
 const styles = (theme) => ({
   root: {
@@ -29,7 +26,7 @@ const DialogTitle = withStyles(styles)((props) => {
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton
-          aria-label="close"
+          aria-label="zavřít"
           className={classes.closeButton}
           onClick={onClose}
         >
@@ -45,13 +42,6 @@ const DialogContent = withStyles((theme) => ({
     padding: theme.spacing(2),
   },
 }))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
 
 export function CookieDialog({ open, setOpen, handleClose }) {
   return (
@@ -69,7 +59,7 @@ export function CookieDialog({ open, setOpen, handleClose }) {
             Tento web ukládá na vaše zařízení soubory, obecně nazvané cookies.
           </Typography>
           <Typography gutterBottom>
-            Do vašeho prohlížeče ukládáme seznam obcí, které jste si přidali,
+            Do vašeho prohlížeče ukládáme seznam obcí které jste si přidali,
             abyste je nemuseli při příští návštěvě hledat znovu.
           </Typography>
           <Typography gutterBottom>

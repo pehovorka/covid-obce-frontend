@@ -17,9 +17,10 @@ export function Footer() {
     <Grid container justify="center" spacing={5}>
       <Grid item>
         <Link
-          href="https://www.linkedin.com/in/petr-hovorka-40a198b2/"
-          target="_blank"
-          rel="noreferrer"
+          //href="https://www.linkedin.com/in/petr-hovorka-40a198b2/"
+          //target="_blank"
+          //rel="noreferrer"
+          href="mailto:covid-obce@petrhovorka.com"
         >
           Kontakt
         </Link>
@@ -40,7 +41,7 @@ export function Footer() {
           target="_blank"
           rel="noreferrer"
         >
-          Data – ÚZIS
+          Zdroj dat – ÚZIS
         </Link>
       </Grid>
     </Grid>

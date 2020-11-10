@@ -1,6 +1,7 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 export const client = new ApolloClient({
-  uri: "http://192.168.1.4:4001/graphql",
+  //uri: "http://localhost:4500/graphql",
+  uri: "https://covid-obce.srv.petrhovorka.eu/graphql",
   cache: new InMemoryCache(),
   defaultOptions: {
     watchQuery: {
