@@ -20,6 +20,17 @@ export function HomePage() {
 
   useEffect(() => {
     localStorage.setItem("obce", JSON.stringify(selectedTowns));
+    const gaItems = selectedTowns.map((selectedTown) => {
+      const container = {};
+
+      container.item_id = selectedTown.obec_kod;
+      container.item_name = selectedTown.obec_nazev;
+      return container;
+    });
+    console.log("gaItems", gaItems);
+    window.gtag("event", "view_item_list", {
+      items: gaItems,
+    });
   }, [selectedTowns]);
 
   const addNewTown = (obec_kod, obec_nazev) => {

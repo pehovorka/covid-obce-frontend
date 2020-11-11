@@ -83,6 +83,13 @@ export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
     return result;
   };
 
+  /*   useEffect(() => {
+    console.log("Firing view_item event", obec_kod, obec_nazev);
+    window.gtag("event", "view_item", {
+      items: [{ item_id: obec_kod, item_name: obec_nazev }],
+    });
+  }, [obec_kod, obec_nazev]); */
+
   //console.log(obecData[obecData.length - 1].aktualne_nemocnych);
   const classes = useStyles();
   return (

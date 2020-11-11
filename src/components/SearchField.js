@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
   const [autoCompleteOpen, setAutoCompleteOpen] = useState(false);
   const [options, setOptions] = useState([]);
-  const [value, setValue] = useState("");
   const [obec_nazev, setInputValue] = useState("");
   const obce = useQuery(OBEC_QUERY, {
     variables: { obec_nazev },
@@ -52,17 +51,11 @@ export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
     }
   }, [obce.data, obce.loading, obce.error, obec_nazev]);
 
-  //Use this to add to local storage
-  useEffect(() => {
-    console.log(value);
-    if (value === "") return;
-  }, [value]);
-
-  useEffect(() => {
+  /*  useEffect(() => {
     if (!autoCompleteOpen) {
       setOptions([]);
     }
-  }, [autoCompleteOpen]);
+  }, [autoCompleteOpen]); */
 
   const classes = useStyles();
 
@@ -82,9 +75,13 @@ export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
         setAutoCompleteOpen(false);
       }}
       onChange={(event, newValue) => {
-        setValue(newValue);
         if (newValue !== null) {
           addNewTown(newValue.obec_kod, newValue.obec_nazev);
+          window.gtag("event", "select_item", {
+            items: [
+              { item_id: newValue.obec_kod, item_name: newValue.obec_nazev },
+            ],
+          });
         }
       }}
       inputValue={obec_nazev}
@@ -97,6 +94,7 @@ export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
       }
       getOptionLabel={(option) => option.obec_nazev}
       loading={obce.loading}
+      clearOnBlur={false}
       autoHighlight={true}
       renderInput={(params) => (
         <TextField
