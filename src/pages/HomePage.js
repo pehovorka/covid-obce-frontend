@@ -27,15 +27,12 @@ export function HomePage() {
       container.item_name = selectedTown.obec_nazev;
       return container;
     });
-    console.log("gaItems", gaItems);
     window.gtag("event", "view_item_list", {
       items: gaItems,
     });
   }, [selectedTowns]);
 
   const addNewTown = (obec_kod, obec_nazev) => {
-    console.log(selectedTowns);
-
     if (selectedTowns.some((e) => e.obec_kod === obec_kod)) {
       setSnackBarOpen(true);
       setSnackBarMessage("Tato obec již byla přidána!");
