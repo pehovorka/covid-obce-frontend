@@ -2,6 +2,7 @@
   "name": "covid-obce",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://covidvobcich.cz",
   "dependencies": {
     "@apollo/client": "^3.2.5",
     "@material-ui/core": "^4.11.0",
