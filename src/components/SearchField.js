@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { CircularProgress, TextField } from "@material-ui/core/";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import Autocomplete, {
+  createFilterOptions,
+} from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -37,29 +39,23 @@ const useStyles = makeStyles((theme) => ({
 export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
   const [autoCompleteOpen, setAutoCompleteOpen] = useState(false);
   const [options, setOptions] = useState([]);
-  const [obec_nazev, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const obce = useQuery(OBEC_QUERY, {
-    variables: { obec_nazev },
+    variables: { obec_nazev: inputValue },
   });
 
   useEffect(() => {
     if (!obce.loading && !obce.error) {
-      /*       obec_nazev === ""
-        ? setOptions(suggestedTowns)
-        : setOptions(obce.data.obce); */
       setOptions(obce.data.obce);
     }
-  }, [obce.data, obce.loading, obce.error, obec_nazev]);
-
-  /*  useEffect(() => {
-    if (!autoCompleteOpen) {
-      setOptions([]);
-    }
-  }, [autoCompleteOpen]); */
+  }, [obce.data, obce.loading, obce.error, inputValue]);
 
   const classes = useStyles();
 
-  //console.log("Input value: " + obec_nazev);
+  const filterOptions = createFilterOptions({
+    trim: true,
+  });
+
   return (
     <Autocomplete
       id="obce-search"
@@ -84,7 +80,7 @@ export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
           });
         }
       }}
-      inputValue={obec_nazev}
+      inputValue={inputValue}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
@@ -96,6 +92,7 @@ export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
       loading={obce.loading}
       clearOnBlur={false}
       autoHighlight={true}
+      filterOptions={filterOptions}
       renderInput={(params) => (
         <TextField
           {...params}
