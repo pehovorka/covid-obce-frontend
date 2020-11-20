@@ -93,7 +93,6 @@ export function HomePage() {
                         {(provided) => (
                           <Box
                             {...provided.draggableProps}
-                            {...provided.dragHandleProps}
                             ref={provided.innerRef}
                             p={1}
                           >
@@ -102,6 +101,7 @@ export function HomePage() {
                               obec_kod={selectedTown.obec_kod}
                               index={index}
                               handleClose={handleClose}
+                              provided={provided}
                             />
                           </Box>
                         )}

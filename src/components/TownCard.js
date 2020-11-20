@@ -49,7 +49,13 @@ const useStyles = makeStyles({
   },
 });
 
-export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
+export function TownCard({
+  obec_nazev,
+  obec_kod,
+  handleClose,
+  index,
+  provided,
+}) {
   const [limit, setLimit] = useState(90);
   const [queryLimit, setQueryLimit] = useState(90);
   const obec = useQuery(OBEC_DETAIL_QUERY, {
@@ -94,6 +100,7 @@ export function TownCard({ obec_nazev, obec_kod, handleClose, index }) {
   return (
     <Card className={classes.root}>
       <CardHeader
+        {...provided.dragHandleProps}
         action={
           <Box>
             <Grid
