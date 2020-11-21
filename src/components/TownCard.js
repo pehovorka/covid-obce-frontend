@@ -7,16 +7,13 @@ import {
   CardContent,
   makeStyles,
   CardHeader,
-  Table,
-  TableCell,
-  TableRow,
-  TableBody,
-  TableHead,
   FormControl,
   MenuItem,
   Select,
   IconButton,
   Grid,
+  Divider,
+  Typography,
 } from "@material-ui/core/";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -85,19 +82,19 @@ export function TownCard({
   };
 
   const formatNumberToDisplay = (number) => {
-    let result = (number > 0 ? "+" : "") + number;
+    let result = parseInt(number).toLocaleString("cs-CZ");
     return result;
   };
 
-  /*   useEffect(() => {
-    console.log("Firing view_item event", obec_kod, obec_nazev);
-    window.gtag("event", "view_item", {
-      items: [{ item_id: obec_kod, item_name: obec_nazev }],
-    });
-  }, [obec_kod, obec_nazev]); */
+  const formatChangeNumberToDisplay = (number) => {
+    let result =
+      (number > 0 ? "+ " : number === 0 ? "" : "- ") +
+      Math.abs(number).toLocaleString("cs-CZ");
+    return result;
+  };
 
-  //console.log(obecData[obecData.length - 1].aktualne_nemocnych);
   const classes = useStyles();
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -142,7 +139,7 @@ export function TownCard({
       <CardContent>
         {obec.loading || obec.error ? (
           <Box
-            height={426}
+            height={388}
             width="100%"
             display="flex"
             alignItems="center"
@@ -155,61 +152,101 @@ export function TownCard({
         ) : (
           <>
             <Box mb={2}>
-              <Table
-                className={classes.table}
-                aria-label="Tabulka s vývojem počtu nakažených"
-              >
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="center" width="25%">
-                      Aktuálně nemocných (
-                      {new Date(obec.data.obec[0].datum).toLocaleDateString(
-                        "cs-CZ",
-                        {
-                          day: "numeric",
-                          month: "numeric",
-                        }
-                      )}
-                      )
-                    </TableCell>
-                    <TableCell align="center" width="25%">
-                      Změna za 7 dní
-                    </TableCell>
-                    <TableCell align="center" width="25%">
-                      Změna za 30 dní
-                    </TableCell>
-                    <TableCell align="center" width="25%">
-                      Aktuálně nemocných na 1000 obyvatel
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow>
-                    <TableCell align="center">
-                      {obec.data.obec[0].aktualne_nemocnych}
-                    </TableCell>
-                    <TableCell align="center">
-                      {formatNumberToDisplay(
-                        obec.data.obec[0].aktualne_nemocnych -
-                          obec.data.obec[6].aktualne_nemocnych
-                      )}
-                    </TableCell>
-                    <TableCell align="center">
-                      {formatNumberToDisplay(
-                        obec.data.obec[0].aktualne_nemocnych -
-                          obec.data.obec[29].aktualne_nemocnych
-                      )}
-                    </TableCell>
-                    <TableCell align="center">
-                      {(
-                        (obec.data.obec[0].aktualne_nemocnych /
-                          municipalitiesPopulation[0][obec_kod]) *
-                        1000
-                      ).toLocaleString("cs-CZ", { maximumFractionDigits: 1 })}
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
+              <Grid container spacing={3} justify="center">
+                <Grid item xs={12} lg={7}>
+                  <Grid container spacing={1}>
+                    <Grid item xs={12} sm>
+                      <Grid container direction="column" alignItems="center">
+                        <Grid item>
+                          <Typography variant="overline" noWrap={true}>
+                            Nemocných (
+                            {new Date(
+                              obec.data.obec[0].datum
+                            ).toLocaleDateString("cs-CZ", {
+                              day: "numeric",
+                              month: "numeric",
+                            })}
+                            )
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography variant="h6" component="p">
+                            {formatNumberToDisplay(
+                              obec.data.obec[0].aktualne_nemocnych
+                            )}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={12} sm>
+                      <Grid container direction="column" alignItems="center">
+                        <Grid item>
+                          <Typography variant="overline" noWrap={true}>
+                            Změna za 7 dní
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography variant="h6" component="p">
+                            {formatChangeNumberToDisplay(
+                              obec.data.obec[0].aktualne_nemocnych -
+                                obec.data.obec[7].aktualne_nemocnych
+                            )}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={12} sm>
+                      <Grid container direction="column" alignItems="center">
+                        <Grid item>
+                          <Typography variant="overline" noWrap={true}>
+                            Změna za 30 dní
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography variant="h6" component="p">
+                            {formatChangeNumberToDisplay(
+                              obec.data.obec[0].aktualne_nemocnych -
+                                obec.data.obec[30].aktualne_nemocnych
+                            )}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Box mt={1}>
+                    <Divider />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} lg={3}>
+                  <Grid container direction="column" alignItems="center">
+                    <Grid item xs={12}>
+                      <Typography variant="overline" noWrap={true}>
+                        Nemocných na 1000 obyvatel (
+                        {new Date(obec.data.obec[0].datum).toLocaleDateString(
+                          "cs-CZ",
+                          {
+                            day: "numeric",
+                            month: "numeric",
+                          }
+                        )}
+                        )
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="h6" component="p">
+                        {(
+                          (parseInt(obec.data.obec[0].aktualne_nemocnych) /
+                            municipalitiesPopulation[0][obec_kod]) *
+                          1000
+                        ).toLocaleString("cs-CZ", { maximumFractionDigits: 1 })}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Box mt={1}>
+                    <Divider />
+                  </Box>
+                </Grid>
+              </Grid>
             </Box>
             <Chart data={convertToGraphData(obec.data.obec)} />
           </>

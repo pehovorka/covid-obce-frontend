@@ -83,7 +83,11 @@ export function HomePage() {
             <DragDropContext onDragEnd={handleOnDragEnd}>
               <Droppable droppableId="towns">
                 {(provided) => (
-                  <Box {...provided.droppableProps} ref={provided.innerRef}>
+                  <Box
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    mt={1}
+                  >
                     {selectedTowns.map((selectedTown, index) => (
                       <Draggable
                         key={selectedTown.obec_kod}
