@@ -36,12 +36,21 @@ export function Footer() {
         />
       </Grid>
       <Grid item>
+        Zdroje dat:{" "}
         <Link
           href="https://share.uzis.cz/s/dCZBiARJ27ayeoS"
           target="_blank"
           rel="noreferrer"
         >
-          Zdroj dat – ÚZIS
+          ÚZIS
+        </Link>
+        ,{" "}
+        <Link
+          href="https://www.czso.cz/csu/czso/pocet-obyvatel-v-obcich-k-112019"
+          target="_blank"
+          rel="noreferrer"
+        >
+          ČSÚ
         </Link>
       </Grid>
     </Grid>
