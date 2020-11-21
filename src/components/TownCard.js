@@ -21,6 +21,7 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 
 import { Chart } from "./Chart";
+import municipalitiesPopulation from "../assets/municipalitiesPopulation.json";
 
 const OBEC_DETAIL_QUERY = gql`
   query Obec($obec_kod: String!, $limit: Int!) {
@@ -160,7 +161,7 @@ export function TownCard({
               >
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center" width="33.3%">
+                    <TableCell align="center" width="25%">
                       Aktuálně nemocných (
                       {new Date(obec.data.obec[0].datum).toLocaleDateString(
                         "cs-CZ",
@@ -171,11 +172,14 @@ export function TownCard({
                       )}
                       )
                     </TableCell>
-                    <TableCell align="center" width="33.3%">
+                    <TableCell align="center" width="25%">
                       Změna za 7 dní
                     </TableCell>
-                    <TableCell align="center" width="33.3%">
+                    <TableCell align="center" width="25%">
                       Změna za 30 dní
+                    </TableCell>
+                    <TableCell align="center" width="25%">
+                      Aktuálně nemocných na 1000 obyvatel
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -195,6 +199,13 @@ export function TownCard({
                         obec.data.obec[0].aktualne_nemocnych -
                           obec.data.obec[29].aktualne_nemocnych
                       )}
+                    </TableCell>
+                    <TableCell align="center">
+                      {(
+                        (obec.data.obec[0].aktualne_nemocnych /
+                          municipalitiesPopulation[0][obec_kod]) *
+                        1000
+                      ).toLocaleString("cs-CZ", { maximumFractionDigits: 1 })}
                     </TableCell>
                   </TableRow>
                 </TableBody>
