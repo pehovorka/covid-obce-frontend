@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Container, Box, Typography, Grid } from "@material-ui/core";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
 
 import { PrimarySearchAppBar } from "../components/AppBar";
-import { TownCard } from "../components/TownCard";
+import { DragAndDropCards } from "../components/DragAndDropCards";
 import { Footer } from "../components/Footer";
 import { EmptyContent } from "../components/EmptyContent";
 import { SnackBar } from "../components/SnackBar";
@@ -51,22 +50,6 @@ export function HomePage() {
     }
   };
 
-  const handleOnDragEnd = (result) => {
-    if (!result.destination) return;
-
-    const items = Array.from(selectedTowns);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    setSelectedTowns(items);
-  };
-
-  const handleClose = (index) => {
-    const items = Array.from(selectedTowns);
-    items.splice(index, 1);
-    setSelectedTowns(items);
-  };
-
   return (
     <>
       <PrimarySearchAppBar
@@ -80,42 +63,10 @@ export function HomePage() {
           <EmptyContent inputRef={inputRef} />
         ) : (
           <>
-            <DragDropContext onDragEnd={handleOnDragEnd}>
-              <Droppable droppableId="towns">
-                {(provided) => (
-                  <Box
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                    mt={1}
-                  >
-                    {selectedTowns.map((selectedTown, index) => (
-                      <Draggable
-                        key={selectedTown.obec_kod}
-                        draggableId={selectedTown.obec_kod}
-                        index={index}
-                      >
-                        {(provided) => (
-                          <Box
-                            {...provided.draggableProps}
-                            ref={provided.innerRef}
-                            p={1}
-                          >
-                            <TownCard
-                              obec_nazev={selectedTown.obec_nazev}
-                              obec_kod={selectedTown.obec_kod}
-                              index={index}
-                              handleClose={handleClose}
-                              provided={provided}
-                            />
-                          </Box>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
-                  </Box>
-                )}
-              </Droppable>
-            </DragDropContext>
+            <DragAndDropCards
+              selectedTowns={selectedTowns}
+              setSelectedTowns={setSelectedTowns}
+            />
             <Box textAlign="center" mt={2}>
               <Grid container alignItems="center" justify="center" spacing={1}>
                 <Grid item>
