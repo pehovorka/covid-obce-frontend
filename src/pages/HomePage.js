@@ -1,14 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Container, Box, Typography, Grid } from "@material-ui/core";
 import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
-import { useParams } from "react-router-dom";
 
 import { PrimarySearchAppBar } from "../components/AppBar";
 import { DragAndDropCards } from "../components/DragAndDropCards";
 import { Footer } from "../components/Footer";
 import { EmptyContent } from "../components/EmptyContent";
 import { SnackBar } from "../components/SnackBar";
-import { isValidMunicipalityCode } from "../utils/shareUtils";
 
 export function HomePage() {
   const [selectedTowns, setSelectedTowns] = useState(
@@ -33,8 +31,15 @@ export function HomePage() {
     });
   }, [selectedTowns]);
 
-  const addNewTown = (obec_kod, obec_nazev) => {
+  const isAlreadyAdded = (obec_kod) => {
     if (selectedTowns.some((e) => e.obec_kod === obec_kod)) {
+      return true;
+    }
+    return false;
+  };
+
+  const addNewTown = (obec_kod, obec_nazev) => {
+    if (isAlreadyAdded(obec_kod)) {
       setSnackBarOpen(true);
       setSnackBarMessage("Tato obec již byla přidána!");
     } else {
@@ -51,15 +56,6 @@ export function HomePage() {
       }
     }
   };
-
-  //Share functionality
-  const urlParams = useParams();
-
-  if (urlParams.obec_kod) {
-    const requiredMunicipalityCode = parseInt(urlParams.obec_kod);
-    console.log(isValidMunicipalityCode(requiredMunicipalityCode));
-    //Call query here
-  }
 
   return (
     <>
