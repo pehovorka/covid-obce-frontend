@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { useQuery } from "@apollo/client";
 import {
   Box,
@@ -18,6 +18,10 @@ import {
 import { DateLimitSelect } from "./DateLimitSelect";
 import { MunicipalityStats } from "./MunicipalityStats";
 import { LoadingIndicator } from "./LoadingIndicator";
+import {
+  municipalityReducer,
+  CHANGE_LIMIT,
+} from "../utils/municipalityReducer";
 
 export function TownCard({
   obec_nazev,
@@ -26,18 +30,18 @@ export function TownCard({
   index,
   provided,
 }) {
-  const [limit, setLimit] = useState(90);
-  const [queryLimit, setQueryLimit] = useState(90);
+  const [state, dispatch] = useReducer(municipalityReducer, {
+    displayLimit: 90,
+    queryLimit: 90,
+  });
+
   const obec = useQuery(OBEC_DETAIL_QUERY, {
-    variables: { obec_kod, limit: queryLimit },
+    variables: { obec_kod, limit: state.queryLimit },
     fetchPolicy: "cache-first",
   });
 
-  const handleDateLimitChange = (result) => {
-    setLimit(result.target.value);
-    if (result.target.value === 0) {
-      setQueryLimit(0);
-    }
+  const handleDateLimitChange = (select) => {
+    dispatch({ type: CHANGE_LIMIT, selectedLimit: select.target.value });
   };
 
   return (
@@ -55,7 +59,7 @@ export function TownCard({
             >
               <Grid item xs={7}>
                 <DateLimitSelect
-                  limit={limit}
+                  limit={state.displayLimit}
                   handleDateLimitChange={handleDateLimitChange}
                 />
               </Grid>
@@ -78,7 +82,9 @@ export function TownCard({
         ) : (
           <>
             <MunicipalityStats obec={obec} obec_kod={obec_kod} />
-            <Chart data={convertToGraphData(obec.data.obec, limit)} />
+            <Chart
+              data={convertToGraphData(obec.data.obec, state.displayLimit)}
+            />
           </>
         )}
       </CardContent>
