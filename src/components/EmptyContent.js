@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Button, Grid, Paper, Typography } from "@material-ui/core";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import SearchIcon from "@material-ui/icons/Search";
 
 export function EmptyContent({ inputRef }) {
   return (
@@ -22,15 +22,12 @@ export function EmptyContent({ inputRef }) {
             <Button
               variant="contained"
               color="secondary"
-              startIcon={<AddCircleOutlineIcon />}
+              startIcon={<SearchIcon />}
               onClick={() => {
                 inputRef.current.focus();
-                //inputRef.current.style =
-                //  "box-shadow: 0 0 0 99999px rgba(0, 0, 0, .5)";
-                //(inputRef);
               }}
             >
-              Přidat první obec
+              Vyhledat první obec
             </Button>
           </Grid>
         </Grid>

@@ -1,8 +1,19 @@
 import React from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
-import { AppBar, Box, Grid, Toolbar, Typography } from "@material-ui/core/";
+import {
+  AppBar,
+  Box,
+  Button,
+  Grid,
+  Link,
+  Toolbar,
+  Typography,
+} from "@material-ui/core/";
+import SearchIcon from "@material-ui/icons/Search";
 import { SearchField } from "./SearchField";
 import virus from "../assets/virus.svg";
+import { route } from "../Routes";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -27,8 +38,20 @@ export function PrimarySearchAppBar({
   setSelectedTowns,
   addNewTown,
   inputRef,
+  searchEnabled,
 }) {
   const classes = useStyles();
+  const LinkComponent = (props) => {
+    return (
+      <RouterLink
+        {...props}
+        to={{
+          pathname: route.home(),
+          state: { searchAutoFocus: true },
+        }}
+      />
+    );
+  };
 
   return (
     <div className={classes.grow}>
@@ -41,7 +64,7 @@ export function PrimarySearchAppBar({
               alignItems="center"
               spacing={1}
             >
-              <Grid item xs={12} sm={5} md={3} lg={2}>
+              <Grid item xs sm={5} md={3} lg={2}>
                 <Grid container spacing={1}>
                   <Grid item>
                     {" "}
@@ -54,26 +77,49 @@ export function PrimarySearchAppBar({
                     />{" "}
                   </Grid>
                   <Grid item>
-                    <Typography
-                      className={classes.title}
-                      variant="h6"
-                      component="h1"
-                      noWrap
+                    <Link
+                      to={route.home()}
+                      component={RouterLink}
+                      color="inherit"
+                      underline="none"
                     >
-                      COVID v obcích
-                    </Typography>
+                      <Typography
+                        className={classes.title}
+                        variant="h6"
+                        component="h1"
+                        noWrap
+                      >
+                        COVID v obcích
+                      </Typography>
+                    </Link>
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={12} sm={7} md={9} lg={10}>
-                <div className={classes.search}>
-                  <SearchField
-                    setSelectedTowns={setSelectedTowns}
-                    addNewTown={addNewTown}
-                    inputRef={inputRef}
-                  />
-                </div>
-              </Grid>
+              {searchEnabled ? (
+                <Grid item xs={12} sm={7} md={9} lg={10}>
+                  <div className={classes.search}>
+                    <SearchField
+                      setSelectedTowns={setSelectedTowns}
+                      addNewTown={addNewTown}
+                      inputRef={inputRef}
+                    />
+                  </div>
+                </Grid>
+              ) : (
+                <Grid item xs={6}>
+                  <Box textAlign="right">
+                    <Button
+                      startIcon={<SearchIcon />}
+                      variant="contained"
+                      color="secondary"
+                      disableElevation={true}
+                      component={LinkComponent}
+                    >
+                      Vyhledat obec
+                    </Button>
+                  </Box>
+                </Grid>
+              )}
             </Grid>
           </Box>
         </Toolbar>

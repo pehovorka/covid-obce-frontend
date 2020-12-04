@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import {
   Box,
   CircularProgress,
@@ -19,16 +19,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import { Chart } from "./Chart";
 import municipalitiesPopulation from "../assets/municipalitiesPopulation.json";
-
-const OBEC_DETAIL_QUERY = gql`
-  query Obec($obec_kod: String!, $limit: Int!) {
-    obec(obec_kod: $obec_kod, limit: $limit) {
-      datum
-      aktualne_nemocnych
-      nove_pripady
-    }
-  }
-`;
+import { OBEC_DETAIL_QUERY } from "../utils/municipalityUtils";
 
 const useStyles = makeStyles({
   root: {
@@ -98,7 +89,7 @@ export function TownCard({
   return (
     <Card className={classes.root}>
       <CardHeader
-        {...provided.dragHandleProps}
+        {...provided?.dragHandleProps}
         action={
           <Box>
             <Grid
@@ -123,14 +114,18 @@ export function TownCard({
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={5}>
-                <IconButton
-                  aria-label="delete"
-                  onClick={() => handleClose(index)}
-                >
-                  <CloseIcon />
-                </IconButton>
-              </Grid>
+              {handleClose ? (
+                <Grid item xs={5}>
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleClose(index)}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </Grid>
+              ) : (
+                ""
+              )}
             </Grid>
           </Box>
         }

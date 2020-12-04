@@ -8,7 +8,7 @@ import { Footer } from "../components/Footer";
 import { EmptyContent } from "../components/EmptyContent";
 import { SnackBar } from "../components/SnackBar";
 
-export function HomePage() {
+export function HomePage(props) {
   const [selectedTowns, setSelectedTowns] = useState(
     JSON.parse(localStorage.getItem("obce")) || []
   );
@@ -16,6 +16,8 @@ export function HomePage() {
   const inputRef = useRef(null);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [snackBarMessage, setSnackBarMessage] = useState();
+
+  const searchAutoFocus = props.location.state?.searchAutoFocus ?? false;
 
   useEffect(() => {
     localStorage.setItem("obce", JSON.stringify(selectedTowns));
@@ -56,6 +58,12 @@ export function HomePage() {
       }
     }
   };
+  useEffect(() => {
+    console.log(searchAutoFocus);
+    if (searchAutoFocus) {
+      inputRef.current.focus();
+    }
+  }, [searchAutoFocus]);
 
   return (
     <>
@@ -64,6 +72,7 @@ export function HomePage() {
         setSelectedTowns={setSelectedTowns}
         addNewTown={addNewTown}
         inputRef={inputRef}
+        searchEnabled={true}
       />
       <Container component="main">
         {selectedTowns.length === 0 ? (

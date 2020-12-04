@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { Container, Box, Typography, Paper } from "@material-ui/core";
+import { Footer } from "../components/Footer";
+import { PrimarySearchAppBar } from "../components/AppBar";
+
 import { useParams } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
 
-import { isValidMunicipalityCode, OBEC_NAZEV_QUERY } from "../utils/shareUtils";
+import {
+  isValidMunicipalityCode,
+  OBEC_DETAIL_QUERY,
+} from "../utils/municipalityUtils";
 import { PageNotFound } from "./PageNotFound";
+import { TownCard } from "../components/TownCard";
 
 export function MunicipalityDetailPage() {
   const [municipality, setMunicipality] = useState({
@@ -13,7 +21,7 @@ export function MunicipalityDetailPage() {
   const [error, setError] = useState(null);
   const urlParams = useParams();
   const [getMunicipalityName, { called, loading, data }] = useLazyQuery(
-    OBEC_NAZEV_QUERY
+    OBEC_DETAIL_QUERY
   );
 
   useEffect(() => {
@@ -49,5 +57,15 @@ export function MunicipalityDetailPage() {
   if (error) {
     return <PageNotFound message={error} />;
   }
-  return <h1>{municipality.obec_nazev}</h1>;
+  return (
+    <>
+      <PrimarySearchAppBar />
+      <Container>
+        <TownCard />
+        <Box mt={10}>
+          <Footer />
+        </Box>
+      </Container>
+    </>
+  );
 }
