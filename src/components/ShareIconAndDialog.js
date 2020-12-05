@@ -25,8 +25,19 @@ export function ShareIconAndDialog({ obec_kod, obec_nazev }) {
   const inputRef = useRef();
 
   const handleOpen = () => {
-    setCopyButtonText("Zkopírovat do schránky");
-    setShareDialogOpen(true);
+    if (navigator.share) {
+      navigator
+        .share({
+          title: getTitle(),
+          text: "Vývoj počtu lidí s prokázaným onemocněním Covid-19",
+          url: getUrl(),
+        })
+        .then(() => console.log("Successful share"))
+        .catch((error) => console.log("Chyba sdílení", error));
+    } else {
+      setCopyButtonText("Zkopírovat do schránky");
+      setShareDialogOpen(true);
+    }
   };
 
   const handleClose = () => {
@@ -45,6 +56,12 @@ export function ShareIconAndDialog({ obec_kod, obec_nazev }) {
     const municipalityCode = obec_kod;
     return baseUrl + path + municipalityCode;
   };
+
+  const getTitle = () => {
+    return `${obec_nazev} – COVID v obcích`;
+  };
+
+  console.log(getTitle());
 
   const styles = (theme) => ({
     root: {
