@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Box, Typography, Paper } from "@material-ui/core";
+import { Container, Box } from "@material-ui/core";
 import { Footer } from "../components/Footer";
 import { PrimarySearchAppBar } from "../components/AppBar";
 
@@ -8,20 +8,19 @@ import { useLazyQuery } from "@apollo/client";
 
 import {
   isValidMunicipalityCode,
-  OBEC_DETAIL_QUERY,
+  OBEC_NAZEV_QUERY,
 } from "../utils/municipalityUtils";
 import { PageNotFound } from "./PageNotFound";
+
+import { LoadingIndicator } from "../components/LoadingIndicator";
 import { TownCard } from "../components/TownCard";
 
 export function MunicipalityDetailPage() {
-  const [municipality, setMunicipality] = useState({
-    obec_nazev: "",
-    obec_kod: "",
-  });
   const [error, setError] = useState(null);
   const urlParams = useParams();
-  const [getMunicipalityName, { called, loading, data }] = useLazyQuery(
-    OBEC_DETAIL_QUERY
+
+  const [getMunicipalityName, municipalityName] = useLazyQuery(
+    OBEC_NAZEV_QUERY
   );
 
   useEffect(() => {
@@ -29,42 +28,52 @@ export function MunicipalityDetailPage() {
       const requiredMunicipalityCode = urlParams.obec_kod;
       //Call query here
       if (isValidMunicipalityCode(requiredMunicipalityCode)) {
-        console.log("Valid");
-        getMunicipalityName({
-          variables: { obec_kod: requiredMunicipalityCode, limit: 1 },
-        });
-      } else {
+        console.log("municipalityName", municipalityName);
+        !municipalityName.called &&
+          getMunicipalityName({
+            variables: {
+              obec_kod: requiredMunicipalityCode,
+              limit: 1,
+            },
+            fetchPolicy: "cache-first",
+          });
+      } else if (!isValidMunicipalityCode(requiredMunicipalityCode)) {
         setError("Špatně zadaný formát kódu obce!");
       }
     }
-  }, [getMunicipalityName, urlParams.obec_kod]);
+  }, [getMunicipalityName, urlParams, municipalityName]);
 
   useEffect(() => {
-    if (called && !loading && data.obec.length === 1) {
-      console.log("Success!");
-      setMunicipality(data.obec[0]);
-    } else if (called && !loading && data.obec.length === 0) {
+    if (municipalityName.data && municipalityName.data.obec.length === 0) {
       setError("Obec s tímto kódem neexistuje!");
     }
-  }, [called, loading, data]);
-
-  console.log("municipality", municipality);
+  }, [municipalityName]);
 
   if (error) {
     return <PageNotFound message={error} />;
-  }
-  return (
-    <>
-      <PrimarySearchAppBar />
-      <Container>
-        {/*         <TownCard
-          obec_kod={municipality.obec_kod}
-          obec_nazev={municipality.obec_nazev}
-        /> */}
-        <Box mt={10}>
-          <Footer />
-        </Box>
-      </Container>
-    </>
-  );
+  } else
+    return (
+      <>
+        <PrimarySearchAppBar />
+        <Container>
+          {!municipalityName.data || !municipalityName.called ? (
+            <LoadingIndicator />
+          ) : municipalityName.data?.obec?.length === 0 ? (
+            <PageNotFound message={error} />
+          ) : (
+            <>
+              <Box mt={6}>
+                <TownCard
+                  obec_nazev={municipalityName.data?.obec[0]?.obec_nazev}
+                  obec_kod={urlParams.obec_kod}
+                />
+              </Box>
+              <Box mt={10}>
+                <Footer />
+              </Box>
+            </>
+          )}
+        </Container>
+      </>
+    );
 }
