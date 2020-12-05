@@ -19,8 +19,11 @@ export const OBEC_DETAIL_QUERY = gql`
 `;
 
 export const isValidMunicipalityCode = (code) => {
+  if (code.length !== 6) {
+    return false;
+  }
   code = parseInt(code);
-  if (Number.isInteger(code) && code.toString().length === 6) {
+  if (Number.isInteger(code)) {
     return true;
   }
   return false;
