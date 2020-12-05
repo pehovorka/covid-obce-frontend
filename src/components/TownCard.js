@@ -10,7 +10,6 @@ import {
   Tooltip,
 } from "@material-ui/core/";
 import CloseIcon from "@material-ui/icons/Close";
-import ShareIcon from "@material-ui/icons/Share";
 
 import { Chart } from "./Chart";
 import {
@@ -20,6 +19,7 @@ import {
 import { DateLimitSelect } from "./DateLimitSelect";
 import { MunicipalityStats } from "./MunicipalityStats";
 import { LoadingIndicator } from "./LoadingIndicator";
+import { ShareIconAndDialog } from "./ShareIconAndDialog";
 import {
   municipalityReducer,
   CHANGE_LIMIT,
@@ -66,20 +66,16 @@ export function TownCard({
                 />
               </Grid>
               <Grid item xs>
-                <Tooltip title="Sdílet odkaz">
-                  <IconButton
-                    aria-label="share"
-                    onClick={() => alert("Kód obce: " + obec_kod)}
-                  >
-                    <ShareIcon />
-                  </IconButton>
-                </Tooltip>
+                <ShareIconAndDialog
+                  obec_kod={obec_kod}
+                  obec_nazev={obec_nazev}
+                />
               </Grid>
               {handleClose ? (
                 <Grid item xs>
                   <Tooltip title="Zavřít kartu">
                     <IconButton
-                      aria-label="delete"
+                      aria-label="zavřít kartu obce"
                       onClick={() => handleClose(index)}
                     >
                       <CloseIcon />
