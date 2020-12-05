@@ -19,6 +19,8 @@ export function HomePage(props) {
 
   const searchAutoFocus = props.location.state?.searchAutoFocus ?? false;
 
+  document.title = `COVID v obcích`;
+
   useEffect(() => {
     localStorage.setItem("obce", JSON.stringify(selectedTowns));
     const gaItems = selectedTowns.map((selectedTown) => {

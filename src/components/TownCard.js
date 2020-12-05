@@ -9,6 +9,7 @@ import {
   Grid,
 } from "@material-ui/core/";
 import CloseIcon from "@material-ui/icons/Close";
+import ShareIcon from "@material-ui/icons/Share";
 
 import { Chart } from "./Chart";
 import {
@@ -57,20 +58,32 @@ export function TownCard({
               spacing={1}
               direction="row"
             >
-              <Grid item xs={7}>
+              <Grid item xs>
                 <DateLimitSelect
                   limit={state.displayLimit}
                   handleDateLimitChange={handleDateLimitChange}
                 />
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs>
                 <IconButton
-                  aria-label="delete"
-                  onClick={() => handleClose(index)}
+                  aria-label="share"
+                  onClick={() => alert("Kód obce: " + obec_kod)}
                 >
-                  <CloseIcon />
+                  <ShareIcon />
                 </IconButton>
               </Grid>
+              {handleClose ? (
+                <Grid item xs>
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleClose(index)}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </Grid>
+              ) : (
+                ""
+              )}
             </Grid>
           </Box>
         }

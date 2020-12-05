@@ -4,6 +4,7 @@ import { Footer } from "../components/Footer";
 import { PrimarySearchAppBar } from "../components/AppBar";
 
 export function PageNotFound({ message }) {
+  document.title = `Obec nenalezena – COVID v obcích`;
   return (
     <>
       <PrimarySearchAppBar />

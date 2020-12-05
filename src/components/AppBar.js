@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
       width: "20ch",
     },
   },
+  appBar: {
+    minHeight: "72px",
+  },
 }));
 
 export function PrimarySearchAppBar({
@@ -55,8 +58,8 @@ export function PrimarySearchAppBar({
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar position="static" className={classes.appBar}>
+        <Toolbar className={classes.appBar}>
           <Box width="100%" pt={1} pb={1}>
             <Grid
               container
@@ -67,14 +70,13 @@ export function PrimarySearchAppBar({
               <Grid item xs sm={5} md={3} lg={2}>
                 <Grid container spacing={1}>
                   <Grid item>
-                    {" "}
                     <img
                       src={virus}
                       alt="Virus"
                       height="30px"
                       width="30px"
                       style={{ fill: "#fff" }}
-                    />{" "}
+                    />
                   </Grid>
                   <Grid item>
                     <Link

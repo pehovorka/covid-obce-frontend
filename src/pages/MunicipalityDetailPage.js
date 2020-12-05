@@ -28,7 +28,6 @@ export function MunicipalityDetailPage() {
       const requiredMunicipalityCode = urlParams.obec_kod;
       //Call query here
       if (isValidMunicipalityCode(requiredMunicipalityCode)) {
-        console.log("municipalityName", municipalityName);
         !municipalityName.called &&
           getMunicipalityName({
             variables: {
@@ -46,6 +45,8 @@ export function MunicipalityDetailPage() {
   useEffect(() => {
     if (municipalityName.data && municipalityName.data.obec.length === 0) {
       setError("Obec s tímto kódem neexistuje!");
+    } else if (municipalityName.data) {
+      document.title = `${municipalityName.data.obec[0].obec_nazev} – COVID v obcích`;
     }
   }, [municipalityName]);
 
