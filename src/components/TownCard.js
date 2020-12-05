@@ -51,13 +51,14 @@ export function TownCard({
       <CardHeader
         {...provided?.dragHandleProps}
         action={
-          <Box>
+          <Box ml={1}>
             <Grid
               container
               alignItems="center"
               justify="flex-end"
               spacing={1}
               direction="row"
+              wrap="nowrap"
             >
               <Grid item xs>
                 <DateLimitSelect
