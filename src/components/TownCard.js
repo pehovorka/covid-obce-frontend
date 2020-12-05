@@ -7,6 +7,7 @@ import {
   CardHeader,
   IconButton,
   Grid,
+  Tooltip,
 } from "@material-ui/core/";
 import CloseIcon from "@material-ui/icons/Close";
 import ShareIcon from "@material-ui/icons/Share";
@@ -44,7 +45,7 @@ export function TownCard({
   const handleDateLimitChange = (select) => {
     dispatch({ type: CHANGE_LIMIT, selectedLimit: select.target.value });
   };
-
+  //https://codesandbox.io/s/popper-with-arrow-58jhe
   return (
     <Card>
       <CardHeader
@@ -65,21 +66,25 @@ export function TownCard({
                 />
               </Grid>
               <Grid item xs>
-                <IconButton
-                  aria-label="share"
-                  onClick={() => alert("Kód obce: " + obec_kod)}
-                >
-                  <ShareIcon />
-                </IconButton>
+                <Tooltip title="Sdílet odkaz">
+                  <IconButton
+                    aria-label="share"
+                    onClick={() => alert("Kód obce: " + obec_kod)}
+                  >
+                    <ShareIcon />
+                  </IconButton>
+                </Tooltip>
               </Grid>
               {handleClose ? (
                 <Grid item xs>
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => handleClose(index)}
-                  >
-                    <CloseIcon />
-                  </IconButton>
+                  <Tooltip title="Zavřít kartu">
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => handleClose(index)}
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  </Tooltip>
                 </Grid>
               ) : (
                 ""
