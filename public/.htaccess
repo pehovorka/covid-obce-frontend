@@ -10,3 +10,8 @@ DirectoryIndex index.php
   RewriteRule . /index.php [L]
 
 </IfModule>
+
+<Files "obec_kod_nazev.db">
+  Order Deny,Allow
+  Deny from all
+</Files>
