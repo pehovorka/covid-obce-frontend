@@ -29,10 +29,10 @@ export function ShareIconAndDialog({ obec_kod, obec_nazev }) {
       navigator
         .share({
           title: getTitle(),
-          text: "Vývoj počtu lidí s prokázaným onemocněním Covid-19",
+          text: `${obec_nazev} – vývoj počtu lidí s prokázaným onemocněním COVID-19`,
           url: getUrl(),
         })
-        .then(() => console.log("Successful share"))
+        .then(() => {})
         .catch((error) => console.log("Chyba sdílení", error));
     } else {
       setCopyButtonText("Zkopírovat do schránky");
@@ -60,8 +60,6 @@ export function ShareIconAndDialog({ obec_kod, obec_nazev }) {
   const getTitle = () => {
     return `${obec_nazev} – COVID v obcích`;
   };
-
-  console.log(getTitle());
 
   const styles = (theme) => ({
     root: {

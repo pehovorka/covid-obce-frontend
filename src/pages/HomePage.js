@@ -61,7 +61,6 @@ export function HomePage(props) {
     }
   };
   useEffect(() => {
-    console.log(searchAutoFocus);
     if (searchAutoFocus) {
       inputRef.current.focus();
     }
