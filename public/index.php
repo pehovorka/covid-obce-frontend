@@ -45,7 +45,7 @@ function getTitle() {
         $municipalityCode = substr( $uri, 6, 12 );
         $municipalityName = getMunicipalityNameFromDB($municipalityCode);
         if ($municipalityName){
-            return $municipalityName. " - COVID v obcích";
+            return $municipalityName. " – COVID v obcích";
         }
         return "COVID v obcích";
     }
