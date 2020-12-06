@@ -24,7 +24,7 @@ export function SearchButton({ text }) {
       disableElevation={true}
       component={LinkComponent}
     >
-      {text ? text : "Vyhledat obec"}
+      {text ? text : "Hledat obec"}
     </Button>
   );
 }
