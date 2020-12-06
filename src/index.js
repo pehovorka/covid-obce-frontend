@@ -28,6 +28,17 @@ const theme = createMuiTheme({
   },
 });
 
+theme.typography.h5 = {
+  fontSize: "1.2rem",
+  fontWeight: 400,
+  [theme.breakpoints.up("sm")]: {
+    fontSize: "1.4rem",
+  },
+  [theme.breakpoints.up("md")]: {
+    fontSize: "1.5rem",
+  },
+};
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

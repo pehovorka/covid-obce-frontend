@@ -61,6 +61,7 @@ export function TownCard({
     <Card>
       <CardHeader
         {...provided?.dragHandleProps}
+        titleTypographyProps={{ variant: "h5", component: "h2" }}
         action={
           <Box ml={1}>
             <Grid
