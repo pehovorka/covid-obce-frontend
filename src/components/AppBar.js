@@ -3,17 +3,17 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
   Box,
-  Button,
   Grid,
   Link,
   Toolbar,
   Typography,
 } from "@material-ui/core/";
-import SearchIcon from "@material-ui/icons/Search";
+import { Link as RouterLink } from "react-router-dom";
+
 import { SearchField } from "./SearchField";
 import virus from "../assets/virus.svg";
+import { SearchButton } from "./SearchButton";
 import { route } from "../Routes";
-import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -44,17 +44,6 @@ export function PrimarySearchAppBar({
   searchEnabled,
 }) {
   const classes = useStyles();
-  const LinkComponent = (props) => {
-    return (
-      <RouterLink
-        {...props}
-        to={{
-          pathname: route.home(),
-          state: { searchAutoFocus: true },
-        }}
-      />
-    );
-  };
 
   return (
     <div className={classes.grow}>
@@ -110,15 +99,7 @@ export function PrimarySearchAppBar({
               ) : (
                 <Grid item xs={6}>
                   <Box textAlign="right">
-                    <Button
-                      startIcon={<SearchIcon />}
-                      variant="contained"
-                      color="secondary"
-                      disableElevation={true}
-                      component={LinkComponent}
-                    >
-                      Vyhledat obec
-                    </Button>
+                    <SearchButton />
                   </Box>
                 </Grid>
               )}

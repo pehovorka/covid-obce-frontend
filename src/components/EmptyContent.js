@@ -22,6 +22,7 @@ export function EmptyContent({ inputRef }) {
             <Button
               variant="contained"
               color="secondary"
+              disableElevation={true}
               startIcon={<SearchIcon />}
               onClick={() => {
                 inputRef.current.focus();
