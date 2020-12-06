@@ -38,6 +38,11 @@ export function ShareIconAndDialog({ obec_kod, obec_nazev }) {
       setCopyButtonText("Zkopírovat do schránky");
       setShareDialogOpen(true);
     }
+    window.gtag("event", "share", {
+      method: "Link",
+      content_type: obec_nazev,
+      content_id: obec_kod,
+    });
   };
 
   const handleClose = () => {

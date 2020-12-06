@@ -23,7 +23,7 @@ export function HomePage(props) {
 
   useEffect(() => {
     localStorage.setItem("obce", JSON.stringify(selectedTowns));
-    const gaItems = selectedTowns.map((selectedTown) => {
+    /*     const gaItems = selectedTowns.map((selectedTown) => {
       const container = {};
 
       container.item_id = selectedTown.obec_kod;
@@ -32,7 +32,7 @@ export function HomePage(props) {
     });
     window.gtag("event", "view_item_list", {
       items: gaItems,
-    });
+    }); */
   }, [selectedTowns]);
 
   const isAlreadyAdded = (obec_kod) => {

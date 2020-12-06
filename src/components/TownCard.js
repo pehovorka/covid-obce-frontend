@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { useQuery } from "@apollo/client";
 import {
   Box,
@@ -45,7 +45,18 @@ export function TownCard({
   const handleDateLimitChange = (select) => {
     dispatch({ type: CHANGE_LIMIT, selectedLimit: select.target.value });
   };
-  //https://codesandbox.io/s/popper-with-arrow-58jhe
+
+  useEffect(() => {
+    if (obec_nazev && obec_kod) {
+      const item = {};
+      item.item_id = obec_kod;
+      item.item_name = obec_nazev;
+      window.gtag("event", "view_item", {
+        items: [item],
+      });
+    }
+  }, [obec_kod, obec_nazev]);
+
   return (
     <Card>
       <CardHeader
