@@ -14,6 +14,11 @@ export function DragAndDropCards({ selectedTowns, setSelectedTowns }) {
     setSelectedTowns(items);
   };
 
+  const handleClose = (index) => {
+    const items = Array.from(selectedTowns);
+    items.splice(index, 1);
+    setSelectedTowns(items);
+  };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId="towns">
@@ -36,6 +41,7 @@ export function DragAndDropCards({ selectedTowns, setSelectedTowns }) {
                       obec_kod={selectedTown.obec_kod}
                       limit={selectedTown.limit}
                       index={index}
+                      handleClose={handleClose}
                       provided={provided}
                     />
                   </Box>
