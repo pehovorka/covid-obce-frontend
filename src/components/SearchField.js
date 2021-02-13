@@ -6,6 +6,8 @@ import Autocomplete, {
 } from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
+import { useMunicipalitiesDispatch } from "../contexts/MunicipalitiesProvider";
+import { ADD_MUNICIPALITY } from "../utils/municipalitiesReducer";
 
 const OBEC_QUERY = gql`
   query Obce_nazvy($obec_nazev: String!) {
@@ -36,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function SearchField({ addNewTown, inputRef }) {
+export function SearchField({ inputRef }) {
+  const dispatch = useMunicipalitiesDispatch();
   const [autoCompleteOpen, setAutoCompleteOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -72,7 +75,11 @@ export function SearchField({ addNewTown, inputRef }) {
       }}
       onChange={(event, newValue) => {
         if (newValue !== null) {
-          addNewTown(newValue.obec_kod, newValue.obec_nazev);
+          dispatch({
+            type: ADD_MUNICIPALITY,
+            code: newValue.obec_kod,
+            name: newValue.obec_nazev,
+          });
           window.gtag("event", "select_item", {
             items: [
               { item_id: newValue.obec_kod, item_name: newValue.obec_nazev },

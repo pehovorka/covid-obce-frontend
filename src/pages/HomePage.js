@@ -7,14 +7,18 @@ import { DragAndDropCards } from "../components/DragAndDropCards";
 import { Footer } from "../components/Footer";
 import { EmptyContent } from "../components/EmptyContent";
 import { SnackBar } from "../components/SnackBar";
-import { useMunicipalitiesState } from "../contexts/MunicipalitiesProvider";
+import {
+  useMunicipalitiesDispatch,
+  useMunicipalitiesState,
+} from "../contexts/MunicipalitiesProvider";
 
 export function HomePage(props) {
   /*   const [selectedTowns, setSelectedTowns] = useState(
     JSON.parse(localStorage.getItem("obce")) || []
   ); */
 
-  const { municipalities } = useMunicipalitiesState();
+  const municipalities = useMunicipalitiesState();
+  const dispatch = useMunicipalitiesDispatch();
 
   const inputRef = useRef(null);
   const [snackBarOpen, setSnackBarOpen] = useState(false);

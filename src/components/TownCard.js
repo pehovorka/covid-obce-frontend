@@ -27,25 +27,24 @@ import { MunicipalityStats } from "./MunicipalityStats";
 import { LoadingIndicator } from "./LoadingIndicator";
 import { ShareIconAndDialog } from "./ShareIconAndDialog";
 import {
-  municipalitiesReducer,
   CHANGE_LIMIT,
+  REMOVE_MUNICIPALITY,
 } from "../utils/municipalitiesReducer";
+import {
+  useMunicipalitiesDispatch,
+  useMunicipalitiesState,
+} from "../contexts/MunicipalitiesProvider";
 
-export function TownCard({
-  obec_nazev,
-  obec_kod,
-  limit,
-  handleClose,
-  index,
-  provided,
-}) {
-  const [state, dispatch] = useReducer(municipalitiesReducer, {
+export function TownCard({ obec_nazev, obec_kod, limit, index, provided }) {
+  /*   const [state, dispatch] = useReducer(municipalitiesReducer, {
     displayLimit: limit,
     queryLimit: limit,
-  });
+  }); */
+  const dispatch = useMunicipalitiesDispatch();
+  const state = useMunicipalitiesState();
 
   const obec = useQuery(OBEC_DETAIL_QUERY, {
-    variables: { obec_kod, limit: state.queryLimit },
+    variables: { obec_kod, limit: 90 }, //TODO: State
     fetchPolicy: "cache-first",
   });
 
@@ -91,20 +90,22 @@ export function TownCard({
                   obec_nazev={obec_nazev}
                 />
               </Grid>
-              {handleClose ? (
-                <Grid item xs>
-                  <Tooltip title="Zavřít kartu">
-                    <IconButton
-                      aria-label="zavřít kartu obce"
-                      onClick={() => handleClose(index)}
-                    >
-                      <CloseIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              ) : (
-                ""
-              )}
+
+              <Grid item xs>
+                <Tooltip title="Zavřít kartu">
+                  <IconButton
+                    aria-label="zavřít kartu obce"
+                    onClick={() =>
+                      dispatch({
+                        type: REMOVE_MUNICIPALITY,
+                        code: obec_kod,
+                      })
+                    }
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
             </Grid>
           </Box>
         }

@@ -6,9 +6,10 @@ const MunicipalitiesStateContext = createContext();
 const MunicipalitiesDispatchContext = createContext();
 
 export function MunicipalitiesProvider({ children }) {
-  const [state, dispatch] = useReducer(municipalitiesReducer, {
-    municipalities: JSON.parse(localStorage.getItem("obce")) || [],
-  });
+  const [state, dispatch] = useReducer(
+    municipalitiesReducer,
+    JSON.parse(localStorage.getItem("obce")) || []
+  );
   return (
     <MunicipalitiesStateContext.Provider value={state}>
       <MunicipalitiesDispatchContext.Provider value={dispatch}>

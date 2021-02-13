@@ -37,12 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function PrimarySearchAppBar({
-  setSelectedTowns,
-  addNewTown,
-  inputRef,
-  searchEnabled,
-}) {
+export function PrimarySearchAppBar({ inputRef, searchEnabled }) {
   const classes = useStyles();
 
   return (
@@ -89,7 +84,7 @@ export function PrimarySearchAppBar({
               {searchEnabled ? (
                 <Grid item xs={12} sm={7} md={9} lg={10}>
                   <div className={classes.search}>
-                    <SearchField addNewTown={addNewTown} inputRef={inputRef} />
+                    <SearchField inputRef={inputRef} />
                   </div>
                 </Grid>
               ) : (
