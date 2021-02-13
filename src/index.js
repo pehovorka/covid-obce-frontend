@@ -9,6 +9,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 import "./index.css";
 import App from "./App";
+import { MunicipalitiesProvider } from "./contexts/MunicipalitiesProvider";
 
 const theme = createMuiTheme({
   palette: {
@@ -43,11 +44,13 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline>
-            <App />
-          </CssBaseline>
-        </ThemeProvider>
+        <MunicipalitiesProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline>
+              <App />
+            </CssBaseline>
+          </ThemeProvider>
+        </MunicipalitiesProvider>
       </ApolloProvider>
     </BrowserRouter>
   </React.StrictMode>,

@@ -89,11 +89,7 @@ export function PrimarySearchAppBar({
               {searchEnabled ? (
                 <Grid item xs={12} sm={7} md={9} lg={10}>
                   <div className={classes.search}>
-                    <SearchField
-                      setSelectedTowns={setSelectedTowns}
-                      addNewTown={addNewTown}
-                      inputRef={inputRef}
-                    />
+                    <SearchField addNewTown={addNewTown} inputRef={inputRef} />
                   </div>
                 </Grid>
               ) : (

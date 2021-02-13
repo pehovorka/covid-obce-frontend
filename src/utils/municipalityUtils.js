@@ -52,3 +52,10 @@ export const formatChangeNumberToDisplay = (number) => {
     Math.abs(number).toLocaleString("cs-CZ");
   return result;
 };
+
+export const isAlreadyAdded = ({ municipalityCodeToCheck, municipalities }) => {
+  if (municipalities.some((e) => e.obec_kod === municipalityCodeToCheck)) {
+    return true;
+  }
+  return false;
+};

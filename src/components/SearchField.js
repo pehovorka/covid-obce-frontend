@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
+export function SearchField({ addNewTown, inputRef }) {
   const [autoCompleteOpen, setAutoCompleteOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");

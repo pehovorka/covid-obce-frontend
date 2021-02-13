@@ -39,6 +39,7 @@ export function DragAndDropCards({ selectedTowns, setSelectedTowns }) {
                     <TownCard
                       obec_nazev={selectedTown.obec_nazev}
                       obec_kod={selectedTown.obec_kod}
+                      limit={selectedTown.limit}
                       index={index}
                       handleClose={handleClose}
                       provided={provided}

@@ -1,5 +1,10 @@
+// React
 import React, { useEffect, useReducer } from "react";
+
+// Apollo
 import { useQuery } from "@apollo/client";
+
+// Material UI
 import {
   Box,
   Card,
@@ -11,6 +16,7 @@ import {
 } from "@material-ui/core/";
 import CloseIcon from "@material-ui/icons/Close";
 
+// Sub-components
 import { Chart } from "./Chart";
 import {
   OBEC_DETAIL_QUERY,
@@ -21,20 +27,21 @@ import { MunicipalityStats } from "./MunicipalityStats";
 import { LoadingIndicator } from "./LoadingIndicator";
 import { ShareIconAndDialog } from "./ShareIconAndDialog";
 import {
-  municipalityReducer,
+  municipalitiesReducer,
   CHANGE_LIMIT,
-} from "../utils/municipalityReducer";
+} from "../utils/municipalitiesReducer";
 
 export function TownCard({
   obec_nazev,
   obec_kod,
+  limit,
   handleClose,
   index,
   provided,
 }) {
-  const [state, dispatch] = useReducer(municipalityReducer, {
-    displayLimit: 90,
-    queryLimit: 90,
+  const [state, dispatch] = useReducer(municipalitiesReducer, {
+    displayLimit: limit,
+    queryLimit: limit,
   });
 
   const obec = useQuery(OBEC_DETAIL_QUERY, {
@@ -118,3 +125,7 @@ export function TownCard({
     </Card>
   );
 }
+
+TownCard.defaultProps = {
+  limit: 90,
+};
