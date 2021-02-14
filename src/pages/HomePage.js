@@ -30,11 +30,6 @@ export function HomePage(props) {
 
   // [{obec_kod: "548511", obec_nazev: "Pacov"}, {obec_kod: "554782", obec_nazev: "Praha"}]
 
-  // Update LocalStorage on change of selectedTowns array
-  useEffect(() => {
-    localStorage.setItem("obce", JSON.stringify(municipalities));
-  }, [municipalities]);
-
   /* 
   const addNewTown = (obec_kod, obec_nazev) => {
     if (isAlreadyAdded(obec_kod)) {

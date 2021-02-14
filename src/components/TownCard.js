@@ -36,20 +36,19 @@ import {
 } from "../contexts/MunicipalitiesProvider";
 
 export function TownCard({ obec_nazev, obec_kod, limit, index, provided }) {
-  /*   const [state, dispatch] = useReducer(municipalitiesReducer, {
-    displayLimit: limit,
-    queryLimit: limit,
-  }); */
   const dispatch = useMunicipalitiesDispatch();
-  const state = useMunicipalitiesState();
 
   const obec = useQuery(OBEC_DETAIL_QUERY, {
-    variables: { obec_kod, limit: 90 }, //TODO: State
+    variables: { obec_kod, limit: limit === 0 ? 0 : 90 },
     fetchPolicy: "cache-first",
   });
 
   const handleDateLimitChange = (select) => {
-    dispatch({ type: CHANGE_LIMIT, selectedLimit: select.target.value });
+    dispatch({
+      type: CHANGE_LIMIT,
+      code: obec_kod,
+      selectedLimit: select.target.value,
+    });
   };
 
   useEffect(() => {
@@ -80,7 +79,7 @@ export function TownCard({ obec_nazev, obec_kod, limit, index, provided }) {
             >
               <Grid item xs>
                 <DateLimitSelect
-                  limit={state.displayLimit}
+                  limit={limit}
                   handleDateLimitChange={handleDateLimitChange}
                 />
               </Grid>
@@ -117,9 +116,7 @@ export function TownCard({ obec_nazev, obec_kod, limit, index, provided }) {
         ) : (
           <>
             <MunicipalityStats obec={obec} obec_kod={obec_kod} />
-            <Chart
-              data={convertToGraphData(obec.data.obec, state.displayLimit)}
-            />
+            <Chart data={convertToGraphData(obec.data.obec, limit)} />
           </>
         )}
       </CardContent>

@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from "react";
+import React, { createContext, useReducer, useContext, useEffect } from "react";
 
 import { municipalitiesReducer } from "../utils/municipalitiesReducer";
 
@@ -10,6 +10,11 @@ export function MunicipalitiesProvider({ children }) {
     municipalitiesReducer,
     JSON.parse(localStorage.getItem("obce")) || []
   );
+
+  // Update LocalStorage on change of state
+  useEffect(() => {
+    localStorage.setItem("obce", JSON.stringify(state));
+  }, [state]);
   return (
     <MunicipalitiesStateContext.Provider value={state}>
       <MunicipalitiesDispatchContext.Provider value={dispatch}>

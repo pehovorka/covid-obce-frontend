@@ -4,13 +4,18 @@ export const CHANGE_LIMIT = "CHANGE_LIMIT";
 export const ADD_MUNICIPALITY = "ADD_MUNICIPALITY";
 export const REMOVE_MUNICIPALITY = "REMOVE_MUNICIPALITY";
 
-const handleDateLimitChange = (state, selectedLimit) => {
-  const displayLimit = selectedLimit;
-  let queryLimit = state.queryLimit;
-  if (selectedLimit === 0) {
-    queryLimit = 0;
-  }
-  return { displayLimit: displayLimit, queryLimit: queryLimit };
+const handleLimitChange = (state, code, selectedLimit) => {
+  console.log("changing", state, code, selectedLimit);
+  const municipalities = state.map((municipality) => {
+    if (municipality.obec_kod === code) {
+      return {
+        ...municipality,
+        limit: selectedLimit,
+      };
+    }
+    return municipality;
+  });
+  return municipalities;
 };
 
 const handleAdd = (state, code, name) => {
@@ -41,7 +46,7 @@ const handleRemove = (state, code) => {
 export function municipalitiesReducer(state, action) {
   switch (action.type) {
     case CHANGE_LIMIT:
-      return handleDateLimitChange(state, action.selectedLimit);
+      return handleLimitChange(state, action.code, action.selectedLimit);
     case ADD_MUNICIPALITY:
       return handleAdd(state, action.code, action.name);
     case REMOVE_MUNICIPALITY:
