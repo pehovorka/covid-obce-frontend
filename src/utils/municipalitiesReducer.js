@@ -3,6 +3,7 @@ import { isAlreadyAdded } from "../utils/municipalityUtils";
 export const CHANGE_LIMIT = "CHANGE_LIMIT";
 export const ADD_MUNICIPALITY = "ADD_MUNICIPALITY";
 export const REMOVE_MUNICIPALITY = "REMOVE_MUNICIPALITY";
+export const CHANGE_ORDER = "CHANGE_ORDER";
 
 const handleLimitChange = (state, code, selectedLimit) => {
   console.log("changing", state, code, selectedLimit);
@@ -43,6 +44,10 @@ const handleRemove = (state, code) => {
   return state.filter((municipality) => municipality.obec_kod !== code);
 };
 
+const handleChangeOrder = (newOrder) => {
+  return newOrder;
+};
+
 export function municipalitiesReducer(state, action) {
   switch (action.type) {
     case CHANGE_LIMIT:
@@ -51,7 +56,9 @@ export function municipalitiesReducer(state, action) {
       return handleAdd(state, action.code, action.name);
     case REMOVE_MUNICIPALITY:
       return handleRemove(state, action.code);
+    case CHANGE_ORDER:
+      return handleChangeOrder(action.newOrder);
     default:
-      throw new Error();
+      throw new Error("You must specify an action type!");
   }
 }

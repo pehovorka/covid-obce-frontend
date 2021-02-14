@@ -2,16 +2,19 @@ import React from "react";
 import { Box } from "@material-ui/core";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { TownCard } from "../components/TownCard";
+import { useMunicipalitiesDispatch } from "../contexts/MunicipalitiesProvider";
+import { CHANGE_ORDER } from "../utils/municipalitiesReducer";
 
-export function DragAndDropCards({ selectedTowns, setSelectedTowns }) {
+export function DragAndDropCards({ municipalities }) {
+  const dispatch = useMunicipalitiesDispatch();
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
 
-    const items = Array.from(selectedTowns);
+    const items = Array.from(municipalities);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 
-    setSelectedTowns(items);
+    dispatch({ type: CHANGE_ORDER, newOrder: items });
   };
 
   return (
@@ -19,10 +22,10 @@ export function DragAndDropCards({ selectedTowns, setSelectedTowns }) {
       <Droppable droppableId="towns">
         {(provided) => (
           <Box {...provided.droppableProps} ref={provided.innerRef} mt={1}>
-            {selectedTowns.map((selectedTown, index) => (
+            {municipalities.map((municipality, index) => (
               <Draggable
-                key={selectedTown.obec_kod}
-                draggableId={selectedTown.obec_kod}
+                key={municipality.obec_kod}
+                draggableId={municipality.obec_kod}
                 index={index}
               >
                 {(provided) => (
@@ -32,9 +35,9 @@ export function DragAndDropCards({ selectedTowns, setSelectedTowns }) {
                     p={1}
                   >
                     <TownCard
-                      obec_nazev={selectedTown.obec_nazev}
-                      obec_kod={selectedTown.obec_kod}
-                      limit={selectedTown.limit}
+                      obec_nazev={municipality.obec_nazev}
+                      obec_kod={municipality.obec_kod}
+                      limit={municipality.limit}
                       index={index}
                       provided={provided}
                     />

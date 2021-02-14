@@ -18,7 +18,6 @@ export function HomePage(props) {
   ); */
 
   const municipalities = useMunicipalitiesState();
-  const dispatch = useMunicipalitiesDispatch();
 
   const inputRef = useRef(null);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
@@ -70,7 +69,7 @@ export function HomePage(props) {
         ) : (
           <>
             <DragAndDropCards
-              selectedTowns={municipalities}
+              municipalities={municipalities}
               setSelectedTowns={"setSelectedTowns"}
             />
             <Box textAlign="center" mt={2}>
