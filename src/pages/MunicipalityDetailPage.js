@@ -67,6 +67,7 @@ export function MunicipalityDetailPage() {
                 <TownCard
                   obec_nazev={municipalityName.data?.obec[0]?.obec_nazev}
                   obec_kod={urlParams.obec_kod}
+                  closeButtonHidden={true}
                 />
               </Box>
               <Box mt={10}>

@@ -30,12 +30,15 @@ import {
   CHANGE_LIMIT,
   REMOVE_MUNICIPALITY,
 } from "../utils/municipalitiesReducer";
-import {
-  useMunicipalitiesDispatch,
-  useMunicipalitiesState,
-} from "../contexts/MunicipalitiesProvider";
+import { useMunicipalitiesDispatch } from "../contexts/MunicipalitiesProvider";
 
-export function TownCard({ obec_nazev, obec_kod, limit, index, provided }) {
+export function TownCard({
+  obec_nazev,
+  obec_kod,
+  limit,
+  provided,
+  closeButtonHidden,
+}) {
   const dispatch = useMunicipalitiesDispatch();
 
   const obec = useQuery(OBEC_DETAIL_QUERY, {
@@ -89,22 +92,23 @@ export function TownCard({ obec_nazev, obec_kod, limit, index, provided }) {
                   obec_nazev={obec_nazev}
                 />
               </Grid>
-
-              <Grid item xs>
-                <Tooltip title="Zavřít kartu">
-                  <IconButton
-                    aria-label="zavřít kartu obce"
-                    onClick={() =>
-                      dispatch({
-                        type: REMOVE_MUNICIPALITY,
-                        code: obec_kod,
-                      })
-                    }
-                  >
-                    <CloseIcon />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
+              {!closeButtonHidden && (
+                <Grid item xs>
+                  <Tooltip title="Zavřít kartu">
+                    <IconButton
+                      aria-label="zavřít kartu obce"
+                      onClick={() =>
+                        dispatch({
+                          type: REMOVE_MUNICIPALITY,
+                          code: obec_kod,
+                        })
+                      }
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
             </Grid>
           </Box>
         }
