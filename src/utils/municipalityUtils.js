@@ -54,7 +54,7 @@ export const formatChangeNumberToDisplay = (number) => {
 };
 
 export const isAlreadyAdded = ({ municipalityCodeToCheck, municipalities }) => {
-  if (municipalities.some((e) => e.obec_kod === municipalityCodeToCheck)) {
+  if (municipalities.some((e) => e.code === municipalityCodeToCheck)) {
     return true;
   }
   return false;

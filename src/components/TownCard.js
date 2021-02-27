@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect } from "react";
 
 // Apollo
 import { useQuery } from "@apollo/client";
@@ -26,44 +26,34 @@ import { DateLimitSelect } from "./DateLimitSelect";
 import { MunicipalityStats } from "./MunicipalityStats";
 import { LoadingIndicator } from "./LoadingIndicator";
 import { ShareIconAndDialog } from "./ShareIconAndDialog";
-import {
-  CHANGE_LIMIT,
-  REMOVE_MUNICIPALITY,
-} from "../utils/municipalitiesReducer";
+import { REMOVE_MUNICIPALITY } from "../utils/municipalitiesReducer";
 import { useMunicipalitiesDispatch } from "../contexts/MunicipalitiesProvider";
 
 export function TownCard({
-  obec_nazev,
-  obec_kod,
+  name,
+  code,
   limit,
   provided,
   closeButtonHidden,
+  handleDateLimitChange,
 }) {
   const dispatch = useMunicipalitiesDispatch();
 
   const obec = useQuery(OBEC_DETAIL_QUERY, {
-    variables: { obec_kod, limit: limit === 0 ? 0 : 90 },
+    variables: { obec_kod: code, limit: limit === 0 ? 0 : 90 },
     fetchPolicy: "cache-first",
   });
 
-  const handleDateLimitChange = (select) => {
-    dispatch({
-      type: CHANGE_LIMIT,
-      code: obec_kod,
-      selectedLimit: select.target.value,
-    });
-  };
-
   useEffect(() => {
-    if (obec_nazev && obec_kod) {
+    if (name && code) {
       const item = {};
-      item.item_id = obec_kod;
-      item.item_name = obec_nazev;
+      item.item_id = code;
+      item.item_name = name;
       window.gtag("event", "view_item", {
         items: [item],
       });
     }
-  }, [obec_kod, obec_nazev]);
+  }, [code, name]);
 
   return (
     <Card>
@@ -84,13 +74,11 @@ export function TownCard({
                 <DateLimitSelect
                   limit={limit}
                   handleDateLimitChange={handleDateLimitChange}
+                  code={code}
                 />
               </Grid>
               <Grid item xs>
-                <ShareIconAndDialog
-                  obec_kod={obec_kod}
-                  obec_nazev={obec_nazev}
-                />
+                <ShareIconAndDialog code={code} name={name} />
               </Grid>
               {!closeButtonHidden && (
                 <Grid item xs>
@@ -100,7 +88,7 @@ export function TownCard({
                       onClick={() =>
                         dispatch({
                           type: REMOVE_MUNICIPALITY,
-                          code: obec_kod,
+                          code: code,
                         })
                       }
                     >
@@ -112,14 +100,14 @@ export function TownCard({
             </Grid>
           </Box>
         }
-        title={obec_nazev}
+        title={name}
       />
       <CardContent>
         {obec.loading || obec.error ? (
           <LoadingIndicator />
         ) : (
           <>
-            <MunicipalityStats obec={obec} obec_kod={obec_kod} />
+            <MunicipalityStats obec={obec} code={code} />
             <Chart data={convertToGraphData(obec.data.obec, limit)} />
           </>
         )}

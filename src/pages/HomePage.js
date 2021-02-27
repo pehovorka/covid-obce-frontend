@@ -7,17 +7,14 @@ import { DragAndDropCards } from "../components/DragAndDropCards";
 import { Footer } from "../components/Footer";
 import { EmptyContent } from "../components/EmptyContent";
 import { SnackBar } from "../components/SnackBar";
-import {
-  useMunicipalitiesDispatch,
-  useMunicipalitiesState,
-} from "../contexts/MunicipalitiesProvider";
+import { useMunicipalitiesState } from "../contexts/MunicipalitiesProvider";
 
 export function HomePage(props) {
   /*   const [selectedTowns, setSelectedTowns] = useState(
     JSON.parse(localStorage.getItem("obce")) || []
   ); */
 
-  const municipalities = useMunicipalitiesState();
+  const { municipalities } = useMunicipalitiesState();
 
   const inputRef = useRef(null);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
@@ -26,28 +23,6 @@ export function HomePage(props) {
   const searchAutoFocus = props.location.state?.searchAutoFocus ?? false;
 
   document.title = `COVID v obcích`;
-
-  // [{obec_kod: "548511", obec_nazev: "Pacov"}, {obec_kod: "554782", obec_nazev: "Praha"}]
-
-  /* 
-  const addNewTown = (obec_kod, obec_nazev) => {
-    if (isAlreadyAdded(obec_kod)) {
-      setSnackBarOpen(true);
-      setSnackBarMessage("Tato obec již byla přidána!");
-    } else {
-      if (selectedTowns.length === 10) {
-        setSnackBarOpen(true);
-        setSnackBarMessage(
-          "Dosáhli jste maximálního počtu přidaných obcí. Pokud chcete vyhledat další obec, nějakou odeberte."
-        );
-      } else {
-        setSelectedTowns((selectedTowns) => [
-          { obec_kod: obec_kod, obec_nazev: obec_nazev, limit: 90 },
-          ...selectedTowns,
-        ]);
-      }
-    }
-  }; */
 
   useEffect(() => {
     if (searchAutoFocus) {

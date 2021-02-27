@@ -7,8 +7,8 @@ export const CHANGE_ORDER = "CHANGE_ORDER";
 
 const handleLimitChange = (state, code, selectedLimit) => {
   console.log("changing", state, code, selectedLimit);
-  const municipalities = state.map((municipality) => {
-    if (municipality.obec_kod === code) {
+  const municipalities = state.municipalities.map((municipality) => {
+    if (municipality.code === code) {
       return {
         ...municipality,
         limit: selectedLimit,
@@ -16,36 +16,49 @@ const handleLimitChange = (state, code, selectedLimit) => {
     }
     return municipality;
   });
-  return municipalities;
+  return { ...state, municipalities: municipalities };
 };
 
 const handleAdd = (state, code, name) => {
   if (
     isAlreadyAdded({
       municipalityCodeToCheck: code,
-      municipalities: state,
+      municipalities: state.municipalities,
     })
   ) {
     console.log("Tato obec již byla přidána!");
     return state;
   } else {
-    if (state.length === 10) {
+    if (state.municipalities.length === 10) {
       console.log(
         "Dosáhli jste maximálního počtu přidaných obcí. Pokud chcete vyhledat další obec, nějakou odeberte."
       );
       return state;
     } else {
-      return [{ obec_kod: code, obec_nazev: name, limit: 90 }, ...state];
+      const newState = {
+        ...state,
+        municipalities: [
+          { code: code, name: name, limit: 90 },
+          ...state.municipalities,
+        ],
+      };
+      console.log("newState", newState);
+      return newState;
     }
   }
 };
 
 const handleRemove = (state, code) => {
-  return state.filter((municipality) => municipality.obec_kod !== code);
+  return {
+    ...state,
+    municipalities: state.municipalities.filter(
+      (municipality) => municipality.code !== code
+    ),
+  };
 };
 
-const handleChangeOrder = (newOrder) => {
-  return newOrder;
+const handleChangeOrder = (state, newOrder) => {
+  return { ...state, municipalities: newOrder };
 };
 
 export function municipalitiesReducer(state, action) {
@@ -57,7 +70,7 @@ export function municipalitiesReducer(state, action) {
     case REMOVE_MUNICIPALITY:
       return handleRemove(state, action.code);
     case CHANGE_ORDER:
-      return handleChangeOrder(action.newOrder);
+      return handleChangeOrder(state, action.newOrder);
     default:
       throw new Error("You must specify an action type!");
   }

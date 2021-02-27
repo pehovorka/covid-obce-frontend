@@ -6,7 +6,7 @@ import {
   formatChangeNumberToDisplay,
 } from "../utils/municipalityUtils";
 
-export function MunicipalityStats({ obec, obec_kod }) {
+export function MunicipalityStats({ obec, code }) {
   return (
     <Box mb={2}>
       <Grid container spacing={3} justify="center">
@@ -91,7 +91,7 @@ export function MunicipalityStats({ obec, obec_kod }) {
               <Typography variant="h6" component="p">
                 {(
                   (parseInt(obec.data.obec[0].aktualne_nemocnych) /
-                    municipalitiesPopulation[0][obec_kod]) *
+                    municipalitiesPopulation[0][code]) *
                   1000
                 ).toLocaleString("cs-CZ", { maximumFractionDigits: 1 })}
               </Typography>

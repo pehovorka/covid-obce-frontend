@@ -24,8 +24,8 @@ export function MunicipalityDetailPage() {
   );
 
   useEffect(() => {
-    if (urlParams.obec_kod) {
-      const requiredMunicipalityCode = urlParams.obec_kod;
+    if (urlParams.code) {
+      const requiredMunicipalityCode = urlParams.code;
       //Call query here
       if (isValidMunicipalityCode(requiredMunicipalityCode)) {
         !municipalityName.called &&
@@ -65,8 +65,8 @@ export function MunicipalityDetailPage() {
             <>
               <Box mt={6}>
                 <TownCard
-                  obec_nazev={municipalityName.data?.obec[0]?.obec_nazev}
-                  obec_kod={urlParams.obec_kod}
+                  name={municipalityName.data?.obec[0]?.obec_nazev}
+                  code={urlParams.code}
                   closeButtonHidden={true}
                 />
               </Box>

@@ -18,14 +18,6 @@ const OBEC_QUERY = gql`
   }
 `;
 
-/* const suggestedTowns = [
-  { obec_kod: "554782", obec_nazev: "Praha" },
-  { obec_kod: "582786", obec_nazev: "Brno" },
-  { obec_kod: "554821", obec_nazev: "Ostrava" },
-  { obec_kod: "554791", obec_nazev: "Plzeň" },
-  { obec_kod: "563889", obec_nazev: "Liberec" },
-]; */
-
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
     color: "#fff",

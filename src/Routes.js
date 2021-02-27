@@ -6,14 +6,18 @@ import { MunicipalityDetailPage } from "./pages/MunicipalityDetailPage";
 
 export const route = {
   home: () => `/`,
-  obec: () => `/obec/:obec_kod`,
+  municipality: () => `/obec/:code`,
 };
 
 export function Routes() {
   return (
     <Switch>
       <Route path={route.home()} exact component={HomePage} />
-      <Route path={route.obec()} exact component={MunicipalityDetailPage} />
+      <Route
+        path={route.municipality()}
+        exact
+        component={MunicipalityDetailPage}
+      />
       <Route path="*">
         <Redirect to={route.home()} />
       </Route>

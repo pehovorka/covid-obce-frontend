@@ -1,20 +1,30 @@
 import React, { createContext, useReducer, useContext, useEffect } from "react";
 
 import { municipalitiesReducer } from "../utils/municipalitiesReducer";
+import {
+  getMunicipalities,
+  storeMunicipalitiesToLS,
+} from "../utils/localStorageUtils";
+
+const INITIAL_STATE = {
+  municipalities: [],
+  error: null,
+};
 
 const MunicipalitiesStateContext = createContext();
 const MunicipalitiesDispatchContext = createContext();
 
 export function MunicipalitiesProvider({ children }) {
-  const [state, dispatch] = useReducer(
-    municipalitiesReducer,
-    JSON.parse(localStorage.getItem("obce")) || []
-  );
+  // Initialize reducer
+  const [state, dispatch] = useReducer(municipalitiesReducer, {
+    ...INITIAL_STATE,
+    municipalities: getMunicipalities(),
+  });
 
   // Update LocalStorage on change of state
   useEffect(() => {
-    localStorage.setItem("obce", JSON.stringify(state));
-  }, [state]);
+    storeMunicipalitiesToLS(state.municipalities);
+  }, [state.municipalities]);
   return (
     <MunicipalitiesStateContext.Provider value={state}>
       <MunicipalitiesDispatchContext.Provider value={dispatch}>

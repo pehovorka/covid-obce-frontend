@@ -3,7 +3,7 @@ import { Box } from "@material-ui/core";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { TownCard } from "../components/TownCard";
 import { useMunicipalitiesDispatch } from "../contexts/MunicipalitiesProvider";
-import { CHANGE_ORDER } from "../utils/municipalitiesReducer";
+import { CHANGE_ORDER, CHANGE_LIMIT } from "../utils/municipalitiesReducer";
 
 export function DragAndDropCards({ municipalities }) {
   const dispatch = useMunicipalitiesDispatch();
@@ -17,6 +17,14 @@ export function DragAndDropCards({ municipalities }) {
     dispatch({ type: CHANGE_ORDER, newOrder: items });
   };
 
+  const handleDateLimitChange = ({ select, code }) => {
+    dispatch({
+      type: CHANGE_LIMIT,
+      code: code,
+      selectedLimit: select.target.value,
+    });
+  };
+
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId="towns">
@@ -24,8 +32,8 @@ export function DragAndDropCards({ municipalities }) {
           <Box {...provided.droppableProps} ref={provided.innerRef} mt={1}>
             {municipalities.map((municipality, index) => (
               <Draggable
-                key={municipality.obec_kod}
-                draggableId={municipality.obec_kod}
+                key={municipality.code}
+                draggableId={municipality.code}
                 index={index}
               >
                 {(provided) => (
@@ -35,11 +43,12 @@ export function DragAndDropCards({ municipalities }) {
                     p={1}
                   >
                     <TownCard
-                      obec_nazev={municipality.obec_nazev}
-                      obec_kod={municipality.obec_kod}
+                      name={municipality.name}
+                      code={municipality.code}
                       limit={municipality.limit}
                       index={index}
                       provided={provided}
+                      handleDateLimitChange={handleDateLimitChange}
                     />
                   </Box>
                 )}
