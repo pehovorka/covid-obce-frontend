@@ -4,6 +4,8 @@ export const CHANGE_LIMIT = "CHANGE_LIMIT";
 export const ADD_MUNICIPALITY = "ADD_MUNICIPALITY";
 export const REMOVE_MUNICIPALITY = "REMOVE_MUNICIPALITY";
 export const CHANGE_ORDER = "CHANGE_ORDER";
+export const SET_MESSAGE = "SET_MESSAGE";
+export const REMOVE_MESSAGE = "REMOVE_MESSAGE";
 
 const handleLimitChange = (state, code, selectedLimit) => {
   console.log("changing", state, code, selectedLimit);
@@ -26,14 +28,23 @@ const handleAdd = (state, code, name) => {
       municipalities: state.municipalities,
     })
   ) {
-    console.log("Tato obec již byla přidána!");
-    return state;
+    return {
+      ...state,
+      message: {
+        text: "Tato obec již byla přidána!",
+        severity: "error",
+      },
+    };
   } else {
     if (state.municipalities.length === 10) {
-      console.log(
-        "Dosáhli jste maximálního počtu přidaných obcí. Pokud chcete vyhledat další obec, nějakou odeberte."
-      );
-      return state;
+      return {
+        ...state,
+        message: {
+          text:
+            "Dosáhli jste maximálního počtu přidaných obcí. Pokud chcete vyhledat další obec, nějakou odeberte.",
+          severity: "error",
+        },
+      };
     } else {
       const newState = {
         ...state,
@@ -61,6 +72,14 @@ const handleChangeOrder = (state, newOrder) => {
   return { ...state, municipalities: newOrder };
 };
 
+const setMessage = (state, text, severity) => {
+  return { ...state, message: { text, severity } };
+};
+
+const removeMessage = (state) => {
+  return { ...state, message: null };
+};
+
 export function municipalitiesReducer(state, action) {
   switch (action.type) {
     case CHANGE_LIMIT:
@@ -71,6 +90,10 @@ export function municipalitiesReducer(state, action) {
       return handleRemove(state, action.code);
     case CHANGE_ORDER:
       return handleChangeOrder(state, action.newOrder);
+    case SET_MESSAGE:
+      return setMessage(state, action.text, action.severity);
+    case REMOVE_MESSAGE:
+      return removeMessage(state);
     default:
       throw new Error("You must specify an action type!");
   }

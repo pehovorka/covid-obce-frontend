@@ -9,7 +9,8 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 import "./index.css";
 import App from "./App";
-import { MunicipalitiesProvider } from "./contexts/MunicipalitiesProvider";
+import { MunicipalitiesProvider } from "./providers/MunicipalitiesProvider";
+import { SnackBar } from "./components/SnackBar";
 
 const theme = createMuiTheme({
   palette: {
@@ -48,6 +49,7 @@ ReactDOM.render(
           <ThemeProvider theme={theme}>
             <CssBaseline>
               <App />
+              <SnackBar />
             </CssBaseline>
           </ThemeProvider>
         </MunicipalitiesProvider>

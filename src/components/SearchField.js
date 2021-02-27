@@ -6,7 +6,7 @@ import Autocomplete, {
 } from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
-import { useMunicipalitiesDispatch } from "../contexts/MunicipalitiesProvider";
+import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 import { ADD_MUNICIPALITY } from "../utils/municipalitiesReducer";
 
 const OBEC_QUERY = gql`

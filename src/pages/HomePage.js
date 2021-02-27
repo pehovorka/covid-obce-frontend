@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Container, Box, Typography, Grid } from "@material-ui/core";
 import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
 
@@ -6,19 +6,12 @@ import { PrimarySearchAppBar } from "../components/AppBar";
 import { DragAndDropCards } from "../components/DragAndDropCards";
 import { Footer } from "../components/Footer";
 import { EmptyContent } from "../components/EmptyContent";
-import { SnackBar } from "../components/SnackBar";
-import { useMunicipalitiesState } from "../contexts/MunicipalitiesProvider";
+import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
 
 export function HomePage(props) {
-  /*   const [selectedTowns, setSelectedTowns] = useState(
-    JSON.parse(localStorage.getItem("obce")) || []
-  ); */
-
   const { municipalities } = useMunicipalitiesState();
 
   const inputRef = useRef(null);
-  const [snackBarOpen, setSnackBarOpen] = useState(false);
-  const [snackBarMessage, setSnackBarMessage] = useState();
 
   const searchAutoFocus = props.location.state?.searchAutoFocus ?? false;
 
@@ -68,12 +61,6 @@ export function HomePage(props) {
           <Footer />
         </Box>
       </Container>
-      <SnackBar
-        message={snackBarMessage}
-        severity="error"
-        open={snackBarOpen}
-        setOpen={setSnackBarOpen}
-      />
     </>
   );
 }

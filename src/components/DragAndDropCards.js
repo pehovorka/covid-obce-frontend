@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@material-ui/core";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { TownCard } from "../components/TownCard";
-import { useMunicipalitiesDispatch } from "../contexts/MunicipalitiesProvider";
+import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 import { CHANGE_ORDER, CHANGE_LIMIT } from "../utils/municipalitiesReducer";
 
 export function DragAndDropCards({ municipalities }) {

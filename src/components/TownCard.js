@@ -27,7 +27,7 @@ import { MunicipalityStats } from "./MunicipalityStats";
 import { LoadingIndicator } from "./LoadingIndicator";
 import { ShareIconAndDialog } from "./ShareIconAndDialog";
 import { REMOVE_MUNICIPALITY } from "../utils/municipalitiesReducer";
-import { useMunicipalitiesDispatch } from "../contexts/MunicipalitiesProvider";
+import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 
 export function TownCard({
   name,
