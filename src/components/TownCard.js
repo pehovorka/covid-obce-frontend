@@ -26,7 +26,10 @@ import { DateLimitSelect } from "./DateLimitSelect";
 import { MunicipalityStats } from "./MunicipalityStats";
 import { LoadingIndicator } from "./LoadingIndicator";
 import { ShareIconAndDialog } from "./ShareIconAndDialog";
-import { REMOVE_MUNICIPALITY } from "../utils/municipalitiesReducer";
+import {
+  REMOVE_MUNICIPALITY,
+  SET_MESSAGE,
+} from "../utils/municipalitiesReducer";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 
 export function TownCard({
@@ -54,6 +57,16 @@ export function TownCard({
       });
     }
   }, [code, name]);
+
+  useEffect(() => {
+    if (obec.error) {
+      dispatch({
+        type: SET_MESSAGE,
+        text: "Nepodařilo se připojit k serveru. Zkuste to prosím později.",
+        severity: "error",
+      });
+    }
+  }, [obec.error, dispatch]);
 
   return (
     <Card>

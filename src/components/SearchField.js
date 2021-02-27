@@ -6,8 +6,9 @@ import Autocomplete, {
 } from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
+
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
-import { ADD_MUNICIPALITY } from "../utils/municipalitiesReducer";
+import { ADD_MUNICIPALITY, SET_MESSAGE } from "../utils/municipalitiesReducer";
 
 const OBEC_QUERY = gql`
   query Obce_nazvy($obec_nazev: String!) {
@@ -42,8 +43,14 @@ export function SearchField({ inputRef }) {
   useEffect(() => {
     if (!obce.loading && !obce.error) {
       setOptions(obce.data.obce);
+    } else if (obce.error) {
+      dispatch({
+        type: SET_MESSAGE,
+        text: "Nepodařilo se připojit k serveru. Zkuste to prosím později.",
+        severity: "error",
+      });
     }
-  }, [obce.data, obce.loading, obce.error, inputValue]);
+  }, [obce.data, obce.loading, obce.error, inputValue, dispatch]);
 
   const classes = useStyles();
 
