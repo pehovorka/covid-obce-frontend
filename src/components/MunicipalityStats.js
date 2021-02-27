@@ -16,7 +16,7 @@ export function MunicipalityStats({ obec, code }) {
               <Grid container direction="column" alignItems="center">
                 <Grid item>
                   <Typography variant="overline" noWrap={true}>
-                    Nemocných (
+                    Aktivní případy (
                     {new Date(obec.data.obec[0].datum).toLocaleDateString(
                       "cs-CZ",
                       {
@@ -79,7 +79,7 @@ export function MunicipalityStats({ obec, code }) {
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
               <Typography variant="overline" noWrap={true}>
-                Nemocných na 1000 obyvatel (
+                Aktivní na 1000 obyvatel (
                 {new Date(obec.data.obec[0].datum).toLocaleDateString("cs-CZ", {
                   day: "numeric",
                   month: "numeric",

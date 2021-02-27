@@ -30,7 +30,7 @@ export function Chart({ data }) {
           dataKey="aktualne_nemocnych"
           stroke="#0078B8"
           fill="#0078B8"
-          name="Nemocných"
+          name="Aktivní případy"
         />
         <Area
           type="linear"
