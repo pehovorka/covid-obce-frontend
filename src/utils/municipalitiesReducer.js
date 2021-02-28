@@ -8,7 +8,6 @@ export const SET_MESSAGE = "SET_MESSAGE";
 export const REMOVE_MESSAGE = "REMOVE_MESSAGE";
 
 const handleLimitChange = (state, code, selectedLimit) => {
-  console.log("changing", state, code, selectedLimit);
   const municipalities = state.municipalities.map((municipality) => {
     if (municipality.code === code) {
       return {
@@ -53,7 +52,6 @@ const handleAdd = (state, code, name) => {
           ...state.municipalities,
         ],
       };
-      console.log("newState", newState);
       return newState;
     }
   }

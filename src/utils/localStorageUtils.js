@@ -14,7 +14,7 @@ LocalStorage v2:
 
 // Migration
 const migrateToV2 = () => {
-  console.log("LocalStorage v1 to v2 migration started...");
+  console.log("Storage v1 to v2 migration started...");
   const v1 = JSON.parse(localStorage.getItem("obce"));
   const v2 = v1.map((municipality) => ({
     code: municipality.obec_kod,
