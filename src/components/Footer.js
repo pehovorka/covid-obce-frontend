@@ -40,7 +40,7 @@ export function Footer() {
           />
         </Grid>
         <Grid item>
-          Zdroje dat:{" "}
+          Zdroj:{" "}
           <Link
             href="https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19"
             target="_blank"
@@ -58,7 +58,7 @@ export function Footer() {
           </Link>
         </Grid>
       </Grid>
-      <Box pt={2}>
+      <Box m={2} textAlign="center">
         <LastModified />
       </Box>
     </>

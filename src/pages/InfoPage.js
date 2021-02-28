@@ -64,7 +64,7 @@ export function InfoPage() {
       .then((text) => setMarkdown(text));
   }, []);
 
-  document.title = `Často kladené otázky – COVID v obcích`;
+  document.title = `O webu – COVID v obcích`;
 
   return (
     <>
