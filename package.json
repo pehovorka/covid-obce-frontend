@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^12.1.10",
     "graphql": "^15.4.0",
     "immutability-helper": "^3.1.1",
+    "markdown-to-jsx": "^7.1.1",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-dnd": "^11.1.3",

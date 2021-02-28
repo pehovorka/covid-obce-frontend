@@ -4,7 +4,6 @@
  *
  * Get corresponding municipality name from DB
  * 
- * @param mixed $targetUrl Find record by target url
  *
  */
 function getMunicipalityNameFromDB($municipalityCode)

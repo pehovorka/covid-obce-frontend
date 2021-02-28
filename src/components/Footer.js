@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Grid, Link } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
 
 import { CookieDialog } from "./CookieDialog";
+import { route } from "../Routes";
 
 export function Footer() {
   const [openCookies, setCookiesOpen] = useState(false);
@@ -16,17 +18,12 @@ export function Footer() {
   return (
     <Grid container justify="center" spacing={5}>
       <Grid item>
-        <Link
-          //href="https://www.linkedin.com/in/petr-hovorka-40a198b2/"
-          //target="_blank"
-          //rel="noreferrer"
-          href="mailto:covid-obce@petrhovorka.com"
-        >
-          Kontakt
+        <Link component={RouterLink} to={route.info()}>
+          O webu
         </Link>
       </Grid>
       <Grid item>
-        <Link href="#" onClick={() => handleClickCookiesOpen()}>
+        <Link component={RouterLink} onClick={() => handleClickCookiesOpen()}>
           Cookies
         </Link>
         <CookieDialog
@@ -38,7 +35,7 @@ export function Footer() {
       <Grid item>
         Zdroje dat:{" "}
         <Link
-          href="https://share.uzis.cz/s/dCZBiARJ27ayeoS"
+          href="https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19"
           target="_blank"
           rel="noreferrer"
         >
