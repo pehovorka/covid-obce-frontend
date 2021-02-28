@@ -23,7 +23,12 @@ export function Footer() {
         </Link>
       </Grid>
       <Grid item>
-        <Link component={RouterLink} onClick={() => handleClickCookiesOpen()}>
+        <Link
+          component="button"
+          variant="body2"
+          onClick={() => handleClickCookiesOpen()}
+          style={{ verticalAlign: "top" }}
+        >
           Cookies
         </Link>
         <CookieDialog
