@@ -25,21 +25,13 @@ export function HomePage(props) {
 
   return (
     <>
-      <PrimarySearchAppBar
-        selectedTowns={municipalities}
-        addNewTown={"addNewTown"}
-        inputRef={inputRef}
-        searchEnabled={true}
-      />
+      <PrimarySearchAppBar inputRef={inputRef} searchEnabled={true} />
       <Container component="main">
         {municipalities.length === 0 ? (
           <EmptyContent inputRef={inputRef} />
         ) : (
           <>
-            <DragAndDropCards
-              municipalities={municipalities}
-              setSelectedTowns={"setSelectedTowns"}
-            />
+            <DragAndDropCards municipalities={municipalities} />
             <Box textAlign="center" mt={2}>
               <Grid container alignItems="center" justify="center" spacing={1}>
                 <Grid item>

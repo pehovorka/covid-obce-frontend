@@ -32,7 +32,7 @@ import {
 } from "../utils/municipalitiesReducer";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 
-export function TownCard({
+export function MunicipalityCard({
   name,
   code,
   limit,
@@ -129,6 +129,6 @@ export function TownCard({
   );
 }
 
-TownCard.defaultProps = {
+MunicipalityCard.defaultProps = {
   limit: 90,
 };

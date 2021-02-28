@@ -13,7 +13,7 @@ import {
 import { PageNotFound } from "./PageNotFound";
 
 import { LoadingIndicator } from "../components/LoadingIndicator";
-import { TownCard } from "../components/TownCard";
+import { MunicipalityCard } from "../components/MunicipalityCard";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 import { SET_MESSAGE } from "../utils/municipalitiesReducer";
 
@@ -78,7 +78,7 @@ export function MunicipalityDetailPage() {
           ) : (
             <>
               <Box mt={6}>
-                <TownCard
+                <MunicipalityCard
                   name={municipalityName.data?.obec[0]?.obec_nazev}
                   code={urlParams.code}
                   closeButtonHidden={true}

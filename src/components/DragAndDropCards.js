@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@material-ui/core";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { TownCard } from "../components/TownCard";
+import { MunicipalityCard } from "./MunicipalityCard";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 import { CHANGE_ORDER, CHANGE_LIMIT } from "../utils/municipalitiesReducer";
 
@@ -27,7 +27,7 @@ export function DragAndDropCards({ municipalities }) {
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Droppable droppableId="towns">
+      <Droppable droppableId="municipalities">
         {(provided) => (
           <Box {...provided.droppableProps} ref={provided.innerRef} mt={1}>
             {municipalities.map((municipality, index) => (
@@ -42,7 +42,7 @@ export function DragAndDropCards({ municipalities }) {
                     ref={provided.innerRef}
                     p={1}
                   >
-                    <TownCard
+                    <MunicipalityCard
                       name={municipality.name}
                       code={municipality.code}
                       limit={municipality.limit}
