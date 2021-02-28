@@ -11,6 +11,7 @@ import "./index.css";
 import App from "./App";
 import { MunicipalitiesProvider } from "./providers/MunicipalitiesProvider";
 import { SnackBar } from "./components/SnackBar";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 const theme = createMuiTheme({
   palette: {
@@ -43,18 +44,20 @@ theme.typography.h5 = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ApolloProvider client={client}>
-        <MunicipalitiesProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline>
-              <App />
-              <SnackBar />
-            </CssBaseline>
-          </ThemeProvider>
-        </MunicipalitiesProvider>
-      </ApolloProvider>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ApolloProvider client={client}>
+          <MunicipalitiesProvider>
+            <ThemeProvider theme={theme}>
+              <CssBaseline>
+                <App />
+                <SnackBar />
+              </CssBaseline>
+            </ThemeProvider>
+          </MunicipalitiesProvider>
+        </ApolloProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   </React.StrictMode>,
   document.getElementById("root")
 );

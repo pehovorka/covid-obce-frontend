@@ -23,6 +23,10 @@ const migrateToV2 = () => {
   }));
   storeMunicipalitiesToLS(v2);
   localStorage.removeItem("obce");
+  window.gtag("event", "migration", {
+    success: "true",
+    version: "2",
+  });
   console.log("Migration finished.");
 };
 
