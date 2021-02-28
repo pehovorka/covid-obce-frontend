@@ -1,7 +1,9 @@
 import React from "react";
 import {
-  AreaChart,
+  ComposedChart,
   Area,
+  Bar,
+  Line,
   XAxis,
   YAxis,
   Tooltip,
@@ -11,7 +13,7 @@ import {
 export function Chart({ data }) {
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <AreaChart
+      <ComposedChart
         width={500}
         height={400}
         data={data}
@@ -22,24 +24,33 @@ export function Chart({ data }) {
           bottom: 0,
         }}
       >
-        <XAxis dataKey="datum" minTickGap={20} />
+        <XAxis dataKey="date" minTickGap={20} />
         <YAxis />
-        <Tooltip />
+        <Tooltip
+          formatter={(value) => new Intl.NumberFormat("cs").format(value)}
+        />
         <Area
           type="linear"
-          dataKey="aktualne_nemocnych"
+          dataKey="activeCases"
           stroke="#0078B8"
           fill="#0078B8"
           name="Aktivní případy"
         />
-        <Area
-          type="linear"
-          dataKey="nove_pripady"
+        <Bar
+          dataKey="newCases"
           stroke="#b84100"
           fill="#b84100"
           name="Nové případy"
         />
-      </AreaChart>
+        <Line
+          type="linear"
+          dot={false}
+          strokeWidth={2}
+          dataKey="newCasesAverage"
+          stroke="#c28869"
+          name="Nové případy – sedmidenní průměr"
+        />
+      </ComposedChart>
     </ResponsiveContainer>
   );
 }
