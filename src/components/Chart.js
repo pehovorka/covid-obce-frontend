@@ -14,7 +14,6 @@ export function Chart({ data }) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <ComposedChart
-        width={500}
         height={400}
         data={data}
         margin={{
@@ -28,6 +27,7 @@ export function Chart({ data }) {
         <YAxis />
         <Tooltip
           formatter={(value) => new Intl.NumberFormat("cs").format(value)}
+          separator=": "
         />
         <Area
           type="linear"

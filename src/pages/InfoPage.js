@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import {
   Container,
   Box,
+  Divider,
   Paper,
   Typography,
   Link,
@@ -19,6 +20,10 @@ import { BackToHomeLink } from "../components/BackToHomeLink";
 const styles = (theme) => ({
   listItem: {
     marginTop: theme.spacing(1),
+  },
+  divider: {
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
   },
 });
 
@@ -51,6 +56,11 @@ const options = {
         <li className={classes.listItem}>
           <Typography component="span" {...props} />
         </li>
+      )),
+    },
+    hr: {
+      component: withStyles(styles)(({ classes }) => (
+        <Divider className={classes.divider} light={true} variant="fullWidth" />
       )),
     },
   },
