@@ -26,7 +26,11 @@ export function LastModified() {
 
   return lastModifiedDate ? (
     <Typography variant="caption">
-      Poslední aktualizace dat: {lastModifiedDate.toLocaleString("cs-CZ", {})}
+      Poslední aktualizace dat:{" "}
+      {lastModifiedDate.toLocaleString("cs-CZ", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      })}
     </Typography>
   ) : null;
 }

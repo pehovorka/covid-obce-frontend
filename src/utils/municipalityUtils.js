@@ -37,16 +37,16 @@ export const convertToGraphData = (stringData, limit) => {
     container.newCases = parseInt(item.nove_pripady);
 
     const newCasesAverage =
-      (parseInt(item.nove_pripady) +
-        parseInt(stringData[index - 1]?.nove_pripady) +
+      (parseInt(stringData[index - 3]?.nove_pripady) +
         parseInt(stringData[index - 2]?.nove_pripady) +
-        parseInt(stringData[index - 3]?.nove_pripady) +
+        parseInt(stringData[index - 1]?.nove_pripady) +
+        parseInt(item.nove_pripady) +
         parseInt(stringData[index + 1]?.nove_pripady) +
         parseInt(stringData[index + 2]?.nove_pripady) +
         parseInt(stringData[index + 3]?.nove_pripady)) /
       7;
     container.newCasesAverage = !isNaN(newCasesAverage)
-      ? newCasesAverage.toFixed(2)
+      ? newCasesAverage.toFixed(1)
       : null;
     return container;
   });
