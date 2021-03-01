@@ -1,7 +1,7 @@
 import React from "react";
 import { FormControl, MenuItem, Select, Tooltip } from "@material-ui/core/";
 
-export function DateLimitSelect({ limit, handleDateLimitChange }) {
+export function DateLimitSelect({ limit, handleDateLimitChange, code }) {
   return (
     <Tooltip title="Počet dní v grafu" placement="left">
       <FormControl>
@@ -9,7 +9,7 @@ export function DateLimitSelect({ limit, handleDateLimitChange }) {
           labelId="date-limit-select-label"
           id="date-limit-select"
           value={limit}
-          onChange={handleDateLimitChange}
+          onChange={(select) => handleDateLimitChange({ select, code })}
         >
           <MenuItem value={7}>7 dní</MenuItem>
           <MenuItem value={30}>30 dní</MenuItem>

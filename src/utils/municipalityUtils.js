@@ -30,11 +30,24 @@ export const isValidMunicipalityCode = (code) => {
 };
 
 export const convertToGraphData = (stringData, limit) => {
-  const graphData = stringData.map((item) => {
+  const graphData = stringData.map((item, index) => {
     const container = {};
-    container.datum = new Date(item.datum).toLocaleDateString("cs-CZ", {});
-    container.aktualne_nemocnych = parseInt(item.aktualne_nemocnych);
-    container.nove_pripady = parseInt(item.nove_pripady);
+    container.date = new Date(item.datum).toLocaleDateString("cs-CZ", {});
+    container.activeCases = parseInt(item.aktualne_nemocnych);
+    container.newCases = parseInt(item.nove_pripady);
+
+    const newCasesAverage =
+      (parseInt(stringData[index - 3]?.nove_pripady) +
+        parseInt(stringData[index - 2]?.nove_pripady) +
+        parseInt(stringData[index - 1]?.nove_pripady) +
+        parseInt(item.nove_pripady) +
+        parseInt(stringData[index + 1]?.nove_pripady) +
+        parseInt(stringData[index + 2]?.nove_pripady) +
+        parseInt(stringData[index + 3]?.nove_pripady)) /
+      7;
+    container.newCasesAverage = !isNaN(newCasesAverage)
+      ? newCasesAverage.toFixed(1)
+      : null;
     return container;
   });
   graphData.reverse();
@@ -51,4 +64,11 @@ export const formatChangeNumberToDisplay = (number) => {
     (number > 0 ? "+ " : number === 0 ? "" : "- ") +
     Math.abs(number).toLocaleString("cs-CZ");
   return result;
+};
+
+export const isAlreadyAdded = ({ municipalityCodeToCheck, municipalities }) => {
+  if (municipalities.some((e) => e.code === municipalityCodeToCheck)) {
+    return true;
+  }
+  return false;
 };

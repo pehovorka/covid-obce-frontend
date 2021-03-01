@@ -1,5 +1,10 @@
-import React, { useEffect, useReducer } from "react";
+// React
+import React, { useEffect } from "react";
+
+// Apollo
 import { useQuery } from "@apollo/client";
+
+// Material UI
 import {
   Box,
   Card,
@@ -11,6 +16,7 @@ import {
 } from "@material-ui/core/";
 import CloseIcon from "@material-ui/icons/Close";
 
+// Sub-components
 import { Chart } from "./Chart";
 import {
   OBEC_DETAIL_QUERY,
@@ -21,41 +27,46 @@ import { MunicipalityStats } from "./MunicipalityStats";
 import { LoadingIndicator } from "./LoadingIndicator";
 import { ShareIconAndDialog } from "./ShareIconAndDialog";
 import {
-  municipalityReducer,
-  CHANGE_LIMIT,
-} from "../utils/municipalityReducer";
+  REMOVE_MUNICIPALITY,
+  SET_MESSAGE,
+} from "../utils/municipalitiesReducer";
+import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 
-export function TownCard({
-  obec_nazev,
-  obec_kod,
-  handleClose,
-  index,
+export function MunicipalityCard({
+  name,
+  code,
+  limit,
   provided,
+  closeButtonHidden,
+  handleDateLimitChange,
 }) {
-  const [state, dispatch] = useReducer(municipalityReducer, {
-    displayLimit: 90,
-    queryLimit: 90,
-  });
+  const dispatch = useMunicipalitiesDispatch();
 
   const obec = useQuery(OBEC_DETAIL_QUERY, {
-    variables: { obec_kod, limit: state.queryLimit },
+    variables: { obec_kod: code, limit: limit === 0 ? 0 : 90 },
     fetchPolicy: "cache-first",
   });
 
-  const handleDateLimitChange = (select) => {
-    dispatch({ type: CHANGE_LIMIT, selectedLimit: select.target.value });
-  };
-
   useEffect(() => {
-    if (obec_nazev && obec_kod) {
+    if (name && code) {
       const item = {};
-      item.item_id = obec_kod;
-      item.item_name = obec_nazev;
+      item.item_id = code;
+      item.item_name = name;
       window.gtag("event", "view_item", {
         items: [item],
       });
     }
-  }, [obec_kod, obec_nazev]);
+  }, [code, name]);
+
+  useEffect(() => {
+    if (obec.error) {
+      dispatch({
+        type: SET_MESSAGE,
+        text: "Nepodařilo se připojit k serveru. Zkuste to prosím později.",
+        severity: "error",
+      });
+    }
+  }, [obec.error, dispatch]);
 
   return (
     <Card>
@@ -74,47 +85,50 @@ export function TownCard({
             >
               <Grid item xs>
                 <DateLimitSelect
-                  limit={state.displayLimit}
+                  limit={limit}
                   handleDateLimitChange={handleDateLimitChange}
+                  code={code}
                 />
               </Grid>
               <Grid item xs>
-                <ShareIconAndDialog
-                  obec_kod={obec_kod}
-                  obec_nazev={obec_nazev}
-                />
+                <ShareIconAndDialog code={code} name={name} />
               </Grid>
-              {handleClose ? (
+              {!closeButtonHidden && (
                 <Grid item xs>
                   <Tooltip title="Zavřít kartu">
                     <IconButton
                       aria-label="zavřít kartu obce"
-                      onClick={() => handleClose(index)}
+                      onClick={() =>
+                        dispatch({
+                          type: REMOVE_MUNICIPALITY,
+                          code: code,
+                        })
+                      }
                     >
                       <CloseIcon />
                     </IconButton>
                   </Tooltip>
                 </Grid>
-              ) : (
-                ""
               )}
             </Grid>
           </Box>
         }
-        title={obec_nazev}
+        title={name}
       />
       <CardContent>
         {obec.loading || obec.error ? (
           <LoadingIndicator />
         ) : (
           <>
-            <MunicipalityStats obec={obec} obec_kod={obec_kod} />
-            <Chart
-              data={convertToGraphData(obec.data.obec, state.displayLimit)}
-            />
+            <MunicipalityStats obec={obec} code={code} />
+            <Chart data={convertToGraphData(obec.data.obec, limit)} />
           </>
         )}
       </CardContent>
     </Card>
   );
 }
+
+MunicipalityCard.defaultProps = {
+  limit: 90,
+};

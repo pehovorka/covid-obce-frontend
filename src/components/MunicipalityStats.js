@@ -6,7 +6,7 @@ import {
   formatChangeNumberToDisplay,
 } from "../utils/municipalityUtils";
 
-export function MunicipalityStats({ obec, obec_kod }) {
+export function MunicipalityStats({ obec, code }) {
   return (
     <Box mb={2}>
       <Grid container spacing={3} justify="center">
@@ -16,7 +16,7 @@ export function MunicipalityStats({ obec, obec_kod }) {
               <Grid container direction="column" alignItems="center">
                 <Grid item>
                   <Typography variant="overline" noWrap={true}>
-                    Nemocných (
+                    Aktivní případy (
                     {new Date(obec.data.obec[0].datum).toLocaleDateString(
                       "cs-CZ",
                       {
@@ -79,7 +79,7 @@ export function MunicipalityStats({ obec, obec_kod }) {
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
               <Typography variant="overline" noWrap={true}>
-                Nemocných na 1000 obyvatel (
+                Aktivní na 1000 obyvatel (
                 {new Date(obec.data.obec[0].datum).toLocaleDateString("cs-CZ", {
                   day: "numeric",
                   month: "numeric",
@@ -91,7 +91,7 @@ export function MunicipalityStats({ obec, obec_kod }) {
               <Typography variant="h6" component="p">
                 {(
                   (parseInt(obec.data.obec[0].aktualne_nemocnych) /
-                    municipalitiesPopulation[0][obec_kod]) *
+                    municipalitiesPopulation[0][code]) *
                   1000
                 ).toLocaleString("cs-CZ", { maximumFractionDigits: 1 })}
               </Typography>

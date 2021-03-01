@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Container, Box, Typography, Grid } from "@material-ui/core";
 import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
 
@@ -6,60 +6,17 @@ import { PrimarySearchAppBar } from "../components/AppBar";
 import { DragAndDropCards } from "../components/DragAndDropCards";
 import { Footer } from "../components/Footer";
 import { EmptyContent } from "../components/EmptyContent";
-import { SnackBar } from "../components/SnackBar";
+import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
 
 export function HomePage(props) {
-  const [selectedTowns, setSelectedTowns] = useState(
-    JSON.parse(localStorage.getItem("obce")) || []
-  );
+  const { municipalities } = useMunicipalitiesState();
 
   const inputRef = useRef(null);
-  const [snackBarOpen, setSnackBarOpen] = useState(false);
-  const [snackBarMessage, setSnackBarMessage] = useState();
 
   const searchAutoFocus = props.location.state?.searchAutoFocus ?? false;
 
   document.title = `COVID v obcích`;
 
-  useEffect(() => {
-    localStorage.setItem("obce", JSON.stringify(selectedTowns));
-    /*     const gaItems = selectedTowns.map((selectedTown) => {
-      const container = {};
-
-      container.item_id = selectedTown.obec_kod;
-      container.item_name = selectedTown.obec_nazev;
-      return container;
-    });
-    window.gtag("event", "view_item_list", {
-      items: gaItems,
-    }); */
-  }, [selectedTowns]);
-
-  const isAlreadyAdded = (obec_kod) => {
-    if (selectedTowns.some((e) => e.obec_kod === obec_kod)) {
-      return true;
-    }
-    return false;
-  };
-
-  const addNewTown = (obec_kod, obec_nazev) => {
-    if (isAlreadyAdded(obec_kod)) {
-      setSnackBarOpen(true);
-      setSnackBarMessage("Tato obec již byla přidána!");
-    } else {
-      if (selectedTowns.length === 10) {
-        setSnackBarOpen(true);
-        setSnackBarMessage(
-          "Dosáhli jste maximálního počtu přidaných obcí. Pokud chcete vyhledat další obec, nějakou odeberte."
-        );
-      } else {
-        setSelectedTowns((selectedTowns) => [
-          { obec_kod: obec_kod, obec_nazev: obec_nazev },
-          ...selectedTowns,
-        ]);
-      }
-    }
-  };
   useEffect(() => {
     if (searchAutoFocus) {
       inputRef.current.focus();
@@ -68,22 +25,13 @@ export function HomePage(props) {
 
   return (
     <>
-      <PrimarySearchAppBar
-        selectedTowns={selectedTowns}
-        setSelectedTowns={setSelectedTowns}
-        addNewTown={addNewTown}
-        inputRef={inputRef}
-        searchEnabled={true}
-      />
+      <PrimarySearchAppBar inputRef={inputRef} searchEnabled={true} />
       <Container component="main">
-        {selectedTowns.length === 0 ? (
+        {municipalities.length === 0 ? (
           <EmptyContent inputRef={inputRef} />
         ) : (
           <>
-            <DragAndDropCards
-              selectedTowns={selectedTowns}
-              setSelectedTowns={setSelectedTowns}
-            />
+            <DragAndDropCards municipalities={municipalities} />
             <Box textAlign="center" mt={2}>
               <Grid container alignItems="center" justify="center" spacing={1}>
                 <Grid item>
@@ -105,12 +53,6 @@ export function HomePage(props) {
           <Footer />
         </Box>
       </Container>
-      <SnackBar
-        message={snackBarMessage}
-        severity="error"
-        open={snackBarOpen}
-        setOpen={setSnackBarOpen}
-      />
     </>
   );
 }

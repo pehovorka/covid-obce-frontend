@@ -7,6 +7,9 @@ import Autocomplete, {
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
+import { ADD_MUNICIPALITY, SET_MESSAGE } from "../utils/municipalitiesReducer";
+
 const OBEC_QUERY = gql`
   query Obce_nazvy($obec_nazev: String!) {
     obce(obec_nazev: $obec_nazev, datum: "2020-11-05") {
@@ -15,14 +18,6 @@ const OBEC_QUERY = gql`
     }
   }
 `;
-
-/* const suggestedTowns = [
-  { obec_kod: "554782", obec_nazev: "Praha" },
-  { obec_kod: "582786", obec_nazev: "Brno" },
-  { obec_kod: "554821", obec_nazev: "Ostrava" },
-  { obec_kod: "554791", obec_nazev: "Plzeň" },
-  { obec_kod: "563889", obec_nazev: "Liberec" },
-]; */
 
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
@@ -36,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
+export function SearchField({ inputRef }) {
+  const dispatch = useMunicipalitiesDispatch();
   const [autoCompleteOpen, setAutoCompleteOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -47,8 +43,14 @@ export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
   useEffect(() => {
     if (!obce.loading && !obce.error) {
       setOptions(obce.data.obce);
+    } else if (obce.error) {
+      dispatch({
+        type: SET_MESSAGE,
+        text: "Nepodařilo se připojit k serveru. Zkuste to prosím později.",
+        severity: "error",
+      });
     }
-  }, [obce.data, obce.loading, obce.error, inputValue]);
+  }, [obce.data, obce.loading, obce.error, inputValue, dispatch]);
 
   const classes = useStyles();
 
@@ -72,7 +74,11 @@ export function SearchField({ setSelectedTowns, addNewTown, inputRef }) {
       }}
       onChange={(event, newValue) => {
         if (newValue !== null) {
-          addNewTown(newValue.obec_kod, newValue.obec_nazev);
+          dispatch({
+            type: ADD_MUNICIPALITY,
+            code: newValue.obec_kod,
+            name: newValue.obec_nazev,
+          });
           window.gtag("event", "select_item", {
             items: [
               { item_id: newValue.obec_kod, item_name: newValue.obec_nazev },

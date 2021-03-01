@@ -17,7 +17,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import ShareIcon from "@material-ui/icons/Share";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 
-export function ShareIconAndDialog({ obec_kod, obec_nazev }) {
+export function ShareIconAndDialog({ code, name }) {
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
   const [copyButtonText, setCopyButtonText] = useState(
     "Zkopírovat do schránky"
@@ -29,7 +29,7 @@ export function ShareIconAndDialog({ obec_kod, obec_nazev }) {
       navigator
         .share({
           title: getTitle(),
-          text: `${obec_nazev} – vývoj počtu lidí s prokázaným onemocněním COVID-19`,
+          text: `${name} – vývoj počtu lidí s prokázaným onemocněním COVID-19`,
           url: getUrl(),
         })
         .then(() => {})
@@ -40,8 +40,8 @@ export function ShareIconAndDialog({ obec_kod, obec_nazev }) {
     }
     window.gtag("event", "share", {
       method: "Link",
-      content_type: obec_nazev,
-      content_id: obec_kod,
+      content_type: name,
+      content_id: code,
     });
   };
 
@@ -58,12 +58,12 @@ export function ShareIconAndDialog({ obec_kod, obec_nazev }) {
   const getUrl = () => {
     const baseUrl = window.location.origin.toString();
     const path = "/obec/";
-    const municipalityCode = obec_kod;
+    const municipalityCode = code;
     return baseUrl + path + municipalityCode;
   };
 
   const getTitle = () => {
-    return `${obec_nazev} – COVID v obcích`;
+    return `${name} – COVID v obcích`;
   };
 
   const styles = (theme) => ({
@@ -119,7 +119,7 @@ export function ShareIconAndDialog({ obec_kod, obec_nazev }) {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title" onClose={handleClose}>
-          {obec_nazev} – sdílení
+          {name} – sdílení
         </DialogTitle>
         <DialogContent dividers>
           <TextField
