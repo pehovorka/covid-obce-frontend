@@ -17,7 +17,7 @@ export function Footer() {
   };
 
   return (
-    <Box mt={5} mb={3} textAlign={"center"}>
+    <Box mt={5} mb={3} textAlign="center">
       <Box mb={2}>
         <Divider variant="middle" />
       </Box>
@@ -31,16 +31,14 @@ export function Footer() {
         </Grid>
 
         <Grid item xs={12} md>
-          <Typography variant="body2">
-            <Link
-              component="button"
-              variant="body2"
-              onClick={() => handleClickCookiesOpen()}
-              style={{ verticalAlign: "top" }}
-            >
-              Cookies
-            </Link>
-          </Typography>
+          <Link
+            component="button"
+            variant="body2"
+            onClick={() => handleClickCookiesOpen()}
+            style={{ verticalAlign: "top" }}
+          >
+            Cookies
+          </Link>
           <CookieDialog
             open={openCookies}
             setOpen={setCookiesOpen}

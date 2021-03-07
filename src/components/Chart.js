@@ -21,7 +21,7 @@ export function Chart({ data }) {
         margin={{
           top: 10,
           right: 30,
-          left: 0,
+          left: -5,
           bottom: 0,
         }}
       >
