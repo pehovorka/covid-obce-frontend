@@ -32,8 +32,16 @@ Počet osob pozitivně testovaných na původce onemocnění COVID‑19, které 
 
 Celkový počet nově diagnostikovaných osob za daný den.
 
+### Nové případy – osoby mladší 65
+
+Počet nově diagnostikovaných za daný den ve věkové skupině 0-64.
+
+### Nové případy – osoby 65+
+
+Počet nově diagnostikovaných za daný den ve věkové skupině 65+.
+
 ### Nové případy – sedmidenní průměr
 
-Sedmidenní průměr denního počtu nově diagnostikovaných osob.
+Sedmidenní průměr celkového denního počtu nově diagnostikovaných osob.
 
 ---
