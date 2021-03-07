@@ -49,9 +49,7 @@ export function HomePage(props) {
             </Box>
           </>
         )}
-        <Box p={3} textAlign={"center"}>
-          <Footer />
-        </Box>
+        <Footer />
       </Container>
     </>
   );

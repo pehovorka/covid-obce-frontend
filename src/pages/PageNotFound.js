@@ -10,7 +10,7 @@ export function PageNotFound({ message }) {
     <>
       <PrimarySearchAppBar />
       <Container>
-        <Box mt={6}>
+        <Box my={4}>
           <Paper>
             <Box textAlign="center" p={10}>
               <Typography variant="h2" component="h2">
@@ -25,9 +25,7 @@ export function PageNotFound({ message }) {
             </Box>
           </Paper>
         </Box>
-        <Box mt={10}>
-          <Footer />
-        </Box>
+        <Footer />
       </Container>
     </>
   );

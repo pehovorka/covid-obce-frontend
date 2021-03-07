@@ -79,7 +79,7 @@ export function InfoPage() {
   return (
     <>
       <PrimarySearchAppBar />
-      <Container>
+      <Container component="main">
         <Box py={4}>
           <Paper>
             <Box p={6}>
@@ -99,9 +99,7 @@ export function InfoPage() {
             </Box>
           </Paper>
         </Box>
-        <Box>
-          <Footer />
-        </Box>
+        <Footer />
       </Container>
     </>
   );

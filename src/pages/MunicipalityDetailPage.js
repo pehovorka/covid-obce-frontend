@@ -77,7 +77,7 @@ export function MunicipalityDetailPage() {
             <PageNotFound message={error} />
           ) : (
             <>
-              <Box mt={6}>
+              <Box my={4}>
                 <MunicipalityCard
                   name={municipalityName.data?.obec[0]?.obec_nazev}
                   code={urlParams.code}
@@ -86,9 +86,7 @@ export function MunicipalityDetailPage() {
                   limit={limit}
                 />
               </Box>
-              <Box mt={10}>
-                <Footer />
-              </Box>
+              <Footer />
             </>
           )}
         </Container>

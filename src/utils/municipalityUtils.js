@@ -14,6 +14,7 @@ export const OBEC_DETAIL_QUERY = gql`
       datum
       aktualne_nemocnych
       nove_pripady
+      nove_pripady_65
     }
   }
 `;
@@ -32,18 +33,21 @@ export const isValidMunicipalityCode = (code) => {
 export const convertToGraphData = (stringData, limit) => {
   const graphData = stringData.map((item, index) => {
     const container = {};
-    container.date = new Date(item.datum).toLocaleDateString("cs-CZ", {});
-    container.activeCases = parseInt(item.aktualne_nemocnych);
-    container.newCases = parseInt(item.nove_pripady);
+    //container.date = new Date(item.datum).toLocaleDateString("cs-CZ", {});
+    container.date = item.datum;
+    container.activeCases = item.aktualne_nemocnych;
+    container.newCases = item.nove_pripady;
+    container.newCasesOver65 = item.nove_pripady_65;
+    container.newCasesUnder65 = item.nove_pripady - item.nove_pripady_65;
 
     const newCasesAverage =
-      (parseInt(stringData[index - 3]?.nove_pripady) +
-        parseInt(stringData[index - 2]?.nove_pripady) +
-        parseInt(stringData[index - 1]?.nove_pripady) +
-        parseInt(item.nove_pripady) +
-        parseInt(stringData[index + 1]?.nove_pripady) +
-        parseInt(stringData[index + 2]?.nove_pripady) +
-        parseInt(stringData[index + 3]?.nove_pripady)) /
+      (stringData[index - 3]?.nove_pripady +
+        stringData[index - 2]?.nove_pripady +
+        stringData[index - 1]?.nove_pripady +
+        item.nove_pripady +
+        stringData[index + 1]?.nove_pripady +
+        stringData[index + 2]?.nove_pripady +
+        stringData[index + 3]?.nove_pripady) /
       7;
     container.newCasesAverage = !isNaN(newCasesAverage)
       ? newCasesAverage.toFixed(1)
