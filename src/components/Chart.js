@@ -16,11 +16,9 @@ export function Chart({ data }) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <ComposedChart
-        height={400}
         data={data}
         margin={{
-          top: 10,
-          right: 30,
+          right: 20,
           left: -5,
           bottom: 0,
         }}
@@ -67,7 +65,7 @@ export function Chart({ data }) {
           strokeWidth={3}
           dataKey="newCasesAverage"
           stroke="#F27F41"
-          name="Sedmidenní průměr"
+          name="7denní průměr"
         />
       </ComposedChart>
     </ResponsiveContainer>

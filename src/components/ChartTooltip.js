@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
   marginLeft: {
     marginLeft: "0.8rem",
   },
+  title: {
+    textAlign: "center",
+    fontSize: "1.1rem",
+    fontWeight: 500,
+  },
 }));
 
 export const ChartTooltip = ({ active, payload, label }) => {
@@ -40,11 +45,9 @@ export const ChartTooltip = ({ active, payload, label }) => {
         className="custom-tooltip"
         style={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}
       >
-        <Box p={1} minWidth="16rem">
+        <Box p={1} minWidth="15rem">
           {/* Date */}
-          <Typography variant="h6" align="center">
-            {stringDate}
-          </Typography>
+          <Typography className={styles.title}>{stringDate}</Typography>
           <Divider />
           {/* Main content */}
           <Box pt={1}>
