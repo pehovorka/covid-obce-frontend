@@ -29,9 +29,7 @@ export function Footer() {
             </Link>
           </Typography>
         </Grid>
-        <Grid item>
-          <Divider orientation="vertical" />
-        </Grid>
+
         <Grid item xs={12} md>
           <Typography variant="body2">
             <Link
@@ -49,9 +47,7 @@ export function Footer() {
             handleClose={handleCookiesClose}
           />
         </Grid>
-        <Grid item>
-          <Divider orientation="vertical" />
-        </Grid>
+
         <Grid item xs={12} md>
           <Typography variant="body2">
             Zdroj dat:{" "}
