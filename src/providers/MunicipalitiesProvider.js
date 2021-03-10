@@ -8,7 +8,8 @@ import {
 
 const INITIAL_STATE = {
   municipalities: [],
-  message: null,
+  snackBarMessage: null,
+  alertMessage: null,
 };
 
 const MunicipalitiesStateContext = createContext();

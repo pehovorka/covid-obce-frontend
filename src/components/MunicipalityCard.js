@@ -28,7 +28,7 @@ import { LoadingIndicator } from "./LoadingIndicator";
 import { ShareIconAndDialog } from "./ShareIconAndDialog";
 import {
   REMOVE_MUNICIPALITY,
-  SET_MESSAGE,
+  SET_SNACKBAR_MESSAGE,
 } from "../utils/municipalitiesReducer";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 
@@ -61,7 +61,7 @@ export function MunicipalityCard({
   useEffect(() => {
     if (obec.error) {
       dispatch({
-        type: SET_MESSAGE,
+        type: SET_SNACKBAR_MESSAGE,
         text: "Nepodařilo se připojit k serveru. Zkuste to prosím později.",
         severity: "error",
       });

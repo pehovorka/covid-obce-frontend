@@ -133,7 +133,7 @@ export const ChartTooltip = ({ active, payload, label }) => {
                 </Grid>
               </Grid>
               {/* New cases average */}
-              {payload[3] && (
+              {payload[3].value && (
                 <Grid container justify="flex-start" direction="row">
                   <Grid item>
                     <Box

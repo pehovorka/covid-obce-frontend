@@ -12,6 +12,7 @@ import App from "./App";
 import { MunicipalitiesProvider } from "./providers/MunicipalitiesProvider";
 import { SnackBar } from "./components/SnackBar";
 import { ErrorBoundary } from "./ErrorBoundary";
+import { MessagesFetcher } from "./utils/MessagesFetcher";
 
 const theme = createMuiTheme({
   palette: {
@@ -52,6 +53,7 @@ ReactDOM.render(
               <CssBaseline>
                 <App />
                 <SnackBar />
+                <MessagesFetcher />
               </CssBaseline>
             </ThemeProvider>
           </MunicipalitiesProvider>

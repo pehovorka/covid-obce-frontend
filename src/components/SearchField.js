@@ -8,7 +8,10 @@ import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
-import { ADD_MUNICIPALITY, SET_MESSAGE } from "../utils/municipalitiesReducer";
+import {
+  ADD_MUNICIPALITY,
+  SET_SNACKBAR_MESSAGE,
+} from "../utils/municipalitiesReducer";
 
 const OBEC_QUERY = gql`
   query Obce_nazvy($obec_nazev: String!) {
@@ -45,7 +48,7 @@ export function SearchField({ inputRef }) {
       setOptions(obce.data.obce);
     } else if (obce.error) {
       dispatch({
-        type: SET_MESSAGE,
+        type: SET_SNACKBAR_MESSAGE,
         text: "Nepodařilo se připojit k serveru. Zkuste to prosím později.",
         severity: "error",
       });

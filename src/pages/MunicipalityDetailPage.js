@@ -15,7 +15,7 @@ import { PageNotFound } from "./PageNotFound";
 import { LoadingIndicator } from "../components/LoadingIndicator";
 import { MunicipalityCard } from "../components/MunicipalityCard";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
-import { SET_MESSAGE } from "../utils/municipalitiesReducer";
+import { SET_SNACKBAR_MESSAGE } from "../utils/municipalitiesReducer";
 
 export function MunicipalityDetailPage() {
   const dispatch = useMunicipalitiesDispatch();
@@ -53,7 +53,7 @@ export function MunicipalityDetailPage() {
       document.title = `${municipalityName.data.obec[0].obec_nazev} – COVID v obcích`;
     } else if (municipalityName.error) {
       dispatch({
-        type: SET_MESSAGE,
+        type: SET_SNACKBAR_MESSAGE,
         text: "Nepodařilo se připojit k serveru. Zkuste to prosím později.",
         severity: "error",
       });
