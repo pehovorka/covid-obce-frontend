@@ -36,6 +36,7 @@ export function Chart({ data }) {
           formatter={(value) => new Intl.NumberFormat("cs").format(value)}
           separator=": "
           content={<ChartTooltip />}
+          filterNull={false}
         />
         <Area
           type="linear"
