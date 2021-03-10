@@ -7,6 +7,7 @@ import { DragAndDropCards } from "../components/DragAndDropCards";
 import { Footer } from "../components/Footer";
 import { EmptyContent } from "../components/EmptyContent";
 import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
+import { Alert } from "../components/Alert";
 
 export function HomePage(props) {
   const { municipalities } = useMunicipalitiesState();
@@ -27,6 +28,7 @@ export function HomePage(props) {
     <>
       <PrimarySearchAppBar inputRef={inputRef} searchEnabled={true} />
       <Container component="main">
+        <Alert />
         {municipalities.length === 0 ? (
           <EmptyContent inputRef={inputRef} />
         ) : (

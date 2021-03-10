@@ -5,16 +5,16 @@ import Alert from "@material-ui/lab/Alert";
 import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
 
 export function SnackBar() {
-  const { message } = useMunicipalitiesState();
+  const { snackBarMessage } = useMunicipalitiesState();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (message) {
+    if (snackBarMessage) {
       setOpen(true);
     } else {
       setOpen(false);
     }
-  }, [message]);
+  }, [snackBarMessage]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -26,8 +26,8 @@ export function SnackBar() {
   return (
     <>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={message?.severity}>
-          {message?.text}
+        <Alert onClose={handleClose} severity={snackBarMessage?.severity}>
+          {snackBarMessage?.text}
         </Alert>
       </Snackbar>
     </>
