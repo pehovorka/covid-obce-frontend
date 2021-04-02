@@ -27,12 +27,12 @@ export function HomePage(props) {
   return (
     <>
       <PrimarySearchAppBar inputRef={inputRef} searchEnabled={true} />
-      <Container component="main">
-        <Alert />
-        {municipalities.length === 0 ? (
-          <EmptyContent inputRef={inputRef} />
-        ) : (
-          <>
+      {municipalities.length === 0 ? (
+        <EmptyContent inputRef={inputRef} />
+      ) : (
+        <>
+          <Container component="main">
+            <Alert />
             <DragAndDropCards municipalities={municipalities} />
             <Box textAlign="center" mt={2}>
               <Grid container alignItems="center" justify="center" spacing={1}>
@@ -49,8 +49,10 @@ export function HomePage(props) {
                 </Grid>
               </Grid>
             </Box>
-          </>
-        )}
+          </Container>
+        </>
+      )}
+      <Container component="footer">
         <Footer />
       </Container>
     </>
