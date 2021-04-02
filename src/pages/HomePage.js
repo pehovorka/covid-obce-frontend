@@ -32,7 +32,7 @@ export function HomePage(props) {
       ) : (
         <>
           <Container component="main">
-            <Alert />
+            <Alert remote />
             <DragAndDropCards municipalities={municipalities} />
             <Box textAlign="center" mt={2} mb={8}>
               <Grid container alignItems="center" justify="center" spacing={1}>
@@ -48,6 +48,7 @@ export function HomePage(props) {
                   </Typography>
                 </Grid>
               </Grid>
+              <Alert activeCasesDisclaimer variant="outlined" />
             </Box>
           </Container>
         </>
