@@ -86,10 +86,10 @@ export function MunicipalityDetailPage() {
                   limit={limit}
                 />
               </Box>
-              <Footer />
             </>
           )}
         </Container>
+        <Footer />
       </>
     );
 }

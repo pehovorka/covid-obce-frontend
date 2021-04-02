@@ -34,7 +34,7 @@ export function HomePage(props) {
           <Container component="main">
             <Alert />
             <DragAndDropCards municipalities={municipalities} />
-            <Box textAlign="center" mt={2}>
+            <Box textAlign="center" mt={2} mb={8}>
               <Grid container alignItems="center" justify="center" spacing={1}>
                 <Grid item>
                   <WbIncandescentTwoToneIcon
@@ -52,9 +52,7 @@ export function HomePage(props) {
           </Container>
         </>
       )}
-      <Container component="footer">
-        <Footer />
-      </Container>
+      <Footer />
     </>
   );
 }

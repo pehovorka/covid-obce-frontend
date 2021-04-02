@@ -1,13 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Paper,
-  Typography,
-} from "@material-ui/core";
+import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
 import townImage from "../assets/czechTown.svg";
@@ -63,11 +56,14 @@ const useStyles = makeStyles((theme) => ({
   container: {
     background:
       "linear-gradient(to top, #d5d4d0 0%, #d5d4d0 1%, #eeeeec 31%, #efeeec 75%, #e9e9e7 100%);",
-    //minHeight: "calc(100vh - 72px)",
+    minHeight: "calc(100vh - 72px)",
     boxShadow: "inset 0 7px 9px -7px rgba(0,0,0,0.4)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     [theme.breakpoints.up("md")]: {
       paddingTop: theme.spacing(5),
-      paddingBottom: theme.spacing(10),
+      paddingBottom: theme.spacing(15),
     },
   },
   textContainer: {
