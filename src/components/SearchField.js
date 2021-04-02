@@ -41,11 +41,12 @@ export function SearchField({ inputRef }) {
   const [inputValue, setInputValue] = useState("");
   const obce = useQuery(OBEC_QUERY, {
     variables: { obec_nazev: inputValue },
+    skip: inputValue.length < 2 ? true : false,
   });
 
   useEffect(() => {
     if (!obce.loading && !obce.error) {
-      setOptions(obce.data.obce);
+      setOptions(obce?.data?.obce || []);
     } else if (obce.error) {
       dispatch({
         type: SET_SNACKBAR_MESSAGE,
@@ -68,6 +69,7 @@ export function SearchField({ inputRef }) {
       openOnFocus
       noOptionsText={"Žádné výsledky"}
       loadingText={"Načítám..."}
+      clearText={"Vymazat"}
       open={autoCompleteOpen}
       onOpen={() => {
         setAutoCompleteOpen(true);
@@ -87,11 +89,18 @@ export function SearchField({ inputRef }) {
               { item_id: newValue.obec_kod, item_name: newValue.obec_nazev },
             ],
           });
+          // Clears input if typed name is exactly the same as autocomplete item
+          setInputValue("");
         }
       }}
       inputValue={inputValue}
       onInputChange={(event, newInputValue) => {
-        setInputValue(newInputValue);
+        if (event?.type === "change") {
+          setInputValue(newInputValue);
+        } else {
+          // Clears input if autocomplete item is selected on click or if enter key is pressed
+          setInputValue("");
+        }
       }}
       options={options}
       getOptionSelected={(option, value) =>
