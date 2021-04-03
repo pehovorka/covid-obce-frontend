@@ -5,7 +5,7 @@ import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone"
 import { PrimarySearchAppBar } from "../components/AppBar";
 import { DragAndDropCards } from "../components/DragAndDropCards";
 import { Footer } from "../components/Footer";
-import { EmptyContent } from "../components/EmptyContent";
+import { LandingScreen } from "../components/LandingScreen";
 import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
 import { Alert } from "../components/Alert";
 
@@ -26,9 +26,9 @@ export function HomePage(props) {
 
   return (
     <>
-      <PrimarySearchAppBar inputRef={inputRef} searchEnabled={true} />
+      <PrimarySearchAppBar inputRef={inputRef} searchEnabled />
       {municipalities.length === 0 ? (
-        <EmptyContent inputRef={inputRef} />
+        <LandingScreen inputRef={inputRef} />
       ) : (
         <>
           <Container component="main">

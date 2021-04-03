@@ -5,16 +5,18 @@ import SearchIcon from "@material-ui/icons/Search";
 
 import townImage from "../assets/czechTown.svg";
 
-export function EmptyContent({ inputRef }) {
+export function LandingScreen({ inputRef }) {
   const classes = useStyles();
   return (
     <Box className={classes.container} component="main">
       <Container>
-        <Grid container direction="row" justify="center">
+        <Grid container direction="row" justify="center" alignItems="center">
           <Grid item xs={12} md={6}>
             <Box className={classes.textContainer}>
               <Typography variant="h4" component="h2" className={classes.title}>
-                Kolik pozitivně testovaných osob na COVID-19 je ve vaší obci?
+                Kolik pozitivně testovaných osob na{" "}
+                <span className={classes.noWrap}>COVID-19</span> je ve vaší
+                obci?
               </Typography>
 
               <Typography
@@ -22,11 +24,10 @@ export function EmptyContent({ inputRef }) {
                 component="p"
                 className={classes.subtitle}
               >
-                V celém Česku bylo od začátku pandemie protvrzeno již více než
-                milion a půl případů. Podívejte se, jak se koronavirová nákaza
-                šíří ve vaší obci. Přehledné grafy vám ukážou historický vývoj i
-                aktuální situaci, stačí vyhledat název obce v záhlaví této
-                stránky.
+                V celém Česku bylo od začátku pandemie potvrzeno již více než
+                milion a půl případů. Podívejte se, jak se koronavirová nákaza
+                šíří ve vaší obci. Přehledné grafy vám ukážou historický vývoj
+                i aktuální situaci, stačí vyhledat název obce v záhlaví stránky.
               </Typography>
 
               <Button
@@ -43,8 +44,8 @@ export function EmptyContent({ inputRef }) {
               </Button>
             </Box>
           </Grid>
-          <Grid item xs={10} md={6} className={classes.image}>
-            <img src={townImage} alt="Obec" />
+          <Grid item xs={10} md={6}>
+            <img className={classes.image} src={townImage} alt="Obec" />
           </Grid>
         </Grid>
       </Container>
@@ -69,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   textContainer: {
     marginTop: theme.spacing(4),
     [theme.breakpoints.up("sm")]: {
-      marginTop: theme.spacing(12),
+      marginTop: theme.spacing(7),
     },
   },
   title: {
@@ -87,10 +88,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "400",
     marginBottom: "2rem",
     width: "100%",
+    textAlign: "justify",
+    hyphens: "auto",
     [theme.breakpoints.up("sm")]: {
       fontSize: "1.2rem",
       marginBottom: "4rem",
-      width: "70%",
+      width: "75%",
     },
   },
   button: {
@@ -103,4 +106,8 @@ const useStyles = makeStyles((theme) => ({
       minWidth: "40%",
     },
   },
+  noWrap: {
+    whiteSpace: "nowrap",
+  },
+  image: { filter: "drop-shadow( 0px 40px 50px rgba(0, 0, 0, .25))" },
 }));
