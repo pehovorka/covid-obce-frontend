@@ -45,7 +45,13 @@ export function LandingScreen({ inputRef }) {
             </Box>
           </Grid>
           <Grid item xs={10} md={6}>
-            <img className={classes.image} src={townImage} alt="Obec" />
+            <img
+              src={townImage}
+              className={classes.image}
+              alt="Obec"
+              width="616"
+              height="616"
+            />
           </Grid>
         </Grid>
       </Container>
@@ -109,5 +115,9 @@ const useStyles = makeStyles((theme) => ({
   noWrap: {
     whiteSpace: "nowrap",
   },
-  image: { filter: "drop-shadow( 0px 40px 50px rgba(0, 0, 0, .25))" },
+  image: {
+    filter: "drop-shadow( 0px 40px 50px rgba(0, 0, 0, .25))",
+    maxWidth: "100%",
+    height: "auto,",
+  },
 }));
