@@ -118,6 +118,6 @@ const useStyles = makeStyles((theme) => ({
   image: {
     filter: "drop-shadow( 0px 40px 50px rgba(0, 0, 0, .25))",
     maxWidth: "100%",
-    height: "auto,",
+    height: "auto",
   },
 }));
