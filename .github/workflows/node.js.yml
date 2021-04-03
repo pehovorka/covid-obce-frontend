@@ -18,18 +18,27 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm i
-    - run: npm run build --if-present
+    - name: 🔨 Build Project
+      run: |
+        npm i
+        npm run build
       env: 
         PUBLIC_URL: ${{ secrets.DEV_URL }}
         REACT_APP_API_URL: ${{ secrets.API_URL }}
         REACT_APP_MESSAGES_URL: ${{ secrets.MESSAGES_URL }}
         REACT_APP_VERSION: $npm_package_version
         GENERATE_SOURCEMAP: false
+    - name: 🎉 Deploy to FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_LOGIN }}
+        password: ${{ secrets.FTP_PASSWORD }}
 
         
