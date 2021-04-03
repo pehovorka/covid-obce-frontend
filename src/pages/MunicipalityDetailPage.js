@@ -11,7 +11,7 @@ import {
   OBEC_NAZEV_QUERY,
 } from "../utils/municipalityUtils";
 import { PageNotFound } from "./PageNotFound";
-
+import { Alert } from "../components/Alert";
 import { LoadingIndicator } from "../components/LoadingIndicator";
 import { MunicipalityCard } from "../components/MunicipalityCard";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
@@ -86,10 +86,11 @@ export function MunicipalityDetailPage() {
                   limit={limit}
                 />
               </Box>
-              <Footer />
+              <Alert activeCasesDisclaimer variant="outlined" />
             </>
           )}
         </Container>
+        <Footer />
       </>
     );
 }

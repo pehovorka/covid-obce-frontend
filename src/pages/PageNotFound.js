@@ -25,8 +25,8 @@ export function PageNotFound({ message }) {
             </Box>
           </Paper>
         </Box>
-        <Footer />
       </Container>
+      <Footer />
     </>
   );
 }

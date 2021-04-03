@@ -5,7 +5,7 @@ import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone"
 import { PrimarySearchAppBar } from "../components/AppBar";
 import { DragAndDropCards } from "../components/DragAndDropCards";
 import { Footer } from "../components/Footer";
-import { EmptyContent } from "../components/EmptyContent";
+import { LandingScreen } from "../components/LandingScreen";
 import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
 import { Alert } from "../components/Alert";
 
@@ -26,15 +26,15 @@ export function HomePage(props) {
 
   return (
     <>
-      <PrimarySearchAppBar inputRef={inputRef} searchEnabled={true} />
-      <Container component="main">
-        <Alert />
-        {municipalities.length === 0 ? (
-          <EmptyContent inputRef={inputRef} />
-        ) : (
-          <>
+      <PrimarySearchAppBar inputRef={inputRef} searchEnabled />
+      {municipalities.length === 0 ? (
+        <LandingScreen inputRef={inputRef} />
+      ) : (
+        <>
+          <Container component="main">
+            <Alert remote />
             <DragAndDropCards municipalities={municipalities} />
-            <Box textAlign="center" mt={2}>
+            <Box textAlign="center" mt={2} mb={8}>
               <Grid container alignItems="center" justify="center" spacing={1}>
                 <Grid item>
                   <WbIncandescentTwoToneIcon
@@ -48,11 +48,12 @@ export function HomePage(props) {
                   </Typography>
                 </Grid>
               </Grid>
+              <Alert activeCasesDisclaimer variant="outlined" />
             </Box>
-          </>
-        )}
-        <Footer />
-      </Container>
+          </Container>
+        </>
+      )}
+      <Footer />
     </>
   );
 }

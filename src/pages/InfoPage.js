@@ -99,8 +99,8 @@ export function InfoPage() {
             </Box>
           </Paper>
         </Box>
-        <Footer />
       </Container>
+      <Footer />
     </>
   );
 }
