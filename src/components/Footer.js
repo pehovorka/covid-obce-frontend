@@ -22,7 +22,7 @@ export function Footer() {
   return (
     <Box className={classes.container} textAlign="center" component="footer">
       <Box className={classes.content}>
-        <Grid container justify="center" spacing={1}>
+        <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} md>
             <Typography>
               <Link
