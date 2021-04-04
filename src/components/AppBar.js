@@ -11,7 +11,6 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 
 import { SearchField } from "./SearchField";
-import virus from "../assets/virus.svg";
 import { SearchButton } from "./SearchButton";
 import { route } from "../Routes";
 
@@ -54,8 +53,8 @@ export function PrimarySearchAppBar({ inputRef, searchEnabled }) {
               <Grid container spacing={1}>
                 <Grid item>
                   <img
-                    src={virus}
-                    alt="Virus"
+                    src={process.env.PUBLIC_URL + "logo.svg"}
+                    alt="Logo"
                     height="30px"
                     width="30px"
                     style={{ fill: "#fff" }}
