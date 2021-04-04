@@ -53,7 +53,7 @@ export function PrimarySearchAppBar({ inputRef, searchEnabled }) {
               <Grid container spacing={1}>
                 <Grid item>
                   <img
-                    src={process.env.PUBLIC_URL + "logo.svg"}
+                    src={process.env.PUBLIC_URL + "/logo.svg"}
                     alt="Logo"
                     height="30px"
                     width="30px"
