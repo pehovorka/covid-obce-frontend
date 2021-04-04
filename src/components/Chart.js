@@ -9,10 +9,16 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { Skeleton } from "@material-ui/lab";
 
 import { ChartTooltip } from "./ChartTooltip";
 
-export function Chart({ data }) {
+export default function Chart({ data }) {
+  if (!data) {
+    return (
+      <Skeleton variant="rect" width="100%" height={300} animation="wave" />
+    );
+  }
   return (
     <ResponsiveContainer width="100%" height={300}>
       <ComposedChart

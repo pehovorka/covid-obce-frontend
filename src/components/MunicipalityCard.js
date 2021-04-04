@@ -1,5 +1,5 @@
 // React
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 
 // Apollo
 import { useQuery } from "@apollo/client";
@@ -15,22 +15,23 @@ import {
   Tooltip,
 } from "@material-ui/core/";
 import CloseIcon from "@material-ui/icons/Close";
+import { Skeleton } from "@material-ui/lab";
 
 // Sub-components
-import { Chart } from "./Chart";
 import {
   OBEC_DETAIL_QUERY,
   convertToGraphData,
 } from "../utils/municipalityUtils";
 import { DateLimitSelect } from "./DateLimitSelect";
 import { MunicipalityStats } from "./MunicipalityStats";
-import { LoadingIndicator } from "./LoadingIndicator";
 import { ShareIconAndDialog } from "./ShareIconAndDialog";
 import {
   REMOVE_MUNICIPALITY,
   SET_SNACKBAR_MESSAGE,
 } from "../utils/municipalitiesReducer";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
+
+const Chart = lazy(() => import("./Chart"));
 
 export function MunicipalityCard({
   name,
@@ -116,14 +117,20 @@ export function MunicipalityCard({
         title={name}
       />
       <CardContent>
-        {obec.loading || obec.error ? (
-          <LoadingIndicator />
-        ) : (
-          <>
-            <MunicipalityStats obec={obec} code={code} />
-            <Chart data={convertToGraphData(obec.data.obec, limit)} />
-          </>
-        )}
+        <MunicipalityStats obec={obec} code={code} />
+
+        <Suspense
+          fallback={
+            <Skeleton
+              variant="rect"
+              width="100%"
+              height={300}
+              animation="wave"
+            />
+          }
+        >
+          <Chart data={convertToGraphData(obec.data?.obec, limit)} />
+        </Suspense>
       </CardContent>
     </Card>
   );
