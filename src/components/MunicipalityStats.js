@@ -1,10 +1,11 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Box, Grid, Divider, Typography } from "@material-ui/core/";
-import municipalitiesPopulation from "../assets/municipalitiesPopulation.json";
 import {
   formatNumberToDisplay,
   formatChangeNumberToDisplay,
 } from "../utils/municipalityUtils";
+
+const ActivePer1000 = lazy(() => import("./ActivePer1000"));
 
 export function MunicipalityStats({ obec, code }) {
   return (
@@ -89,11 +90,12 @@ export function MunicipalityStats({ obec, code }) {
             </Grid>
             <Grid item>
               <Typography variant="h6" component="p">
-                {(
-                  (parseInt(obec.data.obec[0].aktualne_nemocnych) /
-                    municipalitiesPopulation[0][code]) *
-                  1000
-                ).toLocaleString("cs-CZ", { maximumFractionDigits: 1 })}
+                <Suspense fallback="...">
+                  <ActivePer1000
+                    activeCases={obec.data.obec[0].aktualne_nemocnych}
+                    municipalityCode={code}
+                  />
+                </Suspense>
               </Typography>
             </Grid>
           </Grid>
