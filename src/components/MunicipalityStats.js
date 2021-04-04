@@ -1,10 +1,14 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Box, Grid, Divider, Typography } from "@material-ui/core/";
-import municipalitiesPopulation from "../assets/municipalitiesPopulation.json";
+import { Skeleton } from "@material-ui/lab";
+
 import {
   formatNumberToDisplay,
   formatChangeNumberToDisplay,
 } from "../utils/municipalityUtils";
+
+const ActivePer1000 = lazy(() => import("./ActivePer1000"));
+const skeletonWidth = 100;
 
 export function MunicipalityStats({ obec, code }) {
   return (
@@ -16,21 +20,27 @@ export function MunicipalityStats({ obec, code }) {
               <Grid container direction="column" alignItems="center">
                 <Grid item>
                   <Typography variant="overline" noWrap={true}>
-                    Aktivní případy (
-                    {new Date(obec.data.obec[0].datum).toLocaleDateString(
-                      "cs-CZ",
-                      {
-                        day: "numeric",
-                        month: "numeric",
-                      }
-                    )}
-                    )
+                    Aktivní případy
+                    {obec.data &&
+                      " (" +
+                        new Date(obec.data.obec[0].datum).toLocaleDateString(
+                          "cs-CZ",
+                          {
+                            day: "numeric",
+                            month: "numeric",
+                          }
+                        ) +
+                        ")"}
                   </Typography>
                 </Grid>
                 <Grid item>
                   <Typography variant="h6" component="p">
-                    {formatNumberToDisplay(
-                      obec.data.obec[0].aktualne_nemocnych
+                    {obec.data ? (
+                      formatNumberToDisplay(
+                        obec.data.obec[0].aktualne_nemocnych
+                      )
+                    ) : (
+                      <Skeleton width={skeletonWidth} />
                     )}
                   </Typography>
                 </Grid>
@@ -45,9 +55,13 @@ export function MunicipalityStats({ obec, code }) {
                 </Grid>
                 <Grid item>
                   <Typography variant="h6" component="p">
-                    {formatChangeNumberToDisplay(
-                      obec.data.obec[0].aktualne_nemocnych -
-                        obec.data.obec[7].aktualne_nemocnych
+                    {obec.data ? (
+                      formatChangeNumberToDisplay(
+                        obec.data.obec[0].aktualne_nemocnych -
+                          obec.data.obec[7].aktualne_nemocnych
+                      )
+                    ) : (
+                      <Skeleton width={skeletonWidth} />
                     )}
                   </Typography>
                 </Grid>
@@ -62,9 +76,13 @@ export function MunicipalityStats({ obec, code }) {
                 </Grid>
                 <Grid item>
                   <Typography variant="h6" component="p">
-                    {formatChangeNumberToDisplay(
-                      obec.data.obec[0].aktualne_nemocnych -
-                        obec.data.obec[30].aktualne_nemocnych
+                    {obec.data ? (
+                      formatChangeNumberToDisplay(
+                        obec.data.obec[0].aktualne_nemocnych -
+                          obec.data.obec[30].aktualne_nemocnych
+                      )
+                    ) : (
+                      <Skeleton width={skeletonWidth} />
                     )}
                   </Typography>
                 </Grid>
@@ -79,21 +97,28 @@ export function MunicipalityStats({ obec, code }) {
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
               <Typography variant="overline" noWrap={true}>
-                Aktivní na 1000 obyvatel (
-                {new Date(obec.data.obec[0].datum).toLocaleDateString("cs-CZ", {
-                  day: "numeric",
-                  month: "numeric",
-                })}
-                )
+                Aktivní na 1000 obyvatel
+                {obec.data &&
+                  " (" +
+                    new Date(obec.data.obec[0].datum).toLocaleDateString(
+                      "cs-CZ",
+                      {
+                        day: "numeric",
+                        month: "numeric",
+                      }
+                    ) +
+                    ")"}
               </Typography>
             </Grid>
             <Grid item>
               <Typography variant="h6" component="p">
-                {(
-                  (parseInt(obec.data.obec[0].aktualne_nemocnych) /
-                    municipalitiesPopulation[0][code]) *
-                  1000
-                ).toLocaleString("cs-CZ", { maximumFractionDigits: 1 })}
+                <Suspense fallback={<Skeleton width={skeletonWidth} />}>
+                  <ActivePer1000
+                    activeCases={obec.data?.obec[0]?.aktualne_nemocnych}
+                    municipalityCode={code}
+                    skeletonWidth={skeletonWidth}
+                  />
+                </Suspense>
               </Typography>
             </Grid>
           </Grid>

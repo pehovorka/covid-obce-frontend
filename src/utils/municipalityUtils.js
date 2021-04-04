@@ -31,6 +31,7 @@ export const isValidMunicipalityCode = (code) => {
 };
 
 export const convertToGraphData = (stringData, limit) => {
+  if (!stringData) return null;
   const graphData = stringData.map((item, index) => {
     const container = {};
     //container.date = new Date(item.datum).toLocaleDateString("cs-CZ", {});
