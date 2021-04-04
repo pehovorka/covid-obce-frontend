@@ -118,7 +118,6 @@ export function MunicipalityCard({
       />
       <CardContent>
         <MunicipalityStats obec={obec} code={code} />
-
         <Suspense
           fallback={
             <Skeleton
