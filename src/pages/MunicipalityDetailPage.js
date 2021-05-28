@@ -7,7 +7,7 @@ import { useLazyQuery } from "@apollo/client";
 
 import { isValidMunicipalityCode } from "../utils/municipalityUtils";
 import { MUNICIPALITY_NAME_QUERY } from "../utils/queries";
-import { PageNotFound } from "./PageNotFound";
+import { NotFoundPage } from ".";
 import { Alert, LoadingIndicator } from "../components";
 import { MunicipalityCard } from "../components/card";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
@@ -61,7 +61,7 @@ export function MunicipalityDetailPage() {
   };
 
   if (error) {
-    return <PageNotFound message={error} />;
+    return <NotFoundPage message={error} />;
   } else
     return (
       <>
@@ -70,7 +70,7 @@ export function MunicipalityDetailPage() {
           {!municipalityName.data || !municipalityName.called ? (
             <LoadingIndicator />
           ) : municipalityName.data?.obec?.length === 0 ? (
-            <PageNotFound message={error} />
+            <NotFoundPage message={error} />
           ) : (
             <>
               <Box my={4}>

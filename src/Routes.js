@@ -1,9 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import { HomePage } from "./pages/HomePage";
-import { InfoPage } from "./pages/infoPage/InfoPage";
-import { MunicipalityDetailPage } from "./pages/MunicipalityDetailPage";
+import { HomePage, InfoPage, MunicipalityDetailPage } from "./pages";
 
 export const route = {
   home: () => `/`,

@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Box, Typography, Paper } from "@material-ui/core";
 import { AppBar, Footer, SearchButton } from "../components/layout";
 
-export function PageNotFound({ message }) {
+export function NotFoundPage({ message }) {
   document.title = `Obec nenalezena – COVID v obcích`;
   return (
     <>
