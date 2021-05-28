@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import { HomePage } from "./pages/HomePage";
-import { InfoPage } from "./pages/InfoPage";
+import { InfoPage } from "./pages/infoPage/InfoPage";
 import { MunicipalityDetailPage } from "./pages/MunicipalityDetailPage";
 
 export const route = {

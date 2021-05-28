@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Grid, Link, Box, Typography, makeStyles } from "@material-ui/core";
+import { Grid, Link, Box, Typography } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 
 import { route } from "../../../Routes";
 import { CookieDialog } from "./CookieDialog";
 import { LastModified } from "./LastModified";
 import { useMunicipalitiesState } from "../../../providers/MunicipalitiesProvider";
+import { useStyles } from "./Footer.style";
 
 export function Footer() {
   const classes = useStyles();
@@ -98,18 +99,3 @@ export function Footer() {
     </Box>
   );
 }
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    borderTop: "5px solid #efefef",
-  },
-  content: {
-    padding: "2rem",
-    margin: "0 auto",
-    width: "70%",
-    fontSize: "1rem",
-  },
-  link: {
-    fontWeight: 500,
-  },
-}));

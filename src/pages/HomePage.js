@@ -4,14 +4,13 @@ import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone"
 
 import { AppBar, Footer } from "../components/layout";
 import { DragAndDropCards } from "../components/card";
-import { Alert, LandingScreen } from "../components";
+import { Alert } from "../components";
+import { LandingScreen } from "../components/landingScreen";
 import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
 
 export function HomePage(props) {
   const { municipalities } = useMunicipalitiesState();
-
   const inputRef = useRef(null);
-
   const searchAutoFocus = props.location.state?.searchAutoFocus ?? false;
 
   document.title = `COVID v obcích`;

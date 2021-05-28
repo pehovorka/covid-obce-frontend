@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  Box,
-  Paper,
-  Grid,
-  Typography,
-  Divider,
-  makeStyles,
-} from "@material-ui/core/";
+import { Box, Paper, Grid, Typography, Divider } from "@material-ui/core/";
+import { useStyles } from "./ChartTooltip.style";
 
 export const ChartTooltip = ({ active, payload, label }) => {
   const styles = useStyles();
@@ -137,25 +131,3 @@ export const ChartTooltip = ({ active, payload, label }) => {
 
   return null;
 };
-
-const useStyles = makeStyles((theme) => ({
-  bold: {
-    fontWeight: 500,
-  },
-  bigger: {
-    fontSize: theme.typography.body1.fontSize,
-    fontWeight: 500,
-    lineHeight: "1.4rem",
-  },
-  alignRight: {
-    marginLeft: "auto",
-  },
-  marginLeft: {
-    marginLeft: "0.8rem",
-  },
-  title: {
-    textAlign: "center",
-    fontSize: "1.1rem",
-    fontWeight: 500,
-  },
-}));
