@@ -1,4 +1,4 @@
-# Covidvobcich.cz web app
+# Covid v obcích web app
 
 Frontend part of the [covidvobcich.cz](https://covidvobcich.cz/) website.
 

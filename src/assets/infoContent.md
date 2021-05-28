@@ -10,7 +10,7 @@ K aktualizaci dochází 1× denně, zpravidla v ranních hodinách. Datum a čas
 
 ## Kdo provozuje web Covid v obcích?
 
-Tento web není oficiálním informačním kanálem Ministerstva zdravotnictví, nestojí za ním žádná organizace ani mediální dům. Web vytvářím a spravuji ve volném čase, v případě dotazů či připomínek mě můžete kontaktovat na e-mailu covid-obce@petrhovorka.com nebo na síti [LinkedIn](https://www.linkedin.com/in/pehovorka/).
+Tento web není oficiálním informačním kanálem Ministerstva zdravotnictví, nestojí za ním žádná organizace ani mediální dům. Web vytvářím a spravuji ve volném čase, v případě dotazů či připomínek mě můžete kontaktovat na e-mailu covid-obce@petrhovorka.com nebo na síti [LinkedIn](https://www.linkedin.com/in/pehovorka/). Zdrojový kód tohoto webu lze nalézt [zde](https://github.com/pehovorka/covid-obce-frontend/).
 
 ## Proč vznikl tento web?
 
