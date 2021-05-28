@@ -5,10 +5,8 @@ import { AppBar, Footer } from "../components/layout";
 import { useParams } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
 
-import {
-  isValidMunicipalityCode,
-  OBEC_NAZEV_QUERY,
-} from "../utils/municipalityUtils";
+import { isValidMunicipalityCode } from "../utils/municipalityUtils";
+import { MUNICIPALITY_NAME_QUERY } from "../utils/queries";
 import { PageNotFound } from "./PageNotFound";
 import { Alert, LoadingIndicator } from "../components";
 import { MunicipalityCard } from "../components/card";
@@ -21,8 +19,9 @@ export function MunicipalityDetailPage() {
   const [limit, setLimit] = useState(90);
   const urlParams = useParams();
 
-  const [getMunicipalityName, municipalityName] =
-    useLazyQuery(OBEC_NAZEV_QUERY);
+  const [getMunicipalityName, municipalityName] = useLazyQuery(
+    MUNICIPALITY_NAME_QUERY
+  );
 
   useEffect(() => {
     if (urlParams.code) {

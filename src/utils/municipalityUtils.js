@@ -1,24 +1,3 @@
-import { gql } from "@apollo/client";
-
-export const OBEC_NAZEV_QUERY = gql`
-  query Obec($obec_kod: String!, $limit: Int!) {
-    obec(obec_kod: $obec_kod, limit: $limit) {
-      obec_nazev
-    }
-  }
-`;
-
-export const OBEC_DETAIL_QUERY = gql`
-  query Obec($obec_kod: String!, $limit: Int!) {
-    obec(obec_kod: $obec_kod, limit: $limit) {
-      datum
-      aktualne_nemocnych
-      nove_pripady
-      nove_pripady_65
-    }
-  }
-`;
-
 export const isValidMunicipalityCode = (code) => {
   if (code.length !== 6) {
     return false;

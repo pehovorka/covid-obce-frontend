@@ -18,10 +18,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import { Skeleton } from "@material-ui/lab";
 
 // Sub-components
-import {
-  OBEC_DETAIL_QUERY,
-  convertToGraphData,
-} from "../../utils/municipalityUtils";
+import { convertToGraphData } from "../../utils/municipalityUtils";
+import { MUNICIPALITY_DETAIL_QUERY } from "../../utils/queries";
 import { DateLimitSelect, MunicipalityStats, ShareIconAndDialog } from ".";
 import {
   REMOVE_MUNICIPALITY,
@@ -41,7 +39,7 @@ export function MunicipalityCard({
 }) {
   const dispatch = useMunicipalitiesDispatch();
 
-  const obec = useQuery(OBEC_DETAIL_QUERY, {
+  const obec = useQuery(MUNICIPALITY_DETAIL_QUERY, {
     variables: { obec_kod: code, limit: limit === 0 ? 0 : 90 },
     fetchPolicy: "cache-first",
   });

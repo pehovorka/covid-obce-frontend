@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { CircularProgress, TextField } from "@material-ui/core/";
 import Autocomplete, {
   createFilterOptions,
@@ -11,23 +11,15 @@ import {
   ADD_MUNICIPALITY,
   SET_SNACKBAR_MESSAGE,
 } from "../../../utils/municipalitiesReducer";
+import { MUNICIPALITY_NAMES_SEARCH_QUERY } from "../../../utils/queries";
 import { useStyles } from "./SearchField.style";
-
-const OBEC_QUERY = gql`
-  query Obce_nazvy($obec_nazev: String!) {
-    obce(obec_nazev: $obec_nazev, datum: "2020-11-05") {
-      obec_nazev
-      obec_kod
-    }
-  }
-`;
 
 export function SearchField({ inputRef }) {
   const dispatch = useMunicipalitiesDispatch();
   const [autoCompleteOpen, setAutoCompleteOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const obce = useQuery(OBEC_QUERY, {
+  const obce = useQuery(MUNICIPALITY_NAMES_SEARCH_QUERY, {
     variables: { obec_nazev: inputValue },
     skip: inputValue.length < 2 ? true : false,
   });

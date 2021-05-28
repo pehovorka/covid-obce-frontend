@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Typography } from "@material-ui/core";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
-const LAST_MODIFIED_QUERY = gql`
-  query lastModified {
-    lastModified {
-      last_modified
-    }
-  }
-`;
+import { LAST_MODIFIED_QUERY } from "../../../utils/queries";
 
 export function LastModified() {
   const lastModified = useQuery(LAST_MODIFIED_QUERY, {});
