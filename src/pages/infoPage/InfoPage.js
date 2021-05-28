@@ -7,6 +7,7 @@ import { AppBar, Footer } from "../../components/layout";
 import { BackToHomeLink } from "../../components";
 import { options } from "./InfoPage.style";
 import infoContent from "../../assets/infoContent.md";
+import { Seo } from "../../utils/Seo";
 
 export function InfoPage() {
   const [markdown, setMarkdown] = useState("");
@@ -16,10 +17,9 @@ export function InfoPage() {
       .then((text) => setMarkdown(text));
   }, []);
 
-  document.title = `O webu – COVID v obcích`;
-
   return (
     <>
+      <Seo title="O webu" />
       <AppBar />
       <Container component="main">
         <Box py={4}>

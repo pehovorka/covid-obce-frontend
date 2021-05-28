@@ -1,11 +1,12 @@
 import React from "react";
 import { Container, Box, Typography, Paper } from "@material-ui/core";
 import { AppBar, Footer, SearchButton } from "../components/layout";
+import { Seo } from "../utils/Seo";
 
 export function NotFoundPage({ message }) {
-  document.title = `Obec nenalezena – COVID v obcích`;
   return (
     <>
+      <Seo title="Obec nenalezena" />
       <AppBar />
       <Container>
         <Box my={4}>

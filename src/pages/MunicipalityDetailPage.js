@@ -12,6 +12,7 @@ import { Alert, LoadingIndicator } from "../components";
 import { MunicipalityCard } from "../components/card";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 import { SET_SNACKBAR_MESSAGE } from "../utils/municipalitiesReducer";
+import { Seo } from "../utils/Seo";
 
 export function MunicipalityDetailPage() {
   const dispatch = useMunicipalitiesDispatch();
@@ -45,8 +46,6 @@ export function MunicipalityDetailPage() {
   useEffect(() => {
     if (municipalityName.data && municipalityName.data.obec.length === 0) {
       setError("Obec s tímto kódem neexistuje!");
-    } else if (municipalityName.data) {
-      document.title = `${municipalityName.data.obec[0].obec_nazev} – COVID v obcích`;
     } else if (municipalityName.error) {
       dispatch({
         type: SET_SNACKBAR_MESSAGE,
@@ -65,6 +64,7 @@ export function MunicipalityDetailPage() {
   } else
     return (
       <>
+        <Seo title={municipalityName.data?.obec[0].obec_nazev} />
         <AppBar />
         <Container>
           {!municipalityName.data || !municipalityName.called ? (
