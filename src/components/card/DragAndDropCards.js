@@ -1,9 +1,10 @@
 import React from "react";
 import { Box } from "@material-ui/core";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { MunicipalityCard } from "./MunicipalityCard";
-import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
-import { CHANGE_ORDER, CHANGE_LIMIT } from "../utils/municipalitiesReducer";
+
+import { MunicipalityCard } from ".";
+import { useMunicipalitiesDispatch } from "../../providers/MunicipalitiesProvider";
+import { CHANGE_ORDER, CHANGE_LIMIT } from "../../utils/municipalitiesReducer";
 
 export function DragAndDropCards({ municipalities }) {
   const dispatch = useMunicipalitiesDispatch();

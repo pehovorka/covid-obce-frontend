@@ -12,10 +12,9 @@ import {
   Grid,
 } from "@material-ui/core";
 
-import { PrimarySearchAppBar } from "../components/AppBar";
-import { Footer } from "../components/Footer";
+import { AppBar, Footer } from "../components/layout/";
+import { BackToHomeLink } from "../components";
 import infoContent from "../assets/infoContent.md";
-import { BackToHomeLink } from "../components/BackToHomeLink";
 
 const styles = (theme) => ({
   listItem: {
@@ -78,7 +77,7 @@ export function InfoPage() {
 
   return (
     <>
-      <PrimarySearchAppBar />
+      <AppBar />
       <Container component="main">
         <Box py={4}>
           <Paper>

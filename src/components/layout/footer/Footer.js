@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Grid, Link, Box, Typography, makeStyles } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 
+import { route } from "../../../Routes";
 import { CookieDialog } from "./CookieDialog";
-import { route } from "../Routes";
 import { LastModified } from "./LastModified";
-import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
+import { useMunicipalitiesState } from "../../../providers/MunicipalitiesProvider";
 
 export function Footer() {
   const classes = useStyles();

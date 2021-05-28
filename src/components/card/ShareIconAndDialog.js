@@ -66,17 +66,6 @@ export function ShareIconAndDialog({ code, name }) {
     return `${name} – COVID v obcích`;
   };
 
-  const styles = (theme) => ({
-    root: {
-      margin: 0,
-      padding: 0,
-      minWidth: 400,
-    },
-    closeButton: {
-      color: theme.palette.grey[500],
-    },
-  });
-
   const DialogTitle = withStyles(styles)((props) => {
     const { children, classes, onClose, ...other } = props;
     return (
@@ -149,3 +138,14 @@ export function ShareIconAndDialog({ code, name }) {
     </>
   );
 }
+
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: 0,
+    minWidth: 400,
+  },
+  closeButton: {
+    color: theme.palette.grey[500],
+  },
+});

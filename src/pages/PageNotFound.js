@@ -1,14 +1,12 @@
 import React from "react";
 import { Container, Box, Typography, Paper } from "@material-ui/core";
-import { Footer } from "../components/Footer";
-import { PrimarySearchAppBar } from "../components/AppBar";
-import { SearchButton } from "../components/SearchButton";
+import { AppBar, Footer, SearchButton } from "../components/layout";
 
 export function PageNotFound({ message }) {
   document.title = `Obec nenalezena – COVID v obcích`;
   return (
     <>
-      <PrimarySearchAppBar />
+      <AppBar />
       <Container>
         <Box my={4}>
           <Paper>

@@ -1,8 +1,5 @@
-// React
 import React, { useEffect, useState } from "react";
-// Material-UI
 import { Typography } from "@material-ui/core";
-// Apollo
 import { useQuery, gql } from "@apollo/client";
 
 const LAST_MODIFIED_QUERY = gql`

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box } from "@material-ui/core";
-import { Footer } from "../components/Footer";
-import { PrimarySearchAppBar } from "../components/AppBar";
+import { AppBar, Footer } from "../components/layout";
 
 import { useParams } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
@@ -11,9 +10,8 @@ import {
   OBEC_NAZEV_QUERY,
 } from "../utils/municipalityUtils";
 import { PageNotFound } from "./PageNotFound";
-import { Alert } from "../components/Alert";
-import { LoadingIndicator } from "../components/LoadingIndicator";
-import { MunicipalityCard } from "../components/MunicipalityCard";
+import { Alert, LoadingIndicator } from "../components";
+import { MunicipalityCard } from "../components/card";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 import { SET_SNACKBAR_MESSAGE } from "../utils/municipalitiesReducer";
 
@@ -23,9 +21,8 @@ export function MunicipalityDetailPage() {
   const [limit, setLimit] = useState(90);
   const urlParams = useParams();
 
-  const [getMunicipalityName, municipalityName] = useLazyQuery(
-    OBEC_NAZEV_QUERY
-  );
+  const [getMunicipalityName, municipalityName] =
+    useLazyQuery(OBEC_NAZEV_QUERY);
 
   useEffect(() => {
     if (urlParams.code) {
@@ -69,7 +66,7 @@ export function MunicipalityDetailPage() {
   } else
     return (
       <>
-        <PrimarySearchAppBar />
+        <AppBar />
         <Container>
           {!municipalityName.data || !municipalityName.called ? (
             <LoadingIndicator />

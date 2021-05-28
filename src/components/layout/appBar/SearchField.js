@@ -7,11 +7,11 @@ import Autocomplete, {
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
+import { useMunicipalitiesDispatch } from "../../../providers/MunicipalitiesProvider";
 import {
   ADD_MUNICIPALITY,
   SET_SNACKBAR_MESSAGE,
-} from "../utils/municipalitiesReducer";
+} from "../../../utils/municipalitiesReducer";
 
 const OBEC_QUERY = gql`
   query Obce_nazvy($obec_nazev: String!) {
@@ -21,18 +21,6 @@ const OBEC_QUERY = gql`
     }
   }
 `;
-
-const useStyles = makeStyles((theme) => ({
-  inputRoot: {
-    color: "#fff",
-  },
-  popupIndicator: {
-    color: "#fff",
-  },
-  clearIndicator: {
-    color: "#fff",
-  },
-}));
 
 export function SearchField({ inputRef }) {
   const dispatch = useMunicipalitiesDispatch();
@@ -134,3 +122,15 @@ export function SearchField({ inputRef }) {
     />
   );
 }
+
+const useStyles = makeStyles((theme) => ({
+  inputRoot: {
+    color: "#fff",
+  },
+  popupIndicator: {
+    color: "#fff",
+  },
+  clearIndicator: {
+    color: "#fff",
+  },
+}));

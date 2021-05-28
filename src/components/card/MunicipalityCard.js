@@ -21,15 +21,13 @@ import { Skeleton } from "@material-ui/lab";
 import {
   OBEC_DETAIL_QUERY,
   convertToGraphData,
-} from "../utils/municipalityUtils";
-import { DateLimitSelect } from "./DateLimitSelect";
-import { MunicipalityStats } from "./MunicipalityStats";
-import { ShareIconAndDialog } from "./ShareIconAndDialog";
+} from "../../utils/municipalityUtils";
+import { DateLimitSelect, MunicipalityStats, ShareIconAndDialog } from ".";
 import {
   REMOVE_MUNICIPALITY,
   SET_SNACKBAR_MESSAGE,
-} from "../utils/municipalitiesReducer";
-import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
+} from "../../utils/municipalitiesReducer";
+import { useMunicipalitiesDispatch } from "../../providers/MunicipalitiesProvider";
 
 const Chart = lazy(() => import("./Chart"));
 

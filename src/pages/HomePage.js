@@ -2,12 +2,10 @@ import React, { useEffect, useRef } from "react";
 import { Container, Box, Typography, Grid } from "@material-ui/core";
 import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
 
-import { PrimarySearchAppBar } from "../components/AppBar";
-import { DragAndDropCards } from "../components/DragAndDropCards";
-import { Footer } from "../components/Footer";
-import { LandingScreen } from "../components/LandingScreen";
+import { AppBar, Footer } from "../components/layout";
+import { DragAndDropCards } from "../components/card";
+import { Alert, LandingScreen } from "../components";
 import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
-import { Alert } from "../components/Alert";
 
 export function HomePage(props) {
   const { municipalities } = useMunicipalitiesState();
@@ -26,7 +24,7 @@ export function HomePage(props) {
 
   return (
     <>
-      <PrimarySearchAppBar inputRef={inputRef} searchEnabled />
+      <AppBar inputRef={inputRef} searchEnabled />
       {municipalities.length === 0 ? (
         <LandingScreen inputRef={inputRef} />
       ) : (

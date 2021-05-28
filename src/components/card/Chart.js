@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { Skeleton } from "@material-ui/lab";
 
-import { ChartTooltip } from "./ChartTooltip";
+import { ChartTooltip } from ".";
 
 export default function Chart({ data }) {
   if (!data) {

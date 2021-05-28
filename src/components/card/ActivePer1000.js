@@ -1,6 +1,6 @@
 import { Skeleton } from "@material-ui/lab";
 
-import municipalitiesPopulation from "../assets/municipalitiesPopulation.json";
+import municipalitiesPopulation from "../../assets/municipalitiesPopulation.json";
 
 export default function ActivePer1000({
   activeCases,

@@ -1,7 +1,7 @@
 import React from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import {
-  AppBar,
+  AppBar as MUIAppBar,
   Box,
   Grid,
   Link,
@@ -10,9 +10,8 @@ import {
 } from "@material-ui/core/";
 import { Link as RouterLink } from "react-router-dom";
 
-import { SearchField } from "./SearchField";
-import { SearchButton } from "./SearchButton";
-import { route } from "../Routes";
+import { SearchButton, SearchField } from ".";
+import { route } from "../../../Routes";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -36,11 +35,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function PrimarySearchAppBar({ inputRef, searchEnabled }) {
+export function AppBar({ inputRef, searchEnabled }) {
   const classes = useStyles();
 
   return (
-    <AppBar position="static" className={classes.appBar}>
+    <MUIAppBar position="static" className={classes.appBar}>
       <Toolbar className={classes.appBar}>
         <Box width="100%" pt={1} pb={1}>
           <Grid
@@ -95,6 +94,6 @@ export function PrimarySearchAppBar({ inputRef, searchEnabled }) {
           </Grid>
         </Box>
       </Toolbar>
-    </AppBar>
+    </MUIAppBar>
   );
 }

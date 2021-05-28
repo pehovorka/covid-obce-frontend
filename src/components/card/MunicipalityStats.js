@@ -5,7 +5,7 @@ import { Skeleton } from "@material-ui/lab";
 import {
   formatNumberToDisplay,
   formatChangeNumberToDisplay,
-} from "../utils/municipalityUtils";
+} from "../../utils/municipalityUtils";
 
 const ActivePer1000 = lazy(() => import("./ActivePer1000"));
 const skeletonWidth = 100;
