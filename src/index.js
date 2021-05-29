@@ -4,44 +4,13 @@ import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./utils/apollo";
 import { CssBaseline, ThemeProvider } from "@material-ui/core/";
-import reportWebVitals from "./reportWebVitals";
-import { createMuiTheme } from "@material-ui/core/styles";
 
-import "./index.css";
 import App from "./App";
 import { MunicipalitiesProvider } from "./providers/MunicipalitiesProvider";
-import { SnackBar } from "./components/SnackBar";
+import { SnackBar } from "./components/other";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { MessagesFetcher } from "./utils/MessagesFetcher";
-
-const theme = createMuiTheme({
-  palette: {
-    type: "light",
-    primary: {
-      light: "#757ce8",
-      main: "#0078B8",
-      dark: "#00527D",
-      contrastText: "#fff",
-    },
-    secondary: {
-      light: "#ff7961",
-      main: "#FFBA00",
-      dark: "#ffc833",
-      contrastText: "#222222",
-    },
-  },
-});
-
-theme.typography.h5 = {
-  fontSize: "1.2rem",
-  fontWeight: 400,
-  [theme.breakpoints.up("sm")]: {
-    fontSize: "1.4rem",
-  },
-  [theme.breakpoints.up("md")]: {
-    fontSize: "1.5rem",
-  },
-};
+import { theme } from "./theme";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -63,8 +32,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box } from "@material-ui/core";
-import { Footer } from "../components/Footer";
-import { PrimarySearchAppBar } from "../components/AppBar";
+import { AppBar, Footer } from "../components/layout";
 
 import { useParams } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
 
-import {
-  isValidMunicipalityCode,
-  OBEC_NAZEV_QUERY,
-} from "../utils/municipalityUtils";
-import { PageNotFound } from "./PageNotFound";
-import { Alert } from "../components/Alert";
-import { LoadingIndicator } from "../components/LoadingIndicator";
-import { MunicipalityCard } from "../components/MunicipalityCard";
+import { isValidMunicipalityCode } from "../utils/municipalityUtils";
+import { MUNICIPALITY_NAME_QUERY } from "../utils/queries";
+import { NotFoundPage } from ".";
+import { Alert, LoadingIndicator } from "../components/other";
+import { MunicipalityCard } from "../components/card";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 import { SET_SNACKBAR_MESSAGE } from "../utils/municipalitiesReducer";
+import { Seo } from "../utils/Seo";
 
-export function MunicipalityDetailPage() {
+export default function MunicipalityDetailPage() {
   const dispatch = useMunicipalitiesDispatch();
   const [error, setError] = useState(null);
   const [limit, setLimit] = useState(90);
   const urlParams = useParams();
 
   const [getMunicipalityName, municipalityName] = useLazyQuery(
-    OBEC_NAZEV_QUERY
+    MUNICIPALITY_NAME_QUERY
   );
 
   useEffect(() => {
@@ -49,8 +46,6 @@ export function MunicipalityDetailPage() {
   useEffect(() => {
     if (municipalityName.data && municipalityName.data.obec.length === 0) {
       setError("Obec s tímto kódem neexistuje!");
-    } else if (municipalityName.data) {
-      document.title = `${municipalityName.data.obec[0].obec_nazev} – COVID v obcích`;
     } else if (municipalityName.error) {
       dispatch({
         type: SET_SNACKBAR_MESSAGE,
@@ -65,16 +60,17 @@ export function MunicipalityDetailPage() {
   };
 
   if (error) {
-    return <PageNotFound message={error} />;
+    return <NotFoundPage message={error} />;
   } else
     return (
       <>
-        <PrimarySearchAppBar />
+        <Seo title={municipalityName.data?.obec[0].obec_nazev} />
+        <AppBar />
         <Container>
           {!municipalityName.data || !municipalityName.called ? (
             <LoadingIndicator />
           ) : municipalityName.data?.obec?.length === 0 ? (
-            <PageNotFound message={error} />
+            <NotFoundPage message={error} />
           ) : (
             <>
               <Box my={4}>

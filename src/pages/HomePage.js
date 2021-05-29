@@ -2,21 +2,16 @@ import React, { useEffect, useRef } from "react";
 import { Container, Box, Typography, Grid } from "@material-ui/core";
 import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
 
-import { PrimarySearchAppBar } from "../components/AppBar";
-import { DragAndDropCards } from "../components/DragAndDropCards";
-import { Footer } from "../components/Footer";
-import { LandingScreen } from "../components/LandingScreen";
+import { AppBar, Footer } from "../components/layout";
+import { DragAndDropCards } from "../components/card";
+import { Alert, LandingScreen } from "../components/other";
 import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
-import { Alert } from "../components/Alert";
+import { Seo } from "../utils/Seo";
 
-export function HomePage(props) {
+export default function HomePage(props) {
   const { municipalities } = useMunicipalitiesState();
-
   const inputRef = useRef(null);
-
   const searchAutoFocus = props.location.state?.searchAutoFocus ?? false;
-
-  document.title = `COVID v obcích`;
 
   useEffect(() => {
     if (searchAutoFocus) {
@@ -26,7 +21,8 @@ export function HomePage(props) {
 
   return (
     <>
-      <PrimarySearchAppBar inputRef={inputRef} searchEnabled />
+      <Seo />
+      <AppBar inputRef={inputRef} searchEnabled />
       {municipalities.length === 0 ? (
         <LandingScreen inputRef={inputRef} />
       ) : (
