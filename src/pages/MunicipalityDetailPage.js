@@ -64,7 +64,7 @@ export default function MunicipalityDetailPage() {
   } else
     return (
       <>
-        <Seo title={municipalityName.data?.obec[0].obec_nazev} />
+        <Seo title={municipalityName.data?.obec[0]?.obec_nazev} />
         <AppBar />
         <Container>
           {!municipalityName.data || !municipalityName.called ? (
