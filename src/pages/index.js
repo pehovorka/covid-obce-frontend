@@ -1,4 +1,4 @@
-export { HomePage } from "./HomePage";
-export { InfoPage } from "./infoPage";
-export { MunicipalityDetailPage } from "./MunicipalityDetailPage";
-export { NotFoundPage } from "./NotFoundPage";
+export { default as HomePage } from "./HomePage";
+export { default as InfoPage } from "./InfoPage";
+export { default as MunicipalityDetailPage } from "./MunicipalityDetailPage";
+export { default as NotFoundPage } from "./NotFoundPage";

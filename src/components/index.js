@@ -1,4 +1,4 @@
-export { Alert } from "./Alert";
-export { BackToHomeLink } from "./BackToHomeLink";
-export { LoadingIndicator } from "./LoadingIndicator";
-export { SnackBar } from "./SnackBar";
+export { default as Alert } from "./Alert";
+export { default as BackToHomeLink } from "./BackToHomeLink";
+export { default as LoadingIndicator } from "./LoadingIndicator";
+export { default as SnackBar } from "./SnackBar";

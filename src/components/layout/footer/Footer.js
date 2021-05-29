@@ -3,12 +3,11 @@ import { Grid, Link, Box, Typography } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 
 import { route } from "../../../Routes";
-import { CookieDialog } from "./CookieDialog";
-import { LastModified } from "./LastModified";
+import { CookieDialog, LastModified } from ".";
 import { useMunicipalitiesState } from "../../../providers/MunicipalitiesProvider";
 import { useStyles } from "./Footer.style";
 
-export function Footer() {
+export default function Footer() {
   const classes = useStyles();
   const { municipalities } = useMunicipalitiesState();
   const [openCookies, setCookiesOpen] = useState(false);

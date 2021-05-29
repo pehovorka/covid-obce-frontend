@@ -2,13 +2,9 @@ import React from "react";
 import { Dialog, Link, Typography } from "@material-ui/core/";
 import { DialogTitle, DialogContent } from "./CookieDialog.style";
 
-export function CookieDialog({ open, setOpen, handleClose }) {
+export default function CookieDialog({ open, handleClose }) {
   return (
-    <Dialog
-      onClose={handleClose}
-      aria-labelledby="customized-dialog-title"
-      open={open}
-    >
+    <Dialog onClose={handleClose} open={open}>
       <DialogTitle id="customized-dialog-title" onClose={handleClose}>
         Prohlášení o použití cookies
       </DialogTitle>

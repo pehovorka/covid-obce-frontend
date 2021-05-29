@@ -14,7 +14,7 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 
 import { DialogTitle } from "./ShareIconAndDialog.style";
 
-export function ShareIconAndDialog({ code, name }) {
+export default function ShareIconAndDialog({ code, name }) {
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
   const [copyButtonText, setCopyButtonText] = useState(
     "Zkopírovat do schránky"

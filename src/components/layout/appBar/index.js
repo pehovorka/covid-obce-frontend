@@ -1,3 +1,3 @@
-export { AppBar } from "./AppBar";
-export { SearchButton } from "./SearchButton";
-export { SearchField } from "./SearchField";
+export { default as AppBar } from "./AppBar";
+export { default as SearchButton } from "./SearchButton";
+export { default as SearchField } from "./SearchField";

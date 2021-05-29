@@ -10,7 +10,7 @@ import {
 const ActivePer1000 = lazy(() => import("./ActivePer1000"));
 const skeletonWidth = 100;
 
-export function MunicipalityStats({ obec, code }) {
+export default function MunicipalityStats({ obec, code }) {
   return (
     <Box mb={2}>
       <Grid container spacing={3} justify="center">

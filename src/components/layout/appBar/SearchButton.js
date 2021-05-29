@@ -4,7 +4,7 @@ import { route } from "../../../Routes";
 import { Button } from "@material-ui/core/";
 import SearchIcon from "@material-ui/icons/Search";
 
-export function SearchButton({ text }) {
+export default function SearchButton({ text }) {
   return (
     <Button
       startIcon={<SearchIcon />}

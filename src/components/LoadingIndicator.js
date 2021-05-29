@@ -1,7 +1,7 @@
 import { React } from "react";
 import { Box, CircularProgress } from "@material-ui/core/";
 
-export function LoadingIndicator() {
+export default function LoadingIndicator() {
   return (
     <Box
       height={388}

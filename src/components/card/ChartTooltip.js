@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Paper, Grid, Typography, Divider } from "@material-ui/core/";
 import { useStyles } from "./ChartTooltip.style";
 
-export const ChartTooltip = ({ active, payload, label }) => {
+export default function ChartTooltip({ active, payload, label }) {
   const styles = useStyles();
   const date = new Date(label);
   const stringDate = date.toLocaleDateString("cs-CZ", {
@@ -130,4 +130,4 @@ export const ChartTooltip = ({ active, payload, label }) => {
   }
 
   return null;
-};
+}

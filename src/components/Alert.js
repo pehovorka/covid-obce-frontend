@@ -4,7 +4,7 @@ import { Alert as Al } from "@material-ui/lab";
 import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
 import { Box } from "@material-ui/core";
 
-export function Alert({
+export default function Alert({
   message,
   severity,
   variant,

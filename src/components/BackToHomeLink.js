@@ -5,7 +5,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 import { route } from "../Routes";
 
-export function BackToHomeLink() {
+export default function BackToHomeLink() {
   return (
     <Link component={RouterLink} to={route.home()}>
       <Grid container>

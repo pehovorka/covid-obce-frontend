@@ -9,7 +9,7 @@ import { options } from "./InfoPage.style";
 import infoContent from "../../assets/infoContent.md";
 import { Seo } from "../../utils/Seo";
 
-export function InfoPage() {
+export default function InfoPage() {
   const [markdown, setMarkdown] = useState("");
   useEffect(() => {
     fetch(infoContent)

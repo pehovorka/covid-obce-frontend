@@ -4,7 +4,7 @@ import Alert from "@material-ui/lab/Alert";
 
 import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
 
-export function SnackBar() {
+export default function SnackBar() {
   const { snackBarMessage } = useMunicipalitiesState();
   const [open, setOpen] = useState(false);
 

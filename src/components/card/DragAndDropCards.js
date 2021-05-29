@@ -6,7 +6,7 @@ import { MunicipalityCard } from ".";
 import { useMunicipalitiesDispatch } from "../../providers/MunicipalitiesProvider";
 import { CHANGE_ORDER, CHANGE_LIMIT } from "../../utils/municipalitiesReducer";
 
-export function DragAndDropCards({ municipalities }) {
+export default function DragAndDropCards({ municipalities }) {
   const dispatch = useMunicipalitiesDispatch();
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;

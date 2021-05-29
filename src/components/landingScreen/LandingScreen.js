@@ -5,7 +5,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import townImage from "../../assets/czechTown.svg";
 import { useStyles } from "./LandingScreen.style";
 
-export function LandingScreen({ inputRef }) {
+export default function LandingScreen({ inputRef }) {
   const classes = useStyles();
   return (
     <Box className={classes.container} component="main">

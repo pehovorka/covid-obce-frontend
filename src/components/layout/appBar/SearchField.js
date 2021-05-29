@@ -14,7 +14,7 @@ import {
 import { MUNICIPALITY_NAMES_SEARCH_QUERY } from "../../../utils/queries";
 import { useStyles } from "./SearchField.style";
 
-export function SearchField({ inputRef }) {
+export default function SearchField({ inputRef }) {
   const dispatch = useMunicipalitiesDispatch();
   const [autoCompleteOpen, setAutoCompleteOpen] = useState(false);
   const [options, setOptions] = useState([]);

@@ -3,7 +3,7 @@ import { Container, Box, Typography, Paper } from "@material-ui/core";
 import { AppBar, Footer, SearchButton } from "../components/layout";
 import { Seo } from "../utils/Seo";
 
-export function NotFoundPage({ message }) {
+export default function NotFoundPage({ message }) {
   return (
     <>
       <Seo title="Obec nenalezena" />

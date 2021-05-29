@@ -29,7 +29,7 @@ import { useMunicipalitiesDispatch } from "../../providers/MunicipalitiesProvide
 
 const Chart = lazy(() => import("./Chart"));
 
-export function MunicipalityCard({
+export default function MunicipalityCard({
   name,
   code,
   limit,

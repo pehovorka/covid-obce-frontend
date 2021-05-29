@@ -13,7 +13,7 @@ import { SearchButton, SearchField } from ".";
 import { useStyles } from "./AppBar.style";
 import { route } from "../../../Routes";
 
-export function AppBar({ inputRef, searchEnabled }) {
+export default function AppBar({ inputRef, searchEnabled }) {
   const classes = useStyles();
 
   return (

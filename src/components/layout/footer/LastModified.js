@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 
 import { LAST_MODIFIED_QUERY } from "../../../utils/queries";
 
-export function LastModified() {
+export default function LastModified() {
   const lastModified = useQuery(LAST_MODIFIED_QUERY, {});
   const [lastModifiedDate, setLastModifiedDate] = useState();
 
