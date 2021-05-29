@@ -6,12 +6,12 @@ import Autocomplete, {
 } from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 
-import { useMunicipalitiesDispatch } from "../../../providers/MunicipalitiesProvider";
+import { useMunicipalitiesDispatch } from "../../../../providers/MunicipalitiesProvider";
 import {
   ADD_MUNICIPALITY,
   SET_SNACKBAR_MESSAGE,
-} from "../../../utils/municipalitiesReducer";
-import { MUNICIPALITY_NAMES_SEARCH_QUERY } from "../../../utils/queries";
+} from "../../../../utils/municipalitiesReducer";
+import { MUNICIPALITY_NAMES_SEARCH_QUERY } from "../../../../utils/queries";
 import { useStyles } from "./SearchField.style";
 
 export default function SearchField({ inputRef }) {

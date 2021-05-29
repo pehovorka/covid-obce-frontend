@@ -4,7 +4,7 @@ import ReactMarkdown from "markdown-to-jsx";
 import { Container, Box, Paper, Typography, Grid } from "@material-ui/core";
 
 import { AppBar, Footer } from "../../components/layout";
-import { BackToHomeLink } from "../../components";
+import { BackToHomeLink } from "../../components/other";
 import { options } from "./InfoPage.style";
 import infoContent from "../../assets/infoContent.md";
 import { Seo } from "../../utils/Seo";

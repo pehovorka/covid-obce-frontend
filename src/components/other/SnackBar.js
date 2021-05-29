@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Snackbar } from "@material-ui/core/";
 import Alert from "@material-ui/lab/Alert";
 
-import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
+import { useMunicipalitiesState } from "../../providers/MunicipalitiesProvider";
 
 export default function SnackBar() {
   const { snackBarMessage } = useMunicipalitiesState();

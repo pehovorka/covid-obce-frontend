@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Grid, Link, Box, Typography } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 
-import { route } from "../../../Routes";
-import { CookieDialog, LastModified } from ".";
-import { useMunicipalitiesState } from "../../../providers/MunicipalitiesProvider";
+import { route } from "../../../../Routes";
+import { CookieDialog, LastModified } from "../.";
+import { useMunicipalitiesState } from "../../../../providers/MunicipalitiesProvider";
 import { useStyles } from "./Footer.style";
 
 export default function Footer() {

@@ -9,9 +9,9 @@ import {
 } from "@material-ui/core/";
 import { Link as RouterLink } from "react-router-dom";
 
-import { SearchButton, SearchField } from ".";
+import { SearchButton, SearchField } from "../.";
 import { useStyles } from "./AppBar.style";
-import { route } from "../../../Routes";
+import { route } from "../../../../Routes";
 
 export default function AppBar({ inputRef, searchEnabled }) {
   const classes = useStyles();

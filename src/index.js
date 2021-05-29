@@ -7,7 +7,7 @@ import { CssBaseline, ThemeProvider } from "@material-ui/core/";
 
 import App from "./App";
 import { MunicipalitiesProvider } from "./providers/MunicipalitiesProvider";
-import { SnackBar } from "./components";
+import { SnackBar } from "./components/other";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { MessagesFetcher } from "./utils/MessagesFetcher";
 import { theme } from "./theme";

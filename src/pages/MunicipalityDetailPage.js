@@ -8,7 +8,7 @@ import { useLazyQuery } from "@apollo/client";
 import { isValidMunicipalityCode } from "../utils/municipalityUtils";
 import { MUNICIPALITY_NAME_QUERY } from "../utils/queries";
 import { NotFoundPage } from ".";
-import { Alert, LoadingIndicator } from "../components";
+import { Alert, LoadingIndicator } from "../components/other";
 import { MunicipalityCard } from "../components/card";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 import { SET_SNACKBAR_MESSAGE } from "../utils/municipalitiesReducer";

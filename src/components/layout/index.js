@@ -1,6 +1,6 @@
-export { AppBar } from "./AppBar";
-export { CookieDialog } from "./Footer";
-export { Footer } from "./Footer";
-export { LastModified } from "./Footer";
-export { SearchButton } from "./AppBar";
-export { SearchField } from "./AppBar";
+export { AppBar } from "./appbar";
+export { CookieDialog } from "./footer";
+export { Footer } from "./footer";
+export { LastModified } from "./footer";
+export { SearchButton } from "./appbar";
+export { SearchField } from "./appbar";

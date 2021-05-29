@@ -4,8 +4,7 @@ import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone"
 
 import { AppBar, Footer } from "../components/layout";
 import { DragAndDropCards } from "../components/card";
-import { Alert } from "../components";
-import { LandingScreen } from "../components";
+import { Alert, LandingScreen } from "../components/other";
 import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
 import { Seo } from "../utils/Seo";
 

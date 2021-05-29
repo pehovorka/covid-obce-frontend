@@ -3,7 +3,7 @@ import { Grid, Link, Typography } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
-import { route } from "../Routes";
+import { route } from "../../Routes";
 
 export default function BackToHomeLink() {
   return (
