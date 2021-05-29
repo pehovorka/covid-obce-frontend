@@ -3,13 +3,13 @@ import { Container, Box, Typography, Grid } from "@material-ui/core";
 import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
 
 import { AppBar, Footer } from "../components/layout";
-import { DragAndDropCards } from "../components/card";
+import { DragAndDropCards } from "../components/Card";
 import { Alert } from "../components";
-import { LandingScreen } from "../components/landingScreen";
+import { LandingScreen } from "../components/LandingScreen";
 import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
 import { Seo } from "../utils/Seo";
 
-export function HomePage(props) {
+export default function HomePage(props) {
   const { municipalities } = useMunicipalitiesState();
   const inputRef = useRef(null);
   const searchAutoFocus = props.location.state?.searchAutoFocus ?? false;

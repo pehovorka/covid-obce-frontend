@@ -9,12 +9,12 @@ import { isValidMunicipalityCode } from "../utils/municipalityUtils";
 import { MUNICIPALITY_NAME_QUERY } from "../utils/queries";
 import { NotFoundPage } from ".";
 import { Alert, LoadingIndicator } from "../components";
-import { MunicipalityCard } from "../components/card";
+import { MunicipalityCard } from "../components/Card";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 import { SET_SNACKBAR_MESSAGE } from "../utils/municipalitiesReducer";
 import { Seo } from "../utils/Seo";
 
-export function MunicipalityDetailPage() {
+export default function MunicipalityDetailPage() {
   const dispatch = useMunicipalitiesDispatch();
   const [error, setError] = useState(null);
   const [limit, setLimit] = useState(90);
