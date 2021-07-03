@@ -12,7 +12,7 @@ import {
   SET_SNACKBAR_MESSAGE,
 } from "../../../../utils/municipalitiesReducer";
 import { MUNICIPALITY_NAMES_SEARCH_QUERY } from "../../../../utils/queries";
-import { useStyles } from "./SearchField.style";
+import { useSearchFieldStyles, useOptionsStyles } from "./SearchField.style";
 
 export default function SearchField({ inputRef }) {
   const dispatch = useMunicipalitiesDispatch();
@@ -36,7 +36,8 @@ export default function SearchField({ inputRef }) {
     }
   }, [obce.data, obce.loading, obce.error, inputValue, dispatch]);
 
-  const classes = useStyles();
+  const searchFieldStyles = useSearchFieldStyles();
+  const optionsStyles = useOptionsStyles();
 
   const filterOptions = createFilterOptions({
     trim: true,
@@ -45,7 +46,7 @@ export default function SearchField({ inputRef }) {
   return (
     <Autocomplete
       id="obce-search"
-      classes={classes}
+      classes={searchFieldStyles}
       openOnFocus
       noOptionsText={"Žádné výsledky"}
       loadingText={"Načítám..."}
@@ -91,6 +92,12 @@ export default function SearchField({ inputRef }) {
       clearOnBlur={false}
       autoHighlight={true}
       filterOptions={filterOptions}
+      renderOption={(option) => (
+        <>
+          <span>{option.obec_nazev}</span>
+          <span className={optionsStyles.districtText}>(okres {option.okres_nazev})</span>
+        </>
+      )}
       renderInput={(params) => (
         <TextField
           {...params}

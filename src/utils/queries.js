@@ -24,6 +24,7 @@ export const MUNICIPALITY_NAMES_SEARCH_QUERY = gql`
     obce(obec_nazev: $obec_nazev, datum: "2020-11-05") {
       obec_nazev
       obec_kod
+      okres_nazev
     }
   }
 `;
