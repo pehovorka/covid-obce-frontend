@@ -1,5 +1,5 @@
 {
-  "name": "covid-obce",
+  "name": "covidvobcich",
   "version": "3.4.0",
   "private": true,
   "homepage": "https://covidvobcich.cz",
@@ -8,6 +8,8 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
+    "@sentry/react": "^6.14.1",
+    "@sentry/tracing": "^6.14.1",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",

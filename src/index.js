@@ -11,6 +11,9 @@ import { SnackBar } from "./components/other";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { MessagesFetcher } from "./utils/MessagesFetcher";
 import { theme } from "./theme";
+import { initializeSentry } from "./utils/initializeSentry";
+
+initializeSentry();
 
 ReactDOM.render(
   <React.StrictMode>
