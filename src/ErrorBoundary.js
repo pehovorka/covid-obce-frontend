@@ -1,4 +1,6 @@
 import React from "react";
+import { captureException } from "@sentry/react";
+
 export class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -23,6 +25,7 @@ export class ErrorBoundary extends React.Component {
       error: error,
       stack: errorInfo.componentStack,
     });
+    captureException(error, { extra: errorInfo });
   }
 
   render() {
