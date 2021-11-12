@@ -9,6 +9,6 @@ export const initializeSentry = () => {
     environment: process.env.REACT_APP_ENV,
     // We recommend adjusting this value in production, or using tracesSampler
     // for finer control
-    tracesSampleRate: 1.0,
+    tracesSampleRate: 0.05,
   });
 };
