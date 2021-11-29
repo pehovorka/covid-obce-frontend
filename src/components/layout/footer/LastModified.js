@@ -2,23 +2,38 @@ import React, { useEffect, useState } from "react";
 import { Typography } from "@material-ui/core";
 import { useQuery } from "@apollo/client";
 
-import { LAST_MODIFIED_QUERY } from "../../../utils/queries";
+import { MUNICIPALITY_CASES_METADATA } from "../../../utils/queries";
 
 export default function LastModified() {
-  const lastModified = useQuery(LAST_MODIFIED_QUERY, {});
-  const [lastModifiedDate, setLastModifiedDate] = useState();
+  const metadataResult = useQuery(MUNICIPALITY_CASES_METADATA, {});
+  const [updatedAtDates, setUpdatedAtDates] = useState();
 
   useEffect(() => {
-    lastModified.data &&
-      setLastModifiedDate(
-        new Date(parseInt(lastModified.data?.lastModified?.last_modified))
-      );
-  }, [lastModified.data]);
+    metadataResult.data &&
+      setUpdatedAtDates({
+        sourceUpdatedAt: new Date(
+          parseInt(
+            metadataResult.data?.municipalityCasesMetadata?.sourceUpdatedAt
+          )
+        ),
+        collectionUpdatedAt: new Date(
+          parseInt(
+            metadataResult.data?.municipalityCasesMetadata?.collectionUpdatedAt
+          )
+        ),
+      });
+  }, [metadataResult.data]);
 
-  return lastModifiedDate ? (
+  return updatedAtDates ? (
     <Typography variant="caption">
-      Poslední aktualizace dat:{" "}
-      {lastModifiedDate.toLocaleString("cs-CZ", {
+      Aktualizace zdrojových dat:{" "}
+      {updatedAtDates.sourceUpdatedAt.toLocaleString("cs-CZ", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      })}
+      <br />
+      Import dat:{" "}
+      {updatedAtDates.collectionUpdatedAt.toLocaleString("cs-CZ", {
         dateStyle: "medium",
         timeStyle: "short",
       })}
