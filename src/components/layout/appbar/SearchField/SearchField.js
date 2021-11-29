@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { CircularProgress, TextField } from "@material-ui/core/";
-import Autocomplete, {
-  createFilterOptions,
-} from "@material-ui/lab/Autocomplete";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 
 import { useMunicipalitiesDispatch } from "../../../../providers/MunicipalitiesProvider";
@@ -19,33 +17,35 @@ export default function SearchField({ inputRef }) {
   const [autoCompleteOpen, setAutoCompleteOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const obce = useQuery(MUNICIPALITY_NAMES_SEARCH_QUERY, {
-    variables: { obec_nazev: inputValue },
+  const municipalities = useQuery(MUNICIPALITY_NAMES_SEARCH_QUERY, {
+    variables: { name: inputValue },
     skip: inputValue.length < 2 ? true : false,
   });
 
   useEffect(() => {
-    if (!obce.loading && !obce.error) {
-      setOptions(obce?.data?.obce || []);
-    } else if (obce.error) {
+    if (!municipalities.loading && !municipalities.error) {
+      setOptions(municipalities?.data?.municipalitySearch || []);
+    } else if (municipalities.error) {
       dispatch({
         type: SET_SNACKBAR_MESSAGE,
         text: "Nepodařilo se připojit k serveru. Zkuste to prosím později.",
         severity: "error",
       });
     }
-  }, [obce.data, obce.loading, obce.error, inputValue, dispatch]);
+  }, [
+    municipalities.data,
+    municipalities.loading,
+    municipalities.error,
+    inputValue,
+    dispatch,
+  ]);
 
   const searchFieldStyles = useSearchFieldStyles();
   const optionsStyles = useOptionsStyles();
 
-  const filterOptions = createFilterOptions({
-    trim: true,
-  });
-
   return (
     <Autocomplete
-      id="obce-search"
+      id="municipalities-search"
       classes={searchFieldStyles}
       openOnFocus
       noOptionsText={"Žádné výsledky"}
@@ -85,17 +85,19 @@ export default function SearchField({ inputRef }) {
       }}
       options={options}
       getOptionSelected={(option, value) =>
-        option.obec_nazev === value.obec_nazev
+        option.municipalityName === value.municipalityName
       }
-      getOptionLabel={(option) => option.obec_nazev}
-      loading={obce.loading}
+      getOptionLabel={(option) => option.municipalityName}
+      loading={municipalities.loading}
       clearOnBlur={false}
       autoHighlight={true}
-      filterOptions={filterOptions}
+      filterOptions={(options) => options}
       renderOption={(option) => (
         <>
-          <span>{option.obec_nazev}</span>
-          <span className={optionsStyles.districtText}>(okres {option.okres_nazev})</span>
+          <span>{option.municipalityName}</span>
+          <span className={optionsStyles.districtText}>
+            (okres {option.districtName})
+          </span>
         </>
       )}
       renderInput={(params) => (
@@ -109,7 +111,7 @@ export default function SearchField({ inputRef }) {
             startAdornment: <SearchIcon style={{ color: "#fff" }} />,
             endAdornment: (
               <>
-                {obce.loading || obce.error ? (
+                {municipalities.loading || municipalities.error ? (
                   <CircularProgress color="inherit" size={20} />
                 ) : null}
                 {params.InputProps.endAdornment}

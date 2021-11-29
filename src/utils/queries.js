@@ -20,11 +20,11 @@ export const MUNICIPALITY_DETAIL_QUERY = gql`
 `;
 
 export const MUNICIPALITY_NAMES_SEARCH_QUERY = gql`
-  query Obce_nazvy($obec_nazev: String!) {
-    obce(obec_nazev: $obec_nazev, datum: "2020-11-05") {
-      obec_nazev
-      obec_kod
-      okres_nazev
+  query municipalitySearch($name: String!) {
+    municipalitySearch(name: $name, limit: 25) {
+      municipalityId
+      municipalityName
+      districtName
     }
   }
 `;
