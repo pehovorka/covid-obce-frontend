@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { Box, Grid, Divider, Typography } from "@material-ui/core/";
 import { Skeleton } from "@material-ui/lab";
 
@@ -7,7 +7,7 @@ import {
   formatChangeNumberToDisplay,
 } from "../../utils/municipalityUtils";
 
-const ActivePer1000 = lazy(() => import("./ActivePer1000"));
+import { ActivePer1000 } from "./ActivePer1000";
 const skeletonWidth = 100;
 
 export default function MunicipalityStats({ municipality, code }) {
@@ -109,15 +109,17 @@ export default function MunicipalityStats({ municipality, code }) {
             </Grid>
             <Grid item>
               <Typography variant="h6" component="p">
-                <Suspense fallback={<Skeleton width={skeletonWidth} />}>
-                  {municipality.data && (
-                    <ActivePer1000
-                      activeCases={days[days.length - 1].ac}
-                      municipalityCode={code}
-                      skeletonWidth={skeletonWidth}
-                    />
-                  )}
-                </Suspense>
+                {municipality.data ? (
+                  <ActivePer1000
+                    activeCases={days[days.length - 1].ac}
+                    municipalityPopulation={
+                      municipality.data?.municipalityCases
+                        .municipalityPopulation
+                    }
+                  />
+                ) : (
+                  <Skeleton width={skeletonWidth} />
+                )}
               </Typography>
             </Grid>
           </Grid>

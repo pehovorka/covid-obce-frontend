@@ -1,18 +1,14 @@
-import { Skeleton } from "@material-ui/lab";
+import PropTypes from "prop-types";
 
-import municipalitiesPopulation from "../../assets/municipalitiesPopulation.json";
-
-export default function ActivePer1000({
-  activeCases,
-  municipalityCode,
-  skeletonWidth,
-}) {
-  if (isNaN(activeCases)) {
-    return <Skeleton width={skeletonWidth} />;
-  }
-  const cases = (
-    (activeCases / municipalitiesPopulation[0][municipalityCode]) *
-    1000
-  ).toLocaleString("cs-CZ", { maximumFractionDigits: 1 });
+export function ActivePer1000({ activeCases, municipalityPopulation }) {
+  const cases = ((activeCases / municipalityPopulation) * 1000).toLocaleString(
+    "cs-CZ",
+    { maximumFractionDigits: 1 }
+  );
   return cases;
 }
+
+ActivePer1000.propTypes = {
+  activeCases: PropTypes.number,
+  municipalityPopulation: PropTypes.number,
+};
