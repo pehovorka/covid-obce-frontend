@@ -31,10 +31,11 @@ export const MUNICIPALITIES_SEARCH_QUERY = gql`
   }
 `;
 
-export const LAST_MODIFIED_QUERY = gql`
-  query lastModified {
-    lastModified {
-      last_modified
+export const MUNICIPALITY_CASES_METADATA = gql`
+  query MunicipalityCasesMetadata {
+    municipalityCasesMetadata {
+      sourceUpdatedAt
+      collectionUpdatedAt
     }
   }
 `;
