@@ -11,6 +11,7 @@ export const MUNICIPALITY_NAME_QUERY = gql`
 export const MUNICIPALITY_CASES_QUERY = gql`
   query MunicipalityCases($municipalityId: Int!, $limit: Int!) {
     municipalityCases(municipalityId: $municipalityId, limit: $limit) {
+      municipalityPopulation
       days {
         d
         ac
