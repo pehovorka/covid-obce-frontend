@@ -9,7 +9,7 @@ import {
   ADD_MUNICIPALITY,
   SET_SNACKBAR_MESSAGE,
 } from "../../../../utils/municipalitiesReducer";
-import { MUNICIPALITY_NAMES_SEARCH_QUERY } from "../../../../utils/queries";
+import { MUNICIPALITIES_SEARCH_QUERY } from "../../../../utils/queries";
 import { useSearchFieldStyles, useOptionsStyles } from "./SearchField.style";
 
 export default function SearchField({ inputRef }) {
@@ -17,7 +17,7 @@ export default function SearchField({ inputRef }) {
   const [autoCompleteOpen, setAutoCompleteOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const municipalities = useQuery(MUNICIPALITY_NAMES_SEARCH_QUERY, {
+  const municipalities = useQuery(MUNICIPALITIES_SEARCH_QUERY, {
     variables: { name: inputValue },
     skip: inputValue.length < 2 ? true : false,
   });
@@ -62,12 +62,15 @@ export default function SearchField({ inputRef }) {
         if (newValue !== null) {
           dispatch({
             type: ADD_MUNICIPALITY,
-            code: newValue.obec_kod,
-            name: newValue.obec_nazev,
+            code: newValue.municipalityId,
+            name: newValue.municipalityName,
           });
           window.gtag("event", "select_item", {
             items: [
-              { item_id: newValue.obec_kod, item_name: newValue.obec_nazev },
+              {
+                item_id: newValue.municipalityCode,
+                item_name: newValue.municipalityName,
+              },
             ],
           });
           // Clears input if typed name is exactly the same as autocomplete item

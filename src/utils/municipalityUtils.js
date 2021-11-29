@@ -9,32 +9,31 @@ export const isValidMunicipalityCode = (code) => {
   return false;
 };
 
-export const convertToGraphData = (stringData, limit) => {
-  if (!stringData) return null;
-  const graphData = stringData.map((item, index) => {
+export const convertToGraphData = (days, limit) => {
+  if (!days) return null;
+  const graphData = days.map((item, index) => {
     const container = {};
     //container.date = new Date(item.datum).toLocaleDateString("cs-CZ", {});
-    container.date = item.datum;
-    container.activeCases = item.aktualne_nemocnych;
-    container.newCases = item.nove_pripady;
-    container.newCasesOver65 = item.nove_pripady_65;
-    container.newCasesUnder65 = item.nove_pripady - item.nove_pripady_65;
+    container.date = item.d;
+    container.activeCases = item.ac;
+    container.newCases = item.nc;
+    container.newCasesOver65 = item.nc65;
+    container.newCasesUnder65 = item.nc - item.nc65;
 
     const newCasesAverage =
-      (stringData[index - 3]?.nove_pripady +
-        stringData[index - 2]?.nove_pripady +
-        stringData[index - 1]?.nove_pripady +
-        item.nove_pripady +
-        stringData[index + 1]?.nove_pripady +
-        stringData[index + 2]?.nove_pripady +
-        stringData[index + 3]?.nove_pripady) /
+      (days[index - 3]?.nc +
+        days[index - 2]?.nc +
+        days[index - 1]?.nc +
+        item.nc +
+        days[index + 1]?.nc +
+        days[index + 2]?.nc +
+        days[index + 3]?.nc) /
       7;
     container.newCasesAverage = !isNaN(newCasesAverage)
       ? newCasesAverage.toFixed(1)
       : null;
     return container;
   });
-  graphData.reverse();
   return graphData.slice(-limit);
 };
 
