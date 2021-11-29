@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
 
 export const MUNICIPALITY_NAME_QUERY = gql`
-  query Obec($obec_kod: String!, $limit: Int!) {
-    obec(obec_kod: $obec_kod, limit: $limit) {
-      obec_nazev
+  query MunicipalityName($municipalityId: Int!) {
+    municipalityCases(municipalityId: $municipalityId, limit: 0) {
+      municipalityName
     }
   }
 `;

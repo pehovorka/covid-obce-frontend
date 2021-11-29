@@ -19,21 +19,20 @@ export default function MunicipalityDetailPage() {
   const [error, setError] = useState(null);
   const [limit, setLimit] = useState(90);
   const urlParams = useParams();
+  const requiredMunicipalityCode = parseInt(urlParams.code);
 
-  const [getMunicipalityName, municipalityName] = useLazyQuery(
+  const [getMunicipalityNameResult, municipalityNameResult] = useLazyQuery(
     MUNICIPALITY_NAME_QUERY
   );
 
   useEffect(() => {
     if (urlParams.code) {
-      const requiredMunicipalityCode = urlParams.code;
       //Call query here
       if (isValidMunicipalityCode(requiredMunicipalityCode)) {
-        !municipalityName.called &&
-          getMunicipalityName({
+        !municipalityNameResult.called &&
+          getMunicipalityNameResult({
             variables: {
-              obec_kod: requiredMunicipalityCode,
-              limit: 1,
+              municipalityId: requiredMunicipalityCode,
             },
             fetchPolicy: "cache-first",
           });
@@ -41,19 +40,27 @@ export default function MunicipalityDetailPage() {
         setError("Špatně zadaný formát kódu obce!");
       }
     }
-  }, [getMunicipalityName, urlParams, municipalityName]);
+  }, [
+    getMunicipalityNameResult,
+    urlParams,
+    municipalityNameResult,
+    requiredMunicipalityCode,
+  ]);
 
   useEffect(() => {
-    if (municipalityName.data && municipalityName.data.obec.length === 0) {
+    if (
+      municipalityNameResult.data &&
+      !municipalityNameResult.data.municipalityCases
+    ) {
       setError("Obec s tímto kódem neexistuje!");
-    } else if (municipalityName.error) {
+    } else if (municipalityNameResult.error) {
       dispatch({
         type: SET_SNACKBAR_MESSAGE,
         text: "Nepodařilo se připojit k serveru. Zkuste to prosím později.",
         severity: "error",
       });
     }
-  }, [municipalityName, dispatch]);
+  }, [municipalityNameResult, dispatch]);
 
   const handleDateLimitChange = ({ select }) => {
     setLimit(select.target.value);
@@ -64,19 +71,26 @@ export default function MunicipalityDetailPage() {
   } else
     return (
       <>
-        <Seo title={municipalityName.data?.obec[0]?.obec_nazev} />
+        <Seo
+          title={
+            municipalityNameResult.data?.municipalityCases?.municipalityName
+          }
+        />
         <AppBar />
         <Container>
-          {!municipalityName.data || !municipalityName.called ? (
+          {!municipalityNameResult.data || !municipalityNameResult.called ? (
             <LoadingIndicator />
-          ) : municipalityName.data?.obec?.length === 0 ? (
+          ) : municipalityNameResult.data?.municipalityCases?.length === 0 ? (
             <NotFoundPage message={error} />
           ) : (
             <>
               <Box my={4}>
                 <MunicipalityCard
-                  name={municipalityName.data?.obec[0]?.obec_nazev}
-                  code={urlParams.code}
+                  name={
+                    municipalityNameResult.data?.municipalityCases
+                      ?.municipalityName
+                  }
+                  code={requiredMunicipalityCode}
                   closeButtonHidden={true}
                   handleDateLimitChange={handleDateLimitChange}
                   limit={limit}
