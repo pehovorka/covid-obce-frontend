@@ -14,7 +14,10 @@ jobs:
       - name: 📦 Get package version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
-      - run: npm i && npm run build
+      - name: 🔨 Build Project
+        run: |
+          npm i
+          npm run build
         env:
           PUBLIC_URL: ${{ secrets.DEV_URL }}
           REACT_APP_API_URL: ${{ secrets.API_URL }}
