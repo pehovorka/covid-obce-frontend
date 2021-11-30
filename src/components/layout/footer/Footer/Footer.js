@@ -92,18 +92,18 @@ export default function Footer() {
           )}
         </Grid>
 
-        <Box m={3} textAlign="center">
+        <Box mt={3} textAlign="center">
           <LastModified />
         </Box>
 
-        <Box m={0} textAlign="center">
+        <Box mt={1} textAlign="center">
           <Link
             href="https://github.com/search?q=user%3Apehovorka+covidvobcich"
             target="_blank"
             rel="noopener"
             className={classes.icon}
           >
-            <GitHub />
+            <GitHub titleAccess="GitHub" />
           </Link>
         </Box>
       </Box>

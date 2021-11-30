@@ -14,6 +14,9 @@ export const useStyles = makeStyles(() => ({
     fontWeight: 500,
   },
   icon: {
-    color: "rgba(0, 0, 0, 0.87)",
+    color: "rgba(0, 0, 0, 0.5)",
+    "&:hover": {
+      color: "rgba(0, 0, 0, 0.7)",
+    },
   },
 }));
