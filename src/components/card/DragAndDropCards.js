@@ -45,7 +45,7 @@ export default function DragAndDropCards({ municipalities }) {
                   >
                     <MunicipalityCard
                       name={municipality.name}
-                      code={municipality.code}
+                      code={parseInt(municipality.code)}
                       limit={municipality.limit}
                       index={index}
                       provided={provided}
