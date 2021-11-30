@@ -13,4 +13,7 @@ export const useStyles = makeStyles(() => ({
   link: {
     fontWeight: 500,
   },
+  icon: {
+    color: "rgba(0, 0, 0, 0.87)",
+  },
 }));
