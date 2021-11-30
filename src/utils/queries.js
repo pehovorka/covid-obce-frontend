@@ -40,3 +40,12 @@ export const MUNICIPALITY_CASES_METADATA = gql`
     }
   }
 `;
+
+export const SERVER_INFO = gql`
+  query ServerInfo {
+    serverInfo {
+      apiVersion
+      importerVersion
+    }
+  }
+`;
