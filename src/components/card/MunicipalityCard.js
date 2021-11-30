@@ -65,6 +65,8 @@ export default function MunicipalityCard({
     }
   }, [municipality.error, dispatch]);
 
+  const districtName = municipality.data?.municipalityCases.districtName;
+
   return (
     <Card>
       <CardHeader
@@ -109,6 +111,9 @@ export default function MunicipalityCard({
               )}
             </Grid>
           </Box>
+        }
+        subheader={
+          districtName ? "Okres " + districtName : <Skeleton width="12rem" />
         }
         title={name}
       />
