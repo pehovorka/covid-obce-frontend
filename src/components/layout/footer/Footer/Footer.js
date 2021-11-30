@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Grid, Link, Box, Typography } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
+import { GitHub } from "@material-ui/icons";
 
 import { route } from "../../../../Routes";
 import { CookieDialog, LastModified } from "../.";
@@ -64,7 +65,7 @@ export default function Footer() {
               </Link>
               ,{" "}
               <Link
-                href="https://www.czso.cz/csu/czso/pocet-obyvatel-v-obcich-k-112019"
+                href="https://www.czso.cz/csu/czso/pocet-obyvatel-v-obcich-k-112021"
                 target="_blank"
                 rel="noreferrer"
                 className={classes.link}
@@ -91,8 +92,19 @@ export default function Footer() {
           )}
         </Grid>
 
-        <Box m={3} textAlign="center">
+        <Box mt={3} textAlign="center">
           <LastModified />
+        </Box>
+
+        <Box mt={1} textAlign="center">
+          <Link
+            href="https://github.com/search?q=user%3Apehovorka+covidvobcich"
+            target="_blank"
+            rel="noopener"
+            className={classes.icon}
+          >
+            <GitHub titleAccess="GitHub" />
+          </Link>
         </Box>
       </Box>
     </Box>

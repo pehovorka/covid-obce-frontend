@@ -19,7 +19,7 @@ import { Skeleton } from "@material-ui/lab";
 
 // Sub-components
 import { convertToGraphData } from "../../utils/municipalityUtils";
-import { MUNICIPALITY_DETAIL_QUERY } from "../../utils/queries";
+import { MUNICIPALITY_CASES_QUERY } from "../../utils/queries";
 import { DateLimitSelect, MunicipalityStats, ShareIconAndDialog } from ".";
 import {
   REMOVE_MUNICIPALITY,
@@ -39,8 +39,8 @@ export default function MunicipalityCard({
 }) {
   const dispatch = useMunicipalitiesDispatch();
 
-  const obec = useQuery(MUNICIPALITY_DETAIL_QUERY, {
-    variables: { obec_kod: code, limit: limit === 0 ? 0 : 90 },
+  const municipality = useQuery(MUNICIPALITY_CASES_QUERY, {
+    variables: { municipalityId: code, limit: limit === 0 ? 0 : 90 },
     fetchPolicy: "cache-first",
   });
 
@@ -56,14 +56,16 @@ export default function MunicipalityCard({
   }, [code, name]);
 
   useEffect(() => {
-    if (obec.error) {
+    if (municipality.error) {
       dispatch({
         type: SET_SNACKBAR_MESSAGE,
         text: "Nepodařilo se připojit k serveru. Zkuste to prosím později.",
         severity: "error",
       });
     }
-  }, [obec.error, dispatch]);
+  }, [municipality.error, dispatch]);
+
+  const districtName = municipality.data?.municipalityCases.districtName;
 
   return (
     <Card>
@@ -110,10 +112,13 @@ export default function MunicipalityCard({
             </Grid>
           </Box>
         }
+        subheader={
+          districtName ? "Okres " + districtName : <Skeleton width="12rem" />
+        }
         title={name}
       />
       <CardContent>
-        <MunicipalityStats obec={obec} code={code} />
+        <MunicipalityStats municipality={municipality} code={code} />
         <Suspense
           fallback={
             <Skeleton
@@ -124,7 +129,12 @@ export default function MunicipalityCard({
             />
           }
         >
-          <Chart data={convertToGraphData(obec.data?.obec, limit)} />
+          <Chart
+            data={convertToGraphData(
+              municipality.data?.municipalityCases.days,
+              limit
+            )}
+          />
         </Suspense>
       </CardContent>
     </Card>

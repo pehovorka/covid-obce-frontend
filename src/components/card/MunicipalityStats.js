@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { Box, Grid, Divider, Typography } from "@material-ui/core/";
 import { Skeleton } from "@material-ui/lab";
 
@@ -7,10 +7,11 @@ import {
   formatChangeNumberToDisplay,
 } from "../../utils/municipalityUtils";
 
-const ActivePer1000 = lazy(() => import("./ActivePer1000"));
+import { ActivePer1000 } from "./ActivePer1000";
 const skeletonWidth = 100;
 
-export default function MunicipalityStats({ obec, code }) {
+export default function MunicipalityStats({ municipality, code }) {
+  const days = municipality.data?.municipalityCases.days;
   return (
     <Box mb={2}>
       <Grid container spacing={3} justify="center">
@@ -21,9 +22,9 @@ export default function MunicipalityStats({ obec, code }) {
                 <Grid item>
                   <Typography variant="overline" noWrap={true}>
                     Aktivní případy
-                    {obec.data &&
+                    {municipality.data &&
                       " (" +
-                        new Date(obec.data.obec[0].datum).toLocaleDateString(
+                        new Date(days[days.length - 1].d).toLocaleDateString(
                           "cs-CZ",
                           {
                             day: "numeric",
@@ -35,10 +36,8 @@ export default function MunicipalityStats({ obec, code }) {
                 </Grid>
                 <Grid item>
                   <Typography variant="h6" component="p">
-                    {obec.data ? (
-                      formatNumberToDisplay(
-                        obec.data.obec[0].aktualne_nemocnych
-                      )
+                    {municipality.data ? (
+                      formatNumberToDisplay(days[days.length - 1].ac)
                     ) : (
                       <Skeleton width={skeletonWidth} />
                     )}
@@ -55,10 +54,9 @@ export default function MunicipalityStats({ obec, code }) {
                 </Grid>
                 <Grid item>
                   <Typography variant="h6" component="p">
-                    {obec.data ? (
+                    {municipality.data ? (
                       formatChangeNumberToDisplay(
-                        obec.data.obec[0].aktualne_nemocnych -
-                          obec.data.obec[7].aktualne_nemocnych
+                        days[days.length - 1].ac - days[days.length - 8].ac
                       )
                     ) : (
                       <Skeleton width={skeletonWidth} />
@@ -76,10 +74,9 @@ export default function MunicipalityStats({ obec, code }) {
                 </Grid>
                 <Grid item>
                   <Typography variant="h6" component="p">
-                    {obec.data ? (
+                    {municipality.data ? (
                       formatChangeNumberToDisplay(
-                        obec.data.obec[0].aktualne_nemocnych -
-                          obec.data.obec[30].aktualne_nemocnych
+                        days[days.length - 1].ac - days[days.length - 31].ac
                       )
                     ) : (
                       <Skeleton width={skeletonWidth} />
@@ -98,9 +95,9 @@ export default function MunicipalityStats({ obec, code }) {
             <Grid item xs={12}>
               <Typography variant="overline" noWrap={true}>
                 Aktivní na 1000 obyvatel
-                {obec.data &&
+                {municipality.data &&
                   " (" +
-                    new Date(obec.data.obec[0].datum).toLocaleDateString(
+                    new Date(days[days.length - 1].d).toLocaleDateString(
                       "cs-CZ",
                       {
                         day: "numeric",
@@ -112,13 +109,17 @@ export default function MunicipalityStats({ obec, code }) {
             </Grid>
             <Grid item>
               <Typography variant="h6" component="p">
-                <Suspense fallback={<Skeleton width={skeletonWidth} />}>
+                {municipality.data ? (
                   <ActivePer1000
-                    activeCases={obec.data?.obec[0]?.aktualne_nemocnych}
-                    municipalityCode={code}
-                    skeletonWidth={skeletonWidth}
+                    activeCases={days[days.length - 1].ac}
+                    municipalityPopulation={
+                      municipality.data?.municipalityCases
+                        .municipalityPopulation
+                    }
                   />
-                </Suspense>
+                ) : (
+                  <Skeleton width={skeletonWidth} />
+                )}
               </Typography>
             </Grid>
           </Grid>

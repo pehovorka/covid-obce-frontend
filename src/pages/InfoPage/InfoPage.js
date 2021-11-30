@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "markdown-to-jsx";
 
-import { Container, Box, Paper, Typography, Grid } from "@material-ui/core";
+import { Container, Box, Paper, Grid } from "@material-ui/core";
 
 import { AppBar, Footer } from "../../components/layout";
-import { BackToHomeLink } from "../../components/other";
+import { BackToHomeLink, Version } from "../../components/other";
 import { options } from "./InfoPage.style";
 import infoContent from "../../assets/infoContent.md";
 import { Seo } from "../../utils/Seo";
@@ -32,9 +32,7 @@ export default function InfoPage() {
                     <BackToHomeLink />
                   </Grid>
                   <Grid item>
-                    <Typography variant="caption" color="textSecondary">
-                      Verze {process.env.REACT_APP_VERSION}
-                    </Typography>
+                    <Version />
                   </Grid>
                 </Grid>
               </Box>

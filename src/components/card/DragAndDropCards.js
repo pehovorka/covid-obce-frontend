@@ -34,7 +34,7 @@ export default function DragAndDropCards({ municipalities }) {
             {municipalities.map((municipality, index) => (
               <Draggable
                 key={municipality.code}
-                draggableId={municipality.code}
+                draggableId={municipality.code.toString()}
                 index={index}
               >
                 {(provided) => (
