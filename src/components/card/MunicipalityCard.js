@@ -17,6 +17,9 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import { Skeleton } from "@material-ui/lab";
 
+// PropTypes
+import PropTypes from "prop-types";
+
 // Sub-components
 import { convertToGraphData } from "../../utils/municipalityUtils";
 import { MUNICIPALITY_CASES_QUERY } from "../../utils/queries";
@@ -143,4 +146,13 @@ export default function MunicipalityCard({
 
 MunicipalityCard.defaultProps = {
   limit: 90,
+};
+
+MunicipalityCard.propTypes = {
+  name: PropTypes.string,
+  code: PropTypes.number,
+  limit: PropTypes.number,
+  provided: PropTypes.object,
+  closeButtonHidden: PropTypes.bool,
+  handleDateLimitChange: PropTypes.func,
 };
