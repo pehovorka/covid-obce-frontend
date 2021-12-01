@@ -30,6 +30,20 @@ const migrateToV2 = () => {
   console.log("Migration finished.");
 };
 
+const migrateToV3 = () => {
+  console.log("Storage v2 to v3 migration started...");
+  const v2 = JSON.parse(localStorage.getItem("municipalities"));
+  const v3 = v2.map((municipality) => ({
+    ...municipality,
+    code: parseInt(municipality.code),
+  }));
+  storeMunicipalitiesToLS(v3);
+  window.gtag("event", "migration", {
+    success: "true",
+    version: "3",
+  });
+};
+
 // Load from local storage
 const loadMunicipalitiesFromLS = () => {
   const municipalities = JSON.parse(localStorage.getItem("municipalities"));
@@ -39,14 +53,19 @@ const loadMunicipalitiesFromLS = () => {
 // Save to local storage
 export const storeMunicipalitiesToLS = (municipalities) => {
   localStorage.setItem("municipalities", JSON.stringify(municipalities));
-  localStorage.setItem("storageVersion", 2);
+  localStorage.setItem("storageVersion", 3);
 };
 
 // Flow to get all stored municipalities
 export const getMunicipalities = () => {
+  const storageVersion = localStorage.getItem("storageVersion");
   if (localStorage.getItem("obce")) {
     // old v1 localStorage schema with "obce" property – migrate and then return migrated municipalities
     migrateToV2();
+    return loadMunicipalitiesFromLS();
+  }
+  if (JSON.parse(storageVersion) === 2) {
+    migrateToV3();
     return loadMunicipalitiesFromLS();
   } else if (loadMunicipalitiesFromLS()) {
     // already migrated to v2 – return saved municipalities
