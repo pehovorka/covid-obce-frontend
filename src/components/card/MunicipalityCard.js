@@ -62,6 +62,7 @@ export default function MunicipalityCard({
   });
 
   const [expanded, setExpanded] = useState(false);
+  const [orp, setOrp] = useState();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -79,6 +80,12 @@ export default function MunicipalityCard({
   }, [code, name]);
 
   useEffect(() => {
+    if (municipality.data) {
+      setOrp({
+        orpId: municipality.data.municipalityCases.orpId,
+        orpName: municipality.data.municipalityCases.orpName,
+      });
+    }
     if (municipality.error) {
       dispatch({
         type: SET_SNACKBAR_MESSAGE,
@@ -86,11 +93,9 @@ export default function MunicipalityCard({
         severity: "error",
       });
     }
-  }, [municipality.error, dispatch]);
+  }, [municipality.data, municipality.error, dispatch]);
 
   const districtName = municipality.data?.municipalityCases.districtName;
-  const orpId = municipality.data?.municipalityCases.orpId;
-  const orpName = municipality.data?.municipalityCases.orpName;
 
   return (
     <Card>
@@ -171,7 +176,7 @@ export default function MunicipalityCard({
               aria-expanded={expanded}
               aria-label="Zobrazit informace o očkování"
             >
-              Informace o očkování na území ORP {orpName}
+              Informace o očkování na území ORP {orp?.orpName}
               <ExpandMoreIcon
                 className={clsx(classes.expand, {
                   [classes.expandOpen]: expanded,
@@ -183,7 +188,7 @@ export default function MunicipalityCard({
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <OrpVaccinationsContainer orpId={orpId} />
+          <OrpVaccinationsContainer orpId={orp?.orpId} />
         </CardContent>
       </Collapse>
     </Card>
