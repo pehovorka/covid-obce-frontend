@@ -8,6 +8,7 @@ import {
   PieChart,
   Pie,
 } from "recharts";
+import { formatNumberToDisplay } from "../../../../utils/municipalityUtils";
 
 export default function VaccineTypesChart({ data }) {
   return (
@@ -25,7 +26,7 @@ export default function VaccineTypesChart({ data }) {
           layout="vertical"
           wrapperStyle={{ width: "40%" }}
         />
-        <Tooltip />
+        <Tooltip formatter={formatNumberToDisplay} />
       </PieChart>
     </ResponsiveContainer>
   );
