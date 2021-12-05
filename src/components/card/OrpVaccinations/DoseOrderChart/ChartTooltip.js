@@ -37,10 +37,12 @@ export default function ChartTooltip({ active, payload, label }) {
           {/* Main content */}
           <Table size="small" padding="none">
             <TableHead>
-              <TableCell>Dávka</TableCell>
-              <TableCell align="right">% obyvatel</TableCell>
-              <TableCell align="right">celkem</TableCell>
-              <TableCell align="right">nově</TableCell>
+              <TableRow>
+                <TableCell>Dávka</TableCell>
+                <TableCell align="right">% obyvatel</TableCell>
+                <TableCell align="right">celkem</TableCell>
+                <TableCell align="right">nově</TableCell>
+              </TableRow>
             </TableHead>
             <TableBody>
               <TableRow key="1st">
