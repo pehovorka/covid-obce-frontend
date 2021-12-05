@@ -11,9 +11,9 @@ import {
 } from "recharts";
 import { Skeleton } from "@material-ui/lab";
 
-import { ChartTooltip } from ".";
+import { ChartTooltip } from "./ChartTooltip";
 
-export default function Chart({ data }) {
+export default function MunicipalityCasesChart({ data }) {
   if (!data) {
     return (
       <Skeleton variant="rect" width="100%" height={300} animation="wave" />

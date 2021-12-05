@@ -5,12 +5,12 @@ import { Skeleton } from "@material-ui/lab";
 import {
   formatNumberToDisplay,
   formatChangeNumberToDisplay,
-} from "../../utils/municipalityUtils";
+} from "../../../utils/municipalityUtils";
 
-import { ActivePer1000 } from "./ActivePer1000";
+import { ActivePer1000 } from ".";
 const skeletonWidth = 100;
 
-export default function MunicipalityStats({ municipality, code }) {
+export default function MunicipalityCasesStats({ municipality, code }) {
   const days = municipality.data?.municipalityCases.days;
   return (
     <Box mb={2}>
