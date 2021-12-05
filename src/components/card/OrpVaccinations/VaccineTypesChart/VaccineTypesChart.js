@@ -13,7 +13,7 @@ export default function VaccineTypesChart({ data }) {
   return (
     <ResponsiveContainer width="100%" height={260}>
       <PieChart>
-        <Pie width="60" data={data} dataKey={"value"}>
+        <Pie data={data} dataKey={"value"}>
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} opacity="100%" />
           ))}
@@ -23,7 +23,7 @@ export default function VaccineTypesChart({ data }) {
           verticalAlign="middle"
           align="right"
           layout="vertical"
-          width="40%"
+          wrapperStyle={{ width: "40%" }}
         />
         <Tooltip />
       </PieChart>
