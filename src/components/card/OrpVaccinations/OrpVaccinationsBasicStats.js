@@ -27,9 +27,6 @@ export default function OrpVaccinationsBasicStats({
   };
   return (
     <>
-      <Typography variant="h6">
-        Základní přehled k {new Date(lastDay.date).toLocaleDateString("cs-CZ")}
-      </Typography>
       <Box my={2}>
         <Table>
           <TableHead>

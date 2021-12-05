@@ -11,16 +11,21 @@ import {
 
 export default function VaccineTypesChart({ data }) {
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={260}>
       <PieChart>
-        <Pie data={data} dataKey={"value"}>
+        <Pie width="60" data={data} dataKey={"value"}>
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} opacity="100%" />
           ))}
         </Pie>
         ;
+        <Legend
+          verticalAlign="middle"
+          align="right"
+          layout="vertical"
+          width="40%"
+        />
         <Tooltip />
-        <Legend />
       </PieChart>
     </ResponsiveContainer>
   );

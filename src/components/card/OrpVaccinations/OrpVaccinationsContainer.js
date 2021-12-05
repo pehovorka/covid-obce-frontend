@@ -38,8 +38,14 @@ export default function OrpVaccinationsContainer({ orpId }) {
 
   return (
     <>
+      <Typography variant="h5">
+        Základní přehled k {new Date(lastDay.date).toLocaleDateString("cs-CZ")}
+      </Typography>
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
+          <Typography variant="h6">
+            Vykázaná očkování dle pořadí dávky
+          </Typography>
           <OrpVaccinationsBasicStats
             lastDay={lastDay}
             orpPopulation={orpVaccinations.orpPopulation}

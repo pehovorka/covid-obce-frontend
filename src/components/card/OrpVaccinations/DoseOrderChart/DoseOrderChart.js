@@ -43,6 +43,7 @@ export default function DoseOrderChart({ data, population }) {
           yAxisId="right"
           orientation="right"
           type="number"
+          scale="linear"
           unit="%"
           tickFormatter={percentageFormatter}
           domain={[0, "maxValue"]}

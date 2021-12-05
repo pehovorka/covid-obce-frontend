@@ -18,7 +18,7 @@ export const convertToVaccineTypes = (data, vaccineNames) => {
 
   const result = data.map((vaccine, index) => ({
     value: vaccine.td,
-    name: getVaccineName(vaccine.v).vaccineName,
+    name: getVaccineName(vaccine.v).vaccineName || vaccine.v,
     color: colors[index],
   }));
   return result;
