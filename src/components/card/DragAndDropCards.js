@@ -41,7 +41,7 @@ export default function DragAndDropCards({ municipalities }) {
                   <Box
                     {...provided.draggableProps}
                     ref={provided.innerRef}
-                    p={1}
+                    py={1}
                   >
                     <MunicipalityCard
                       name={municipality.name}

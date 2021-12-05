@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 
 // Apollo
 import { useQuery } from "@apollo/client";
@@ -7,14 +7,20 @@ import { useQuery } from "@apollo/client";
 // Material UI
 import {
   Box,
+  Button,
   Card,
+  CardActions,
   CardContent,
   CardHeader,
+  Collapse,
+  Divider,
   IconButton,
   Grid,
   Tooltip,
 } from "@material-ui/core/";
+
 import CloseIcon from "@material-ui/icons/Close";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Skeleton } from "@material-ui/lab";
 
 // PropTypes
@@ -23,14 +29,21 @@ import PropTypes from "prop-types";
 // Sub-components
 import { convertToGraphData } from "../../utils/municipalityUtils";
 import { MUNICIPALITY_CASES_QUERY } from "../../utils/queries";
-import { DateLimitSelect, MunicipalityStats, ShareIconAndDialog } from ".";
+import { DateLimitSelect, MunicipalityCasesStats } from "./MunicipalityCases";
+import { ShareIconAndDialog } from ".";
+
 import {
   REMOVE_MUNICIPALITY,
   SET_SNACKBAR_MESSAGE,
 } from "../../utils/municipalitiesReducer";
 import { useMunicipalitiesDispatch } from "../../providers/MunicipalitiesProvider";
 
-const Chart = lazy(() => import("./Chart"));
+// Styles
+import clsx from "clsx";
+import { useStyles } from "./MunicipalityCard.style";
+import OrpVaccinationsContainer from "./OrpVaccinations/OrpVaccinationsContainer";
+
+const Chart = lazy(() => import("./MunicipalityCases/MunicipalityCasesChart"));
 
 export default function MunicipalityCard({
   name,
@@ -40,12 +53,19 @@ export default function MunicipalityCard({
   closeButtonHidden,
   handleDateLimitChange,
 }) {
+  const classes = useStyles();
   const dispatch = useMunicipalitiesDispatch();
 
   const municipality = useQuery(MUNICIPALITY_CASES_QUERY, {
     variables: { municipalityId: code, limit: limit === 0 ? 0 : 90 },
     fetchPolicy: "cache-first",
   });
+
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   useEffect(() => {
     if (name && code) {
@@ -69,6 +89,8 @@ export default function MunicipalityCard({
   }, [municipality.error, dispatch]);
 
   const districtName = municipality.data?.municipalityCases.districtName;
+  const orpId = municipality.data?.municipalityCases.orpId;
+  const orpName = municipality.data?.municipalityCases.orpName;
 
   return (
     <Card>
@@ -121,7 +143,7 @@ export default function MunicipalityCard({
         title={name}
       />
       <CardContent>
-        <MunicipalityStats municipality={municipality} code={code} />
+        <MunicipalityCasesStats municipality={municipality} code={code} />
         <Suspense
           fallback={
             <Skeleton
@@ -140,6 +162,30 @@ export default function MunicipalityCard({
           />
         </Suspense>
       </CardContent>
+      <Divider />
+      <CardActions>
+        <Grid container justify="flex-start">
+          <Grid item>
+            <Button
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="Zobrazit informace o očkování"
+            >
+              Informace o očkování na území ORP {orpName}
+              <ExpandMoreIcon
+                className={clsx(classes.expand, {
+                  [classes.expandOpen]: expanded,
+                })}
+              />
+            </Button>
+          </Grid>
+        </Grid>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <OrpVaccinationsContainer orpId={orpId} />
+        </CardContent>
+      </Collapse>
     </Card>
   );
 }
