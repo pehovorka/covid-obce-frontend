@@ -9,7 +9,7 @@ import DoseOrderCumulativeDosesChart from "./DoseOrderCumulativeDosesChart";
 
 export default function DoseOrderCumulativeDosesChartContainer({
   data,
-  population,
+  orpPopulation,
 }) {
   const [limit, setLimit] = useState(0);
   const handleDateLimitChange = ({ select }) => {
@@ -35,7 +35,7 @@ export default function DoseOrderCumulativeDosesChartContainer({
       </Box>
       <DoseOrderCumulativeDosesChart
         data={convertToDoseOrderCumulativeDosesData(data, limit)}
-        population={population}
+        population={orpPopulation}
       />
     </>
   );

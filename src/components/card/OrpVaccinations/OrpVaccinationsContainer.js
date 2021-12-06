@@ -56,7 +56,7 @@ export default function OrpVaccinationsContainer({ orpId }) {
         <Grid item xs={12}>
           <DoseOrderCumulativeDosesChartContainer
             data={orpVaccinations.days}
-            population={orpVaccinations.population}
+            orpPopulation={orpVaccinations.orpPopulation}
           />
         </Grid>
       </Grid>
