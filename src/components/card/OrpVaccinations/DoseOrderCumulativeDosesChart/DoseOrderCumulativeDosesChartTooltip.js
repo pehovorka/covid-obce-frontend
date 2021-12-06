@@ -11,9 +11,13 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core/";
-import { useStyles } from "./ChartTooltip.style";
+import { useStyles } from "./DoseOrderCumulativeDosesChartTooltip.style";
 
-export default function ChartTooltip({ active, payload, label }) {
+export default function DoseOrderCumulativeDosesChartTooltip({
+  active,
+  payload,
+  label,
+}) {
   const styles = useStyles();
   const date = new Date(label);
   const stringDate = date.toLocaleDateString("cs-CZ", {
@@ -41,7 +45,6 @@ export default function ChartTooltip({ active, payload, label }) {
                 <TableCell>Dávka</TableCell>
                 <TableCell align="right">% obyvatel</TableCell>
                 <TableCell align="right">celkem</TableCell>
-                <TableCell align="right">nově</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -64,13 +67,6 @@ export default function ChartTooltip({ active, payload, label }) {
                 >
                   {getProperty("dose1TD").value.toLocaleString("cs-CZ")}
                 </TableCell>
-
-                <TableCell
-                  align="right"
-                  style={{ color: getProperty("dose1TD").color }}
-                >
-                  {getProperty("dose1ND").value.toLocaleString("cs-CZ")}
-                </TableCell>
               </TableRow>
 
               <TableRow key="2nd">
@@ -91,12 +87,6 @@ export default function ChartTooltip({ active, payload, label }) {
                   style={{ color: getProperty("dose2TD").color }}
                 >
                   {getProperty("dose2TD").value.toLocaleString("cs-CZ")}
-                </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: getProperty("dose2TD").color }}
-                >
-                  {getProperty("dose2ND").value.toLocaleString("cs-CZ")}
                 </TableCell>
               </TableRow>
 
@@ -119,12 +109,6 @@ export default function ChartTooltip({ active, payload, label }) {
                 >
                   {getProperty("dose3TD").value.toLocaleString("cs-CZ")}
                 </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: getProperty("dose3TD").color }}
-                >
-                  {getProperty("dose3ND").value.toLocaleString("cs-CZ")}
-                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -136,7 +120,7 @@ export default function ChartTooltip({ active, payload, label }) {
   return null;
 }
 
-ChartTooltip.propTypes = {
+DoseOrderCumulativeDosesChartTooltip.propTypes = {
   active: PropTypes.bool,
   payload: PropTypes.array,
   label: PropTypes.string,

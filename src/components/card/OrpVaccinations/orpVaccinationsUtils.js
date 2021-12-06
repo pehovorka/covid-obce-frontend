@@ -1,4 +1,4 @@
-export const convertToDoseOrderData = (days, limit) => {
+export const convertToDoseOrderCumulativeDosesData = (days, limit) => {
   if (!days) return null;
   const chartData = days.map((item) => {
     const container = {};
@@ -6,6 +6,41 @@ export const convertToDoseOrderData = (days, limit) => {
     container.doses = item.doses;
     return container;
   });
+  return chartData.slice(-limit);
+};
+
+export const convertToDoseOrderNewDosesData = (days, limit) => {
+  if (!days) return null;
+
+  const sumDoses = (doses) => {
+    if (!doses) return;
+    let sum = 0;
+    doses.map((dose) => (sum += dose.nd));
+    return sum;
+  };
+
+  const chartData = days.map((item, index) => {
+    const container = {};
+    container.date = item.date;
+    container.doses = item.doses;
+
+    const newDosesAverage =
+      (sumDoses(days[index - 3]?.doses) +
+        sumDoses(days[index - 2]?.doses) +
+        sumDoses(days[index - 1]?.doses) +
+        sumDoses(item.doses) +
+        sumDoses(days[index + 1]?.doses) +
+        sumDoses(days[index + 2]?.doses) +
+        sumDoses(days[index + 3]?.doses)) /
+      7;
+
+    if (!isNaN(newDosesAverage)) {
+      container.newDosesAverage = newDosesAverage.toFixed(1);
+    }
+
+    return container;
+  });
+
   return chartData.slice(-limit);
 };
 

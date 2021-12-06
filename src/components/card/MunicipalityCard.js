@@ -176,7 +176,7 @@ export default function MunicipalityCard({
               aria-expanded={expanded}
               aria-label="Zobrazit informace o očkování"
             >
-              Informace o očkování na území ORP {orp?.orpName}
+              Očkování na území ORP {orp?.orpName}
               <ExpandMoreIcon
                 className={clsx(classes.expand, {
                   [classes.expandOpen]: expanded,

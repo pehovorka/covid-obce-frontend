@@ -11,10 +11,10 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import ChartTooltip from "./ChartTooltip";
+import ChartTooltip from "./DoseOrderCumulativeDosesChartTooltip";
 import { getDoseOrderData } from "../orpVaccinationsUtils";
 
-export default function DoseOrderChart({ data, population }) {
+export default function DoseOrderCumulativeDosesChart({ data, population }) {
   const percentageFormatter = (value) =>
     value.toLocaleString("cs-CZ", { maximumFractionDigits: 0 });
 
@@ -56,7 +56,7 @@ export default function DoseOrderChart({ data, population }) {
           name={"dose1TD"}
           fill={colors[0]}
           stroke={colors[0]}
-          fillOpacity="100%"
+          strokeWidth={3}
           yAxisId="left"
         />
         <Line
@@ -74,7 +74,7 @@ export default function DoseOrderChart({ data, population }) {
           name={"dose2TD"}
           fill={colors[1]}
           stroke={colors[1]}
-          fillOpacity="100%"
+          strokeWidth={3}
           yAxisId="left"
         />
         <Line
@@ -91,7 +91,7 @@ export default function DoseOrderChart({ data, population }) {
           name={"dose3TD"}
           fill={colors[2]}
           stroke={colors[2]}
-          fillOpacity="100%"
+          strokeWidth={3}
           yAxisId="left"
         />
         <Line
@@ -102,34 +102,12 @@ export default function DoseOrderChart({ data, population }) {
           dot={false}
           strokeWidth={0}
         />
-
-        <Bar
-          stackId="newDosesSplit"
-          dataKey={(day) => getDoseOrderData(day, 1).nd}
-          fill={colors[4]}
-          name="dose1ND"
-          yAxisId="left"
-        />
-        <Bar
-          stackId="newDosesSplit"
-          dataKey={(day) => getDoseOrderData(day, 2).nd}
-          fill={colors[4]}
-          name="dose2ND"
-          yAxisId="left"
-        />
-        <Bar
-          stackId="newDosesSplit"
-          dataKey={(day) => getDoseOrderData(day, 3).nd}
-          fill={colors[4]}
-          name="dose3ND"
-          yAxisId="left"
-        />
       </ComposedChart>
     </ResponsiveContainer>
   );
 }
 
-DoseOrderChart.propTypes = {
+DoseOrderCumulativeDosesChart.propTypes = {
   data: PropTypes.array,
   population: PropTypes.number,
 };

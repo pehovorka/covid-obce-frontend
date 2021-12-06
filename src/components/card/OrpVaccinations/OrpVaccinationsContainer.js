@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useQuery } from "@apollo/client";
 import { Alert, Skeleton } from "@material-ui/lab";
-import { Grid, Typography } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
 
-import DoseOrderChart from "./DoseOrderChart/DoseOrderChart";
+import DoseOrderCumulativeDosesChart from "./DoseOrderCumulativeDosesChart/DoseOrderCumulativeDosesChart";
 import VaccineTypesChart from "./VaccineTypesChart/VaccineTypesChart";
 import OrpVaccinationsBasicStats from "./OrpVaccinationsBasicStats";
 
 import { ORP_VACCINATIONS_QUERY } from "../../../utils/queries";
 import {
-  convertToDoseOrderData,
+  convertToDoseOrderCumulativeDosesData,
+  convertToDoseOrderNewDosesData,
   convertToVaccineTypes,
 } from "./orpVaccinationsUtils";
+import DoseOrderNewDosesChart from "./DoseOrderNewDosesChart/DoseOrderNewDosesChart";
 
 export default function OrpVaccinationsContainer({ orpId }) {
   const [limit] = useState(0);
@@ -37,8 +39,8 @@ export default function OrpVaccinationsContainer({ orpId }) {
   const lastDay = orpVaccinations.days[orpVaccinations.days.length - 1];
 
   return (
-    <>
-      <Typography variant="h5">
+    <Box px={{ xs: 0, sm: 3 }}>
+      <Typography variant="h5" gutterBottom>
         Základní přehled k {new Date(lastDay.date).toLocaleDateString("cs-CZ")}
       </Typography>
       <Grid container spacing={4}>
@@ -64,16 +66,27 @@ export default function OrpVaccinationsContainer({ orpId }) {
           />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h6">
+          <Typography variant="h6" gutterBottom>
+            Nově vykázaná očkování dle pořadí dávky
+          </Typography>
+          <DoseOrderNewDosesChart
+            data={convertToDoseOrderNewDosesData(orpVaccinations.days, limit)}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h6" gutterBottom>
             Vykázaná očkování dle pořadí dávky kumulativně
           </Typography>
-          <DoseOrderChart
-            data={convertToDoseOrderData(orpVaccinations.days, limit)}
+          <DoseOrderCumulativeDosesChart
+            data={convertToDoseOrderCumulativeDosesData(
+              orpVaccinations.days,
+              limit
+            )}
             population={orpVaccinations.orpPopulation}
           />
         </Grid>
       </Grid>
-    </>
+    </Box>
   );
 }
 
