@@ -10,8 +10,8 @@ import {
   TableBody,
 } from "@material-ui/core";
 
-import { getDoseOrderData } from "./orpVaccinationsUtils";
-import { formatNumberToDisplay } from "../../../utils/municipalityUtils";
+import { getDoseOrderData } from "../orpVaccinationsUtils";
+import { formatNumberToDisplay } from "../../../../utils/municipalityUtils";
 
 export default function OrpVaccinationsBasicStats({
   lastDay,

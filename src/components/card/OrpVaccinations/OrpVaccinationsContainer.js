@@ -1,26 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useQuery } from "@apollo/client";
 import { Alert, Skeleton } from "@material-ui/lab";
 import { Box, Grid, Typography } from "@material-ui/core";
 
-import DoseOrderCumulativeDosesChart from "./DoseOrderCumulativeDosesChart/DoseOrderCumulativeDosesChart";
-import VaccineTypesChart from "./VaccineTypesChart/VaccineTypesChart";
-import OrpVaccinationsBasicStats from "./OrpVaccinationsBasicStats";
-
 import { ORP_VACCINATIONS_QUERY } from "../../../utils/queries";
-import {
-  convertToDoseOrderCumulativeDosesData,
-  convertToDoseOrderNewDosesData,
-  convertToVaccineTypes,
-} from "./orpVaccinationsUtils";
-import DoseOrderNewDosesChart from "./DoseOrderNewDosesChart/DoseOrderNewDosesChart";
+
+import DoseOrderNewDosesChartContainer from "./DoseOrderNewDosesChart/DoseOrderNewDosesChartContainer";
+import DoseOrderCumulativeDosesChartContainer from "./DoseOrderCumulativeDosesChart/DoseOrderCumulativeDosesChartContainer";
+import OrpVaccinationsBasicStatsContainer from "./BasicStats/OrpVaccinationsBasicStatsContainer";
+import VaccineTypesChartContainer from "./VaccineTypesChart/VaccineTypesChartContainer";
 
 export default function OrpVaccinationsContainer({ orpId }) {
-  const [limit] = useState(0);
-
   const orp = useQuery(ORP_VACCINATIONS_QUERY, {
-    variables: { orpId: orpId, limit: limit === 0 ? 0 : 90 },
+    variables: { orpId: orpId, limit: 0 },
     fetchPolicy: "cache-first",
   });
 
@@ -45,44 +38,25 @@ export default function OrpVaccinationsContainer({ orpId }) {
       </Typography>
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
-          <Typography variant="h6">
-            Vykázaná očkování dle pořadí dávky
-          </Typography>
-          <OrpVaccinationsBasicStats
+          <OrpVaccinationsBasicStatsContainer
             lastDay={lastDay}
             orpPopulation={orpVaccinations.orpPopulation}
             orpName={orpVaccinations.orpName}
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography variant="h6">
-            Rozdělení dle typu očkovací látky
-          </Typography>
-          <VaccineTypesChart
-            data={convertToVaccineTypes(
-              lastDay.vaccines,
-              orpVaccinations.vaccineNames
-            )}
+          <VaccineTypesChartContainer
+            vaccines={lastDay.vaccines}
+            vaccineNames={orpVaccinations.vaccineNames}
           />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h6" gutterBottom>
-            Nově vykázaná očkování dle pořadí dávky
-          </Typography>
-          <DoseOrderNewDosesChart
-            data={convertToDoseOrderNewDosesData(orpVaccinations.days, limit)}
-          />
+          <DoseOrderNewDosesChartContainer data={orpVaccinations.days} />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h6" gutterBottom>
-            Vykázaná očkování dle pořadí dávky kumulativně
-          </Typography>
-          <DoseOrderCumulativeDosesChart
-            data={convertToDoseOrderCumulativeDosesData(
-              orpVaccinations.days,
-              limit
-            )}
-            population={orpVaccinations.orpPopulation}
+          <DoseOrderCumulativeDosesChartContainer
+            data={orpVaccinations.days}
+            population={orpVaccinations.population}
           />
         </Grid>
       </Grid>

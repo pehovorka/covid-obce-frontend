@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {
   ComposedChart,
   Area,
-  Bar,
   Line,
   XAxis,
   YAxis,

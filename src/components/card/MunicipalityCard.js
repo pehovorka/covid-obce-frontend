@@ -29,8 +29,8 @@ import PropTypes from "prop-types";
 // Sub-components
 import { convertToGraphData } from "../../utils/municipalityUtils";
 import { MUNICIPALITY_CASES_QUERY } from "../../utils/queries";
-import { DateLimitSelect, MunicipalityCasesStats } from "./MunicipalityCases";
-import { ShareIconAndDialog } from ".";
+import { MunicipalityCasesStats } from "./MunicipalityCases";
+import { DateLimitSelect, ShareIconAndDialog } from ".";
 
 import {
   REMOVE_MUNICIPALITY,
