@@ -12,11 +12,13 @@ import {
   TableRow,
 } from "@material-ui/core/";
 import { useStyles } from "./DoseOrderNewDosesChartTooltip.style";
+import { numberToString } from "../../../../utils/general";
 
 export default function DoseOrderNewDosesChartTooltip({
   active,
   payload,
   label,
+  NAMES,
 }) {
   const styles = useStyles();
   const date = new Date(label);
@@ -49,48 +51,66 @@ export default function DoseOrderNewDosesChartTooltip({
             </TableHead>
             <TableBody>
               <TableRow key="1st">
-                <TableCell style={{ color: getProperty("dose1ND").color }}>
+                <TableCell style={{ color: getProperty(NAMES.dose1ND).color }}>
                   1.
                 </TableCell>
                 <TableCell
                   align="right"
-                  style={{ color: getProperty("dose1ND").color }}
+                  style={{ color: getProperty(NAMES.dose1ND).color }}
                 >
-                  {getProperty("dose1ND").value.toLocaleString("cs-CZ")}
+                  {getProperty(NAMES.dose1ND).value.toLocaleString("cs-CZ")}
+                </TableCell>
+                <TableCell
+                  align="right"
+                  style={{ color: getProperty(NAMES.dose1ND).color }}
+                >
+                  {numberToString(getProperty(NAMES.dose1NDA).value, 1)}
                 </TableCell>
               </TableRow>
               <TableRow key="2nd">
-                <TableCell style={{ color: getProperty("dose2ND").color }}>
+                <TableCell style={{ color: getProperty(NAMES.dose2ND).color }}>
                   2.
                 </TableCell>
                 <TableCell
                   align="right"
-                  style={{ color: getProperty("dose2ND").color }}
+                  style={{ color: getProperty(NAMES.dose2ND).color }}
                 >
-                  {getProperty("dose2ND").value.toLocaleString("cs-CZ")}
+                  {getProperty(NAMES.dose2ND).value.toLocaleString("cs-CZ")}
+                </TableCell>
+                <TableCell
+                  align="right"
+                  style={{ color: getProperty(NAMES.dose2ND).color }}
+                >
+                  {numberToString(getProperty(NAMES.dose2NDA).value, 1)}
                 </TableCell>
               </TableRow>
 
-              <TableRow key="total">
-                <TableCell style={{ color: getProperty("dose3ND").color }}>
+              <TableRow key="3rd">
+                <TableCell style={{ color: getProperty(NAMES.dose3ND).color }}>
                   3.
                 </TableCell>
                 <TableCell
                   align="right"
-                  style={{ color: getProperty("dose3ND").color }}
+                  style={{ color: getProperty(NAMES.dose3ND).color }}
                 >
-                  {getProperty("dose3ND").value.toLocaleString("cs-CZ")}
+                  {getProperty(NAMES.dose3ND).value.toLocaleString("cs-CZ")}
+                </TableCell>
+                <TableCell
+                  align="right"
+                  style={{ color: getProperty(NAMES.dose3ND).color }}
+                >
+                  {numberToString(getProperty(NAMES.dose3NDA).value, 1)}
                 </TableCell>
               </TableRow>
-              <TableRow key="3rd">
-                <TableCell>Celkem </TableCell>
+              <TableRow key="total">
+                <TableCell>Celkem</TableCell>
                 <TableCell align="right">
-                  {getProperty("dose1ND").value +
-                    getProperty("dose2ND").value +
-                    getProperty("dose3ND").value}
+                  {getProperty(NAMES.dose1ND).value +
+                    getProperty(NAMES.dose2ND).value +
+                    getProperty(NAMES.dose3ND).value}
                 </TableCell>
                 <TableCell align="right">
-                  {getProperty("7denní průměr").value}
+                  {numberToString(getProperty(NAMES.dosesAllNDA).value, 1)}
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -107,4 +127,5 @@ DoseOrderNewDosesChartTooltip.propTypes = {
   active: PropTypes.bool,
   payload: PropTypes.array,
   label: PropTypes.string,
+  NAMES: PropTypes.object,
 };
