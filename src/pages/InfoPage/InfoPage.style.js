@@ -27,13 +27,13 @@ export const options = {
     },
     h3: {
       component: Typography,
-      props: { gutterBottom: false, variant: "subtitle1", component: "h4" },
+      props: { gutterBottom: false, variant: "h6", component: "h4" },
     },
     h4: {
       component: Typography,
       props: { gutterBottom: true, variant: "caption", paragraph: true },
     },
-    p: { component: Typography, props: { paragraph: true } },
+    p: { component: Typography, props: { paragraph: true, variant: "body1" } },
     a: { component: Link },
     li: {
       component: withStyles(styles)(({ classes, ...props }) => (
