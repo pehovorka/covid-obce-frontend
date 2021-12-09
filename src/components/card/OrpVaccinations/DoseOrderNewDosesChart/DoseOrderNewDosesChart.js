@@ -13,9 +13,10 @@ import {
 
 import ChartTooltip from "./DoseOrderNewDosesChartTooltip";
 import { getDoseOrderData } from "../orpVaccinationsUtils";
+import { theme } from "../../../../theme";
 
 export default function DoseOrderNewDosesChart({ data }) {
-  const colors = ["#0078B8", "#E67145", "#22D083", "#E6B617", "#2EA5E6"];
+  const colors = theme.palette.orpVaccinations;
 
   const NAMES = {
     dose1ND: "První dávky",

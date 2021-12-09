@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@material-ui/core/";
 import { useStyles } from "./DoseOrderNewDosesChartTooltip.style";
-import { numberToString } from "../../../../utils/general";
+import { dateToLongString, numberToString } from "../../../../utils/general";
 
 export default function DoseOrderNewDosesChartTooltip({
   active,
@@ -22,12 +22,8 @@ export default function DoseOrderNewDosesChartTooltip({
 }) {
   const styles = useStyles();
   const date = new Date(label);
-  const stringDate = date.toLocaleDateString("cs-CZ", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    weekday: "long",
-  });
+  const stringDate = dateToLongString(date);
+
   if (active && payload && payload.length) {
     const getProperty = (name) => payload.find((item) => item.name === name);
 
@@ -58,7 +54,7 @@ export default function DoseOrderNewDosesChartTooltip({
                   align="right"
                   style={{ color: getProperty(NAMES.dose1ND).color }}
                 >
-                  {getProperty(NAMES.dose1ND).value.toLocaleString("cs-CZ")}
+                  {numberToString(getProperty(NAMES.dose1ND).value)}
                 </TableCell>
                 <TableCell
                   align="right"
@@ -75,7 +71,7 @@ export default function DoseOrderNewDosesChartTooltip({
                   align="right"
                   style={{ color: getProperty(NAMES.dose2ND).color }}
                 >
-                  {getProperty(NAMES.dose2ND).value.toLocaleString("cs-CZ")}
+                  {numberToString(getProperty(NAMES.dose2ND).value)}
                 </TableCell>
                 <TableCell
                   align="right"
@@ -93,7 +89,7 @@ export default function DoseOrderNewDosesChartTooltip({
                   align="right"
                   style={{ color: getProperty(NAMES.dose3ND).color }}
                 >
-                  {getProperty(NAMES.dose3ND).value.toLocaleString("cs-CZ")}
+                  {numberToString(getProperty(NAMES.dose3ND).value)}
                 </TableCell>
                 <TableCell
                   align="right"

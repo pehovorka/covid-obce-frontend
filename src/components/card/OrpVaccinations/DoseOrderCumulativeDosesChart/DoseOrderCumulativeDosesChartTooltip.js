@@ -13,6 +13,8 @@ import {
 } from "@material-ui/core/";
 import { useStyles } from "./DoseOrderCumulativeDosesChartTooltip.style";
 
+import { numberToString, dateToLongString } from "../../../../utils/general";
+
 export default function DoseOrderCumulativeDosesChartTooltip({
   active,
   payload,
@@ -20,12 +22,8 @@ export default function DoseOrderCumulativeDosesChartTooltip({
 }) {
   const styles = useStyles();
   const date = new Date(label);
-  const stringDate = date.toLocaleDateString("cs-CZ", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    weekday: "long",
-  });
+  const stringDate = dateToLongString(date);
+
   if (active && payload && payload.length) {
     const getProperty = (name) => payload.find((item) => item.name === name);
 
@@ -56,16 +54,16 @@ export default function DoseOrderCumulativeDosesChartTooltip({
                   align="right"
                   style={{ color: getProperty("dose1TD").color }}
                 >
-                  {`${getProperty("dose1TDRelative").value.toLocaleString(
-                    "cs-CZ",
-                    { maximumFractionDigits: 1 }
+                  {`${numberToString(
+                    getProperty("dose1TDRelative").value,
+                    1
                   )} %`}
                 </TableCell>
                 <TableCell
                   align="right"
                   style={{ color: getProperty("dose1TD").color }}
                 >
-                  {getProperty("dose1TD").value.toLocaleString("cs-CZ")}
+                  {numberToString(getProperty("dose1TD").value)}
                 </TableCell>
               </TableRow>
 
@@ -77,16 +75,16 @@ export default function DoseOrderCumulativeDosesChartTooltip({
                   align="right"
                   style={{ color: getProperty("dose2TD").color }}
                 >
-                  {`${getProperty("dose2TDRelative").value.toLocaleString(
-                    "cs-CZ",
-                    { maximumFractionDigits: 1 }
+                  {`${numberToString(
+                    getProperty("dose2TDRelative").value,
+                    1
                   )} %`}
                 </TableCell>
                 <TableCell
                   align="right"
                   style={{ color: getProperty("dose2TD").color }}
                 >
-                  {getProperty("dose2TD").value.toLocaleString("cs-CZ")}
+                  {numberToString(getProperty("dose2TD").value)}
                 </TableCell>
               </TableRow>
 
@@ -98,16 +96,16 @@ export default function DoseOrderCumulativeDosesChartTooltip({
                   align="right"
                   style={{ color: getProperty("dose3TD").color }}
                 >
-                  {`${getProperty("dose3TDRelative").value.toLocaleString(
-                    "cs-CZ",
-                    { maximumFractionDigits: 1 }
+                  {`${numberToString(
+                    getProperty("dose3TDRelative").value,
+                    1
                   )} %`}
                 </TableCell>
                 <TableCell
                   align="right"
                   style={{ color: getProperty("dose3TD").color }}
                 >
-                  {getProperty("dose3TD").value.toLocaleString("cs-CZ")}
+                  {numberToString(getProperty("dose3TD").value)}
                 </TableCell>
               </TableRow>
             </TableBody>

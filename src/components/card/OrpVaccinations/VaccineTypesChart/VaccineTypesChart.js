@@ -9,14 +9,17 @@ import {
   Pie,
 } from "recharts";
 import { formatNumberToDisplay } from "../../../../utils/municipalityUtils";
+import { theme } from "../../../../theme";
 
 export default function VaccineTypesChart({ data }) {
+  const colors = theme.palette.orpVaccinations;
+
   return (
     <ResponsiveContainer width="100%" height={260}>
       <PieChart>
         <Pie data={data} dataKey={"value"}>
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.color} opacity="100%" />
+            <Cell key={`cell-${index}`} fill={colors[index]} opacity="100%" />
           ))}
         </Pie>
         ;

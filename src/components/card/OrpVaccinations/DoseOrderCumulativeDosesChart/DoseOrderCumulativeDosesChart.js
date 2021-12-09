@@ -12,12 +12,11 @@ import {
 
 import ChartTooltip from "./DoseOrderCumulativeDosesChartTooltip";
 import { getDoseOrderData } from "../orpVaccinationsUtils";
+import { theme } from "../../../../theme";
+import { numberToString } from "../../../../utils/general";
 
 export default function DoseOrderCumulativeDosesChart({ data, population }) {
-  const percentageFormatter = (value) =>
-    value.toLocaleString("cs-CZ", { maximumFractionDigits: 0 });
-
-  const colors = ["#0078B8", "#E67145", "#22D083", "#E6B617", "#2EA5E6"];
+  const colors = theme.palette.orpVaccinations;
 
   return (
     <ResponsiveContainer width="100%" height={300}>
@@ -44,7 +43,7 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
           type="number"
           scale="linear"
           unit="%"
-          tickFormatter={percentageFormatter}
+          tickFormatter={numberToString(this, 0)}
           domain={[0, "maxValue"]}
         />
         <Tooltip content={<ChartTooltip />} />

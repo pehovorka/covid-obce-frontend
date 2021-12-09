@@ -41,12 +41,9 @@ export const convertToVaccineTypes = (data, vaccineNames) => {
   const getVaccineName = (vaccineId) =>
     vaccineNames.find((vaccine) => vaccine.vaccineId === vaccineId);
 
-  const colors = ["#0078B8", "#E67145", "#22D083", "#E6B617", "#2EA5E6"];
-
-  const result = data.map((vaccine, index) => ({
+  const result = data.map((vaccine) => ({
     value: vaccine.td,
     name: getVaccineName(vaccine.v).vaccineName || vaccine.v,
-    color: colors[index],
   }));
   return result;
 };
