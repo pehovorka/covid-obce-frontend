@@ -19,7 +19,13 @@ export default function DoseOrderCumulativeDosesChartContainer({
   return (
     <>
       <Box pb={4}>
-        <Grid container spacing={4} justifyContent="space-between">
+        <Grid
+          container
+          spacing={3}
+          justifyContent="space-between"
+          alignItems="center"
+          wrap="nowrap"
+        >
           <Grid item>
             <Typography variant="h6" gutterBottom>
               Vykázaná očkování dle pořadí dávky kumulativně
