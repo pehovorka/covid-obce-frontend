@@ -107,7 +107,7 @@ export default function MunicipalityCard({
             <Grid
               container
               alignItems="center"
-              justify="flex-end"
+              justifyContent="flex-end"
               spacing={1}
               direction="row"
               wrap="nowrap"
@@ -169,7 +169,7 @@ export default function MunicipalityCard({
       </CardContent>
       <Divider />
       <CardActions>
-        <Grid container justify="flex-start">
+        <Grid container justifyContent="flex-start">
           <Grid item>
             <Button
               onClick={handleExpandClick}

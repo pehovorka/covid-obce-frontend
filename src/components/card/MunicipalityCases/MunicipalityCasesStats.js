@@ -14,7 +14,7 @@ export default function MunicipalityCasesStats({ municipality, code }) {
   const days = municipality.data?.municipalityCases.days;
   return (
     <Box mb={2}>
-      <Grid container spacing={3} justify="center">
+      <Grid container spacing={3} justifyContent="center">
         <Grid item xs={12} lg={7}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm>

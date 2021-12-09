@@ -22,7 +22,8 @@ export default function VaccineTypesChart({ data }) {
             <Cell key={`cell-${index}`} fill={colors[index]} opacity="100%" />
           ))}
         </Pie>
-        ;
+        {/* TODO: keep an eye on https://github.com/recharts/recharts/issues/2704 
+        and then update ReCharts after the issue is fixed. */}
         <Legend
           verticalAlign="middle"
           align="right"

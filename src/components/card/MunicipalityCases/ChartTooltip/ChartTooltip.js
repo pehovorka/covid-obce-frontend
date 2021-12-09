@@ -25,7 +25,7 @@ export default function ChartTooltip({ active, payload, label }) {
           <Box pt={1}>
             {/* Active cases */}
             <Box className={styles.bigger} color={payload[0].color}>
-              <Grid container justify="space-between">
+              <Grid container justifyContent="space-between">
                 <Grid item>{payload[0].name} </Grid>
                 <Grid item>
                   {parseInt(payload[0].value).toLocaleString("cs-CZ")}
@@ -41,7 +41,7 @@ export default function ChartTooltip({ active, payload, label }) {
               {/* Total new cases */}
               <Grid
                 container
-                justify="flex-start"
+                justifyContent="flex-start"
                 direction="row"
                 className={styles.bold}
               >
@@ -73,7 +73,7 @@ export default function ChartTooltip({ active, payload, label }) {
                 </Grid>
               </Grid>
               {/* New cases under 65 */}
-              <Grid container justify="flex-start" direction="row">
+              <Grid container justifyContent="flex-start" direction="row">
                 <Grid item>
                   <Box
                     width="2rem"
@@ -89,7 +89,7 @@ export default function ChartTooltip({ active, payload, label }) {
                 </Grid>
               </Grid>
               {/* New cases above 65 */}
-              <Grid container justify="flex-start" direction="row">
+              <Grid container justifyContent="flex-start" direction="row">
                 <Grid item>
                   <Box
                     width="2rem"
@@ -106,7 +106,7 @@ export default function ChartTooltip({ active, payload, label }) {
               </Grid>
               {/* New cases average */}
               {payload[3].value && (
-                <Grid container justify="flex-start" direction="row">
+                <Grid container justifyContent="flex-start" direction="row">
                   <Grid item>
                     <Box
                       width="2rem"

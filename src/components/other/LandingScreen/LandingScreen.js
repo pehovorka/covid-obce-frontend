@@ -10,7 +10,12 @@ export default function LandingScreen({ inputRef }) {
   return (
     <Box className={classes.container} component="main">
       <Container>
-        <Grid container direction="row" justify="center" alignItems="center">
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+        >
           <Grid item xs={12} md={6}>
             <Box className={classes.textContainer}>
               <Typography variant="h4" component="h2" className={classes.title}>

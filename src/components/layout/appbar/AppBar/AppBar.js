@@ -22,7 +22,7 @@ export default function AppBar({ inputRef, searchEnabled }) {
         <Box width="100%" pt={1} pb={1}>
           <Grid
             container
-            justify="space-between"
+            justifyContent="space-between"
             alignItems="center"
             spacing={1}
           >

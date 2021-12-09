@@ -14,7 +14,7 @@ export default function DoseOrderNewDosesChartContainer({ data }) {
   return (
     <>
       <Box pb={4}>
-        <Grid container spacing={4} justify="space-between">
+        <Grid container spacing={4} justifyContent="space-between">
           <Grid item>
             <Typography variant="h6" gutterBottom>
               Nově vykázaná očkování dle pořadí dávky
