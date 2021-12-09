@@ -96,6 +96,8 @@ export default function MunicipalityCard({
   }, [municipality.data, municipality.error, dispatch]);
 
   const districtName = municipality.data?.municipalityCases.districtName;
+  const municipalityPopulation =
+    municipality.data?.municipalityCases.municipalityPopulation;
 
   return (
     <Card>
@@ -188,7 +190,11 @@ export default function MunicipalityCard({
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <OrpVaccinationsContainer orpId={orp?.orpId} />
+          <OrpVaccinationsContainer
+            orpId={orp?.orpId}
+            municipalityName={name}
+            municipalityPopulation={municipalityPopulation}
+          />
         </CardContent>
       </Collapse>
     </Card>

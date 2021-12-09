@@ -11,19 +11,19 @@ import {
 } from "@material-ui/core";
 
 import { getDoseOrderData } from "../orpVaccinationsUtils";
-import { formatNumberToDisplay } from "../../../../utils/municipalityUtils";
+import { numberToString } from "../../../../utils/general";
 
 export default function OrpVaccinationsBasicStats({
   lastDay,
   orpPopulation,
   orpName,
+  municipalityName,
+  municipalityPopulation,
 }) {
   const getPopulationPercentage = (number) => {
     const share = number / orpPopulation;
 
-    return `${(share * 100).toLocaleString("cs-CZ", {
-      maximumFractionDigits: 1,
-    })} %`;
+    return `${numberToString(share * 100, 1)} %`;
   };
   return (
     <>
@@ -44,10 +44,10 @@ export default function OrpVaccinationsBasicStats({
                 {getPopulationPercentage(getDoseOrderData(lastDay, 1).td)}
               </TableCell>
               <TableCell align="right">
-                {formatNumberToDisplay(getDoseOrderData(lastDay, 1).td)}
+                {numberToString(getDoseOrderData(lastDay, 1).td)}
               </TableCell>
               <TableCell align="right">
-                {formatNumberToDisplay(getDoseOrderData(lastDay, 1).nd)}
+                {numberToString(getDoseOrderData(lastDay, 1).nd)}
               </TableCell>
             </TableRow>
             <TableRow>
@@ -56,10 +56,10 @@ export default function OrpVaccinationsBasicStats({
                 {getPopulationPercentage(getDoseOrderData(lastDay, 2).td)}
               </TableCell>
               <TableCell align="right">
-                {formatNumberToDisplay(getDoseOrderData(lastDay, 2).td)}
+                {numberToString(getDoseOrderData(lastDay, 2).td)}
               </TableCell>
               <TableCell align="right">
-                {formatNumberToDisplay(getDoseOrderData(lastDay, 2).nd)}
+                {numberToString(getDoseOrderData(lastDay, 2).nd)}
               </TableCell>
             </TableRow>
             <TableRow>
@@ -68,18 +68,20 @@ export default function OrpVaccinationsBasicStats({
                 {getPopulationPercentage(getDoseOrderData(lastDay, 3).td)}
               </TableCell>
               <TableCell align="right">
-                {formatNumberToDisplay(getDoseOrderData(lastDay, 3).td)}
+                {numberToString(getDoseOrderData(lastDay, 3).td)}
               </TableCell>
               <TableCell align="right">
-                {formatNumberToDisplay(getDoseOrderData(lastDay, 3).nd)}
+                {numberToString(getDoseOrderData(lastDay, 3).nd)}
               </TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </Box>
-      <Typography variant="caption">
-        Počet obyvatel ve správním obvodu ORP {orpName}:{" "}
-        {formatNumberToDisplay(orpPopulation)}
+      <Typography variant="caption" component="p">
+        Počet obyvatel ve správním obvodu obce s rozšířenou působností {orpName}{" "}
+        je {numberToString(orpPopulation)}. Obec {municipalityName} tvoří{" "}
+        {numberToString((municipalityPopulation / orpPopulation) * 100, 1)} % z
+        celkového počtu obyvatel v tomto správním obvodu.
       </Typography>
     </>
   );

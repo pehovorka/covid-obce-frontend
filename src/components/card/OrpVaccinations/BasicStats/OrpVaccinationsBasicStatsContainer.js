@@ -7,6 +7,8 @@ export default function OrpVaccinationsBasicStatsContainer({
   lastDay,
   orpPopulation,
   orpName,
+  municipalityName,
+  municipalityPopulation,
 }) {
   return (
     <>
@@ -15,6 +17,8 @@ export default function OrpVaccinationsBasicStatsContainer({
         lastDay={lastDay}
         orpPopulation={orpPopulation}
         orpName={orpName}
+        municipalityName={municipalityName}
+        municipalityPopulation={municipalityPopulation}
       />
     </>
   );

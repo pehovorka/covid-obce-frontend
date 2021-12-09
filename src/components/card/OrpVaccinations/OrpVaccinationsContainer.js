@@ -11,7 +11,11 @@ import DoseOrderCumulativeDosesChartContainer from "./DoseOrderCumulativeDosesCh
 import OrpVaccinationsBasicStatsContainer from "./BasicStats/OrpVaccinationsBasicStatsContainer";
 import VaccineTypesChartContainer from "./VaccineTypesChart/VaccineTypesChartContainer";
 
-export default function OrpVaccinationsContainer({ orpId }) {
+export default function OrpVaccinationsContainer({
+  orpId,
+  municipalityName,
+  municipalityPopulation,
+}) {
   const orp = useQuery(ORP_VACCINATIONS_QUERY, {
     variables: { orpId: orpId, limit: 0 },
     fetchPolicy: "cache-first",
@@ -42,6 +46,8 @@ export default function OrpVaccinationsContainer({ orpId }) {
             lastDay={lastDay}
             orpPopulation={orpVaccinations.orpPopulation}
             orpName={orpVaccinations.orpName}
+            municipalityName={municipalityName}
+            municipalityPopulation={municipalityPopulation}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -66,4 +72,6 @@ export default function OrpVaccinationsContainer({ orpId }) {
 
 OrpVaccinationsContainer.propTypes = {
   orpId: PropTypes.number,
+  municipalityName: PropTypes.string,
+  municipalityPopulation: PropTypes.number,
 };
