@@ -28,4 +28,6 @@ OrpVaccinationsBasicStatsContainer.propTypes = {
   lastDay: PropTypes.object,
   orpPopulation: PropTypes.number,
   orpName: PropTypes.string,
+  municipalityName: PropTypes.string,
+  municipalityPopulation: PropTypes.number,
 };

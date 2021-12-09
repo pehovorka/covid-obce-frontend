@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useQuery } from "@apollo/client";
-import { Alert, Skeleton } from "@material-ui/lab";
+import { Alert } from "@material-ui/lab";
 import { Box, Grid, Typography } from "@material-ui/core";
 
 import { ORP_VACCINATIONS_QUERY } from "../../../utils/queries";
@@ -15,14 +15,19 @@ export default function OrpVaccinationsContainer({
   orpId,
   municipalityName,
   municipalityPopulation,
+  setOrpLoading,
 }) {
   const orp = useQuery(ORP_VACCINATIONS_QUERY, {
     variables: { orpId: orpId, limit: 0 },
     fetchPolicy: "cache-first",
   });
 
+  useEffect(() => {
+    setOrpLoading(orp.loading);
+  }, [orp.loading, setOrpLoading]);
+
   if (orp.loading && !orp.data) {
-    return <Skeleton animation="wave" />;
+    return null;
   }
   if (orp.error) {
     return (
@@ -74,4 +79,5 @@ OrpVaccinationsContainer.propTypes = {
   orpId: PropTypes.number,
   municipalityName: PropTypes.string,
   municipalityPopulation: PropTypes.number,
+  setOrpLoading: PropTypes.func,
 };

@@ -12,6 +12,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  CircularProgress,
   Collapse,
   Divider,
   IconButton,
@@ -42,6 +43,7 @@ import { useMunicipalitiesDispatch } from "../../providers/MunicipalitiesProvide
 import clsx from "clsx";
 import { useStyles } from "./MunicipalityCard.style";
 import OrpVaccinationsContainer from "./OrpVaccinations/OrpVaccinationsContainer";
+import { theme } from "../../theme";
 
 const Chart = lazy(() => import("./MunicipalityCases/MunicipalityCasesChart"));
 
@@ -63,6 +65,7 @@ export default function MunicipalityCard({
 
   const [expanded, setExpanded] = useState(false);
   const [orp, setOrp] = useState();
+  const [orpLoading, setOrpLoading] = useState();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -173,27 +176,34 @@ export default function MunicipalityCard({
       <CardActions>
         <Grid container justifyContent="flex-start">
           <Grid item>
-            <Button
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="Zobrazit informace o očkování"
-            >
-              Očkování na území ORP {orp?.orpName}
-              <ExpandMoreIcon
-                className={clsx(classes.expand, {
-                  [classes.expandOpen]: expanded,
-                })}
-              />
-            </Button>
+            <Box style={{ position: "relative" }}>
+              <Button
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="Zobrazit informace o očkování"
+                disabled={orpLoading || municipality.loading}
+              >
+                Očkování na území ORP {orp?.orpName}
+                <ExpandMoreIcon
+                  className={clsx(classes.expand, {
+                    [classes.expandOpen]: expanded && !orpLoading,
+                  })}
+                />
+                {orpLoading && (
+                  <CircularProgress className={classes.spinner} size={24} />
+                )}
+              </Button>
+            </Box>
           </Grid>
         </Grid>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={expanded && !orpLoading} timeout="auto" unmountOnExit>
         <CardContent>
           <OrpVaccinationsContainer
             orpId={orp?.orpId}
             municipalityName={name}
             municipalityPopulation={municipalityPopulation}
+            setOrpLoading={setOrpLoading}
           />
         </CardContent>
       </Collapse>

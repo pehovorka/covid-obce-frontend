@@ -11,4 +11,12 @@ export const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: "rotate(360deg)",
   },
+  spinner: {
+    color: theme.palette.primary.main,
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: "-12px",
+    marginLeft: "-12px",
+  },
 }));
