@@ -43,7 +43,6 @@ import { useMunicipalitiesDispatch } from "../../providers/MunicipalitiesProvide
 import clsx from "clsx";
 import { useStyles } from "./MunicipalityCard.style";
 import OrpVaccinationsContainer from "./OrpVaccinations/OrpVaccinationsContainer";
-import { theme } from "../../theme";
 
 const Chart = lazy(() => import("./MunicipalityCases/MunicipalityCasesChart"));
 
