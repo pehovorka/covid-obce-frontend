@@ -8,6 +8,7 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 
 import ChartTooltip from "./DoseOrderCumulativeDosesChartTooltip";
@@ -18,6 +19,15 @@ import { numberToString } from "../../../../utils/general";
 export default function DoseOrderCumulativeDosesChart({ data, population }) {
   const colors = theme.palette.orpVaccinations;
 
+  const NAMES = {
+    dose1TD: "První dávky",
+    dose2TD: "Druhé dávky",
+    dose3TD: "Posilující dávky",
+    dose1TDRelative: "První dávky – % populace",
+    dose2TDRelative: "Druhé dávky – % populace",
+    dose3TDRelative: "Posilující dávky – % populace",
+  };
+
   return (
     <ResponsiveContainer width="100%" height={300}>
       <ComposedChart
@@ -26,6 +36,7 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
           right: -20,
           left: 5,
           bottom: 0,
+          top: 3,
         }}
       >
         <XAxis
@@ -46,12 +57,12 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
           tickFormatter={numberToString(this, 0)}
           domain={[0, "maxValue"]}
         />
-        <Tooltip content={<ChartTooltip />} />
+        <Tooltip content={<ChartTooltip NAMES={NAMES} />} />
 
         <Area
           type="linear"
           dataKey={(day) => getDoseOrderData(day, 1).td}
-          name={"dose1TD"}
+          name={NAMES.dose1TD}
           fill={colors[0]}
           stroke={colors[0]}
           strokeWidth={3}
@@ -60,7 +71,7 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
         <Line
           type="linear"
           dataKey={(day) => (getDoseOrderData(day, 1).td / population) * 100}
-          name="dose1TDRelative"
+          name={NAMES.dose1TDRelative}
           yAxisId="right"
           dot={false}
           strokeWidth={0}
@@ -69,7 +80,7 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
         <Area
           type="linear"
           dataKey={(day) => getDoseOrderData(day, 2).td}
-          name={"dose2TD"}
+          name={NAMES.dose2TD}
           fill={colors[1]}
           stroke={colors[1]}
           strokeWidth={3}
@@ -78,7 +89,7 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
         <Line
           type="linear"
           dataKey={(day) => (getDoseOrderData(day, 2).td / population) * 100}
-          name="dose2TDRelative"
+          name={NAMES.dose2TDRelative}
           yAxisId="right"
           dot={false}
           strokeWidth={0}
@@ -86,7 +97,7 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
         <Area
           type="linear"
           dataKey={(day) => getDoseOrderData(day, 3).td}
-          name={"dose3TD"}
+          name={NAMES.dose3TD}
           fill={colors[2]}
           stroke={colors[2]}
           strokeWidth={3}
@@ -95,10 +106,18 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
         <Line
           type="linear"
           dataKey={(day) => (getDoseOrderData(day, 3).td / population) * 100}
-          name="dose3TDRelative"
+          name={NAMES.dose3TDRelative}
           yAxisId="right"
           dot={false}
           strokeWidth={0}
+        />
+        <Legend
+          align="left"
+          payload={[
+            { value: NAMES.dose1TD, type: "line", color: colors[0] },
+            { value: NAMES.dose2TD, type: "line", color: colors[1] },
+            { value: NAMES.dose3TD, type: "line", color: colors[2] },
+          ]}
         />
       </ComposedChart>
     </ResponsiveContainer>

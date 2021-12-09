@@ -25,7 +25,7 @@ export default function DoseOrderNewDosesChart({ data }) {
     dose1NDA: "7denní průměr prvních dávek",
     dose2NDA: "7denní průměr druhých dávek",
     dose3NDA: "7denní průměr posilujících dávek",
-    dosesAllNDA: "7denní průměr dávek celkem",
+    dosesAllNDA: "7denní průměr nových dávek celkem",
   };
 
   return (
@@ -72,7 +72,7 @@ export default function DoseOrderNewDosesChart({ data }) {
           dot={false}
           strokeWidth={3}
           dataKey="newDosesAverage"
-          stroke="#888888"
+          stroke={colors[3]}
           name={NAMES.dosesAllNDA}
         />
         <Line
@@ -91,11 +91,12 @@ export default function DoseOrderNewDosesChart({ data }) {
           name={NAMES.dose3NDA}
         />
         <Legend
+          align="left"
           payload={[
             { value: NAMES.dose1ND, type: "rect", color: colors[0] },
             { value: NAMES.dose2ND, type: "rect", color: colors[1] },
             { value: NAMES.dose3ND, type: "rect", color: colors[2] },
-            { value: NAMES.dosesAllNDA, type: "line", color: "#888888" },
+            { value: NAMES.dosesAllNDA, type: "line", color: colors[3] },
           ]}
         />
       </ComposedChart>

@@ -23,6 +23,15 @@ export const theme = createMuiTheme({
     },
     orpVaccinations: ["#0078B8", "#E67145", "#22D083", "#E6B617", "#2EA5E6"],
   },
+  overrides: {
+    MuiCssBaseline: {
+      "@global": {
+        ".recharts-legend-item-text": {
+          verticalAlign: "middle",
+        },
+      },
+    },
+  },
 });
 
 theme.typography.h5 = {

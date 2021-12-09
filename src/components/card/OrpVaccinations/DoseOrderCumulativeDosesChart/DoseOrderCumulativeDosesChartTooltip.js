@@ -19,6 +19,7 @@ export default function DoseOrderCumulativeDosesChartTooltip({
   active,
   payload,
   label,
+  NAMES,
 }) {
   const styles = useStyles();
   const date = new Date(label);
@@ -47,65 +48,65 @@ export default function DoseOrderCumulativeDosesChartTooltip({
             </TableHead>
             <TableBody>
               <TableRow key="1st">
-                <TableCell style={{ color: getProperty("dose1TD").color }}>
+                <TableCell style={{ color: getProperty(NAMES.dose1TD).color }}>
                   1.
                 </TableCell>
                 <TableCell
                   align="right"
-                  style={{ color: getProperty("dose1TD").color }}
+                  style={{ color: getProperty(NAMES.dose1TD).color }}
                 >
                   {`${numberToString(
-                    getProperty("dose1TDRelative").value,
+                    getProperty(NAMES.dose1TDRelative).value,
                     1
                   )} %`}
                 </TableCell>
                 <TableCell
                   align="right"
-                  style={{ color: getProperty("dose1TD").color }}
+                  style={{ color: getProperty(NAMES.dose1TD).color }}
                 >
-                  {numberToString(getProperty("dose1TD").value)}
+                  {numberToString(getProperty(NAMES.dose1TD).value)}
                 </TableCell>
               </TableRow>
 
               <TableRow key="2nd">
-                <TableCell style={{ color: getProperty("dose2TD").color }}>
+                <TableCell style={{ color: getProperty(NAMES.dose2TD).color }}>
                   2.
                 </TableCell>
                 <TableCell
                   align="right"
-                  style={{ color: getProperty("dose2TD").color }}
+                  style={{ color: getProperty(NAMES.dose2TD).color }}
                 >
                   {`${numberToString(
-                    getProperty("dose2TDRelative").value,
+                    getProperty(NAMES.dose2TDRelative).value,
                     1
                   )} %`}
                 </TableCell>
                 <TableCell
                   align="right"
-                  style={{ color: getProperty("dose2TD").color }}
+                  style={{ color: getProperty(NAMES.dose2TD).color }}
                 >
-                  {numberToString(getProperty("dose2TD").value)}
+                  {numberToString(getProperty(NAMES.dose2TD).value)}
                 </TableCell>
               </TableRow>
 
               <TableRow key="3rd">
-                <TableCell style={{ color: getProperty("dose3TD").color }}>
+                <TableCell style={{ color: getProperty(NAMES.dose3TD).color }}>
                   3.
                 </TableCell>
                 <TableCell
                   align="right"
-                  style={{ color: getProperty("dose3TD").color }}
+                  style={{ color: getProperty(NAMES.dose3TD).color }}
                 >
                   {`${numberToString(
-                    getProperty("dose3TDRelative").value,
+                    getProperty(NAMES.dose3TDRelative).value,
                     1
                   )} %`}
                 </TableCell>
                 <TableCell
                   align="right"
-                  style={{ color: getProperty("dose3TD").color }}
+                  style={{ color: getProperty(NAMES.dose3TD).color }}
                 >
-                  {numberToString(getProperty("dose3TD").value)}
+                  {numberToString(getProperty(NAMES.dose3TD).value)}
                 </TableCell>
               </TableRow>
             </TableBody>
