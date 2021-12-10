@@ -19,4 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "-12px",
     marginLeft: "-12px",
   },
+  syringeIcon: {
+    padding: 20,
+  },
 }));

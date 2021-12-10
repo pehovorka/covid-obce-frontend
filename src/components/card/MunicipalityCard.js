@@ -7,22 +7,17 @@ import { useQuery } from "@apollo/client";
 // Material UI
 import {
   Box,
-  Button,
   Card,
-  CardActions,
   CardContent,
   CardHeader,
-  CircularProgress,
-  Collapse,
   Divider,
   IconButton,
   Grid,
   Tooltip,
 } from "@material-ui/core/";
+import { Skeleton } from "@material-ui/lab";
 
 import CloseIcon from "@material-ui/icons/Close";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Skeleton } from "@material-ui/lab";
 
 // PropTypes
 import PropTypes from "prop-types";
@@ -40,9 +35,7 @@ import {
 import { useMunicipalitiesDispatch } from "../../providers/MunicipalitiesProvider";
 
 // Styles
-import clsx from "clsx";
-import { useStyles } from "./MunicipalityCard.style";
-import OrpVaccinationsContainer from "./OrpVaccinations/OrpVaccinationsContainer";
+import OrpVaccinationsButton from "./OrpVaccinations/OrpVaccinationsButton";
 
 const Chart = lazy(() => import("./MunicipalityCases/MunicipalityCasesChart"));
 
@@ -54,7 +47,6 @@ export default function MunicipalityCard({
   closeButtonHidden,
   handleDateLimitChange,
 }) {
-  const classes = useStyles();
   const dispatch = useMunicipalitiesDispatch();
 
   const municipality = useQuery(MUNICIPALITY_CASES_QUERY, {
@@ -62,13 +54,7 @@ export default function MunicipalityCard({
     fetchPolicy: "cache-first",
   });
 
-  const [expanded, setExpanded] = useState(false);
   const [orp, setOrp] = useState();
-  const [orpLoading, setOrpLoading] = useState();
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   useEffect(() => {
     if (name && code) {
@@ -98,8 +84,6 @@ export default function MunicipalityCard({
   }, [municipality.data, municipality.error, dispatch]);
 
   const districtName = municipality.data?.municipalityCases.districtName;
-  const municipalityPopulation =
-    municipality.data?.municipalityCases.municipalityPopulation;
 
   return (
     <Card>
@@ -172,38 +156,7 @@ export default function MunicipalityCard({
         </Suspense>
       </CardContent>
       <Divider />
-      <CardActions>
-        <Grid container justifyContent="flex-start">
-          <Grid item>
-            <Box style={{ position: "relative" }}>
-              <Button
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="Zobrazit informace o očkování"
-                disabled={orpLoading || municipality.loading}
-              >
-                Očkování na území ORP {orp?.orpName}
-                <ExpandMoreIcon
-                  className={clsx(classes.expand, {
-                    [classes.expandOpen]: expanded && !orpLoading,
-                  })}
-                />
-                {orpLoading && (
-                  <CircularProgress className={classes.spinner} size={24} />
-                )}
-              </Button>
-            </Box>
-          </Grid>
-        </Grid>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <OrpVaccinationsContainer
-          orpId={orp?.orpId}
-          municipalityName={name}
-          municipalityPopulation={municipalityPopulation}
-          setOrpLoading={setOrpLoading}
-        />
-      </Collapse>
+      <OrpVaccinationsButton orp={orp} municipality={municipality} />
     </Card>
   );
 }
