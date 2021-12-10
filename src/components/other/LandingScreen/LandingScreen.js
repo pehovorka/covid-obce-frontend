@@ -20,8 +20,8 @@ export default function LandingScreen({ inputRef }) {
             <Box className={classes.textContainer}>
               <Typography variant="h4" component="h2" className={classes.title}>
                 Kolik pozitivně testovaných osob na{" "}
-                <span className={classes.noWrap}>COVID-19</span> je ve vaší
-                obci?
+                <span className={classes.noWrap}>COVID-19</span> je ve vaší obci
+                a kolik lidí je naočkovaných?
               </Typography>
 
               <Typography
@@ -29,10 +29,11 @@ export default function LandingScreen({ inputRef }) {
                 component="p"
                 className={classes.subtitle}
               >
-                V celém Česku bylo od začátku pandemie potvrzeno již více než
-                milion a půl případů. Podívejte se, jak se koronavirová nákaza
-                šíří ve vaší obci. Přehledné grafy vám ukážou historický vývoj
-                i aktuální situaci, stačí vyhledat název obce v záhlaví stránky.
+                V celém Česku byly od začátku pandemie potvrzeny již více než
+                dva miliony případů. Podívejte se, jak se koronavirová nákaza
+                šíří ve vaší obci a kolik lidí již dostalo vakcínu. Přehledné
+                grafy vám ukážou historický vývoj i aktuální situaci, stačí
+                vyhledat název obce v záhlaví stránky.
               </Typography>
 
               <Button
