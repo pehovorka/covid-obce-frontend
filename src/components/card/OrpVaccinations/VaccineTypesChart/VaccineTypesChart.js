@@ -8,8 +8,8 @@ import {
   PieChart,
   Pie,
 } from "recharts";
-import { formatNumberToDisplay } from "../../../../utils/municipalityUtils";
 import { theme } from "../../../../theme";
+import VaccineTypesChartTooltip from "./VaccineTypesChartTooltip";
 
 export default function VaccineTypesChart({ data }) {
   const colors = theme.palette.orpVaccinations;
@@ -30,7 +30,7 @@ export default function VaccineTypesChart({ data }) {
           layout="vertical"
           wrapperStyle={{ width: "40%" }}
         />
-        <Tooltip formatter={formatNumberToDisplay} />
+        <Tooltip content={<VaccineTypesChartTooltip data={data} />} />
       </PieChart>
     </ResponsiveContainer>
   );
