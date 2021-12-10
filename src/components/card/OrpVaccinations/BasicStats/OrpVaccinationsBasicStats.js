@@ -8,6 +8,7 @@ import {
   TableCell,
   TableRow,
   TableBody,
+  useMediaQuery,
 } from "@material-ui/core";
 
 import { getDoseOrderData } from "../orpVaccinationsUtils";
@@ -25,13 +26,16 @@ export default function OrpVaccinationsBasicStats({
 
     return `${numberToString(share * 100, 1)} %`;
   };
+
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("xs"));
+
   return (
     <>
       <Box my={2}>
-        <Table>
+        <Table padding={isSmallScreen ? "checkbox" : "normal"}>
           <TableHead>
             <TableRow>
-              <TableCell>Dávka</TableCell>
+              <TableCell>dávka</TableCell>
               <TableCell align="right">% obyvatel</TableCell>
               <TableCell align="right">celkem dávek</TableCell>
               <TableCell align="right">nových dávek</TableCell>
@@ -63,7 +67,7 @@ export default function OrpVaccinationsBasicStats({
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>3.</TableCell>
+              <TableCell>Posilující</TableCell>
               <TableCell align="right">
                 {getPopulationPercentage(getDoseOrderData(lastDay, 3).td)}
               </TableCell>
