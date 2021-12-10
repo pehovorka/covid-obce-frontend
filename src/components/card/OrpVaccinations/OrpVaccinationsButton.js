@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import {
   Box,
@@ -19,9 +19,20 @@ import { useStyles } from "./OrpVaccinationsButton.style";
 function OrpVaccinationsButton({ orp, municipality, municipalityName }) {
   const theme = useTheme();
   const classes = useStyles();
+  const vaccinationButton = useRef(null);
 
   const [expanded, setExpanded] = useState(false);
-  const [orpLoading, setOrpLoading] = useState();
+  const [orpLoading, setOrpLoading] = useState(false);
+
+  useEffect(() => {
+    if (expanded && !orpLoading) {
+      vaccinationButton.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }
+  }, [expanded, orpLoading]);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -44,6 +55,7 @@ function OrpVaccinationsButton({ orp, municipality, municipalityName }) {
                 startIcon={
                   <SyringeIcon size={18} color={theme.palette.primary.dark} />
                 }
+                ref={vaccinationButton}
               >
                 Očkování na území ORP {orp?.orpName}
                 <ExpandMoreIcon
