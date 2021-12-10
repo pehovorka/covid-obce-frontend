@@ -16,7 +16,7 @@ import { SyringeIcon } from "../../../assets/SyringeIcon";
 import OrpVaccinationsContainer from "./OrpVaccinationsContainer";
 import { useStyles } from "./OrpVaccinationsButton.style";
 
-function OrpVaccinationsButton({ orp, municipality }) {
+function OrpVaccinationsButton({ orp, municipality, municipalityName }) {
   const theme = useTheme();
   const classes = useStyles();
 
@@ -27,8 +27,6 @@ function OrpVaccinationsButton({ orp, municipality }) {
     setExpanded(!expanded);
   };
 
-  const municipalityName =
-    municipality.data?.municipalityCases.municipalityName;
   const municipalityPopulation =
     municipality?.data?.municipalityCases.municipalityPopulation;
 
@@ -76,6 +74,7 @@ function OrpVaccinationsButton({ orp, municipality }) {
 OrpVaccinationsButton.propTypes = {
   orp: PropTypes.object,
   municipality: PropTypes.object,
+  municipalityName: PropTypes.string,
 };
 
 export default OrpVaccinationsButton;

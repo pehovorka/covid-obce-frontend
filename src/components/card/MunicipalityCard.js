@@ -156,7 +156,11 @@ export default function MunicipalityCard({
         </Suspense>
       </CardContent>
       <Divider />
-      <OrpVaccinationsButton orp={orp} municipality={municipality} />
+      <OrpVaccinationsButton
+        orp={orp}
+        municipality={municipality}
+        municipalityName={name}
+      />
     </Card>
   );
 }

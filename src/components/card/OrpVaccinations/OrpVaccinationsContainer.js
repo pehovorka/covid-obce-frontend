@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useQuery } from "@apollo/client";
 import { Alert } from "@material-ui/lab";
-import { Box, Grid, Typography } from "@material-ui/core";
+import { Box, Grid, Typography, Link } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
+import { route } from "../../../Routes";
 
 import { ORP_VACCINATIONS_QUERY } from "../../../utils/queries";
 
@@ -69,6 +71,18 @@ export default function OrpVaccinationsContainer({
             data={orpVaccinations.days}
             orpPopulation={orpVaccinations.orpPopulation}
           />
+        </Grid>
+        <Grid item xs={12}>
+          <Alert severity="info">
+            Data o očkování nejsou k dispozici na úrovni jednotlivých obcí.
+            Zobrazená data se vztahují ke správnímu obvodu obce s rozšířenou
+            působností, do kterého vámi vyhledaná obec spadá. Více informací lze
+            nalézt na{" "}
+            <Link component={RouterLink} to={route.info}>
+              stránce s popisem dat
+            </Link>
+            .
+          </Alert>
         </Grid>
       </Grid>
     </Box>
