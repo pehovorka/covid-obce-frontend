@@ -41,11 +41,33 @@ export const convertToVaccineTypes = (data, vaccineNames) => {
   const getVaccineName = (vaccineId) =>
     vaccineNames.find((vaccine) => vaccine.vaccineId === vaccineId);
 
-  const result = data.map((vaccine) => ({
-    value: vaccine.td,
-    name: getVaccineName(vaccine.v).vaccineName || vaccine.v,
-  }));
-  return result;
+  const vaccineManufacturers = [
+    { vaccineName: "Comirnaty", vaccineManufacturer: "Pfizer–BioNTech" },
+    { vaccineName: "SPIKEVAX", vaccineManufacturer: "Moderna" },
+    { vaccineName: "VAXZEVRIA", vaccineManufacturer: "AstraZeneca" },
+    {
+      vaccineName: "COVID-19 Vaccine Janssen",
+      vaccineManufacturer: "Johnson & Johnson",
+    },
+  ];
+
+  const vaccineTypes = data.map((vaccine) => {
+    const vaccineName = getVaccineName(vaccine.v).vaccineName || vaccine.v;
+    const vaccineManufacturer = vaccineManufacturers.find(
+      (vaccineManufacturer) => vaccineName === vaccineManufacturer.vaccineName
+    )?.vaccineManufacturer;
+
+    const result = {
+      value: vaccine.td,
+      name: vaccineManufacturer
+        ? `${vaccineName} (${vaccineManufacturer})`
+        : vaccineName,
+    };
+
+    return result;
+  });
+
+  return vaccineTypes;
 };
 
 export const getDoseOrderData = (day, doseOrder) => {
