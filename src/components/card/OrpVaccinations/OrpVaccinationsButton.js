@@ -27,8 +27,8 @@ function OrpVaccinationsButton({ orp, municipality, municipalityName }) {
   useEffect(() => {
     if (expanded && !orpLoading) {
       vaccinationButton.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
+        behavior: "auto",
+        block: "nearest",
         inline: "nearest",
       });
     }
