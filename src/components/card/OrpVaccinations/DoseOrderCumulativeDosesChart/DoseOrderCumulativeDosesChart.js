@@ -69,16 +69,14 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
           yAxisId="left"
         />
         <Line
-          type="linear"
           dataKey={(day) => (getDoseOrderData(day, 1).td / population) * 100}
           name={NAMES.dose1TDRelative}
           yAxisId="right"
-          dot={false}
-          strokeWidth={0}
+          display="none"
+          activeDot={false}
           unit="%"
         />
         <Area
-          type="linear"
           dataKey={(day) => getDoseOrderData(day, 2).td}
           name={NAMES.dose2TD}
           fill={colors[1]}
@@ -87,12 +85,11 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
           yAxisId="left"
         />
         <Line
-          type="linear"
           dataKey={(day) => (getDoseOrderData(day, 2).td / population) * 100}
           name={NAMES.dose2TDRelative}
           yAxisId="right"
-          dot={false}
-          strokeWidth={0}
+          display="none"
+          activeDot={false}
         />
         <Area
           type="linear"
@@ -104,12 +101,11 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
           yAxisId="left"
         />
         <Line
-          type="linear"
           dataKey={(day) => (getDoseOrderData(day, 3).td / population) * 100}
           name={NAMES.dose3TDRelative}
           yAxisId="right"
-          dot={false}
-          strokeWidth={0}
+          display="none"
+          activeDot={false}
         />
         <Legend
           align="left"

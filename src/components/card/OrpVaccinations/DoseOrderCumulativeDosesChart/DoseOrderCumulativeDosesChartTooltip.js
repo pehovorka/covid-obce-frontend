@@ -31,7 +31,7 @@ export default function DoseOrderCumulativeDosesChartTooltip({
     return (
       <Paper
         className="custom-tooltip"
-        style={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}
+        style={{ backgroundColor: "rgba(255, 255, 255, 0.96)" }}
       >
         <Box p={1} minWidth="15rem">
           {/* Date */}
@@ -91,7 +91,7 @@ export default function DoseOrderCumulativeDosesChartTooltip({
 
               <TableRow key="3rd">
                 <TableCell style={{ color: getProperty(NAMES.dose3TD).color }}>
-                  3.
+                  Posilující
                 </TableCell>
                 <TableCell
                   align="right"

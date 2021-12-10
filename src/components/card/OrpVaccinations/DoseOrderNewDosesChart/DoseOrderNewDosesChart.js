@@ -77,16 +77,19 @@ export default function DoseOrderNewDosesChart({ data }) {
         />
         <Line
           display="none"
+          activeDot={false}
           dataKey={(day) => getDoseOrderData(day, 1).nda}
           name={NAMES.dose1NDA}
         />
         <Line
           display="none"
+          activeDot={false}
           dataKey={(day) => getDoseOrderData(day, 2).nda}
           name={NAMES.dose2NDA}
         />
         <Line
           display="none"
+          activeDot={false}
           dataKey={(day) => getDoseOrderData(day, 3).nda}
           name={NAMES.dose3NDA}
         />
