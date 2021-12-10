@@ -41,7 +41,7 @@ export default function OrpVaccinationsContainer({
   const lastDay = orpVaccinations.days[orpVaccinations.days.length - 1];
 
   return (
-    <Box px={{ xs: 0, sm: 3 }}>
+    <Box px={{ xs: 2, sm: 5 }} py={2}>
       <Typography variant="h5" gutterBottom>
         Základní přehled k {new Date(lastDay.date).toLocaleDateString("cs-CZ")}
       </Typography>

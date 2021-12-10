@@ -196,15 +196,13 @@ export default function MunicipalityCard({
           </Grid>
         </Grid>
       </CardActions>
-      <Collapse in={expanded && !orpLoading} timeout="auto" unmountOnExit>
-        <CardContent>
-          <OrpVaccinationsContainer
-            orpId={orp?.orpId}
-            municipalityName={name}
-            municipalityPopulation={municipalityPopulation}
-            setOrpLoading={setOrpLoading}
-          />
-        </CardContent>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <OrpVaccinationsContainer
+          orpId={orp?.orpId}
+          municipalityName={name}
+          municipalityPopulation={municipalityPopulation}
+          setOrpLoading={setOrpLoading}
+        />
       </Collapse>
     </Card>
   );
