@@ -20,8 +20,8 @@ export default function LandingScreen({ inputRef }) {
             <Box className={classes.textContainer}>
               <Typography variant="h4" component="h2" className={classes.title}>
                 Kolik pozitivně testovaných osob na{" "}
-                <span className={classes.noWrap}>COVID-19</span> je ve vaší obci
-                a kolik lidí je naočkovaných?
+                <span className={classes.noWrap}>COVID-19</span> je ve vaší
+                obci? Kolik lidí je naočkovaných?
               </Typography>
 
               <Typography
