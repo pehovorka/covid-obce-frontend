@@ -80,8 +80,8 @@ export default function OrpVaccinationsBasicStats({
       <Typography variant="caption" component="p">
         Počet obyvatel ve správním obvodu obce s rozšířenou působností {orpName}{" "}
         je {numberToString(orpPopulation)}. Obec {municipalityName} tvoří{" "}
-        {numberToString((municipalityPopulation / orpPopulation) * 100, 1)} % z
-        celkového počtu obyvatel v tomto správním obvodu.
+        {numberToString((municipalityPopulation / orpPopulation) * 100, 1)}
+        &nbsp;% z celkového počtu obyvatel v tomto správním obvodu.
       </Typography>
     </>
   );
