@@ -36,7 +36,7 @@
     "build:local": "env-cmd -f .env.local npm run build",
     "build:dev": "env-cmd -f .env.development npm run build",
     "release": "npm version",
-    "version": "npm run changelog && code CHANGELOG.md --wait",
+    "version": "npm run changelog && code CHANGELOG.md --wait && git add CHANGELOG.md",
     "changelog": "npx gitmoji-changelog",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

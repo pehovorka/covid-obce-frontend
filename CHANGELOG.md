@@ -1,5 +1,14 @@
 # Changelog
 
+<a name="3.6.1"></a>
+
+## 3.6.1 (2021-12-11)
+
+### Changed
+
+- ⚡ Lazy load all charts [58b0528]
+- 💬 Change vaccine types chart heading [f2bd999]
+
 <a name="3.6.0"></a>
 
 ## 3.6.0 (2021-12-11)
