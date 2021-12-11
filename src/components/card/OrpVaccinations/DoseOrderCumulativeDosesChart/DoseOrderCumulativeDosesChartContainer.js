@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import PropTypes from "prop-types";
 
 import { Box, Grid, Typography } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 
 import { DateLimitSelect } from "../..";
 import { convertToDoseOrderCumulativeDosesData } from "../orpVaccinationsUtils";
-import DoseOrderCumulativeDosesChart from "./DoseOrderCumulativeDosesChart";
+
+const DoseOrderCumulativeDosesChart = lazy(() =>
+  import("./DoseOrderCumulativeDosesChart")
+);
 
 export default function DoseOrderCumulativeDosesChartContainer({
   data,
@@ -39,10 +43,16 @@ export default function DoseOrderCumulativeDosesChartContainer({
           </Grid>
         </Grid>
       </Box>
-      <DoseOrderCumulativeDosesChart
-        data={convertToDoseOrderCumulativeDosesData(data, limit)}
-        population={orpPopulation}
-      />
+      <Suspense
+        fallback={
+          <Skeleton variant="rect" width="100%" height={300} animation="wave" />
+        }
+      >
+        <DoseOrderCumulativeDosesChart
+          data={convertToDoseOrderCumulativeDosesData(data, limit)}
+          population={orpPopulation}
+        />
+      </Suspense>
     </>
   );
 }

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 
-import VaccineTypesChart from "./VaccineTypesChart";
 import { convertToVaccineTypes } from "../orpVaccinationsUtils";
+
+const VaccineTypesChart = lazy(() => import("./VaccineTypesChart"));
 
 export default function VaccineTypesChartContainer({ vaccines, vaccineNames }) {
   return (
@@ -11,7 +13,15 @@ export default function VaccineTypesChartContainer({ vaccines, vaccineNames }) {
       <Typography variant="h6">
         Vykázaná očkování celkem dle typu očkovací látky
       </Typography>
-      <VaccineTypesChart data={convertToVaccineTypes(vaccines, vaccineNames)} />
+      <Suspense
+        fallback={
+          <Skeleton variant="rect" width="100%" height={260} animation="wave" />
+        }
+      >
+        <VaccineTypesChart
+          data={convertToVaccineTypes(vaccines, vaccineNames)}
+        />
+      </Suspense>
     </>
   );
 }

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import PropTypes from "prop-types";
 import { Box, Grid, Typography } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
+
 import { DateLimitSelect } from "../..";
-import DoseOrderNewDosesChart from "./DoseOrderNewDosesChart";
 import { convertToDoseOrderNewDosesData } from "../orpVaccinationsUtils";
+
+const DoseOrderNewDosesChart = lazy(() => import("./DoseOrderNewDosesChart"));
 
 export default function DoseOrderNewDosesChartContainer({ data }) {
   const [limit, setLimit] = useState(90);
@@ -34,9 +37,15 @@ export default function DoseOrderNewDosesChartContainer({ data }) {
           </Grid>
         </Grid>
       </Box>
-      <DoseOrderNewDosesChart
-        data={convertToDoseOrderNewDosesData(data, limit)}
-      />
+      <Suspense
+        fallback={
+          <Skeleton variant="rect" width="100%" height={300} animation="wave" />
+        }
+      >
+        <DoseOrderNewDosesChart
+          data={convertToDoseOrderNewDosesData(data, limit)}
+        />
+      </Suspense>
     </>
   );
 }
