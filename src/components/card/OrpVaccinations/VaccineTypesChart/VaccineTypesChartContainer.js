@@ -8,7 +8,9 @@ import { convertToVaccineTypes } from "../orpVaccinationsUtils";
 export default function VaccineTypesChartContainer({ vaccines, vaccineNames }) {
   return (
     <>
-      <Typography variant="h6">Rozdělení dle typu očkovací látky</Typography>
+      <Typography variant="h6">
+        Vykázaná očkování celkem dle typu očkovací látky
+      </Typography>
       <VaccineTypesChart data={convertToVaccineTypes(vaccines, vaccineNames)} />
     </>
   );
