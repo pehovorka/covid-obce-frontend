@@ -11,14 +11,17 @@ import {
 } from "recharts";
 import { Skeleton } from "@material-ui/lab";
 
-import { ChartTooltip } from ".";
+import { ChartTooltip } from "./ChartTooltip";
+import { theme } from "../../../theme";
 
-export default function Chart({ data }) {
+export default function MunicipalityCasesChart({ data }) {
   if (!data) {
     return (
       <Skeleton variant="rect" width="100%" height={300} animation="wave" />
     );
   }
+
+  const colors = theme.palette.municipalityCasesChart;
   return (
     <ResponsiveContainer width="100%" height={300}>
       <ComposedChart
@@ -47,23 +50,23 @@ export default function Chart({ data }) {
         <Area
           type="linear"
           dataKey="activeCases"
-          stroke="#0078B8"
+          stroke={colors.activeCases}
           strokeWidth={3}
-          fill="#0078B8"
+          fill={colors.activeCases}
           name="Aktivní případy"
         />
         <Bar
           stackId="casesSplit"
           dataKey="newCasesOver65"
-          stroke="#ebc800"
-          fill="#ebc800"
+          stroke={colors.newCasesOver65}
+          fill={colors.newCasesOver65}
           name="Osoby 65+"
         />
         <Bar
           stackId="casesSplit"
           dataKey="newCasesUnder65"
-          stroke="#b84100"
-          fill="#b84100"
+          stroke={colors.newCasesUnder65}
+          fill={colors.newCasesUnder65}
           name="Osoby mladší 65"
         />
         <Line
@@ -71,7 +74,7 @@ export default function Chart({ data }) {
           dot={false}
           strokeWidth={3}
           dataKey="newCasesAverage"
-          stroke="#F27F41"
+          stroke={colors.newCasesAverage}
           name="7denní průměr"
         />
       </ComposedChart>

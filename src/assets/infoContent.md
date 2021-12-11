@@ -10,7 +10,7 @@ K aktualizaci dochází 1× denně, zpravidla v ranních hodinách. Datum a čas
 
 ## Kdo provozuje web Covid v obcích?
 
-Tento web není oficiálním informačním kanálem Ministerstva zdravotnictví, nestojí za ním žádná organizace ani mediální dům. Web vytvářím a spravuji ve volném čase, v případě dotazů či připomínek mě můžete kontaktovat na e-mailu covid-obce@petrhovorka.com nebo na síti [LinkedIn](https://www.linkedin.com/in/pehovorka/). Zdrojový kód tohoto webu lze nalézt [zde](https://github.com/pehovorka/covid-obce-frontend/).
+Tento web není oficiálním informačním kanálem Ministerstva zdravotnictví, nestojí za ním žádná organizace ani mediální dům. Web vytvářím a spravuji ve volném čase, v případě dotazů či připomínek mě můžete kontaktovat na e-mailu covid-obce@petrhovorka.com nebo na síti [LinkedIn](https://www.linkedin.com/in/pehovorka/). Zdrojové kódy tohoto webu lze nalézt na mém [GitHubu](https://github.com/search?q=user%3Apehovorka+covidvobcich).
 
 ## Proč vznikl tento web?
 
@@ -23,6 +23,8 @@ Přehledné informace o aktuálních opatřeních v souvislosti se šířením C
 ---
 
 # Popis dat
+
+## Epidemiologická charakteristika obcí
 
 ### Aktivní případy
 
@@ -43,5 +45,35 @@ Počet nově diagnostikovaných za daný den ve věkové skupině 65+.
 ### Nové případy – sedmidenní průměr
 
 Sedmidenní průměr celkového denního počtu nově diagnostikovaných osob.
+
+## Přehled vykázaných očkování podle ORP
+
+Množství vykázaných očkování dle bydliště očkované osoby na úrovni obce s rozšířenou působností. Více informací o správních obvodech obcí s rozšířenou působností si [lze přečíst na Wikipedii](https://cs.wikipedia.org/wiki/Obec_s_roz%C5%A1%C3%AD%C5%99enou_p%C5%AFsobnost%C3%AD).
+
+### Vykázaná očkování dle pořadí dávky
+
+- **Dávka** – pořadí dávky (první, druhá, posilující) danou očkovací látkou.
+- **% obyvatel** – podíl vykázaných dávek očkování daným pořadím dávky na území ORP k celkovému počtu obyvatel ve správním obvodu zvolené ORP (celkový počet obyvatel ve správním obvodu ORP lze nalézt pod tabulkou)
+- **Celkem dávek** – počet vykázaných dávek očkování daným pořadím dávky na území ORP za celou dobu
+- **Nových dávek** – počet vykázaných dávek očkování daným pořadím dávky na území ORP za poslední den
+
+### Rozdělení dle typu očkovací látky
+
+V současné době se očkuje těmito vakcínami:
+
+- **Comirnaty** – vakcína od firem Pfizer a BioNTech
+- **SPIKEVAX** – vakcína od firmy Moderna
+- **VAXZEVRIA** – vakcína od firmy AstraZeneca
+- **COVID-19 Vaccine Janssen** – vakcína od firmy Johnson & Johnson
+
+Více informací o jednotlivých očkovacích látkách lze nalézt na [Národním zdravotnickém informačním portálu](https://www.nzip.cz/clanek/1079-overene-informace-o-vakcinach-proti-covid-19).
+
+### Nově vykázaná očkování dle pořadí dávky
+
+Přehled nově vykázaných dávek očkování dle pořadí dávky v jednotlivé dny. Čára značí sedmidenní průměr všech vykázaných dávek bez ohledu na pořadí dávky.
+
+### Vykázaná očkování dle pořadí dávky kumulativně
+
+Kumulativní počet vykázaných dávek očkování dle pořadí dávky včetně podílu vykázaných dávek očkování daným pořadím dávky na území ORP k celkovému počtu obyvatel ve správním obvodu zvolené ORP.
 
 ---

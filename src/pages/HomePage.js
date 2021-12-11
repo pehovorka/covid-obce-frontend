@@ -31,7 +31,12 @@ export default function HomePage(props) {
             <Alert remote />
             <DragAndDropCards municipalities={municipalities} />
             <Box textAlign="center" mt={2} mb={8}>
-              <Grid container alignItems="center" justify="center" spacing={1}>
+              <Grid
+                container
+                alignItems="center"
+                justifyContent="center"
+                spacing={1}
+              >
                 <Grid item>
                   <WbIncandescentTwoToneIcon
                     style={{ transform: "scaleY(-1)", color: "#dbc21a" }}

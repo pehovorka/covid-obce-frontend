@@ -23,17 +23,27 @@ export const options = {
     },
     h2: {
       component: Typography,
-      props: { gutterBottom: true, variant: "h5", component: "h3" },
+      props: {
+        gutterBottom: true,
+        variant: "h5",
+        component: "h3",
+        style: { paddingTop: "1rem", fontWeight: 500 },
+      },
     },
     h3: {
       component: Typography,
-      props: { gutterBottom: false, variant: "subtitle1", component: "h4" },
+      props: {
+        gutterBottom: false,
+        variant: "h6",
+        component: "h4",
+        style: { fontWeight: 400 },
+      },
     },
     h4: {
       component: Typography,
       props: { gutterBottom: true, variant: "caption", paragraph: true },
     },
-    p: { component: Typography, props: { paragraph: true } },
+    p: { component: Typography, props: { paragraph: true, variant: "body1" } },
     a: { component: Link },
     li: {
       component: withStyles(styles)(({ classes, ...props }) => (

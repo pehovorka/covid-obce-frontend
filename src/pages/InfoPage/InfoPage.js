@@ -27,7 +27,7 @@ export default function InfoPage() {
             <Box p={6}>
               <ReactMarkdown options={options}>{markdown}</ReactMarkdown>
               <Box mt={6}>
-                <Grid container justify="space-between">
+                <Grid container justifyContent="space-between">
                   <Grid item>
                     <BackToHomeLink />
                   </Grid>

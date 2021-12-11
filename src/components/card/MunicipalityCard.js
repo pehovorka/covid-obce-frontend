@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 
 // Apollo
 import { useQuery } from "@apollo/client";
@@ -10,12 +10,14 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Divider,
   IconButton,
   Grid,
   Tooltip,
 } from "@material-ui/core/";
-import CloseIcon from "@material-ui/icons/Close";
 import { Skeleton } from "@material-ui/lab";
+
+import CloseIcon from "@material-ui/icons/Close";
 
 // PropTypes
 import PropTypes from "prop-types";
@@ -23,14 +25,19 @@ import PropTypes from "prop-types";
 // Sub-components
 import { convertToGraphData } from "../../utils/municipalityUtils";
 import { MUNICIPALITY_CASES_QUERY } from "../../utils/queries";
-import { DateLimitSelect, MunicipalityStats, ShareIconAndDialog } from ".";
+import { MunicipalityCasesStats } from "./MunicipalityCases";
+import { DateLimitSelect, ShareIconAndDialog } from ".";
+
 import {
   REMOVE_MUNICIPALITY,
   SET_SNACKBAR_MESSAGE,
 } from "../../utils/municipalitiesReducer";
 import { useMunicipalitiesDispatch } from "../../providers/MunicipalitiesProvider";
 
-const Chart = lazy(() => import("./Chart"));
+// Styles
+import OrpVaccinationsButton from "./OrpVaccinations/OrpVaccinationsButton";
+
+const Chart = lazy(() => import("./MunicipalityCases/MunicipalityCasesChart"));
 
 export default function MunicipalityCard({
   name,
@@ -47,6 +54,8 @@ export default function MunicipalityCard({
     fetchPolicy: "cache-first",
   });
 
+  const [orp, setOrp] = useState();
+
   useEffect(() => {
     if (name && code) {
       const item = {};
@@ -59,6 +68,12 @@ export default function MunicipalityCard({
   }, [code, name]);
 
   useEffect(() => {
+    if (municipality.data) {
+      setOrp({
+        orpId: municipality.data.municipalityCases.orpId,
+        orpName: municipality.data.municipalityCases.orpName,
+      });
+    }
     if (municipality.error) {
       dispatch({
         type: SET_SNACKBAR_MESSAGE,
@@ -66,7 +81,7 @@ export default function MunicipalityCard({
         severity: "error",
       });
     }
-  }, [municipality.error, dispatch]);
+  }, [municipality.data, municipality.error, dispatch]);
 
   const districtName = municipality.data?.municipalityCases.districtName;
 
@@ -80,7 +95,7 @@ export default function MunicipalityCard({
             <Grid
               container
               alignItems="center"
-              justify="flex-end"
+              justifyContent="flex-end"
               spacing={1}
               direction="row"
               wrap="nowrap"
@@ -121,7 +136,7 @@ export default function MunicipalityCard({
         title={name}
       />
       <CardContent>
-        <MunicipalityStats municipality={municipality} code={code} />
+        <MunicipalityCasesStats municipality={municipality} code={code} />
         <Suspense
           fallback={
             <Skeleton
@@ -140,6 +155,12 @@ export default function MunicipalityCard({
           />
         </Suspense>
       </CardContent>
+      <Divider />
+      <OrpVaccinationsButton
+        orp={orp}
+        municipality={municipality}
+        municipalityName={name}
+      />
     </Card>
   );
 }

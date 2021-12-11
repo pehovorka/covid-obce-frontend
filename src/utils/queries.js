@@ -13,6 +13,8 @@ export const MUNICIPALITY_CASES_QUERY = gql`
     municipalityCases(municipalityId: $municipalityId, limit: $limit) {
       municipalityPopulation
       districtName
+      orpId
+      orpName
       days {
         d
         ac
@@ -47,6 +49,33 @@ export const SERVER_INFO = gql`
     serverInfo {
       apiVersion
       importerVersion
+    }
+  }
+`;
+
+export const ORP_VACCINATIONS_QUERY = gql`
+  query OrpVaccinations($orpId: Int!, $limit: Int!) {
+    orpVaccinations(orpId: $orpId, limit: $limit) {
+      orpId
+      orpName
+      orpPopulation
+      vaccineNames {
+        vaccineId
+        vaccineName
+      }
+      days {
+        date
+        doses {
+          o
+          nd
+          td
+        }
+        vaccines {
+          v
+          nd
+          td
+        }
+      }
     }
   }
 `;

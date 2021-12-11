@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export function ActivePer1000({ activeCases, municipalityPopulation }) {
+export default function ActivePer1000({ activeCases, municipalityPopulation }) {
   const cases = ((activeCases / municipalityPopulation) * 1000).toLocaleString(
     "cs-CZ",
     { maximumFractionDigits: 1 }

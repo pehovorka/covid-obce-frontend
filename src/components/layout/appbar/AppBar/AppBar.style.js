@@ -1,12 +1,12 @@
-import { fade, makeStyles } from "@material-ui/core";
+import { alpha, makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   search: {
     color: "#fff",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
   },
   inputInput: {
