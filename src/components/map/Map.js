@@ -9,14 +9,19 @@ import { MUNICIPALITY_OVERVIEW_QUERY } from "../../utils/queries";
 import { Alert } from "@material-ui/lab";
 
 function Map() {
-  const municipalityOverview = useQuery(MUNICIPALITY_OVERVIEW_QUERY, {
+  const bounds = [
+    [51.06, 18.86],
+    [48.55, 12.09],
+  ];
+
+  const municipalityCasesOverview = useQuery(MUNICIPALITY_OVERVIEW_QUERY, {
     fetchPolicy: "cache-first",
   });
 
-  if (municipalityOverview.loading && !municipalityOverview.data) {
+  if (municipalityCasesOverview.loading && !municipalityCasesOverview.data) {
     return null;
   }
-  if (municipalityOverview.error) {
+  if (municipalityCasesOverview.error) {
     return (
       <Alert severity="error">
         Chyba při načítání dat. Zkuste to prosím znovu později.
@@ -25,12 +30,22 @@ function Map() {
   }
 
   return (
-    <MapContainer center={[49.8, 15.5]} zoom={8} style={{ height: 700 }}>
+    <MapContainer
+      style={{ height: "calc(100vh - 72px)" }}
+      scrollWheelZoom={false}
+      bounds={bounds}
+      boundsOptions={{ maxZoom: 10 }}
+    >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <TopoJSON data={municipalitiesTopo} />
+      <TopoJSON
+        data={municipalitiesTopo}
+        municipalityCasesOverview={
+          municipalityCasesOverview.data.municipalityCasesOverview
+        }
+      />
     </MapContainer>
   );
 }
