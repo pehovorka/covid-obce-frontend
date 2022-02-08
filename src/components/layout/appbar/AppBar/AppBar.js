@@ -12,6 +12,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { SearchButton, SearchField } from "../.";
 import { useStyles } from "./AppBar.style";
 import { route } from "../../../../Routes";
+import MapButton from "../MapButton";
 
 export default function AppBar({ inputRef, searchEnabled }) {
   const classes = useStyles();
@@ -26,7 +27,7 @@ export default function AppBar({ inputRef, searchEnabled }) {
             alignItems="center"
             spacing={1}
           >
-            <Grid item xs sm={5} md={3} lg={2}>
+            <Grid item xs sm={5} md={3} lg>
               <Grid container spacing={1}>
                 <Grid item>
                   <img
@@ -57,7 +58,7 @@ export default function AppBar({ inputRef, searchEnabled }) {
               </Grid>
             </Grid>
             {searchEnabled ? (
-              <Grid item xs={12} sm={7} md={9} lg={10}>
+              <Grid item xs={12} sm={7} md={9} lg={9}>
                 <div className={classes.search}>
                   <SearchField inputRef={inputRef} />
                 </div>
@@ -69,6 +70,11 @@ export default function AppBar({ inputRef, searchEnabled }) {
                 </Box>
               </Grid>
             )}
+            <Grid item xs lg>
+              <Box textAlign="right">
+                <MapButton />
+              </Box>
+            </Grid>
           </Grid>
         </Box>
       </Toolbar>

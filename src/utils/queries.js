@@ -85,7 +85,6 @@ export const MUNICIPALITY_OVERVIEW_QUERY = gql`
     municipalityCasesOverview {
       id
       mn
-      dn
       rc
       ac
       d

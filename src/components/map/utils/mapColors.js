@@ -1,5 +1,7 @@
 export const getColor = (rc) => {
-  return rc === 0
+  return rc === null
+    ? "#EEEEEE"
+    : rc === 0
     ? "#fff"
     : rc < 2
     ? "#fff5eb"
