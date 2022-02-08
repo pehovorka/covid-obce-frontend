@@ -55,6 +55,7 @@ function Map() {
           bounds={bounds}
           boundsOptions={{ maxZoom: 10 }}
           zoomSnap={0.25}
+          preferCanvas={true}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
