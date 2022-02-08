@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Box } from "@material-ui/core";
-import { AppBar, Footer } from "../components/layout";
+import { Container, Box } from "@mui/material";
 
 import { useParams } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
@@ -12,6 +11,7 @@ import { Alert, LoadingIndicator } from "../components/other";
 import { MunicipalityCard } from "../components/card";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 import { SET_SNACKBAR_MESSAGE } from "../utils/municipalitiesReducer";
+import { AppBar, Footer } from "../components/layout";
 import { Seo } from "../utils/Seo";
 
 export default function MunicipalityDetailPage() {

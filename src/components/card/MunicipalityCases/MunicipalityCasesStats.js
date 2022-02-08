@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Grid, Divider, Typography } from "@material-ui/core/";
-import { Skeleton } from "@material-ui/lab";
+import { Box, Grid, Divider, Typography, Skeleton } from "@mui/material/";
 
 import {
   formatNumberToDisplay,

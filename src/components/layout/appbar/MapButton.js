@@ -2,19 +2,19 @@ import { React } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { route } from "../../../Routes";
 import { Button } from "@mui/material/";
-import SearchIcon from "@mui/icons-material/Search";
+import MapIcon from "@mui/icons-material/Map";
 
-export default function SearchButton({ text }) {
+export default function MapButton() {
   return (
     <Button
-      startIcon={<SearchIcon />}
+      startIcon={<MapIcon />}
       variant="contained"
-      color="secondary"
+      color="primary"
       disableElevation={true}
       component={RouterLink}
-      to={{ pathname: route.home(), state: { searchAutoFocus: true } }}
+      to={{ pathname: route.map() }}
     >
-      {text ? text : "Hledat obec"}
+      Mapa
     </Button>
   );
 }

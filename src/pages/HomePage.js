@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { Container, Box, Typography, Grid } from "@material-ui/core";
-import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
+import { Container, Box, Typography, Grid } from "@mui/material";
+import WbIncandescentTwoToneIcon from "@mui/icons-material/WbIncandescentTwoTone";
 
 import { AppBar, Footer } from "../components/layout";
 import { DragAndDropCards } from "../components/card";

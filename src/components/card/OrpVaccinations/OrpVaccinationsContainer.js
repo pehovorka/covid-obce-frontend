@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useQuery } from "@apollo/client";
-import { Alert } from "@material-ui/lab";
-import { Box, Grid, Typography, Link } from "@material-ui/core";
+import { Alert, Box, Grid, Typography, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { route } from "../../../Routes";
 
@@ -78,7 +77,7 @@ export default function OrpVaccinationsContainer({
             Zobrazená data se vztahují ke správnímu obvodu obce s rozšířenou
             působností, do kterého vámi vyhledaná obec spadá. Více informací lze
             nalézt na{" "}
-            <Link component={RouterLink} to={route.info}>
+            <Link component={RouterLink} to={route.info} underline="hover">
               stránce s popisem dat
             </Link>
             .

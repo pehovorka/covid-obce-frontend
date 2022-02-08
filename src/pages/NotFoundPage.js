@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Box, Typography, Paper } from "@material-ui/core";
+import { Container, Box, Typography, Paper } from "@mui/material";
 import { AppBar, Footer, SearchButton } from "../components/layout";
 import { Seo } from "../utils/Seo";
 

@@ -1,8 +1,8 @@
-import { withStyles } from "@material-ui/core/styles";
+import withStyles from "@mui/styles/withStyles";
 
-import { Box, Grid, IconButton, Typography } from "@material-ui/core";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import CloseIcon from "@material-ui/icons/Close";
+import { Box, Grid, IconButton, Typography } from "@mui/material";
+import MuiDialogTitle from "@mui/material/DialogTitle";
+import CloseIcon from "@mui/icons-material/Close";
 
 const styles = (theme) => ({
   root: {
@@ -20,7 +20,12 @@ export const DialogTitle = withStyles(styles)((props) => {
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Box px={2} py={1}>
-        <Grid container alignItems="center" spacing={2} justify="space-between">
+        <Grid
+          container
+          alignItems="center"
+          spacing={2}
+          justifyContent="space-between"
+        >
           <Grid item>
             <Typography variant="h6">{children}</Typography>
           </Grid>
@@ -29,6 +34,7 @@ export const DialogTitle = withStyles(styles)((props) => {
               aria-label="close"
               className={classes.closeButton}
               onClick={onClose}
+              size="large"
             >
               <CloseIcon />
             </IconButton>
