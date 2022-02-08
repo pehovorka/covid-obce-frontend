@@ -1,8 +1,7 @@
 import React from "react";
-import { Alert as Al } from "@material-ui/lab";
+import { Alert as Al, Box } from "@mui/material";
 
 import { useMunicipalitiesState } from "../../providers/MunicipalitiesProvider";
-import { Box } from "@material-ui/core";
 
 export default function Alert({
   message,

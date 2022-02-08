@@ -14,10 +14,10 @@ import {
   IconButton,
   Grid,
   Tooltip,
-} from "@material-ui/core/";
-import { Skeleton } from "@material-ui/lab";
+} from "@mui/material/";
+import { Skeleton } from "@mui/material";
 
-import CloseIcon from "@material-ui/icons/Close";
+import CloseIcon from "@mui/icons-material/Close";
 
 // PropTypes
 import PropTypes from "prop-types";
@@ -121,6 +121,7 @@ export default function MunicipalityCard({
                           code: code,
                         })
                       }
+                      size="large"
                     >
                       <CloseIcon />
                     </IconButton>
@@ -140,7 +141,7 @@ export default function MunicipalityCard({
         <Suspense
           fallback={
             <Skeleton
-              variant="rect"
+              variant="rectangular"
               width="100%"
               height={300}
               animation="wave"

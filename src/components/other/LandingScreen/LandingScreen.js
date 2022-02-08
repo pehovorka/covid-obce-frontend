@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 import townImage from "../../../assets/czechTown.svg";
 import { useStyles } from "./LandingScreen.style";

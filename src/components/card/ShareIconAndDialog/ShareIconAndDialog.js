@@ -8,9 +8,9 @@ import {
   IconButton,
   TextField,
   Tooltip,
-} from "@material-ui/core";
-import ShareIcon from "@material-ui/icons/Share";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
+} from "@mui/material";
+import ShareIcon from "@mui/icons-material/Share";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
 
 import { DialogTitle } from "./ShareIconAndDialog.style";
 
@@ -66,7 +66,11 @@ export default function ShareIconAndDialog({ code, name }) {
   return (
     <>
       <Tooltip title="Sdílet odkaz">
-        <IconButton aria-label="share" onClick={() => handleOpen()}>
+        <IconButton
+          aria-label="share"
+          onClick={() => handleOpen()}
+          size="large"
+        >
           <ShareIcon />
         </IconButton>
       </Tooltip>

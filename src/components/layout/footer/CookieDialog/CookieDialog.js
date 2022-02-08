@@ -1,5 +1,5 @@
 import React from "react";
-import { Dialog, Link, Typography } from "@material-ui/core/";
+import { Dialog, Link, Typography } from "@mui/material/";
 import { DialogTitle, DialogContent } from "./CookieDialog.style";
 
 export default function CookieDialog({ open, handleClose }) {
@@ -23,7 +23,7 @@ export default function CookieDialog({ open, handleClose }) {
             href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage"
             target="_blank"
             rel="noreferrer"
-          >
+            underline="hover">
             zde
           </Link>
           . Tyto cookies jsou řízeny třetími stranami a nemáme přístup ke čtení

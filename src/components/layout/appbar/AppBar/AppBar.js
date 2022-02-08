@@ -6,7 +6,7 @@ import {
   Link,
   Toolbar,
   Typography,
-} from "@material-ui/core/";
+} from "@mui/material/";
 import { Link as RouterLink } from "react-router-dom";
 
 import { SearchButton, SearchField } from "../.";

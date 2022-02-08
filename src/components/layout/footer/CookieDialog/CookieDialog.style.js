@@ -1,9 +1,9 @@
-import { withStyles } from "@material-ui/core/styles";
-import { IconButton, Typography } from "@material-ui/core/";
-import MuiDialogContent from "@material-ui/core/DialogContent";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import withStyles from '@mui/styles/withStyles';
+import { IconButton, Typography } from "@mui/material/";
+import MuiDialogContent from "@mui/material/DialogContent";
+import MuiDialogTitle from "@mui/material/DialogTitle";
 
-import CloseIcon from "@material-ui/icons/Close";
+import CloseIcon from "@mui/icons-material/Close";
 
 const styles = (theme) => ({
   root: {
@@ -28,7 +28,7 @@ export const DialogTitle = withStyles(styles)((props) => {
           aria-label="zavřít"
           className={classes.closeButton}
           onClick={onClose}
-        >
+          size="large">
           <CloseIcon />
         </IconButton>
       ) : null}

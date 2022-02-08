@@ -1,13 +1,13 @@
 import React from "react";
-import { Grid, Link, Typography } from "@material-ui/core";
+import { Grid, Link, Typography } from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link as RouterLink } from "react-router-dom";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 import { route } from "../../Routes";
 
 export default function BackToHomeLink() {
   return (
-    <Link component={RouterLink} to={route.home()}>
+    <Link component={RouterLink} to={route.home()} underline="hover">
       <Grid container>
         <Grid item>
           <ArrowBackIosIcon />

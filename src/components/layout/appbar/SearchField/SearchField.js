@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { CircularProgress, TextField } from "@material-ui/core/";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import SearchIcon from "@material-ui/icons/Search";
+import { CircularProgress, TextField, Autocomplete } from "@mui/material/";
+import SearchIcon from "@mui/icons-material/Search";
 
 import { useMunicipalitiesDispatch } from "../../../../providers/MunicipalitiesProvider";
 import {
@@ -87,7 +86,7 @@ export default function SearchField({ inputRef }) {
         }
       }}
       options={options}
-      getOptionSelected={(option, value) =>
+      isOptionEqualToValue={(option, value) =>
         option.municipalityName === value.municipalityName
       }
       getOptionLabel={(option) => option.municipalityName}

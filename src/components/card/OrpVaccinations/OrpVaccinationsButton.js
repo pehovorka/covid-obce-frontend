@@ -8,8 +8,8 @@ import {
   Collapse,
   Grid,
   useTheme,
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import clsx from "clsx";
 
 import { SyringeIcon } from "../../../assets/SyringeIcon";

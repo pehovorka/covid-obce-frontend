@@ -1,7 +1,6 @@
 import React from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { Box, Grid, LinearProgress, Typography } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
+import { Alert, Box, Grid, LinearProgress, Typography } from "@mui/material";
 import "leaflet/dist/leaflet.css";
 
 import municipalitiesTopo from "../../assets/municipalitiesTopo.json";

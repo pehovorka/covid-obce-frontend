@@ -1,8 +1,8 @@
 import { React } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { route } from "../../../Routes";
-import { Button } from "@material-ui/core/";
-import SearchIcon from "@material-ui/icons/Search";
+import { Button } from "@mui/material/";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function SearchButton({ text }) {
   return (

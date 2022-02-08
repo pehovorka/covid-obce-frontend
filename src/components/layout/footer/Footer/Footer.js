@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Grid, Link, Box, Typography } from "@material-ui/core";
+import { Grid, Link, Box, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { GitHub } from "@material-ui/icons";
+import { GitHub } from "@mui/icons-material";
 
 import { route } from "../../../../Routes";
 import { CookieDialog, LastModified } from "../.";
@@ -30,7 +30,7 @@ export default function Footer() {
                 component={RouterLink}
                 to={route.info()}
                 className={classes.link}
-              >
+                underline="hover">
                 Více informací a popis dat
               </Link>
             </Typography>
@@ -42,7 +42,7 @@ export default function Footer() {
               component="a"
               onClick={() => handleClickCookiesOpen()}
               style={{ cursor: "pointer" }}
-            >
+              underline="hover">
               Cookies
             </Link>
             <CookieDialog
@@ -60,7 +60,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 className={classes.link}
-              >
+                underline="hover">
                 ÚZIS
               </Link>
               ,{" "}
@@ -69,7 +69,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 className={classes.link}
-              >
+                underline="hover">
                 ČSÚ
               </Link>
             </Typography>
@@ -84,7 +84,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   className={classes.link}
-                >
+                  underline="hover">
                   macrovector / Freepik
                 </Link>
               </Typography>
@@ -102,7 +102,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener"
             className={classes.icon}
-          >
+            underline="hover">
             <GitHub titleAccess="GitHub" />
           </Link>
         </Box>

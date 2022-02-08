@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Paper, Typography, Divider } from "@material-ui/core/";
+import { Box, Paper, Typography, Divider } from "@mui/material/";
 import { useStyles } from "./VaccineTypesChartTooltip.style";
 import { numberToString } from "../../../../utils/general";
 

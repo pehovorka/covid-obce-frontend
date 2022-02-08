@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "markdown-to-jsx";
 
-import { Container, Box, Paper, Grid } from "@material-ui/core";
+import { Container, Box, Paper, Grid } from "@mui/material";
 
 import { AppBar, Footer } from "../../components/layout";
 import { BackToHomeLink, Version } from "../../components/other";

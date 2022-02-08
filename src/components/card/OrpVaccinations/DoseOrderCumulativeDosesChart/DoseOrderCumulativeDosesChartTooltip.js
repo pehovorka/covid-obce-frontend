@@ -10,7 +10,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
-} from "@material-ui/core/";
+} from "@mui/material/";
 import { useStyles } from "./DoseOrderCumulativeDosesChartTooltip.style";
 
 import { numberToString, dateToLongString } from "../../../../utils/general";

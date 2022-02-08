@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, MenuItem, Select, Tooltip } from "@material-ui/core/";
+import { FormControl, MenuItem, Select, Tooltip } from "@mui/material/";
 
 export default function DateLimitSelect({
   limit,
@@ -13,6 +13,7 @@ export default function DateLimitSelect({
           labelId="date-limit-select-label"
           id="date-limit-select"
           value={limit}
+          variant="standard"
           onChange={(select) => handleDateLimitChange({ select, code })}
         >
           <MenuItem value={7}>7 dní</MenuItem>

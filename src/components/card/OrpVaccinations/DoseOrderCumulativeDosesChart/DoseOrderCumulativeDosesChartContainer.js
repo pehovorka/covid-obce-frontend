@@ -1,8 +1,7 @@
 import React, { lazy, Suspense, useState } from "react";
 import PropTypes from "prop-types";
 
-import { Box, Grid, Typography } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
+import { Box, Grid, Typography, Skeleton } from "@mui/material";
 
 import { DateLimitSelect } from "../..";
 import { convertToDoseOrderCumulativeDosesData } from "../orpVaccinationsUtils";
@@ -45,7 +44,12 @@ export default function DoseOrderCumulativeDosesChartContainer({
       </Box>
       <Suspense
         fallback={
-          <Skeleton variant="rect" width="100%" height={300} animation="wave" />
+          <Skeleton
+            variant="rectangular"
+            width="100%"
+            height={300}
+            animation="wave"
+          />
         }
       >
         <DoseOrderCumulativeDosesChart
