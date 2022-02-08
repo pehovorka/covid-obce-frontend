@@ -94,13 +94,13 @@ export default function SearchField({ inputRef }) {
       clearOnBlur={false}
       autoHighlight={true}
       filterOptions={(options) => options}
-      renderOption={(option) => (
-        <>
+      renderOption={(props, option) => (
+        <li {...props} key={option.municipalityId}>
           <span>{option.municipalityName}</span>
           <span className={optionsStyles.districtText}>
             (okres {option.districtName})
           </span>
-        </>
+        </li>
       )}
       renderInput={(params) => (
         <TextField

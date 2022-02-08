@@ -31,6 +31,20 @@ export const theme = createTheme(
             verticalAlign: "middle",
           },
         },
+        body: {
+          fontSize: "0.875rem",
+          lineHeight: 1.43,
+          letterSpacing: "0.01071em",
+        },
+      },
+    },
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 600,
+        md: 960,
+        lg: 1280,
+        xl: 1920,
       },
     },
   })

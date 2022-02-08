@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "markdown-to-jsx";
 
-import { Container, Box, Paper, Grid } from "@mui/material";
+import { Container, Box, Grid } from "@mui/material";
 
 import { AppBar, Footer } from "../../components/layout";
 import { BackToHomeLink, Version } from "../../components/other";
@@ -22,22 +22,18 @@ export default function InfoPage() {
       <Seo title="O webu" />
       <AppBar />
       <Container component="main">
-        <Box py={4}>
-          <Paper>
-            <Box p={6}>
-              <ReactMarkdown options={options}>{markdown}</ReactMarkdown>
-              <Box mt={6}>
-                <Grid container justifyContent="space-between">
-                  <Grid item>
-                    <BackToHomeLink />
-                  </Grid>
-                  <Grid item>
-                    <Version />
-                  </Grid>
-                </Grid>
-              </Box>
-            </Box>
-          </Paper>
+        <Box py={6}>
+          <ReactMarkdown options={options}>{markdown}</ReactMarkdown>
+          <Box mt={6}>
+            <Grid container justifyContent="space-between">
+              <Grid item>
+                <BackToHomeLink />
+              </Grid>
+              <Grid item>
+                <Version />
+              </Grid>
+            </Grid>
+          </Box>
         </Box>
       </Container>
       <Footer />

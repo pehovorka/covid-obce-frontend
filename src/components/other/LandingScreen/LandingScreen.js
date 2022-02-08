@@ -40,6 +40,7 @@ export default function LandingScreen({ inputRef }) {
                 className={classes.button}
                 variant="contained"
                 size="large"
+                color="secondary"
                 disableElevation={true}
                 startIcon={<SearchIcon />}
                 onClick={() => {

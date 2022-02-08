@@ -49,6 +49,7 @@ function OrpVaccinationsButton({ orp, municipality, municipalityName }) {
             <Box style={{ position: "relative" }}>
               <Button
                 onClick={handleExpandClick}
+                color="inherit"
                 aria-expanded={expanded}
                 aria-label="Zobrazit informace o očkování"
                 disabled={orpLoading || municipality.loading}
