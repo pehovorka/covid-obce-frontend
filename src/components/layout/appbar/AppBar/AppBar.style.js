@@ -1,6 +1,6 @@
 import { alpha } from "@mui/material";
 
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 export const useStyles = makeStyles((theme) => ({
   search: {
@@ -20,6 +20,6 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   appBar: {
-    minHeight: "72px",
+    minHeight: "4.5rem",
   },
 }));

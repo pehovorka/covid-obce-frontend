@@ -9,10 +9,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   centerIcon: {
     "& .MuiButton-startIcon": { marginLeft: 0, marginRight: 0 },
+    minWidth: "2.25rem",
   },
   centerIconOnMobile: {
     [theme.breakpoints.down("sm")]: {
       "& .MuiButton-startIcon": { marginLeft: 0, marginRight: 0 },
+      minWidth: "2.25rem",
     },
   },
   hideOnMobile: {
