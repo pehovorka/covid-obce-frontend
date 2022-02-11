@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Alert, Box } from "@mui/material";
 import "leaflet/dist/leaflet.css";
@@ -8,7 +8,8 @@ import { MUNICIPALITY_OVERVIEW_QUERY } from "../../utils/queries";
 import municipalitiesTopo from "../../assets/municipalitiesTopo.json";
 import { TopoJSON } from "./TopoJSON";
 import { useStyles } from "./Map.style";
-import { MapLoadingScreen } from "./MapLoadingScreen";
+import MapLoadingScreen from "./MapLoadingScreen";
+import Legend from "./Legend";
 
 function Map() {
   const classes = useStyles();
@@ -17,6 +18,8 @@ function Map() {
     [51.06, 18.86],
     [48.55, 12.09],
   ];
+
+  const [map, setMap] = useState(null);
 
   const municipalityCasesOverview = useQuery(MUNICIPALITY_OVERVIEW_QUERY, {
     fetchPolicy: "cache-first",
@@ -42,6 +45,7 @@ function Map() {
         boundsOptions={{ maxZoom: 10 }}
         zoomSnap={0.25}
         preferCanvas={true}
+        whenCreated={setMap}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -53,6 +57,7 @@ function Map() {
             municipalityCasesOverview.data.municipalityCasesOverview
           }
         />
+        <Legend map={map} />
       </MapContainer>
     </Box>
   );

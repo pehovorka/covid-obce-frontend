@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { GeoJSON } from "react-leaflet";
 import * as topojson from "topojson-client";
-import { numberToString } from "../../utils/general";
 
+import { numberToString } from "../../utils/general";
 import { getMunicipality } from "./utils/filterMunicipality";
 import { getColor } from "./utils/mapColors";
 
@@ -75,3 +76,7 @@ export function TopoJSON(props) {
     />
   );
 }
+
+TopoJSON.propTypes = { props: PropTypes.object };
+
+export default TopoJSON;

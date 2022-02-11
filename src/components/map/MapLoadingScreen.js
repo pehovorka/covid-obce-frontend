@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Grid, LinearProgress, Typography } from "@mui/material";
 import { useStyles } from "./MapLoadingScreen.style";
 
-export function MapLoadingScreen() {
+function MapLoadingScreen() {
   const classes = useStyles();
 
   return (
@@ -26,3 +26,5 @@ export function MapLoadingScreen() {
     </Box>
   );
 }
+
+export default MapLoadingScreen;
