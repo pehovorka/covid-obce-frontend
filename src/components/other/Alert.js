@@ -9,6 +9,7 @@ export default function Alert({
   variant,
   remote = false,
   activeCasesDisclaimer = false,
+  noMargin = false,
 }) {
   const { alertMessage } = useMunicipalitiesState();
 
@@ -24,7 +25,7 @@ export default function Alert({
   }
 
   return alertMessage || message ? (
-    <Box mx={1} my={4} textAlign="left">
+    <Box mx={noMargin ? 0 : 1} my={noMargin ? 0 : 4} textAlign="left">
       <Al severity={severity} variant={variant}>
         {message}
       </Al>

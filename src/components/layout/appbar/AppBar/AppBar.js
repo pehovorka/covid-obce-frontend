@@ -9,7 +9,7 @@ import {
 } from "@mui/material/";
 import { Link as RouterLink } from "react-router-dom";
 
-import { HomeButton, MapButton, SearchButton, SearchField } from "../.";
+import { HomeButton, MapButton, SearchField } from "../.";
 import { useStyles } from "./AppBar.style";
 import { route } from "../../../../Routes";
 
@@ -57,17 +57,11 @@ export default function AppBar({ inputRef, searchEnabled }) {
                 </Grid>
               </Grid>
             </Grid>
-            {searchEnabled ? (
+            {searchEnabled && (
               <Grid item xs={12} md lg order={{ xs: 3, md: 2 }}>
                 <div className={classes.search}>
                   <SearchField inputRef={inputRef} />
                 </div>
-              </Grid>
-            ) : (
-              <Grid item xs order={{ xs: 3, md: 2 }}>
-                <Box>
-                  <SearchButton />
-                </Box>
               </Grid>
             )}
             <Grid item order={{ xs: 2, md: 3 }}>
