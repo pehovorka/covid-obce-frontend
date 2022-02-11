@@ -6,7 +6,7 @@ import { numberToString } from "../../utils/general";
 import { getMunicipality } from "./utils/filterMunicipality";
 import { getColor } from "./utils/mapColors";
 
-export default function TopoJSON(props) {
+export function TopoJSON(props) {
   const layerRef = useRef();
   const { data, ...otherProps } = props;
 

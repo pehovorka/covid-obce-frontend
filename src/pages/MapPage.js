@@ -1,14 +1,18 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { AppBar, Footer } from "../components/layout";
+
+import { MapLoadingScreen } from "../components/map/MapLoadingScreen";
 import { Seo } from "../utils/Seo";
-import Map from "../components/map/Map";
+const Map = lazy(() => import("../components/map/Map"));
 
 export default function MapPage() {
   return (
     <>
       <Seo title="Mapa obcí" />
       <AppBar />
-      <Map />
+      <Suspense fallback={<MapLoadingScreen />}>
+        <Map />
+      </Suspense>
       <Footer />
     </>
   );
