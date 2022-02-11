@@ -9,10 +9,9 @@ import {
 } from "@mui/material/";
 import { Link as RouterLink } from "react-router-dom";
 
-import { SearchButton, SearchField } from "../.";
+import { HomeButton, MapButton, SearchButton, SearchField } from "../.";
 import { useStyles } from "./AppBar.style";
 import { route } from "../../../../Routes";
-import MapButton from "../MapButton";
 
 export default function AppBar({ inputRef, searchEnabled }) {
   const classes = useStyles();
@@ -73,7 +72,14 @@ export default function AppBar({ inputRef, searchEnabled }) {
             )}
             <Grid item order={{ xs: 2, md: 3 }}>
               <Box textAlign="right">
-                <MapButton />
+                <Grid container spacing={1}>
+                  <Grid item>
+                    <HomeButton />
+                  </Grid>
+                  <Grid item>
+                    <MapButton />
+                  </Grid>
+                </Grid>
               </Box>
             </Grid>
           </Grid>

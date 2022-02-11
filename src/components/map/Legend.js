@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import PropTypes from "prop-types";
 import ReactDOMServer from "react-dom/server";
 import L from "leaflet";
-import { Box, Grid, Paper } from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import { getColor, GRADES } from "./utils/mapColors";
 import { numberToString } from "../../utils/general";
 
@@ -15,7 +15,10 @@ function Legend({ map }) {
         const div = L.DomUtil.create("div", "info legend");
         div.innerHTML = ReactDOMServer.renderToString(
           <Paper>
-            <Box p={1}>
+            <Box p={1} maxWidth="8rem">
+              <Typography variant="body2" textAlign="center">
+                Aktivní případy na 1000 obyvatel
+              </Typography>
               <Grid container direction="column">
                 {GRADES.map((grade, index) => (
                   <Grid item key={index}>

@@ -1,20 +1,25 @@
 import { React } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { route } from "../../../Routes";
-import { Button } from "@mui/material/";
+import { Button, Hidden } from "@mui/material/";
 import MapIcon from "@mui/icons-material/Map";
 
+import { useStyles } from "./AppBarButton.style";
+
 export default function MapButton() {
+  const classes = useStyles();
+
   return (
     <Button
       startIcon={<MapIcon />}
       variant="contained"
       color="primary"
       disableElevation={true}
-      component={RouterLink}
+      component={NavLink}
       to={{ pathname: route.map() }}
+      className={`${classes.button} ${classes.centerIconOnMobile}`}
     >
-      Mapa
+      <Hidden smDown>Mapa</Hidden>
     </Button>
   );
 }
