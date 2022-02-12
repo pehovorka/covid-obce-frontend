@@ -1,5 +1,39 @@
 # Changelog
 
+<a name="3.7.0"></a>
+
+## 3.7.0 (2022-02-12)
+
+### Added
+
+- ✨ Add map title [b211163]
+- ✨ Add map legend [e216471]
+- ➕ Add MUI 5 dependencies [925956a]
+- ✨ Add map loading progress bar [2e29e57]
+- ✨ Display number of cases on map [78f61b1]
+- ✨ Add map with municipalities TopoJSON layer [2a6e7ed]
+
+### Changed
+
+- 💄 Make appbar buttons taller to fit the badge [721c43e]
+- 📱 Make appbar buttons fit most screens [805ff94]
+- 🚸 Move search button from appbar [5b4fb64]
+- 🚸 Add home button to the appbar [d943315]
+- ⚡ Add code splitting for leaflet map [ee4a389]
+- ⚡ Improve map zoom/pan performance [22f32ca]
+- 💄 Fix appbar map button layout [cb49bb9]
+- 💄 MUI migration fixes [2ec65f8]
+- 👽 Apply codemods for migration from MUI 4 to 5 [0de03fa]
+
+### Removed
+
+- ➖ Remove MUI 4 dependencies [d5241ae]
+
+### Miscellaneous
+
+- Merge pull request #21 from pehovorka/feat/municipalities-map [d33cac3]
+- 🚧 Add appbar button, speed up map loading [cb63ea4]
+
 <a name="3.6.1"></a>
 
 ## 3.6.1 (2021-12-11)
