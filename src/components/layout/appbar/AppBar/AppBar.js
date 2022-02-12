@@ -6,10 +6,10 @@ import {
   Link,
   Toolbar,
   Typography,
-} from "@material-ui/core/";
+} from "@mui/material/";
 import { Link as RouterLink } from "react-router-dom";
 
-import { SearchButton, SearchField } from "../.";
+import { HomeButton, MapButton, SearchField } from "../.";
 import { useStyles } from "./AppBar.style";
 import { route } from "../../../../Routes";
 
@@ -24,9 +24,10 @@ export default function AppBar({ inputRef, searchEnabled }) {
             container
             justifyContent="space-between"
             alignItems="center"
-            spacing={1}
+            columnSpacing={6}
+            rowSpacing={1}
           >
-            <Grid item xs sm={5} md={3} lg={2}>
+            <Grid item order={{ xs: 1, md: 1 }}>
               <Grid container spacing={1}>
                 <Grid item>
                   <img
@@ -56,19 +57,25 @@ export default function AppBar({ inputRef, searchEnabled }) {
                 </Grid>
               </Grid>
             </Grid>
-            {searchEnabled ? (
-              <Grid item xs={12} sm={7} md={9} lg={10}>
+            {searchEnabled && (
+              <Grid item xs={12} md lg order={{ xs: 3, md: 2 }}>
                 <div className={classes.search}>
                   <SearchField inputRef={inputRef} />
                 </div>
               </Grid>
-            ) : (
-              <Grid item xs={6}>
-                <Box textAlign="right">
-                  <SearchButton />
-                </Box>
-              </Grid>
             )}
+            <Grid item order={{ xs: 2, md: 3 }}>
+              <Box textAlign="right">
+                <Grid container spacing={1}>
+                  <Grid item>
+                    <HomeButton />
+                  </Grid>
+                  <Grid item>
+                    <MapButton />
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
           </Grid>
         </Box>
       </Toolbar>

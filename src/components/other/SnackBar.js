@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Snackbar } from "@material-ui/core/";
-import Alert from "@material-ui/lab/Alert";
+import { Alert, Snackbar } from "@mui/material/";
 
 import { useMunicipalitiesState } from "../../providers/MunicipalitiesProvider";
 

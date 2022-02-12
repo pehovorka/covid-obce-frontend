@@ -1,5 +1,5 @@
-import { withStyles } from "@material-ui/core/styles";
-import { Divider, Typography, Link } from "@material-ui/core";
+import withStyles from "@mui/styles/withStyles";
+import { Divider, Typography, Link } from "@mui/material";
 
 const styles = (theme) => ({
   listItem: {
@@ -17,7 +17,7 @@ export const options = {
       component: Typography,
       props: {
         gutterBottom: true,
-        variant: "h4",
+        variant: "h3",
         component: "h2",
       },
     },

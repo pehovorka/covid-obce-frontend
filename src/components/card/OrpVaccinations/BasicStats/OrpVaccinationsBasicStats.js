@@ -9,7 +9,7 @@ import {
   TableRow,
   TableBody,
   useMediaQuery,
-} from "@material-ui/core";
+} from "@mui/material";
 
 import { getDoseOrderData } from "../orpVaccinationsUtils";
 import { numberToString } from "../../../../utils/general";
@@ -27,7 +27,7 @@ export default function OrpVaccinationsBasicStats({
     return `${numberToString(share * 100, 1)} %`;
   };
 
-  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("xs"));
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   return (
     <>

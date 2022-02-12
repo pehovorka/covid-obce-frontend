@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import { Container, Box, Typography, Grid } from "@material-ui/core";
-import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
+import { Container } from "@mui/material";
 
 import { AppBar, Footer } from "../components/layout";
 import { DragAndDropCards } from "../components/card";
-import { Alert, LandingScreen } from "../components/other";
+import { Alert, LandingScreen, HomePageInfoText } from "../components/other";
 import { useMunicipalitiesState } from "../providers/MunicipalitiesProvider";
 import { Seo } from "../utils/Seo";
 
@@ -30,27 +29,7 @@ export default function HomePage(props) {
           <Container component="main">
             <Alert remote />
             <DragAndDropCards municipalities={municipalities} />
-            <Box textAlign="center" mt={2} mb={8}>
-              <Grid
-                container
-                alignItems="center"
-                justifyContent="center"
-                spacing={1}
-              >
-                <Grid item>
-                  <WbIncandescentTwoToneIcon
-                    style={{ transform: "scaleY(-1)", color: "#dbc21a" }}
-                  />
-                </Grid>
-                <Grid item>
-                  <Typography variant="body2">
-                    Přidejte až 10 obcí, řadit je můžete přetažením. Seznam obcí
-                    vám zůstane uložený do příští návštěvy.
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Alert activeCasesDisclaimer variant="outlined" />
-            </Box>
+            <HomePageInfoText />
           </Container>
         </>
       )}

@@ -79,3 +79,15 @@ export const ORP_VACCINATIONS_QUERY = gql`
     }
   }
 `;
+
+export const MUNICIPALITY_OVERVIEW_QUERY = gql`
+  query MunicipalityCasesOverview {
+    municipalityCasesOverview {
+      id
+      mn
+      rc
+      ac
+      d
+    }
+  }
+`;

@@ -9,7 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { Skeleton } from "@material-ui/lab";
+import { Skeleton } from "@mui/material";
 
 import { ChartTooltip } from "./ChartTooltip";
 import { theme } from "../../../theme";
@@ -17,7 +17,12 @@ import { theme } from "../../../theme";
 export default function MunicipalityCasesChart({ data }) {
   if (!data) {
     return (
-      <Skeleton variant="rect" width="100%" height={300} animation="wave" />
+      <Skeleton
+        variant="rectangular"
+        width="100%"
+        height={300}
+        animation="wave"
+      />
     );
   }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Paper, Grid, Typography, Divider } from "@material-ui/core/";
+import { Box, Paper, Grid, Typography, Divider } from "@mui/material/";
 import { useStyles } from "./ChartTooltip.style";
 
 export default function ChartTooltip({ active, payload, label }) {

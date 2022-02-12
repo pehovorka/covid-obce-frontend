@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Box } from "@material-ui/core";
-import { AppBar, Footer } from "../components/layout";
+import { Container, Box, Grid } from "@mui/material";
 
 import { useParams } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
@@ -8,10 +7,15 @@ import { useLazyQuery } from "@apollo/client";
 import { isValidMunicipalityCode } from "../utils/municipalityUtils";
 import { MUNICIPALITY_NAME_QUERY } from "../utils/queries";
 import { NotFoundPage } from ".";
-import { Alert, LoadingIndicator } from "../components/other";
+import {
+  Alert,
+  LoadingIndicator,
+  SearchMunicipalityBox,
+} from "../components/other";
 import { MunicipalityCard } from "../components/card";
 import { useMunicipalitiesDispatch } from "../providers/MunicipalitiesProvider";
 import { SET_SNACKBAR_MESSAGE } from "../utils/municipalitiesReducer";
+import { AppBar, Footer } from "../components/layout";
 import { Seo } from "../utils/Seo";
 
 export default function MunicipalityDetailPage() {
@@ -96,7 +100,16 @@ export default function MunicipalityDetailPage() {
                   limit={limit}
                 />
               </Box>
-              <Alert activeCasesDisclaimer variant="outlined" />
+              <Box my={5}>
+                <Grid container direction="row" spacing={4}>
+                  <Grid item xs={12} sm={3}>
+                    <SearchMunicipalityBox />
+                  </Grid>
+                  <Grid item xs={12} sm>
+                    <Alert activeCasesDisclaimer variant="outlined" noMargin />
+                  </Grid>
+                </Grid>
+              </Box>
             </>
           )}
         </Container>

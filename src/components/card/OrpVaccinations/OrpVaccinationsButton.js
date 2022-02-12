@@ -8,8 +8,8 @@ import {
   Collapse,
   Grid,
   useTheme,
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import clsx from "clsx";
 
 import { SyringeIcon } from "../../../assets/SyringeIcon";
@@ -49,6 +49,7 @@ function OrpVaccinationsButton({ orp, municipality, municipalityName }) {
             <Box style={{ position: "relative" }}>
               <Button
                 onClick={handleExpandClick}
+                color="inherit"
                 aria-expanded={expanded}
                 aria-label="Zobrazit informace o očkování"
                 disabled={orpLoading || municipality.loading}

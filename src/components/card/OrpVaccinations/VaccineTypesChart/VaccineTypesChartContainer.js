@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import PropTypes from "prop-types";
-import { Typography } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
+import { Typography, Skeleton } from "@mui/material";
 
 import { convertToVaccineTypes } from "../orpVaccinationsUtils";
 
@@ -15,7 +14,12 @@ export default function VaccineTypesChartContainer({ vaccines, vaccineNames }) {
       </Typography>
       <Suspense
         fallback={
-          <Skeleton variant="rect" width="100%" height={260} animation="wave" />
+          <Skeleton
+            variant="rectangular"
+            width="100%"
+            height={260}
+            animation="wave"
+          />
         }
       >
         <VaccineTypesChart
