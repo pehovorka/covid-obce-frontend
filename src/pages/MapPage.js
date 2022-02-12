@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { AppBar, Footer } from "../components/layout";
 
-import MapLoadingScreen from "../components/map/MapLoadingScreen";
+import { MapLoadingScreen } from "../components/map";
 import { Seo } from "../utils/Seo";
 const Map = lazy(() => import("../components/map/Map"));
 

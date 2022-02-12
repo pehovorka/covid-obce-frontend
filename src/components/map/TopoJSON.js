@@ -7,7 +7,7 @@ import { numberToString } from "../../utils/general";
 import { getMunicipality } from "./utils/filterMunicipality";
 import { getColor } from "./utils/mapColors";
 
-export function TopoJSON(props) {
+function TopoJSON(props) {
   const layerRef = useRef();
   const { data, ...otherProps } = props;
 
@@ -34,18 +34,18 @@ export function TopoJSON(props) {
     };
     layer.options.fillColor = feature.properties.color;
     layer.bindPopup(
-      `<b>${feature.properties.mn}</b>
-      <br />
-      <br />
-      Aktivní případy na 1000 obyvatel: ${
-        feature.properties.rc !== null
-          ? numberToString(feature.properties.rc, 1)
-          : "není k dispozici"
-      }
-      <br />
-      Aktivní případy:  ${numberToString(feature.properties.ac, 1)}
-      <br />
-      <br />
+      `<h3>${feature.properties.mn}</h3>
+      <ul style="padding-left: 0; list-style: none">
+      <li>
+        Aktivní případy na 1000 obyvatel: ${
+          feature.properties.rc !== null
+            ? numberToString(feature.properties.rc, 1)
+            : "není k dispozici"
+        }</li>
+      <li>
+        Aktivní případy:  ${numberToString(feature.properties.ac, 1)}
+      </li>
+      </ul>
       <i>Data aktuální k ${new Date(feature.properties.d).toLocaleDateString(
         "cs-CZ"
       )}</i>

@@ -6,10 +6,8 @@ import { useQuery } from "@apollo/client";
 
 import { MUNICIPALITY_OVERVIEW_QUERY } from "../../utils/queries";
 import municipalitiesTopo from "../../assets/municipalitiesTopo.json";
-import { TopoJSON } from "./TopoJSON";
+import { TopoJSON, MapLoadingScreen, Legend, Title } from ".";
 import { useStyles } from "./Map.style";
-import MapLoadingScreen from "./MapLoadingScreen";
-import Legend from "./Legend";
 
 function Map() {
   const classes = useStyles();
@@ -46,6 +44,7 @@ function Map() {
         zoomSnap={0.25}
         preferCanvas={true}
         whenCreated={setMap}
+        zoomControl={false}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -58,6 +57,7 @@ function Map() {
           }
         />
         <Legend map={map} />
+        <Title map={map} />
       </MapContainer>
     </Box>
   );
