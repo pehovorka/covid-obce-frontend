@@ -1,8 +1,7 @@
 # Changelog
 
-<a name="3.7.0"></a>
-
-## 3.7.0 (2022-02-12)
+<a name="3.7.1"></a>
+## 3.7.1 (2022-02-12)
 
 ### Added
 
@@ -31,8 +30,10 @@
 
 ### Miscellaneous
 
-- Merge pull request #21 from pehovorka/feat/municipalities-map [d33cac3]
+- 🔍 Add map route to sitemap [c891aa5]
+-  Merge pull request #21 from pehovorka/feat/municipalities-map [d33cac3]
 - 🚧 Add appbar button, speed up map loading [cb63ea4]
+
 
 <a name="3.6.1"></a>
 
