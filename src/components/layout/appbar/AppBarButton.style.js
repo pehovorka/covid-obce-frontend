@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     "&.active": {
       background: "rgba(0, 0, 0, 0.2)",
     },
-    height: "2.25rem",
+    height: "3rem",
   },
   centerIcon: {
     "& .MuiButton-startIcon": { marginLeft: 0, marginRight: 0 },
