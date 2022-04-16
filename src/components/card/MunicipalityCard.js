@@ -46,6 +46,7 @@ export default function MunicipalityCard({
   provided,
   closeButtonHidden,
   handleDateLimitChange,
+  isDraggingOver,
 }) {
   const dispatch = useMunicipalitiesDispatch();
 
@@ -136,7 +137,11 @@ export default function MunicipalityCard({
         }
         title={name}
       />
-      <CardContent>
+      <CardContent
+        style={{
+          ...(isDraggingOver && { pointerEvents: "none" }),
+        }}
+      >
         <MunicipalityCasesStats municipality={municipality} code={code} />
         <Suspense
           fallback={
@@ -177,4 +182,5 @@ MunicipalityCard.propTypes = {
   provided: PropTypes.object,
   closeButtonHidden: PropTypes.bool,
   handleDateLimitChange: PropTypes.func,
+  isDraggingOver: PropTypes.bool,
 };
