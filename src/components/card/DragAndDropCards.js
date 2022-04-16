@@ -29,7 +29,7 @@ export default function DragAndDropCards({ municipalities }) {
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId="municipalities">
-        {(provided) => (
+        {(provided, snapshot) => (
           <Box {...provided.droppableProps} ref={provided.innerRef} mt={1}>
             {municipalities.map((municipality, index) => (
               <Draggable
@@ -50,6 +50,7 @@ export default function DragAndDropCards({ municipalities }) {
                       index={index}
                       provided={provided}
                       handleDateLimitChange={handleDateLimitChange}
+                      isDraggingOver={snapshot.isDraggingOver}
                     />
                   </Box>
                 )}
