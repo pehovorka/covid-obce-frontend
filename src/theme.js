@@ -22,7 +22,17 @@ export const theme = createTheme(
         newCasesUnder65: "#B84100",
         newCasesAverage: "#F27F41",
       },
-      orpVaccinations: ["#0078B8", "#E67145", "#1FC44B", "#E6B617", "#2EA5E6"],
+      orpVaccinations: [
+        "#0078B8",
+        "#E67145",
+        "#1FC44B",
+        "#E6B617",
+        "#2EA5E6",
+        "#9A2883",
+        "#0B282F",
+        "#7C7C6D",
+        "#5C404A",
+      ],
     },
     overrides: {
       MuiCssBaseline: {

@@ -51,21 +51,23 @@ export const convertToVaccineTypes = (data, vaccineNames) => {
     },
   ];
 
-  const vaccineTypes = data.map((vaccine) => {
-    const vaccineName = getVaccineName(vaccine.v).vaccineName || vaccine.v;
-    const vaccineManufacturer = vaccineManufacturers.find(
-      (vaccineManufacturer) => vaccineName === vaccineManufacturer.vaccineName
-    )?.vaccineManufacturer;
+  const vaccineTypes = data
+    .filter((vaccine) => vaccine.td !== 0)
+    .map((vaccine) => {
+      const vaccineName = getVaccineName(vaccine.v).vaccineName || vaccine.v;
+      const vaccineManufacturer = vaccineManufacturers.find(
+        (vaccineManufacturer) => vaccineName === vaccineManufacturer.vaccineName
+      )?.vaccineManufacturer;
 
-    const result = {
-      value: vaccine.td,
-      name: vaccineManufacturer
-        ? `${vaccineName} (${vaccineManufacturer})`
-        : vaccineName,
-    };
+      const result = {
+        value: vaccine.td,
+        name: vaccineManufacturer
+          ? `${vaccineName} (${vaccineManufacturer})`
+          : vaccineName,
+      };
 
-    return result;
-  });
+      return result;
+    });
 
   return vaccineTypes;
 };

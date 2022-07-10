@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="3.8.0"></a>
+
+## 3.8.0 (2022-07-09)
+
+### Added
+
+- ✨ Hide vaccine types with zero doses [8fadba7]
+
 <a name="3.7.2"></a>
 
 ## 3.7.2 (2022-04-16)

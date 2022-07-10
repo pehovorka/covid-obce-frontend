@@ -1,6 +1,6 @@
 {
   "name": "covidvobcich-web",
-  "version": "3.7.2",
+  "version": "3.8.0",
   "private": true,
   "homepage": "https://covidvobcich.cz",
   "dependencies": {
@@ -30,7 +30,7 @@
     "react-leaflet": "^3.2.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
-    "recharts": "2.1.1",
+    "recharts": "2.1.12",
     "swr": "^0.5.5",
     "topojson-client": "^3.1.0",
     "web-vitals": "^0.2.4"
