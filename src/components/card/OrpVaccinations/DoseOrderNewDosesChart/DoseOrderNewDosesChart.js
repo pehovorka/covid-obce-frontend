@@ -21,10 +21,12 @@ export default function DoseOrderNewDosesChart({ data }) {
   const NAMES = {
     dose1ND: "První dávky",
     dose2ND: "Druhé dávky",
-    dose3ND: "Posilující dávky",
+    dose3ND: "1. posilující dávky",
+    dose4ND: "2. posilující dávky",
     dose1NDA: "7denní průměr prvních dávek",
     dose2NDA: "7denní průměr druhých dávek",
-    dose3NDA: "7denní průměr posilujících dávek",
+    dose3NDA: "7denní průměr 1. posilujících dávek",
+    dose4NDA: "7denní průměr 2. posilujících dávek",
     dosesAllNDA: "7denní průměr nových dávek celkem",
   };
 
@@ -67,6 +69,12 @@ export default function DoseOrderNewDosesChart({ data }) {
           fill={colors[2]}
           name={NAMES.dose3ND}
         />
+        <Bar
+          stackId="newDosesSplit"
+          dataKey={(day) => getDoseOrderData(day, 4).nd}
+          fill={colors[5]}
+          name={NAMES.dose4ND}
+        />
         <Line
           type="linear"
           dot={false}
@@ -93,12 +101,19 @@ export default function DoseOrderNewDosesChart({ data }) {
           dataKey={(day) => getDoseOrderData(day, 3).nda}
           name={NAMES.dose3NDA}
         />
+        <Line
+          display="none"
+          activeDot={false}
+          dataKey={(day) => getDoseOrderData(day, 4).nda}
+          name={NAMES.dose4NDA}
+        />
         <Legend
           align="left"
           payload={[
             { value: NAMES.dose1ND, type: "rect", color: colors[0] },
             { value: NAMES.dose2ND, type: "rect", color: colors[1] },
             { value: NAMES.dose3ND, type: "rect", color: colors[2] },
+            { value: NAMES.dose4ND, type: "line", color: colors[5] },
             { value: NAMES.dosesAllNDA, type: "line", color: colors[3] },
           ]}
         />

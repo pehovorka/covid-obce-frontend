@@ -67,7 +67,7 @@ export default function OrpVaccinationsBasicStats({
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Posilující</TableCell>
+              <TableCell>1. posilující</TableCell>
               <TableCell align="right">
                 {getPopulationPercentage(getDoseOrderData(lastDay, 3).td)}
               </TableCell>
@@ -76,6 +76,18 @@ export default function OrpVaccinationsBasicStats({
               </TableCell>
               <TableCell align="right">
                 {numberToString(getDoseOrderData(lastDay, 3).nd)}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>2. posilující</TableCell>
+              <TableCell align="right">
+                {getPopulationPercentage(getDoseOrderData(lastDay, 4).td)}
+              </TableCell>
+              <TableCell align="right">
+                {numberToString(getDoseOrderData(lastDay, 4).td)}
+              </TableCell>
+              <TableCell align="right">
+                {numberToString(getDoseOrderData(lastDay, 4).nd)}
               </TableCell>
             </TableRow>
           </TableBody>

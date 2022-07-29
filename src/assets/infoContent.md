@@ -52,7 +52,7 @@ Množství vykázaných očkování dle bydliště očkované osoby na úrovni o
 
 ### Vykázaná očkování dle pořadí dávky
 
-- **Dávka** – pořadí dávky (první, druhá, posilující) danou očkovací látkou.
+- **Dávka** – pořadí dávky (první, druhá, první posilující, druhá posilující) danou očkovací látkou.
 - **% obyvatel** – podíl vykázaných dávek očkování daným pořadím dávky na území ORP k celkovému počtu obyvatel ve správním obvodu zvolené ORP (celkový počet obyvatel ve správním obvodu ORP lze nalézt pod tabulkou)
 - **Celkem dávek** – počet vykázaných dávek očkování daným pořadím dávky na území ORP za celou dobu
 - **Nových dávek** – počet vykázaných dávek očkování daným pořadím dávky na území ORP za poslední den
