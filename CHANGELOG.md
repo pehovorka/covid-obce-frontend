@@ -1,5 +1,17 @@
 # Changelog
 
+<a name="3.9.0"></a>
+## 3.9.0 (2022-07-29)
+
+### Added
+
+- ✨ Add 4th vaccination dose [508fdb0]
+
+### Miscellaneous
+
+-  Merge pull request #25 from pehovorka/feat/add-4th-dose [18dc588]
+
+
 <a name="3.8.0"></a>
 
 ## 3.8.0 (2022-07-09)
