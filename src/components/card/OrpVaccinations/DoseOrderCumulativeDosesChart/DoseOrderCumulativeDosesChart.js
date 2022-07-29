@@ -22,10 +22,12 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
   const NAMES = {
     dose1TD: "První dávky",
     dose2TD: "Druhé dávky",
-    dose3TD: "Posilující dávky",
+    dose3TD: "1. posilující dávky",
+    dose4TD: "2. posilující dávky",
     dose1TDRelative: "První dávky – % populace",
     dose2TDRelative: "Druhé dávky – % populace",
-    dose3TDRelative: "Posilující dávky – % populace",
+    dose3TDRelative: "1. posilující dávky – % populace",
+    dose4TDRelative: "2. posilující dávky – % populace",
   };
 
   return (
@@ -107,12 +109,29 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
           display="none"
           activeDot={false}
         />
+        <Area
+          type="linear"
+          dataKey={(day) => getDoseOrderData(day, 4).td}
+          name={NAMES.dose4TD}
+          fill={colors[5]}
+          stroke={colors[5]}
+          strokeWidth={3}
+          yAxisId="left"
+        />
+        <Line
+          dataKey={(day) => (getDoseOrderData(day, 4).td / population) * 100}
+          name={NAMES.dose4TDRelative}
+          yAxisId="right"
+          display="none"
+          activeDot={false}
+        />
         <Legend
           align="left"
           payload={[
             { value: NAMES.dose1TD, type: "line", color: colors[0] },
             { value: NAMES.dose2TD, type: "line", color: colors[1] },
             { value: NAMES.dose3TD, type: "line", color: colors[2] },
+            { value: NAMES.dose4TD, type: "line", color: colors[5] },
           ]}
         />
       </ComposedChart>

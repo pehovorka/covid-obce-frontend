@@ -91,7 +91,7 @@ export default function DoseOrderCumulativeDosesChartTooltip({
 
               <TableRow key="3rd">
                 <TableCell style={{ color: getProperty(NAMES.dose3TD).color }}>
-                  Posilující
+                  1. posilující
                 </TableCell>
                 <TableCell
                   align="right"
@@ -107,6 +107,26 @@ export default function DoseOrderCumulativeDosesChartTooltip({
                   style={{ color: getProperty(NAMES.dose3TD).color }}
                 >
                   {numberToString(getProperty(NAMES.dose3TD).value)}
+                </TableCell>
+              </TableRow>
+              <TableRow key="4th">
+                <TableCell style={{ color: getProperty(NAMES.dose4TD).color }}>
+                  2. posilující
+                </TableCell>
+                <TableCell
+                  align="right"
+                  style={{ color: getProperty(NAMES.dose4TD).color }}
+                >
+                  {`${numberToString(
+                    getProperty(NAMES.dose4TDRelative).value,
+                    1
+                  )} %`}
+                </TableCell>
+                <TableCell
+                  align="right"
+                  style={{ color: getProperty(NAMES.dose4TD).color }}
+                >
+                  {numberToString(getProperty(NAMES.dose4TD).value)}
                 </TableCell>
               </TableRow>
             </TableBody>
