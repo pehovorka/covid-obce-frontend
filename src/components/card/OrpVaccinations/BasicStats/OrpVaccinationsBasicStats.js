@@ -29,6 +29,13 @@ export default function OrpVaccinationsBasicStats({
 
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
+  const doses = {
+    first: getDoseOrderData(lastDay, 1),
+    second: getDoseOrderData(lastDay, 2),
+    firstBooster: getDoseOrderData(lastDay, 3),
+    secondBooster: getDoseOrderData(lastDay, 4),
+  };
+
   return (
     <>
       <Box my={2}>
@@ -45,51 +52,53 @@ export default function OrpVaccinationsBasicStats({
             <TableRow>
               <TableCell>1.</TableCell>
               <TableCell align="right">
-                {getPopulationPercentage(getDoseOrderData(lastDay, 1).td)}
+                {getPopulationPercentage(doses.first.td)}
               </TableCell>
               <TableCell align="right">
-                {numberToString(getDoseOrderData(lastDay, 1).td)}
+                {numberToString(doses.first.td)}
               </TableCell>
               <TableCell align="right">
-                {numberToString(getDoseOrderData(lastDay, 1).nd)}
+                {numberToString(doses.first.nd)}
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>2.</TableCell>
               <TableCell align="right">
-                {getPopulationPercentage(getDoseOrderData(lastDay, 2).td)}
+                {getPopulationPercentage(doses.second.td)}
               </TableCell>
               <TableCell align="right">
-                {numberToString(getDoseOrderData(lastDay, 2).td)}
+                {numberToString(doses.second.td)}
               </TableCell>
               <TableCell align="right">
-                {numberToString(getDoseOrderData(lastDay, 2).nd)}
+                {numberToString(doses.second.nd)}
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>1. posilující</TableCell>
               <TableCell align="right">
-                {getPopulationPercentage(getDoseOrderData(lastDay, 3).td)}
+                {getPopulationPercentage(doses.firstBooster.td)}
               </TableCell>
               <TableCell align="right">
-                {numberToString(getDoseOrderData(lastDay, 3).td)}
+                {numberToString(doses.firstBooster.td)}
               </TableCell>
               <TableCell align="right">
-                {numberToString(getDoseOrderData(lastDay, 3).nd)}
+                {numberToString(doses.firstBooster.nd)}
               </TableCell>
             </TableRow>
-            <TableRow>
-              <TableCell>2. posilující</TableCell>
-              <TableCell align="right">
-                {getPopulationPercentage(getDoseOrderData(lastDay, 4).td)}
-              </TableCell>
-              <TableCell align="right">
-                {numberToString(getDoseOrderData(lastDay, 4).td)}
-              </TableCell>
-              <TableCell align="right">
-                {numberToString(getDoseOrderData(lastDay, 4).nd)}
-              </TableCell>
-            </TableRow>
+            {doses.secondBooster && (
+              <TableRow>
+                <TableCell>2. posilující</TableCell>
+                <TableCell align="right">
+                  {getPopulationPercentage(doses.secondBooster.td)}
+                </TableCell>
+                <TableCell align="right">
+                  {numberToString(doses.secondBooster.td)}
+                </TableCell>
+                <TableCell align="right">
+                  {numberToString(doses.secondBooster.nd)}
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </Box>

@@ -1,5 +1,6 @@
 import React from "react";
 import { captureException } from "@sentry/react";
+import { Alert, AlertTitle } from "@mui/material";
 
 export class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -32,20 +33,11 @@ export class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       // You can render any custom fallback UI
       return (
-        <div style={{ padding: "50px" }}>
-          <h1>Něco se pokazilo.</h1>
-          <p>
-            Zkuste odstranit uložené obce z prohlížeče pomocí tlačítka níže. V
-            případě přetrvávajících potíží mě prosím kontaktujte na e-mailu
-            covid-obce@petrhovorka.com
-          </p>
-          <button
-            id="delete-localstorage"
-            onClick={() => this.deleteLocalStorage()}
-          >
-            Odstranit uložené obce
-          </button>
-        </div>
+        <Alert severity="error">
+          <AlertTitle>Něco se pokazilo</AlertTitle>
+          Zkuste to prosím znovu později. V případě přetrvávajících potíží mě
+          prosím kontaktujte na e-mailu covid-obce@petrhovorka.com.
+        </Alert>
       );
     }
 

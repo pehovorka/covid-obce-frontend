@@ -98,23 +98,27 @@ export default function DoseOrderNewDosesChartTooltip({
                   {numberToString(getProperty(NAMES.dose3NDA).value, 1)}
                 </TableCell>
               </TableRow>
-              <TableRow key="4th">
-                <TableCell style={{ color: getProperty(NAMES.dose4ND).color }}>
-                  2. posilující
-                </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: getProperty(NAMES.dose4ND).color }}
-                >
-                  {numberToString(getProperty(NAMES.dose4ND).value)}
-                </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: getProperty(NAMES.dose4ND).color }}
-                >
-                  {numberToString(getProperty(NAMES.dose4NDA).value, 1)}
-                </TableCell>
-              </TableRow>
+              {getProperty(NAMES.dose4TD) && (
+                <TableRow key="4th">
+                  <TableCell
+                    style={{ color: getProperty(NAMES.dose4ND).color }}
+                  >
+                    2. posilující
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ color: getProperty(NAMES.dose4ND).color }}
+                  >
+                    {numberToString(getProperty(NAMES.dose4ND).value)}
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    style={{ color: getProperty(NAMES.dose4ND).color }}
+                  >
+                    {numberToString(getProperty(NAMES.dose4NDA).value, 1)}
+                  </TableCell>
+                </TableRow>
+              )}
               <TableRow key="total">
                 <TableCell>Celkem</TableCell>
                 <TableCell align="right">

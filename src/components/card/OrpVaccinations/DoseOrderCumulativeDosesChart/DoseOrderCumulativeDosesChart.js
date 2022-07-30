@@ -12,7 +12,10 @@ import {
 } from "recharts";
 
 import ChartTooltip from "./DoseOrderCumulativeDosesChartTooltip";
-import { getDoseOrderData } from "../orpVaccinationsUtils";
+import {
+  containsSecondBooster,
+  getDoseOrderData,
+} from "../orpVaccinationsUtils";
 import { theme } from "../../../../theme";
 import { numberToString } from "../../../../utils/general";
 
@@ -29,6 +32,8 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
     dose3TDRelative: "1. posilující dávky – % populace",
     dose4TDRelative: "2. posilující dávky – % populace",
   };
+
+  const secondBooster = containsSecondBooster(data);
 
   return (
     <ResponsiveContainer width="100%" height={300}>
@@ -109,29 +114,37 @@ export default function DoseOrderCumulativeDosesChart({ data, population }) {
           display="none"
           activeDot={false}
         />
-        <Area
-          type="linear"
-          dataKey={(day) => getDoseOrderData(day, 4).td}
-          name={NAMES.dose4TD}
-          fill={colors[5]}
-          stroke={colors[5]}
-          strokeWidth={3}
-          yAxisId="left"
-        />
-        <Line
-          dataKey={(day) => (getDoseOrderData(day, 4).td / population) * 100}
-          name={NAMES.dose4TDRelative}
-          yAxisId="right"
-          display="none"
-          activeDot={false}
-        />
+        {secondBooster && (
+          <>
+            <Area
+              type="linear"
+              dataKey={(day) => getDoseOrderData(day, 4)?.td}
+              name={NAMES.dose4TD}
+              fill={colors[5]}
+              stroke={colors[5]}
+              strokeWidth={3}
+              yAxisId="left"
+            />
+            <Line
+              dataKey={(day) =>
+                (getDoseOrderData(day, 4)?.td / population) * 100
+              }
+              name={NAMES.dose4TDRelative}
+              yAxisId="right"
+              display="none"
+              activeDot={false}
+            />
+          </>
+        )}
         <Legend
           align="left"
           payload={[
             { value: NAMES.dose1TD, type: "line", color: colors[0] },
             { value: NAMES.dose2TD, type: "line", color: colors[1] },
             { value: NAMES.dose3TD, type: "line", color: colors[2] },
-            { value: NAMES.dose4TD, type: "line", color: colors[5] },
+            ...(secondBooster
+              ? [{ value: NAMES.dose4TD, type: "line", color: colors[5] }]
+              : []),
           ]}
         />
       </ComposedChart>
