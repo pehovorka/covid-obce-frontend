@@ -12,7 +12,10 @@ import {
 } from "recharts";
 
 import ChartTooltip from "./DoseOrderNewDosesChartTooltip";
-import { getDoseOrderData } from "../orpVaccinationsUtils";
+import {
+  containsSecondBooster,
+  getDoseOrderData,
+} from "../orpVaccinationsUtils";
 import { theme } from "../../../../theme";
 
 export default function DoseOrderNewDosesChart({ data }) {
@@ -29,6 +32,8 @@ export default function DoseOrderNewDosesChart({ data }) {
     dose4NDA: "7denní průměr 2. posilujících dávek",
     dosesAllNDA: "7denní průměr nových dávek celkem",
   };
+
+  const secondBooster = containsSecondBooster(data);
 
   return (
     <ResponsiveContainer width="100%" height={300}>
@@ -69,12 +74,14 @@ export default function DoseOrderNewDosesChart({ data }) {
           fill={colors[2]}
           name={NAMES.dose3ND}
         />
-        <Bar
-          stackId="newDosesSplit"
-          dataKey={(day) => getDoseOrderData(day, 4).nd}
-          fill={colors[5]}
-          name={NAMES.dose4ND}
-        />
+        {secondBooster && (
+          <Bar
+            stackId="newDosesSplit"
+            dataKey={(day) => getDoseOrderData(day, 4)?.nd}
+            fill={colors[5]}
+            name={NAMES.dose4ND}
+          />
+        )}
         <Line
           type="linear"
           dot={false}
@@ -101,19 +108,29 @@ export default function DoseOrderNewDosesChart({ data }) {
           dataKey={(day) => getDoseOrderData(day, 3).nda}
           name={NAMES.dose3NDA}
         />
-        <Line
-          display="none"
-          activeDot={false}
-          dataKey={(day) => getDoseOrderData(day, 4).nda}
-          name={NAMES.dose4NDA}
-        />
+        {secondBooster && (
+          <Line
+            display="none"
+            activeDot={false}
+            dataKey={(day) => getDoseOrderData(day, 4)?.nda}
+            name={NAMES.dose4NDA}
+          />
+        )}
         <Legend
           align="left"
           payload={[
             { value: NAMES.dose1ND, type: "rect", color: colors[0] },
             { value: NAMES.dose2ND, type: "rect", color: colors[1] },
             { value: NAMES.dose3ND, type: "rect", color: colors[2] },
-            { value: NAMES.dose4ND, type: "line", color: colors[5] },
+            ...(secondBooster
+              ? [
+                  {
+                    value: NAMES.dose4ND,
+                    type: "line",
+                    color: colors[5],
+                  },
+                ]
+              : []),
             { value: NAMES.dosesAllNDA, type: "line", color: colors[3] },
           ]}
         />

@@ -1,6 +1,19 @@
 # Changelog
 
+<a name="3.9.1"></a>
+
+## 3.9.1 (2022-07-30)
+
+### Fixed
+
+- 🐛 Hide missing second booster vaccine data [19aefaf]
+
+### Miscellaneous
+
+- Merge pull request #27 from pehovorka/fix/missing-second-booster-vaccination-data [68b32b4]
+
 <a name="3.9.0"></a>
+
 ## 3.9.0 (2022-07-29)
 
 ### Added
@@ -9,8 +22,7 @@
 
 ### Miscellaneous
 
--  Merge pull request #25 from pehovorka/feat/add-4th-dose [18dc588]
-
+- Merge pull request #25 from pehovorka/feat/add-4th-dose [18dc588]
 
 <a name="3.8.0"></a>
 
