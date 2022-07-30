@@ -90,3 +90,6 @@ const getAverages = (days) => {
   Object.keys(sum).forEach((key) => (sum[key] = sum[key] / 7));
   return sum;
 };
+
+export const containsSecondBooster = (data) =>
+  getDoseOrderData(data[data.length - 1], 4) ? true : false;

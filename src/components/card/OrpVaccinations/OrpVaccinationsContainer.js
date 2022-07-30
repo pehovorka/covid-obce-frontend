@@ -11,6 +11,7 @@ import DoseOrderNewDosesChartContainer from "./DoseOrderNewDosesChart/DoseOrderN
 import DoseOrderCumulativeDosesChartContainer from "./DoseOrderCumulativeDosesChart/DoseOrderCumulativeDosesChartContainer";
 import OrpVaccinationsBasicStatsContainer from "./BasicStats/OrpVaccinationsBasicStatsContainer";
 import VaccineTypesChartContainer from "./VaccineTypesChart/VaccineTypesChartContainer";
+import { ErrorBoundary } from "../../../ErrorBoundary";
 
 export default function OrpVaccinationsContainer({
   orpId,
@@ -42,49 +43,52 @@ export default function OrpVaccinationsContainer({
   const lastDay = orpVaccinations.days[orpVaccinations.days.length - 1];
 
   return (
-    <Box px={{ xs: 2, sm: 5 }} py={2}>
-      <Typography variant="h5" gutterBottom>
-        Základní přehled k {new Date(lastDay.date).toLocaleDateString("cs-CZ")}
-      </Typography>
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
-          <OrpVaccinationsBasicStatsContainer
-            lastDay={lastDay}
-            orpPopulation={orpVaccinations.orpPopulation}
-            orpName={orpVaccinations.orpName}
-            municipalityName={municipalityName}
-            municipalityPopulation={municipalityPopulation}
-          />
+    <ErrorBoundary>
+      <Box px={{ xs: 2, sm: 5 }} py={2}>
+        <Typography variant="h5" gutterBottom>
+          Základní přehled k{" "}
+          {new Date(lastDay.date).toLocaleDateString("cs-CZ")}
+        </Typography>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={6}>
+            <OrpVaccinationsBasicStatsContainer
+              lastDay={lastDay}
+              orpPopulation={orpVaccinations.orpPopulation}
+              orpName={orpVaccinations.orpName}
+              municipalityName={municipalityName}
+              municipalityPopulation={municipalityPopulation}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <VaccineTypesChartContainer
+              vaccines={lastDay.vaccines}
+              vaccineNames={orpVaccinations.vaccineNames}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <DoseOrderNewDosesChartContainer data={orpVaccinations.days} />
+          </Grid>
+          <Grid item xs={12}>
+            <DoseOrderCumulativeDosesChartContainer
+              data={orpVaccinations.days}
+              orpPopulation={orpVaccinations.orpPopulation}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Alert severity="info">
+              Data o očkování nejsou k dispozici na úrovni jednotlivých obcí.
+              Zobrazená data se vztahují ke správnímu obvodu obce s rozšířenou
+              působností, do kterého vámi vyhledaná obec spadá. Více informací
+              lze nalézt na{" "}
+              <Link component={RouterLink} to={route.info} underline="hover">
+                stránce s popisem dat
+              </Link>
+              .
+            </Alert>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <VaccineTypesChartContainer
-            vaccines={lastDay.vaccines}
-            vaccineNames={orpVaccinations.vaccineNames}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <DoseOrderNewDosesChartContainer data={orpVaccinations.days} />
-        </Grid>
-        <Grid item xs={12}>
-          <DoseOrderCumulativeDosesChartContainer
-            data={orpVaccinations.days}
-            orpPopulation={orpVaccinations.orpPopulation}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Alert severity="info">
-            Data o očkování nejsou k dispozici na úrovni jednotlivých obcí.
-            Zobrazená data se vztahují ke správnímu obvodu obce s rozšířenou
-            působností, do kterého vámi vyhledaná obec spadá. Více informací lze
-            nalézt na{" "}
-            <Link component={RouterLink} to={route.info} underline="hover">
-              stránce s popisem dat
-            </Link>
-            .
-          </Alert>
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </ErrorBoundary>
   );
 }
 
