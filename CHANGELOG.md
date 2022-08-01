@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="3.9.2"></a>
+## 3.9.2 (2022-08-01)
+
+### Fixed
+
+- 🐛 Fix missing 2nd booster in chart tooltip [2fe63f7]
+
+
 <a name="3.9.1"></a>
 
 ## 3.9.1 (2022-07-30)
