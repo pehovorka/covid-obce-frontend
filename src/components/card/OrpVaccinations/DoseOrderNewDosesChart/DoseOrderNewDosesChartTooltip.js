@@ -98,7 +98,7 @@ export default function DoseOrderNewDosesChartTooltip({
                   {numberToString(getProperty(NAMES.dose3NDA).value, 1)}
                 </TableCell>
               </TableRow>
-              {getProperty(NAMES.dose4TD) && (
+              {getProperty(NAMES.dose4ND) && (
                 <TableRow key="4th">
                   <TableCell
                     style={{ color: getProperty(NAMES.dose4ND).color }}
