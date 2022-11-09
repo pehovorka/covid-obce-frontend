@@ -37,37 +37,45 @@ export const convertToDoseOrderNewDosesData = (days, limit) => {
 };
 
 export const convertToVaccineTypes = (data, vaccineNames) => {
+  const FEATURED_ITEMS_SIZE = 6;
+
   if (!data) return null;
   const getVaccineName = (vaccineId) =>
     vaccineNames.find((vaccine) => vaccine.vaccineId === vaccineId);
 
-  const vaccineManufacturers = [
-    { vaccineName: "Comirnaty", vaccineManufacturer: "Pfizer–BioNTech" },
-    { vaccineName: "SPIKEVAX", vaccineManufacturer: "Moderna" },
-    { vaccineName: "VAXZEVRIA", vaccineManufacturer: "AstraZeneca" },
-    {
-      vaccineName: "COVID-19 Vaccine Janssen",
-      vaccineManufacturer: "Johnson & Johnson",
-    },
-  ];
+  const vaccineManufacturers = {
+    Comirnaty: "Pfizer–BioNTech",
+    SPIKEVAX: "Moderna",
+    VAXZEVRIA: "AstraZeneca",
+    "COVID-19 Vaccine Janssen": "Johnson & Johnson",
+  };
 
-  const vaccineTypes = data
+  const sortedData = data
     .filter((vaccine) => vaccine.td !== 0)
-    .map((vaccine) => {
-      const vaccineName = getVaccineName(vaccine.v).vaccineName || vaccine.v;
-      const vaccineManufacturer = vaccineManufacturers.find(
-        (vaccineManufacturer) => vaccineName === vaccineManufacturer.vaccineName
-      )?.vaccineManufacturer;
+    .sort((a, b) => b.td - a.td);
 
-      const result = {
-        value: vaccine.td,
-        name: vaccineManufacturer
-          ? `${vaccineName} (${vaccineManufacturer})`
-          : vaccineName,
-      };
+  const featuredItems = sortedData.slice(0, FEATURED_ITEMS_SIZE);
+  const itemsToGroup = sortedData.slice(FEATURED_ITEMS_SIZE, data.length);
+  const groupedTD = itemsToGroup.reduce((acc, obj) => acc + obj.td, 0);
 
-      return result;
+  if (groupedTD > 0) {
+    featuredItems.push({
+      v: "Ostatní",
+      td: groupedTD,
     });
+  }
+
+  const vaccineTypes = featuredItems.map((vaccine) => {
+    const vaccineName = getVaccineName(vaccine.v)?.vaccineName ?? vaccine.v;
+    const vaccineManufacturer = vaccineManufacturers[vaccineName] ?? null;
+
+    return {
+      value: vaccine.td,
+      name: vaccineManufacturer
+        ? `${vaccineName} (${vaccineManufacturer})`
+        : vaccineName,
+    };
+  });
 
   return vaccineTypes;
 };
