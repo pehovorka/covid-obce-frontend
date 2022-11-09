@@ -58,12 +58,14 @@ export const convertToVaccineTypes = (data, vaccineNames) => {
   const itemsToGroup = sortedData.slice(FEATURED_ITEMS_SIZE, data.length);
   const groupedTD = itemsToGroup.reduce((acc, obj) => acc + obj.td, 0);
 
-  const baseAndGroupedItems = [
-    ...featuredItems,
-    { v: "Ostatní", td: groupedTD },
-  ];
+  if (groupedTD > 0) {
+    featuredItems.push({
+      v: "Ostatní",
+      td: groupedTD,
+    });
+  }
 
-  const vaccineTypes = baseAndGroupedItems.map((vaccine) => {
+  const vaccineTypes = featuredItems.map((vaccine) => {
     const vaccineName = getVaccineName(vaccine.v)?.vaccineName ?? vaccine.v;
     const vaccineManufacturer = vaccineManufacturers[vaccineName] ?? null;
 
