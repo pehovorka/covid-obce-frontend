@@ -1,5 +1,17 @@
 # Changelog
 
+<a name="3.9.3"></a>
+## 3.9.3 (2022-11-09)
+
+### Added
+
+- ✨ Group minor vaccine types [889aba2]
+
+### Changed
+
+- 📱 Move legend under vaccine types chart on mobile [073ad7a]
+
+
 <a name="3.9.2"></a>
 ## 3.9.2 (2022-08-01)
 
